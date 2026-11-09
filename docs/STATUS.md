@@ -237,7 +237,8 @@ The last gaps before I announce it are the ones a stranger hits first:
   Mac users; it needs a second repo and a token, so it waits for me.
 - Published 0.1.0 to crates.io by hand (17:31). `cargo install prumo` into a clean root
   builds and runs. The repo has its topics and v0.1.0 has real release notes: what it is,
-  the four ways in, what it was tested on.
+  the four ways in, what it was tested on. The trusted publisher is registered and enforced,
+  so from here only the release workflow can publish.
 
 CTAN upload of `prumo.sty` alone comes later.
 
