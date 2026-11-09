@@ -243,6 +243,12 @@ The last gaps before I announce it are the ones a stranger hits first:
   the release workflow can push to it, and the curl line already does a Mac in one line. The
   formula, its generator and the tap's CI are in commit 6642c04 if people ask for brew.
 
+### v0.1.1 (2026-11-09)
+
+A patch release before the announcement, so the release page and crates.io carry the README
+with the one-line installers, the two hints ship, and the crate job runs once under trusted
+publishing while nobody is watching. No change to what prumo measures.
+
 CTAN upload of `prumo.sty` alone comes later.
 
 ## Hardening 2 — build commands, Windows paths, three more document types (2026-11-07)
