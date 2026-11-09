@@ -134,7 +134,7 @@ pub fn parse_file(path: &Path) -> Result<Vec<Record>, RecordsError> {
 }
 
 /// Parse record text. `file` is only used in error messages.
-pub fn parse_str(text: &str, file: &str) -> Result<Vec<Record>, RecordsError> {
+pub(crate) fn parse_str(text: &str, file: &str) -> Result<Vec<Record>, RecordsError> {
     let err = |line: usize, msg: String| RecordsError::Line { file: file.to_string(), line, msg };
     let mut out = Vec::new();
     for (idx, raw) in text.lines().enumerate() {

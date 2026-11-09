@@ -324,15 +324,10 @@ impl BuildArgs {
 
 fn run_options(b: &BuildArgs) -> RunOptions {
     RunOptions {
-        main: b.main.clone(),
-        engine: b.engine().0,
         latexmk: b.latexmk,
         build: b.build.clone(),
         out: b.out.clone(),
-        env: vec![],
-        pretex: None,
-        edits: vec![],
-        timeout: None,
+        ..RunOptions::new(b.main.clone(), b.engine().0)
     }
 }
 
@@ -450,11 +445,11 @@ fn main() -> anyhow::Result<()> {
             );
             let files = prumo::fls::input_files(&lines, &trees);
             let log = prumo::texlog::parse_file(&run.log).ok();
-            let c = prumo::texlog::hook_coverage(&model, &files, log.as_ref());
+            let c = prumo::doctor::hook_coverage(&model, &files, log.as_ref());
             if json {
                 println!("{}", serde_json::to_string_pretty(&c)?);
             } else {
-                print!("{}", prumo::texlog::coverage_text(&run.job, &c, log.is_some()));
+                print!("{}", prumo::doctor::coverage_text(&run.job, &c, log.is_some()));
             }
         }
         Cmd::Doctor { json, check_log: None, .. } => {

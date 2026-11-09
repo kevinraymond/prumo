@@ -628,7 +628,7 @@ fn biblatex_through_latexmk() {
     let trees = prumo::fls::Trees::from_kpsewhich(&std::fs::read_to_string(out.dir.join("kpsewhich.txt")).unwrap());
     let files = prumo::fls::input_files(&lines, &trees);
     let log = prumo::texlog::parse_file(&out.log).ok();
-    let c = prumo::texlog::hook_coverage(&m, &files, log.as_ref());
+    let c = prumo::doctor::hook_coverage(&m, &files, log.as_ref());
     let outside: Vec<String> =
         c.outside_hooks.iter().map(|o| o.path.file_name().unwrap().to_string_lossy().into_owned()).collect();
     assert!(outside.iter().any(|n| n == "biblatex.def") && outside.iter().any(|n| n == "numeric.bbx"), "{outside:?}");

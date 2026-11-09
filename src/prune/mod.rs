@@ -136,7 +136,7 @@ pub enum PruneError {
 }
 
 /// `.tex` files containing `\documentclass` under the given files, directories or globs.
-pub fn discover(paths: &[String]) -> Result<Vec<PathBuf>, PruneError> {
+pub(crate) fn discover(paths: &[String]) -> Result<Vec<PathBuf>, PruneError> {
     let mut found = BTreeSet::new();
     for p in paths {
         let path = Path::new(p);
@@ -181,7 +181,7 @@ fn walk(dir: &Path, out: &mut BTreeSet<PathBuf>) -> Result<(), PruneError> {
 }
 
 /// A `.tex` file with an uncommented `\documentclass`.
-pub fn is_document(path: &Path) -> bool {
+pub(crate) fn is_document(path: &Path) -> bool {
     std::fs::read_to_string(path)
         .map(|t| t.lines().any(|l| l.split('%').next().unwrap_or("").contains("\\documentclass")))
         .unwrap_or(false)
@@ -220,15 +220,10 @@ pub fn run_corpus(opts: &PruneOptions, db: &Tlpdb, mut progress: impl FnMut(&str
             let out_dir = opts.out.join("corpus").join(engine.command()).join(stable_key(&main));
             progress(&format!("{} on {}", main.display(), engine.command()));
             let ro = RunOptions {
-                main: main.clone(),
-                engine,
                 latexmk: opts.latexmk,
-                build: None,
                 out: Some(out_dir),
                 env: opts.env.clone(),
-                pretex: None,
-                edits: vec![],
-                timeout: None,
+                ..RunOptions::new(main.clone(), engine)
             };
             let cached = run::cached(&main, ro.out.as_deref())?.filter(|c| !run::is_stale(c, &ro));
             let out = match cached {
@@ -266,7 +261,7 @@ pub fn run_corpus(opts: &PruneOptions, db: &Tlpdb, mut progress: impl FnMut(&str
 
 /// A cache directory name for a document path: its file stem plus a short hash of the path
 /// (FNV-1a, so the name is the same on every toolchain; `DefaultHasher` is not).
-pub fn stable_key(main: &Path) -> String {
+pub(crate) fn stable_key(main: &Path) -> String {
     format!(
         "{}-{}",
         main.file_stem().map(|s| s.to_string_lossy().into_owned()).unwrap_or_default(),
@@ -443,7 +438,7 @@ pub fn plan(db: &Tlpdb, runs: &[DocRun], opts: &PruneOptions) -> Plan {
     let order = reverse_dependency_order(db, schemes.iter().chain(&collections).chain(&rest).cloned().collect());
     let removable_size: u64 = removable.iter().filter_map(|n| db.packages.get(n)).map(|p| p.run_size).sum();
     Plan {
-        schema: 1,
+        schema: crate::JSON_SCHEMA,
         documents,
         installed: installed_size_count(db),
         installed_size,

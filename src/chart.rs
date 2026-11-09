@@ -52,7 +52,7 @@ const EIGHTHS: [char; 9] = [' ', '▏', '▎', '▍', '▌', '▋', '▊', '▉'
 const SPARK: [char; 8] = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
 
 /// A left-anchored bar of `frac` (0..=1) of `cells`, in eighths; never empty for `frac > 0`.
-pub fn bar(frac: f64, cells: usize) -> String {
+pub(crate) fn bar(frac: f64, cells: usize) -> String {
     let eighths = ((frac.clamp(0.0, 1.0) * cells as f64 * 8.0).round() as usize).max(usize::from(frac > 0.0));
     let full = eighths / 8;
     let rest = eighths % 8;
@@ -303,7 +303,7 @@ pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
 
 /// One cell per page, height by that page's time, in rows of `width` pages with the first
 /// page number of each row as its label.
-pub fn page_spark(m: &BuildModel, look: Look) -> String {
+pub(crate) fn page_spark(m: &BuildModel, look: Look) -> String {
     let times = m.page_times();
     let Some(max) = times.iter().map(|p| p.1).max().filter(|m| *m > 0) else {
         return String::new();

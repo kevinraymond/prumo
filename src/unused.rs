@@ -24,7 +24,7 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// Packages that act by side effect and always pass a no-change test while obviously doing
 /// something. Reported as "not tested" unless `--test-all`. Keep short and editable.
-pub const SKIP_LIST: [&str; 17] = [
+pub(crate) const SKIP_LIST: [&str; 17] = [
     "fontenc",
     "inputenc",
     "babel",
@@ -150,7 +150,7 @@ pub fn candidates(model: &BuildModel, project_units: &BTreeSet<String>) -> Vec<(
 
 /// Package names a LaTeX source asks for in `\usepackage`/`\RequirePackage` lines
 /// (comments stripped; options skipped; `{a,b}` split).
-pub fn requested_packages(source: &str) -> BTreeSet<String> {
+pub(crate) fn requested_packages(source: &str) -> BTreeSet<String> {
     let mut out = BTreeSet::new();
     let text: String = source.lines().map(|l| l.split('%').next().unwrap_or("")).collect::<Vec<_>>().join("\n");
     for key in ["\\usepackage", "\\RequirePackage"] {
@@ -265,7 +265,7 @@ impl Load {
 /// pulled in by some other package (`graphicx` by `tikz`)? Then the document may use it
 /// all the same and the line is redundant rather than the package unused. The blocking
 /// fallback leaves no `pkg` frame, so it never answers here.
-pub fn loaded_anyway(model: &BuildModel, project_units: &BTreeSet<String>, pkg: &str) -> Option<String> {
+pub(crate) fn loaded_anyway(model: &BuildModel, project_units: &BTreeSet<String>, pkg: &str) -> Option<String> {
     loads_before(model, project_units, u64::MAX)
         .into_iter()
         .find(|l| l.name == pkg)
@@ -276,7 +276,7 @@ pub fn loaded_anyway(model: &BuildModel, project_units: &BTreeSet<String>, pkg: 
 /// `candidates()` with the loaders' sources: a package loaded under `main.tex` that
 /// `main.tex` never asks for came from some package's hook (siunitx loads `color` from
 /// `begindocument/before`) and is not the user's line to delete.
-pub fn candidates_in(
+pub(crate) fn candidates_in(
     model: &BuildModel,
     project_units: &BTreeSet<String>,
     sources: &BTreeMap<String, String>,
@@ -294,7 +294,7 @@ pub fn candidates_in(
 /// `(package, requested by, loaded by)`, where "loaded by" is the distribution unit the
 /// project loaded (`beamer.cls`), with the direct loader when it differs
 /// (`beamer.cls via beamerbaserequires.sty`).
-pub fn redundant_requests(
+pub(crate) fn redundant_requests(
     model: &BuildModel,
     project_units: &BTreeSet<String>,
     sources: &BTreeMap<String, String>,
@@ -313,7 +313,7 @@ pub fn redundant_requests(
 /// Remove every `\usepackage`/`\RequirePackage` request for `pkg` from a LaTeX source: a
 /// one-name request disappears, from a `{a,b}` list the name is dropped. Comments are left
 /// alone; a request split over several lines is not found. `None` when there is none.
-pub fn remove_request(source: &str, pkg: &str) -> Option<String> {
+pub(crate) fn remove_request(source: &str, pkg: &str) -> Option<String> {
     let mut out = String::with_capacity(source.len());
     let mut changed = false;
     for line in source.split_inclusive('\n') {
@@ -401,7 +401,7 @@ fn remove_in_code(code: &str, pkg: &str, changed: &mut bool) -> String {
 /// fail with "outdated". Blocking has a blind spot that removing the request does not: a
 /// package that adapts to the candidate's presence (biblatex to csquotes) sees the marker
 /// and uses macros that are not there.
-pub fn blocking_pretex(package: &str, options: &str) -> String {
+pub(crate) fn blocking_pretex(package: &str, options: &str) -> String {
     format!(
         "\\makeatletter\\@namedef{{ver@{package}.sty}}{{9999/12/31 blocked by prumo}}\\@namedef{{opt@{package}.sty}}{{{options}}}\\makeatother"
     )
@@ -597,15 +597,11 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
     progress(&format!("artifacts in {}", out_root.join(&job).display()));
     // Baseline: the ordinary probed run (byte-identical to a plain build).
     let base_opts = RunOptions {
-        main: opts.main.clone(),
-        engine: opts.engine,
         latexmk: opts.latexmk,
         build: opts.build.clone(),
         out: Some(out_root.clone()),
         env: opts.env.clone(),
-        pretex: None,
-        edits: vec![],
-        timeout: None,
+        ..RunOptions::new(opts.main.clone(), opts.engine)
     };
     let base_run = match run::cached(&opts.main, Some(&out_root))?.filter(|c| !run::is_stale(c, &base_opts)) {
         Some(c) => c,
@@ -652,7 +648,7 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
         && let Ok(candidates) = serde_json::from_value::<Vec<Candidate>>(serde_json::Value::Array(c.candidates))
     {
         return Ok(UnusedReport {
-            schema: 1,
+            schema: crate::JSON_SCHEMA,
             job,
             engine: opts.engine,
             compare: opts.compare,
@@ -695,8 +691,6 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
                         None => (vec![], Some(blocking_pretex(pkg, options))),
                     };
                     let r = run::run(&RunOptions {
-                        main: opts.main.clone(),
-                        engine: opts.engine,
                         latexmk: opts.latexmk,
                         build: opts.build.clone(),
                         out: Some(out_dir),
@@ -704,6 +698,7 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
                         pretex,
                         edits,
                         timeout: Some(std::time::Duration::from_secs_f64(timeout)),
+                        ..RunOptions::new(opts.main.clone(), opts.engine)
                     });
                     let secs = t0.elapsed().as_secs_f64();
                     let verdict = match r {
@@ -765,7 +760,7 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
     };
     let _ = std::fs::write(&cache_path, serde_json::to_string_pretty(&cache).unwrap_or_default());
     Ok(UnusedReport {
-        schema: 1,
+        schema: crate::JSON_SCHEMA,
         job,
         engine: opts.engine,
         compare: opts.compare,
@@ -881,7 +876,13 @@ pub fn run_corpus(
     if !documents.iter().any(|d| d.uses_loader) {
         warnings.push(format!("no document in the corpus loads {loader_name}"));
     }
-    Ok(CorpusReport { schema: 1, loader: loader_name, documents, packages: packages.into_values().collect(), warnings })
+    Ok(CorpusReport {
+        schema: crate::JSON_SCHEMA,
+        loader: loader_name,
+        documents,
+        packages: packages.into_values().collect(),
+        warnings,
+    })
 }
 
 pub fn corpus_text(r: &CorpusReport) -> String {

@@ -323,7 +323,7 @@ fn log_file_opens_versus_hook_records() {
         let m = prumo::model::BuildModel::from_records(&recs, &label).unwrap();
         let lines = fls::parse_file(&s.dir.join(format!("{}.fls", s.job))).unwrap();
         let files = fls::input_files(&lines, &Trees::from_kpsewhich(&read(&s.dir, "kpsewhich.txt")));
-        let c = prumo::texlog::hook_coverage(&m, &files, Some(&log));
+        let c = prumo::doctor::hook_coverage(&m, &files, Some(&log));
         let outside: Vec<String> =
             c.outside_hooks.iter().map(|o| o.path.file_name().unwrap().to_string_lossy().into_owned()).collect();
         assert!(
@@ -344,7 +344,7 @@ fn log_file_opens_versus_hook_records() {
             c.log_pages,
             m.pages.len()
         );
-        let t = prumo::texlog::coverage_text(&s.job, &c, true);
+        let t = prumo::doctor::coverage_text(&s.job, &c, true);
         assert!(t.contains("hook coverage"), "{t}");
     }
 }

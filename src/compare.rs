@@ -10,7 +10,7 @@ use crate::Scaled;
 use crate::model::BuildModel;
 use crate::report::ms;
 use crate::run::{self, EngineCmd, RunOptions};
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 pub const ALL_ENGINES: [EngineCmd; 3] = [EngineCmd::Pdflatex, EngineCmd::Xelatex, EngineCmd::Lualatex];
 
@@ -90,15 +90,10 @@ pub fn compare(opts: &CompareOptions, mut progress: impl FnMut(&str)) -> Result<
         for i in 0..opts.runs.max(1) {
             progress(&format!("{}: run {}/{}", engine.command(), i + 1, opts.runs.max(1)));
             let out = run::run(&RunOptions {
-                main: opts.main.clone(),
-                engine,
                 latexmk: opts.latexmk,
-                build: None,
                 out: Some(out_dir.clone()),
                 env: opts.env.clone(),
-                pretex: None,
-                edits: vec![],
-                timeout: None,
+                ..RunOptions::new(opts.main.clone(), engine)
             })?;
             if out.info.exit_code != Some(0) {
                 // The first `! ` error says why; the log tail usually shows an "Output written" line of a build that failed earlier.
@@ -139,7 +134,7 @@ pub fn compare(opts: &CompareOptions, mut progress: impl FnMut(&str)) -> Result<
             },
         });
     }
-    Ok(Comparison { schema: 1, job, runs: opts.runs.max(1), rows })
+    Ok(Comparison { schema: crate::JSON_SCHEMA, job, runs: opts.runs.max(1), rows })
 }
 
 pub fn text(c: &Comparison) -> String {
@@ -234,13 +229,4 @@ pub fn text(c: &Comparison) -> String {
         }
     }
     s
-}
-
-/// Where the per-engine caches live, for `--check-log` and friends.
-pub fn engine_out_dir(main: &Path, out: Option<&Path>, engine: EngineCmd) -> Result<PathBuf, run::RunError> {
-    let base = match out {
-        Some(o) => o.join("compare"),
-        None => run::default_out(main)?.join("compare"),
-    };
-    Ok(base.join(engine.command()))
 }

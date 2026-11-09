@@ -358,7 +358,7 @@ fn collapse_unit_files(fr: &mut Frame) {
 
 /// Python's `os.path.splitext(name)[0]`: strip the last extension of the basename, where a
 /// leading-dot name (`.hidden`) has no extension.
-pub fn splitext_stem(name: &str) -> &str {
+pub(crate) fn splitext_stem(name: &str) -> &str {
     let base_start = name.rfind('/').map_or(0, |i| i + 1);
     let base = &name[base_start..];
     let first_non_dot = base.find(|c| c != '.').unwrap_or(base.len());

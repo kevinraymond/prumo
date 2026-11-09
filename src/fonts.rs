@@ -28,13 +28,8 @@ pub struct MapEntry {
     pub encoding: Option<String>,
 }
 
-/// Parse map text into a `tfm → entry` index; the first line for a TFM wins (as pdfTeX does).
-pub fn parse_map(text: &str) -> HashMap<String, MapEntry> {
-    parse_map_entries(text).into_iter().map(|e| (e.tfm.clone(), e)).collect()
-}
-
 /// Parse map text in file order, keeping the first line per TFM.
-pub fn parse_map_entries(text: &str) -> Vec<MapEntry> {
+pub(crate) fn parse_map_entries(text: &str) -> Vec<MapEntry> {
     let mut seen = std::collections::HashSet::new();
     let mut out = Vec::new();
     for line in text.lines() {
@@ -163,7 +158,7 @@ pub struct FontReport {
 
 /// `tfm → (encoding/family, fd file)` from the `.fd` files the run read.
 /// `\DeclareFontShape{T1}{pcr}{m}{n}{ <-> pcrr8t }{}` declares `pcrr8t` for `T1/pcr`.
-pub fn fd_declarations(fd_texts: &[(String, String)]) -> HashMap<String, (String, String)> {
+pub(crate) fn fd_declarations(fd_texts: &[(String, String)]) -> HashMap<String, (String, String)> {
     let mut out = HashMap::new();
     for (fd_name, text) in fd_texts {
         let text: String = text.lines().map(|l| l.split('%').next().unwrap_or("")).collect::<Vec<_>>().join("\n");
@@ -373,7 +368,7 @@ pub fn report(
     }
     let naive: Vec<String> = loaded.iter().filter(|t| !emb_lower.contains(&t.to_lowercase())).cloned().collect();
     FontReport {
-        schema: 1,
+        schema: crate::JSON_SCHEMA,
         job: job.to_string(),
         engine: model.engine.to_string(),
         loaded: rows,
@@ -470,6 +465,11 @@ pub fn text(r: &FontReport) -> String {
 
 #[cfg(test)]
 mod tests {
+    /// `tfm → entry`, the first line per TFM, as pdfTeX reads a map.
+    fn parse_map(text: &str) -> HashMap<String, MapEntry> {
+        parse_map_entries(text).into_iter().map(|e| (e.tfm.clone(), e)).collect()
+    }
+
     use super::*;
 
     #[test]

@@ -53,16 +53,11 @@ pub struct PackagesReport {
 }
 
 /// The infrastructure packages that are always needed; see `docs/05-packages-and-pruning.md`.
-pub const INFRA: [&str; 4] = ["texlive.infra", "kpathsea", "texlive-scripts", "hyphen-base"];
-
-/// The format a `latex` command runs.
-pub fn format_of(cmd: &str) -> &str {
-    cmd.rsplit('/').next().unwrap_or(cmd)
-}
+pub(crate) const INFRA: [&str; 4] = ["texlive.infra", "kpathsea", "texlive-scripts", "hyphen-base"];
 
 /// `name → loader` for every file and unit in the tree: `siunitx.sty → obra.cls`,
 /// `t1pcr.fd → main.tex`, `translations.sty → siunitx`.
-pub fn loaders(m: &BuildModel) -> HashMap<String, String> {
+pub(crate) fn loaders(m: &BuildModel) -> HashMap<String, String> {
     fn label(fr: &Frame) -> String {
         match fr.kind {
             FrameKind::Job => "the command line".into(),
@@ -90,8 +85,12 @@ pub fn loaders(m: &BuildModel) -> HashMap<String, String> {
 /// The whole computation. `format` is `pdflatex`/`xelatex`/`lualatex`.
 pub fn resolve(job: &str, model: &BuildModel, files: &[InputFile], db: &Tlpdb, format: &str) -> PackagesReport {
     let via = loaders(model);
-    let mut report =
-        PackagesReport { schema: 1, job: job.to_string(), format: format.to_string(), ..Default::default() };
+    let mut report = PackagesReport {
+        schema: crate::JSON_SCHEMA,
+        job: job.to_string(),
+        format: format.to_string(),
+        ..Default::default()
+    };
     // name → reason, first reason wins; used files are the strongest evidence.
     let mut reasons: BTreeMap<String, Reason> = BTreeMap::new();
     for f in files {

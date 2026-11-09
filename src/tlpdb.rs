@@ -12,7 +12,7 @@ use std::fmt;
 use std::path::{Component, Path};
 
 /// `TeXLive::TLConfig::BlockSize`: the unit of every `size=` in the database.
-pub const BLOCK_SIZE: u64 = 4096;
+pub(crate) const BLOCK_SIZE: u64 = 4096;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum Category {
@@ -108,7 +108,7 @@ pub fn parse_file(path: &Path) -> Result<Tlpdb, TlpdbError> {
 
 /// Parse database text. Lines starting with `#` are skipped (the fixture excerpt has
 /// comments; real databases do not).
-pub fn parse_str(text: &str, file: &str) -> Result<Tlpdb, TlpdbError> {
+pub(crate) fn parse_str(text: &str, file: &str) -> Result<Tlpdb, TlpdbError> {
     let err = |line: usize, msg: String| TlpdbError::Line { file: file.to_string(), line, msg };
     let mut db = Tlpdb::default();
     let mut cur: Option<Tlpkg> = None;

@@ -13,7 +13,7 @@ use crate::report::ms;
 use std::fmt::Write as _;
 
 /// Escape text for an HTML or SVG text node or attribute value.
-pub fn esc(s: &str) -> String {
+pub(crate) fn esc(s: &str) -> String {
     let mut out = String::with_capacity(s.len());
     for c in s.chars() {
         match c {

@@ -9,13 +9,10 @@
 //! not try to recognize every message: it only needs the opened-file sequence to be right
 //! for the files the records also know about, and it is honest about the rest.
 
-use crate::fls::{InputFile, InputKind};
-use crate::model::{BuildModel, FrameKind};
-use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 
 /// TeX's default `max_print_line`.
-pub const MAX_PRINT_LINE: usize = 79;
+pub(crate) const MAX_PRINT_LINE: usize = 79;
 
 #[derive(Debug, Clone, PartialEq, Eq, serde::Serialize)]
 pub struct LogFile {
@@ -119,7 +116,7 @@ fn is_message_continuation(line: &str) -> bool {
 }
 
 /// Parse log text (already read from disk; `lossy` conversion is fine).
-pub fn parse_str(text: &str) -> TexLog {
+pub(crate) fn parse_str(text: &str) -> TexLog {
     let mut log = TexLog::default();
     let mut depth = 0usize;
     for (idx, line) in unwrap(text, MAX_PRINT_LINE).into_iter().enumerate() {
@@ -203,122 +200,6 @@ pub fn parse_str(text: &str) -> TexLog {
         }
     }
     log
-}
-
-/// A file the `.fls` proves was read but no `file+` record saw: loaded with the TeX
-/// primitive `\input` (the kernel reads `.aux` that way), or by something that bypasses
-/// the LaTeX file machinery. Its position in the load tree is unknown.
-#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize)]
-pub struct Outside {
-    pub path: PathBuf,
-    pub kind: InputKind,
-}
-
-/// What the records cover, cross-checked against the `.fls` and the log.
-#[derive(Debug, Clone, Default, PartialEq, Eq, serde::Serialize)]
-pub struct Coverage {
-    pub schema: u32,
-    /// Macro-level files from the `.fls` with no `file+` record (fonts, maps, formats and
-    /// the probe itself are not counted: they are never `\input`).
-    pub outside_hooks: Vec<Outside>,
-    /// Files the log shows opened that no record saw (by base name).
-    pub log_only: Vec<String>,
-    /// Files a record saw that the log parser did not find: a parser miss, worth a look.
-    pub hooked_not_in_log: Vec<String>,
-    pub log_errors: Vec<String>,
-    pub log_warnings: usize,
-    pub log_pages: usize,
-}
-
-/// Cross-check the records' file frames against the `.fls` inputs and (if given) the log.
-pub fn hook_coverage(model: &BuildModel, files: &[InputFile], log: Option<&TexLog>) -> Coverage {
-    let mut hooked: BTreeSet<String> = BTreeSet::new();
-    model.root.walk(&mut |fr, _| {
-        let base = fr.name.rsplit('/').next().unwrap_or(&fr.name).to_string();
-        match fr.kind {
-            FrameKind::Pkg => hooked.insert(format!("{base}.sty")),
-            FrameKind::Cls => hooked.insert(format!("{base}.cls")),
-            _ => hooked.insert(base),
-        };
-    });
-    let mut c = Coverage { schema: 1, ..Default::default() };
-    for f in files {
-        let macro_level = matches!(
-            f.kind,
-            InputKind::Tex
-                | InputKind::Sty
-                | InputKind::Cls
-                | InputKind::Clo
-                | InputKind::Fd
-                | InputKind::Def
-                | InputKind::Cfg
-                | InputKind::Ltx
-                | InputKind::Ldf
-                | InputKind::Other
-        );
-        let base = f.path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
-        // Kernel file substitution (atbegshi.sty → atbegshi-ltx.sty): the requested file is
-        // opened for the existence check, so the .fls lists it, but the substitute is read.
-        let substituted =
-            base.strip_suffix(".sty").map(|s| format!("{s}-ltx.sty")).is_some_and(|s| hooked.contains(&s));
-        if macro_level && base != "prumo.sty" && !hooked.contains(&base) && !substituted && f.path.extension().is_some()
-        {
-            c.outside_hooks.push(Outside { path: f.path.clone(), kind: f.kind });
-        }
-    }
-    if let Some(log) = log {
-        let logged: BTreeSet<String> =
-            log.files.iter().map(|f| f.path.rsplit('/').next().unwrap_or(&f.path).to_string()).collect();
-        c.log_only = logged.iter().filter(|n| !hooked.contains(*n) && n.as_str() != "prumo.sty").cloned().collect();
-        // `.sty`/`.cls` keys above are derived from unit names; only bare file frames are checked here.
-        c.hooked_not_in_log = hooked
-            .iter()
-            .filter(|n| !logged.contains(*n) && !n.ends_with(".sty") && !n.ends_with(".cls"))
-            .cloned()
-            .collect();
-        c.log_errors = log.errors.clone();
-        c.log_warnings = log.warnings.len();
-        c.log_pages = log.pages;
-    }
-    c
-}
-
-/// Text for `prumo doctor --check-log`.
-pub fn coverage_text(job: &str, c: &Coverage, has_log: bool) -> String {
-    use std::fmt::Write as _;
-    let mut s = format!("== hook coverage: {job}\n");
-    if c.outside_hooks.is_empty() {
-        let _ = writeln!(s, "  every macro-level file in the .fls has a file record");
-    } else {
-        let _ = writeln!(s, "  read outside the LaTeX file hooks (position in the load tree unknown):");
-        for o in &c.outside_hooks {
-            let note = match o.kind {
-                InputKind::Aux | InputKind::AuxLike => "; read by the kernel with the \\input primitive",
-                InputKind::Tex => "; probably \\input<space>file or \\@@input",
-                _ => "",
-            };
-            let _ = writeln!(s, "    {}  ({:?}{note})", o.path.display(), o.kind);
-        }
-    }
-    if has_log {
-        let _ = writeln!(
-            s,
-            "  log vs records: {} hooked files missing from the log{}; {} log files never hooked{}",
-            c.hooked_not_in_log.len(),
-            list(&c.hooked_not_in_log),
-            c.log_only.len(),
-            list(&c.log_only)
-        );
-        let _ = writeln!(s, "  log: {} errors, {} warnings, {} pages", c.log_errors.len(), c.log_warnings, c.log_pages);
-        for e in &c.log_errors {
-            let _ = writeln!(s, "    ! {e}");
-        }
-    }
-    s
-}
-
-fn list(v: &[String]) -> String {
-    if v.is_empty() { String::new() } else { format!(" ({})", v.join(", ")) }
 }
 
 #[derive(Debug, thiserror::Error)]

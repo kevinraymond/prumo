@@ -114,7 +114,14 @@ pub fn graph_json<'a>(m: &'a BuildModel, job: &'a str) -> GraphJson<'a> {
     for c in &m.root.children {
         go(c, &c.name, &mut edges);
     }
-    GraphJson { schema: 1, job, engine: m.engine.to_string(), total_ms: t.total_ms, tree: t.tree, edges }
+    GraphJson {
+        schema: crate::JSON_SCHEMA,
+        job,
+        engine: m.engine.to_string(),
+        total_ms: t.total_ms,
+        tree: t.tree,
+        edges,
+    }
 }
 
 #[cfg(test)]

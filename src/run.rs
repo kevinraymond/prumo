@@ -183,7 +183,7 @@ fn is_document_token(w: &str, stem: &str) -> bool {
 /// Split a command line the way a POSIX shell would (single and double quotes,
 /// backslash escapes) without running a shell, so the probe argument reaches the engine
 /// verbatim.
-pub fn split_words(s: &str) -> Result<Vec<String>, String> {
+pub(crate) fn split_words(s: &str) -> Result<Vec<String>, String> {
     let mut out = Vec::new();
     let mut cur = String::new();
     let mut in_word = false;
@@ -267,6 +267,24 @@ pub struct RunOptions {
     pub timeout: Option<std::time::Duration>,
 }
 
+impl RunOptions {
+    /// The ordinary probed build of `main` with `engine`: no latexmk, no custom command,
+    /// the default cache directory, no extra environment, no pretex, no edits, no timeout.
+    pub fn new(main: PathBuf, engine: EngineCmd) -> Self {
+        Self {
+            main,
+            engine,
+            latexmk: false,
+            build: None,
+            out: None,
+            env: vec![],
+            pretex: None,
+            edits: vec![],
+            timeout: None,
+        }
+    }
+}
+
 /// What `run.json` records about a build.
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct RunInfo {
@@ -345,7 +363,7 @@ fn io<'a>(what: &'static str, path: &'a Path) -> impl FnOnce(std::io::Error) -> 
 }
 
 /// `<job>` and the project directory for a document path.
-pub fn job_of(main: &Path) -> Result<(String, PathBuf), RunError> {
+pub(crate) fn job_of(main: &Path) -> Result<(String, PathBuf), RunError> {
     if !main.is_file() {
         // In the image the container sees only the directory prumo was run from.
         let hint = if crate::doctor::image().is_some() {
@@ -464,7 +482,7 @@ pub fn build_once(
 
 /// `build_once` with a timeout: the build runs in its own process group and the whole
 /// group is killed when the time is up (latexmk's engine child included).
-pub fn build_once_timed(
+pub(crate) fn build_once_timed(
     dir: &Path,
     stem: &str,
     build: &BuildCmd,
@@ -549,7 +567,7 @@ pub fn build_once_timed(
 }
 
 /// The build command an options set asks for.
-pub fn build_cmd(opts: &RunOptions) -> Result<BuildCmd, RunError> {
+pub(crate) fn build_cmd(opts: &RunOptions) -> Result<BuildCmd, RunError> {
     match &opts.build {
         Some(b) => BuildCmd::parse(b, &job_of(&opts.main)?.0),
         None => Ok(BuildCmd::standard(opts.engine, opts.latexmk)),
@@ -638,7 +656,7 @@ pub fn run(opts: &RunOptions) -> Result<RunOutput, RunError> {
     save_font_sources(&cache, &fls);
 
     let info = RunInfo {
-        schema: 1,
+        schema: crate::JSON_SCHEMA,
         main: std::fs::canonicalize(&opts.main).unwrap_or_else(|_| opts.main.clone()),
         job: job.clone(),
         engine,
@@ -709,7 +727,7 @@ fn save_font_sources(cache: &Path, fls_path: &Path) {
 }
 
 /// Parse the records of a run.
-pub fn parse_records(out: &RunOutput) -> Result<Vec<crate::records::Record>, RunError> {
+pub(crate) fn parse_records(out: &RunOutput) -> Result<Vec<crate::records::Record>, RunError> {
     Ok(crate::records::parse_file(&out.records)?)
 }
 
@@ -720,13 +738,13 @@ pub fn model_of(out: &RunOutput) -> Result<crate::model::BuildModel, RunError> {
 }
 
 /// The last `n` lines of `text`, for log tails in messages.
-pub fn tail_lines(text: &str, n: usize) -> String {
+pub(crate) fn tail_lines(text: &str, n: usize) -> String {
     let skip = text.lines().count().saturating_sub(n);
     text.lines().skip(skip).collect::<Vec<_>>().join("\n")
 }
 
 /// `NAME=value` lines for the texmf roots of the installation on `PATH`.
-pub fn kpsewhich_text() -> String {
+pub(crate) fn kpsewhich_text() -> String {
     KPSEWHICH_VARS
         .iter()
         .map(|v| {

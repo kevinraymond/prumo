@@ -67,7 +67,7 @@ fn tree_json(fr: &Frame) -> TreeJson {
 
 pub fn time_json<'a>(m: &'a BuildModel, job: &'a str) -> TimeJson<'a> {
     TimeJson {
-        schema: 1,
+        schema: crate::JSON_SCHEMA,
         job,
         engine: m.engine.to_string(),
         format_date: &m.format_date,

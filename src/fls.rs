@@ -41,7 +41,7 @@ pub fn parse_file(path: &Path) -> Result<Vec<FlsLine>, FlsError> {
 
 /// `C:/…` or `c:\…`: a Windows drive path. TeX Live on Windows writes forward slashes with
 /// the drive letter in either case; MiKTeX writes backslashes.
-pub fn windows_drive(s: &str) -> bool {
+pub(crate) fn windows_drive(s: &str) -> bool {
     let b = s.as_bytes();
     b.len() >= 3 && b[0].is_ascii_alphabetic() && b[1] == b':' && (b[2] == b'/' || b[2] == b'\\')
 }
@@ -49,7 +49,7 @@ pub fn windows_drive(s: &str) -> bool {
 /// One spelling for a Windows path: forward slashes, lowercase drive letter. POSIX paths
 /// pass through untouched. `backslashes` says the file is from a Windows build, so a
 /// relative `.\main.tex` is converted too.
-pub fn portable(s: &str, backslashes: bool) -> PathBuf {
+pub(crate) fn portable(s: &str, backslashes: bool) -> PathBuf {
     let drive = windows_drive(s);
     if !(drive || backslashes || s.starts_with("\\\\")) {
         return PathBuf::from(s);
@@ -69,7 +69,7 @@ fn is_absolute(p: &Path) -> bool {
 /// Parse `.fls` text. Unknown line kinds are an error: the format has exactly three.
 /// Windows paths (`C:/…`, `C:\…`, CRLF) are read into one portable spelling, so artifacts
 /// from a Windows machine parse everywhere and classify by the same roots.
-pub fn parse_str(text: &str, file: &str) -> Result<Vec<FlsLine>, FlsError> {
+pub(crate) fn parse_str(text: &str, file: &str) -> Result<Vec<FlsLine>, FlsError> {
     let mut out = Vec::new();
     let windows = text.lines().any(|l| l.split_once(' ').is_some_and(|(_, rest)| windows_drive(rest.trim())));
     for (idx, raw) in text.lines().enumerate() {
@@ -156,7 +156,7 @@ fn resolved(lines: &[FlsLine], pick: impl Fn(&FlsLine) -> Option<&PathBuf>) -> V
 
 /// Lexical normalization: drop `.`, fold `..`, keep the root. Symlinks are left alone
 /// (`canonicalize` touches the filesystem; `run.rs` does that when the files exist).
-pub fn normalize(p: &Path) -> PathBuf {
+pub(crate) fn normalize(p: &Path) -> PathBuf {
     let mut out = PathBuf::new();
     for c in p.components() {
         match c {
@@ -315,7 +315,7 @@ pub struct Trees {
 }
 
 /// The kpathsea variables `Trees` is built from, in the order `kpsewhich.txt` lists them.
-pub const KPSEWHICH_VARS: [&str; 8] =
+pub(crate) const KPSEWHICH_VARS: [&str; 8] =
     ["TEXMFROOT", "TEXMFDIST", "TEXMFVAR", "TEXMFSYSVAR", "TEXMFCONFIG", "TEXMFSYSCONFIG", "TEXMFLOCAL", "TEXMFHOME"];
 
 impl Trees {

@@ -98,7 +98,7 @@ pub fn opentype_providers(db: &Tlpdb, font_name: &str) -> Vec<String> {
 }
 
 /// Every package shipping OpenType/TrueType fonts: the fallback when a name has no match.
-pub fn all_opentype_providers(db: &Tlpdb) -> Vec<String> {
+pub(crate) fn all_opentype_providers(db: &Tlpdb) -> Vec<String> {
     let mut v: Vec<String> = db
         .packages
         .values()

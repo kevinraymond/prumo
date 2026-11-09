@@ -64,7 +64,7 @@ pub fn list(root: &Path) -> Listing {
     }
     entries.sort_by(|a, b| b.bytes.cmp(&a.bytes).then_with(|| a.dir.cmp(&b.dir)));
     let bytes = entries.iter().map(|e| e.bytes).sum();
-    Listing { schema: 1, root: root.to_path_buf(), entries, bytes }
+    Listing { schema: crate::JSON_SCHEMA, root: root.to_path_buf(), entries, bytes }
 }
 
 fn classify(dir: &Path) -> Kind {
@@ -103,7 +103,7 @@ fn classify(dir: &Path) -> Kind {
 }
 
 /// Bytes under a directory (file sizes, not blocks).
-pub fn dir_size(dir: &Path) -> u64 {
+pub(crate) fn dir_size(dir: &Path) -> u64 {
     let mut total = 0;
     let mut stack = vec![dir.to_path_buf()];
     while let Some(d) = stack.pop() {
@@ -163,7 +163,7 @@ pub fn human_bytes(b: u64) -> String {
     }
 }
 
-pub fn human_age(secs: Option<u64>) -> String {
+pub(crate) fn human_age(secs: Option<u64>) -> String {
     match secs {
         None => String::new(),
         Some(s) if s < 60 => "just now".into(),

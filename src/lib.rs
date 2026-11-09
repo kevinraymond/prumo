@@ -23,6 +23,10 @@ pub mod texlog;
 pub mod tlpdb;
 pub mod unused;
 
+/// The `schema` field of every `--json` report. It moves only when a field is renamed or
+/// removed, never when one is added.
+pub const JSON_SCHEMA: u32 = 1;
+
 /// Scaled seconds: 1/65536 s, the unit of `\sys_timer:` on every engine.
 /// Kept integral until display.
 pub type Scaled = u64;
