@@ -60,7 +60,7 @@ fi
 
 if [ -z "$version" ]; then
     # GitHub answers /releases/latest with a redirect to /releases/tag/vX.Y.Z.
-    url="$(curl -fsSLI -o /dev/null -w '%{url_effective}' "https://github.com/$repo/releases/latest")" || fail "could not reach github.com"
+    url="$(curl -fsSLI --retry 3 -o /dev/null -w '%{url_effective}' "https://github.com/$repo/releases/latest")" || fail "could not reach github.com"
     version="${url##*/}"
     case "$version" in
         v[0-9]*) ;;
@@ -74,9 +74,9 @@ tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 
 echo "prumo: downloading $name.tar.gz"
-curl -fsSL -o "$tmp/$name.tar.gz" "$base/$name.tar.gz" \
+curl -fsSL --retry 3 -o "$tmp/$name.tar.gz" "$base/$name.tar.gz" \
     || fail "release $version has no $name.tar.gz (https://github.com/$repo/releases)"
-curl -fsSL -o "$tmp/sum" "$base/$name.tar.gz.sha256" \
+curl -fsSL --retry 3 -o "$tmp/sum" "$base/$name.tar.gz.sha256" \
     || fail "release $version has no sha256 for $name.tar.gz"
 
 want="$(tr -d ' \r\n' < "$tmp/sum")"

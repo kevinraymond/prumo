@@ -12,6 +12,19 @@
 $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
+# GitHub closes idle connections, and .NET likes to reuse them: no keep-alive, and three tries.
+function Fetch($Uri, $OutFile) {
+    for ($try = 1; ; $try++) {
+        try {
+            if ($OutFile) { return Invoke-WebRequest -UseBasicParsing -DisableKeepAlive -Uri $Uri -OutFile $OutFile }
+            return Invoke-RestMethod -DisableKeepAlive -Uri $Uri -Headers @{ 'User-Agent' = 'prumo-install' }
+        } catch {
+            if ($try -ge 3) { throw }
+            Start-Sleep -Seconds (2 * $try)
+        }
+    }
+}
+
 $repo = 'kevinraymond/prumo'
 $target = 'x86_64-pc-windows-msvc'
 $version = $env:PRUMO_VERSION
@@ -19,7 +32,7 @@ $dir = if ($env:PRUMO_INSTALL_DIR) { $env:PRUMO_INSTALL_DIR } else { Join-Path $
 $dir = $dir.TrimEnd('\')
 
 if (-not $version) {
-    $latest = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases/latest" -Headers @{ 'User-Agent' = 'prumo-install' }
+    $latest = Fetch "https://api.github.com/repos/$repo/releases/latest"
     $version = $latest.tag_name
     if (-not $version) { throw "could not tell the latest release of $repo" }
 }
@@ -30,8 +43,8 @@ $tmp = Join-Path ([IO.Path]::GetTempPath()) "prumo-install-$([IO.Path]::GetRando
 New-Item -ItemType Directory -Path $tmp | Out-Null
 try {
     Write-Host "prumo: downloading $name.zip"
-    Invoke-WebRequest -UseBasicParsing -Uri "$base/$name.zip" -OutFile (Join-Path $tmp "$name.zip")
-    Invoke-WebRequest -UseBasicParsing -Uri "$base/$name.zip.sha256" -OutFile (Join-Path $tmp 'sum')
+    Fetch "$base/$name.zip" (Join-Path $tmp "$name.zip") | Out-Null
+    Fetch "$base/$name.zip.sha256" (Join-Path $tmp 'sum') | Out-Null
 
     $want = (Get-Content (Join-Path $tmp 'sum') -Raw).Trim().ToLower()
     $have = (Get-FileHash (Join-Path $tmp "$name.zip") -Algorithm SHA256).Hash.ToLower()
