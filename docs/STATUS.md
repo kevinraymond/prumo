@@ -249,6 +249,10 @@ A patch release before the announcement, so the release page and crates.io carry
 with the one-line installers, the two hints ship, and the crate job runs once under trusted
 publishing while nobody is watching. No change to what prumo measures.
 
+All three workflows green on the tag: ten assets, the crate on crates.io from the workflow
+(the first publish under the enforced trusted publisher), the four image tags for both
+architectures. `install.sh` from the README fetched 0.1.1 on its own a minute later.
+
 CTAN upload of `prumo.sty` alone comes later.
 
 ## Hardening 2 — build commands, Windows paths, three more document types (2026-11-07)
