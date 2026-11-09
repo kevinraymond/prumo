@@ -255,9 +255,13 @@ architectures. `install.sh` from the README fetched 0.1.1 on its own a minute la
 
 ### API hygiene (2026-11-09)
 
-The leftovers from the idiomatic review, in three commits, with no change to any output:
-every report of the v0.1.1 binary and the new build on the cached runs here (florilegium's
-manual, lshort, `doctor`, `--check-log`, `--html`) is identical byte for byte.
+The leftovers from the idiomatic review, in three commits, with no change to any output.
+The check: `scripts/same_output.sh` runs the v0.1.1 binary and the new build inside the TeX
+image on every fixture and engine, fourteen reports each plus `prune` and `doctor`, and
+compares byte for byte. 248 identical; the 7 that differ are the fontspec fixture on
+pdflatex, whose build fails by design and is rebuilt on every call, so only its
+milliseconds move. My first attempt at this check ran on this machine, which has no TeX,
+and compared two identical error messages. Worth remembering.
 
 - The public surface. The library has one consumer, `main.rs`, plus the tests, so there is
   no case for `#![warn(missing_docs)]`. The 41 helpers nothing outside the crate calls are
