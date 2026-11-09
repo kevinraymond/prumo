@@ -574,42 +574,44 @@ pub(crate) fn build_cmd(opts: &RunOptions) -> Result<BuildCmd, RunError> {
     }
 }
 
-/// The instrumented build: copy, probe, run, collect.
-pub fn run(opts: &RunOptions) -> Result<RunOutput, RunError> {
-    let (stem, project) = job_of(&opts.main)?;
-    let build = build_cmd(opts)?;
-    // Artifacts are named after the job; `-jobname` in a user command renames them.
-    let job = build.jobname.clone().unwrap_or_else(|| stem.clone());
-    let cache = cache_dir(&opts.main, opts.out.as_deref())?;
-    let started_at_ns = unix_ns(SystemTime::now());
-    let tmp = tempfile::Builder::new().prefix("prumo-").tempdir().map_err(io("create temp dir", Path::new("/tmp")))?;
-    let probe_dir = tmp.path().join("probe");
+/// The temp copy a build runs in: the probe beside it, the project copied, edits applied.
+struct Staged {
+    probe_dir: PathBuf,
+    work: PathBuf,
+}
+
+fn stage(tmp: &Path, project: &Path, edits: &[(PathBuf, String)]) -> Result<Staged, RunError> {
+    let probe_dir = tmp.join("probe");
     std::fs::create_dir_all(&probe_dir).map_err(io("create", &probe_dir))?;
     std::fs::write(probe_dir.join("prumo.sty"), PROBE).map_err(io("write", &probe_dir.join("prumo.sty")))?;
-    let work = tmp.path().join("project");
-    copy_tree(&project, &work)?;
-    for (rel, text) in &opts.edits {
+    let work = tmp.join("project");
+    copy_tree(project, &work)?;
+    for (rel, text) in edits {
         let p = work.join(rel);
         std::fs::write(&p, text).map_err(io("write", &p))?;
     }
+    Ok(Staged { probe_dir, work })
+}
 
-    let (command, exit_code) =
-        build_once_timed(&work, &stem, &build, Some(&probe_dir), &opts.env, opts.pretex.as_deref(), opts.timeout)?;
+/// What a build left behind, copied into the cache directory.
+struct Artifacts {
+    records: PathBuf,
+    fls: PathBuf,
+    log: PathBuf,
+    pdf: Option<PathBuf>,
+}
 
-    // With -output-directory / -outdir the PDF lands there; latexmk's -auxdir takes the
-    // .fls, .log and records (verified: the probe's \iow_open follows openout).
-    let pdf_dir = build.out_dir.as_ref().map(|d| work.join(d)).unwrap_or_else(|| work.clone());
-    let aux_dir = build.aux_dir.as_ref().map(|d| work.join(d)).unwrap_or_else(|| pdf_dir.clone());
-    let records = aux_dir.join(format!("{job}.prumo"));
-    if !records.is_file() {
-        let tail = std::fs::read_to_string(aux_dir.join(format!("{job}.log")))
-            .or_else(|_| std::fs::read_to_string(work.join("build.out")))
-            .map(|t| tail_lines(&t, 25))
-            .unwrap_or_default();
-        return Err(RunError::NoRecords { job, code: exit_code, tail });
-    }
-
-    std::fs::create_dir_all(&cache).map_err(io("create", &cache))?;
+/// Copy the job's artifacts out of the temp copy. The records file was checked before;
+/// the `.fls` is required; the log and the PDF may be missing.
+fn collect(
+    aux_dir: &Path,
+    pdf_dir: &Path,
+    work: &Path,
+    cache: &Path,
+    job: &str,
+    exit_code: Option<i32>,
+) -> Result<Artifacts, RunError> {
+    std::fs::create_dir_all(cache).map_err(io("create", cache))?;
     let copied = |from: &Path, ext: &str| -> Result<Option<PathBuf>, RunError> {
         let src = from.join(format!("{job}.{ext}"));
         if !src.is_file() {
@@ -619,41 +621,78 @@ pub fn run(opts: &RunOptions) -> Result<RunOutput, RunError> {
         std::fs::copy(&src, &dst).map_err(io("copy", &src))?;
         Ok(Some(dst))
     };
-    let records = copied(&aux_dir, "prumo")?.expect("checked above");
-    let fls = copied(&aux_dir, "fls")?.ok_or_else(|| RunError::NoFls { job: job.clone(), code: exit_code })?;
-    let log = copied(&aux_dir, "log")?.unwrap_or_else(|| cache.join(format!("{job}.log")));
-    let pdf = copied(&pdf_dir, "pdf")?;
+    let records = copied(aux_dir, "prumo")?.expect("checked above");
+    let fls = copied(aux_dir, "fls")?.ok_or_else(|| RunError::NoFls { job: job.to_string(), code: exit_code })?;
+    let log = copied(aux_dir, "log")?.unwrap_or_else(|| cache.join(format!("{job}.log")));
+    let pdf = copied(pdf_dir, "pdf")?;
     let _ = std::fs::copy(work.join("build.out"), cache.join("build.out"));
+    Ok(Artifacts { records, fls, log, pdf })
+}
 
-    // A bare `latexmk` leaves the engine to latexmkrc; the start record says what ran.
-    let engine = match build.engine {
-        Some(e) => e,
-        None => {
-            let recs = crate::records::parse_file(&records)?;
-            match recs.first().map(|r| &r.event) {
-                Some(crate::records::Event::Start { engine: crate::records::Engine::PdfTex, .. }) => {
-                    EngineCmd::Pdflatex
-                }
-                Some(crate::records::Event::Start { engine: crate::records::Engine::XeTex, .. }) => EngineCmd::Xelatex,
-                Some(crate::records::Event::Start { engine: crate::records::Engine::LuaTex, .. }) => {
-                    EngineCmd::Lualatex
-                }
-                Some(crate::records::Event::Start { engine_name, .. }) => {
-                    return Err(RunError::UnsupportedEngine { engine: engine_name.clone() });
-                }
-                _ => return Err(RunError::UnsupportedEngine { engine: "unknown".into() }),
-            }
-        }
-    };
+/// The engine a bare `latexmk` ran, from the start record.
+fn engine_of(records: &Path) -> Result<EngineCmd, RunError> {
+    use crate::records::{Engine, Event};
+    let recs = crate::records::parse_file(records)?;
+    match recs.first().map(|r| &r.event) {
+        Some(Event::Start { engine: Engine::PdfTex, .. }) => Ok(EngineCmd::Pdflatex),
+        Some(Event::Start { engine: Engine::XeTex, .. }) => Ok(EngineCmd::Xelatex),
+        Some(Event::Start { engine: Engine::LuaTex, .. }) => Ok(EngineCmd::Lualatex),
+        Some(Event::Start { engine_name, .. }) => Err(RunError::UnsupportedEngine { engine: engine_name.clone() }),
+        _ => Err(RunError::UnsupportedEngine { engine: "unknown".into() }),
+    }
+}
 
-    if let Some(pdf) = &pdf
+/// The sidecar files later commands read: `pdffonts` output, the kpathsea variables, and
+/// the font sources the `.fls` names.
+fn save_sidecars(cache: &Path, pdf: Option<&Path>, fls: &Path) {
+    if let Some(pdf) = pdf
         && crate::doctor::which("pdffonts").is_some()
         && let Ok(out) = Command::new("pdffonts").arg(pdf).output()
     {
         let _ = std::fs::write(cache.join("pdffonts.txt"), out.stdout);
     }
     let _ = std::fs::write(cache.join("kpsewhich.txt"), kpsewhich_text());
-    save_font_sources(&cache, &fls);
+    save_font_sources(cache, fls);
+}
+
+/// The instrumented build: copy, probe, run, collect.
+pub fn run(opts: &RunOptions) -> Result<RunOutput, RunError> {
+    let (stem, project) = job_of(&opts.main)?;
+    let build = build_cmd(opts)?;
+    // Artifacts are named after the job; `-jobname` in a user command renames them.
+    let job = build.jobname.clone().unwrap_or_else(|| stem.clone());
+    let cache = cache_dir(&opts.main, opts.out.as_deref())?;
+    let started_at_ns = unix_ns(SystemTime::now());
+    let tmp = tempfile::Builder::new().prefix("prumo-").tempdir().map_err(io("create temp dir", Path::new("/tmp")))?;
+    let staged = stage(tmp.path(), &project, &opts.edits)?;
+    let (command, exit_code) = build_once_timed(
+        &staged.work,
+        &stem,
+        &build,
+        Some(&staged.probe_dir),
+        &opts.env,
+        opts.pretex.as_deref(),
+        opts.timeout,
+    )?;
+
+    // With -output-directory / -outdir the PDF lands there; latexmk's -auxdir takes the
+    // .fls, .log and records (verified: the probe's \iow_open follows openout).
+    let pdf_dir = build.out_dir.as_ref().map(|d| staged.work.join(d)).unwrap_or_else(|| staged.work.clone());
+    let aux_dir = build.aux_dir.as_ref().map(|d| staged.work.join(d)).unwrap_or_else(|| pdf_dir.clone());
+    if !aux_dir.join(format!("{job}.prumo")).is_file() {
+        let tail = std::fs::read_to_string(aux_dir.join(format!("{job}.log")))
+            .or_else(|_| std::fs::read_to_string(staged.work.join("build.out")))
+            .map(|t| tail_lines(&t, 25))
+            .unwrap_or_default();
+        return Err(RunError::NoRecords { job, code: exit_code, tail });
+    }
+    let a = collect(&aux_dir, &pdf_dir, &staged.work, &cache, &job, exit_code)?;
+    // A bare `latexmk` leaves the engine to latexmkrc; the start record says what ran.
+    let engine = match build.engine {
+        Some(e) => e,
+        None => engine_of(&a.records)?,
+    };
+    save_sidecars(&cache, a.pdf.as_deref(), &a.fls);
 
     let info = RunInfo {
         schema: crate::JSON_SCHEMA,
@@ -671,7 +710,7 @@ pub fn run(opts: &RunOptions) -> Result<RunOutput, RunError> {
     let text = serde_json::to_string_pretty(&info)
         .map_err(|source| RunError::BadRunJson { path: info_path.clone(), source })?;
     std::fs::write(&info_path, text).map_err(io("write", &cache.join("run.json")))?;
-    Ok(RunOutput { dir: cache, job, info, records, fls, log, pdf })
+    Ok(RunOutput { dir: cache, job, info, records: a.records, fls: a.fls, log: a.log, pdf: a.pdf })
 }
 
 fn unix_ns(t: SystemTime) -> u64 {

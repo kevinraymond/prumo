@@ -593,18 +593,27 @@ struct CacheFile {
     candidates: Vec<serde_json::Value>,
 }
 
-/// The whole pass. `progress` gets one line per candidate build.
-pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Result<UnusedReport, UnusedError> {
-    if crate::doctor::which("pdftotext").is_none() {
-        return Err(UnusedError::NoPdftotext);
-    }
-    let (job, _project) = run::job_of(&opts.main)?;
+/// The baseline run and what the experiments need from it.
+struct BaseRun {
+    job: String,
+    out_root: PathBuf,
+    run: RunOutput,
+    model: BuildModel,
+    /// The project's own classes and packages, by file name.
+    project_units: BTreeSet<String>,
+    /// The main file and each project unit, by file name: where the requests are.
+    sources: BTreeMap<String, String>,
+}
+
+/// The ordinary probed run (byte-identical to a plain build), reused from the cache when it
+/// is current, plus the project files that may hold the `\usepackage` lines.
+fn base_run(opts: &UnusedOptions, progress: &mut impl FnMut(&str)) -> Result<BaseRun, UnusedError> {
+    let (job, project) = run::job_of(&opts.main)?;
     let out_root = match &opts.out {
         Some(o) => o.clone(),
         None => run::default_out(&opts.main)?,
     };
     progress(&format!("artifacts in {}", out_root.join(&job).display()));
-    // Baseline: the ordinary probed run (byte-identical to a plain build).
     let base_opts = RunOptions {
         latexmk: opts.latexmk,
         build: opts.build.clone(),
@@ -612,24 +621,22 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
         env: opts.env.clone(),
         ..RunOptions::new(opts.main.clone(), opts.engine)
     };
-    let base_run = match run::cached(&opts.main, Some(&out_root))?.filter(|c| !run::is_stale(c, &base_opts)) {
+    let run = match run::cached(&opts.main, Some(&out_root))?.filter(|c| !run::is_stale(c, &base_opts)) {
         Some(c) => c,
         None => run::run(&base_opts)?,
     };
-    if base_run.info.exit_code != Some(0) {
-        let tail = std::fs::read_to_string(&base_run.log).map(|t| run::tail_lines(&t, 10)).unwrap_or_default();
-        return Err(UnusedError::BaselineFailed { code: base_run.info.exit_code, tail });
+    if run.info.exit_code != Some(0) {
+        let tail = std::fs::read_to_string(&run.log).map(|t| run::tail_lines(&t, 10)).unwrap_or_default();
+        return Err(UnusedError::BaselineFailed { code: run.info.exit_code, tail });
     }
-    let model = run::model_of(&base_run)?;
-    let baseline_secs = crate::scaled_to_secs(model.total());
-    let lines = fls::parse_file(&base_run.fls).map_err(run::RunError::Fls)?;
-    let trees = Trees::from_kpsewhich(&std::fs::read_to_string(base_run.dir.join("kpsewhich.txt")).unwrap_or_default());
+    let model = run::model_of(&run)?;
+    let lines = fls::parse_file(&run.fls).map_err(run::RunError::Fls)?;
+    let trees = Trees::from_kpsewhich(&std::fs::read_to_string(run.dir.join("kpsewhich.txt")).unwrap_or_default());
     let project_units: BTreeSet<String> = fls::input_files(&lines, &trees)
         .into_iter()
         .filter(|f| f.tree == Tree::Project && matches!(f.kind, fls::InputKind::Cls | fls::InputKind::Sty))
         .filter_map(|f| f.path.file_name().map(|n| n.to_string_lossy().into_owned()))
         .collect();
-    let (_, project) = run::job_of(&opts.main)?;
     let mut sources: BTreeMap<String, String> = BTreeMap::new();
     if let Ok(t) = std::fs::read_to_string(&opts.main)
         && let Some(n) = opts.main.file_name()
@@ -641,32 +648,130 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
             sources.insert(u.clone(), t);
         }
     }
-    let cands = candidates_in(&model, &project_units, &sources);
-    let redundant = redundant_requests(&model, &project_units, &sources);
-    let base = baseline_of(&base_run, opts.compare)?;
+    Ok(BaseRun { job, out_root, run, model, project_units, sources })
+}
+
+/// The `compare` mode as the cache file spells it.
+fn compare_key(compare: Compare) -> String {
+    format!("{compare:?}").to_lowercase()
+}
+
+/// The verdicts of an earlier pass over the same sources, engine and mode, when the cache
+/// file holds them.
+fn cached_candidates(cache_path: &Path, hash: u64, opts: &UnusedOptions) -> Option<Vec<Candidate>> {
+    let text = std::fs::read_to_string(cache_path).ok()?;
+    let c = serde_json::from_str::<CacheFile>(&text).ok()?;
+    let same = c.source_hash == hash
+        && c.engine == opts.engine
+        && c.compare == compare_key(opts.compare)
+        && c.test_all == opts.test_all;
+    same.then(|| serde_json::from_value::<Vec<Candidate>>(serde_json::Value::Array(c.candidates)).ok()).flatten()
+}
+
+/// One experiment: the document rebuilt without `r`, judged against the baseline. The
+/// request is deleted from the loader's source in the copy, the way the user would do it;
+/// when it is not found there, the package is blocked instead.
+fn try_without(opts: &UnusedOptions, b: &BaseRun, base: &Baseline, r: &Request, timeout: f64) -> Verdict {
+    let out_dir = b.out_root.join(&b.job).join("unused").join(&r.package);
+    let edit = b
+        .sources
+        .get(&r.loaded_by)
+        .and_then(|src| remove_request(src, &r.package))
+        .map(|t| (PathBuf::from(&r.loaded_by), t));
+    let (edits, pretex) = match edit {
+        Some(e) => (vec![e], None),
+        None => (vec![], Some(blocking_pretex(&r.package, &r.options))),
+    };
+    let result = run::run(&RunOptions {
+        latexmk: opts.latexmk,
+        build: opts.build.clone(),
+        out: Some(out_dir),
+        env: opts.env.clone(),
+        pretex,
+        edits,
+        timeout: Some(std::time::Duration::from_secs_f64(timeout)),
+        ..RunOptions::new(opts.main.clone(), opts.engine)
+    });
+    match result {
+        Ok(out) => match judge(base, &out, opts.compare) {
+            Verdict::NoObservableEffect => {
+                let still = run::parse_records(&out)
+                    .ok()
+                    .and_then(|recs| BuildModel::from_records(&recs, &out.records.display().to_string()).ok())
+                    .and_then(|m| loaded_anyway(&m, &b.project_units, &r.package));
+                match still {
+                    Some(by) => Verdict::LoadedAnyway { by },
+                    None => Verdict::NoObservableEffect,
+                }
+            }
+            v => v,
+        },
+        Err(run::RunError::TimedOut { .. }) => Verdict::TimedOut,
+        Err(run::RunError::NoRecords { code, tail, .. }) => Verdict::Required {
+            evidence: format!("build produced no records (exit {code:?}): {}", tail.lines().last().unwrap_or("")),
+        },
+        Err(e) => Verdict::Required { evidence: e.to_string() },
+    }
+}
+
+/// Every candidate through `try_without`, `opts.jobs` at a time. Verdict and wall time,
+/// by package name.
+fn test_candidates(
+    opts: &UnusedOptions,
+    b: &BaseRun,
+    base: &Baseline,
+    to_test: &[&Request],
+    timeout: f64,
+    progress: impl FnMut(&str) + Send,
+) -> BTreeMap<String, (Verdict, f64)> {
+    let results: Mutex<BTreeMap<String, (Verdict, f64)>> = Mutex::new(BTreeMap::new());
+    let next = AtomicUsize::new(0);
+    let progress = Mutex::new(progress);
+    std::thread::scope(|s| {
+        for _ in 0..opts.jobs.max(1) {
+            s.spawn(|| {
+                loop {
+                    let i = next.fetch_add(1, Ordering::SeqCst);
+                    let Some(r) = to_test.get(i) else { break };
+                    let t0 = std::time::Instant::now();
+                    let verdict = try_without(opts, b, base, r, timeout);
+                    let secs = t0.elapsed().as_secs_f64();
+                    (progress.lock().unwrap())(&format!("{}: {} ({secs:.1} s)", r.package, verdict_word(&verdict)));
+                    results.lock().unwrap().insert(r.package.clone(), (verdict, secs));
+                }
+            });
+        }
+    });
+    results.into_inner().unwrap()
+}
+
+/// The whole pass. `progress` gets one line per candidate build.
+pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Result<UnusedReport, UnusedError> {
+    if crate::doctor::which("pdftotext").is_none() {
+        return Err(UnusedError::NoPdftotext);
+    }
+    let b = base_run(opts, &mut progress)?;
+    let baseline_secs = crate::scaled_to_secs(b.model.total());
+    let cands = candidates_in(&b.model, &b.project_units, &b.sources);
+    let redundant = redundant_requests(&b.model, &b.project_units, &b.sources);
+    let base = baseline_of(&b.run, opts.compare)?;
+    let report = |candidates: Vec<Candidate>, cached: bool| UnusedReport {
+        schema: crate::JSON_SCHEMA,
+        job: b.job.clone(),
+        engine: opts.engine,
+        compare: opts.compare,
+        baseline_pages: base.pages,
+        baseline_secs,
+        candidates,
+        cached,
+        warnings: vec![],
+    };
 
     // Cache: verdicts for the same sources, engine, mode.
-    let hash = source_hash(&base_run, &opts.main);
-    let cache_path = base_run.dir.join("unused.json");
-    if let Ok(text) = std::fs::read_to_string(&cache_path)
-        && let Ok(c) = serde_json::from_str::<CacheFile>(&text)
-        && c.source_hash == hash
-        && c.engine == opts.engine
-        && c.compare == format!("{:?}", opts.compare).to_lowercase()
-        && c.test_all == opts.test_all
-        && let Ok(candidates) = serde_json::from_value::<Vec<Candidate>>(serde_json::Value::Array(c.candidates))
-    {
-        return Ok(UnusedReport {
-            schema: crate::JSON_SCHEMA,
-            job,
-            engine: opts.engine,
-            compare: opts.compare,
-            baseline_pages: base.pages,
-            baseline_secs,
-            candidates,
-            cached: true,
-            warnings: vec![],
-        });
+    let hash = source_hash(&b.run, &opts.main);
+    let cache_path = b.run.dir.join("unused.json");
+    if let Some(candidates) = cached_candidates(&cache_path, hash, opts) {
+        return Ok(report(candidates, true));
     }
 
     let timeout = if opts.timeout_secs > 0 { opts.timeout_secs as f64 } else { (baseline_secs * 10.0).max(30.0) };
@@ -680,79 +785,25 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
         opts.jobs.max(1),
         if opts.jobs == 1 { "" } else { "s" }
     ));
+    let results = test_candidates(opts, &b, &base, &to_test, timeout, progress);
 
-    let results: Mutex<BTreeMap<String, (Verdict, f64)>> = Mutex::new(BTreeMap::new());
-    let next = AtomicUsize::new(0);
-    let progress = Mutex::new(progress);
-    std::thread::scope(|s| {
-        for _ in 0..opts.jobs.max(1) {
-            s.spawn(|| {
-                loop {
-                    let i = next.fetch_add(1, Ordering::SeqCst);
-                    let Some(r) = to_test.get(i) else { break };
-                    let (pkg, options, by) = (&r.package, &r.options, &r.loaded_by);
-                    let t0 = std::time::Instant::now();
-                    let out_dir = out_root.join(&job).join("unused").join(pkg);
-                    // The experiment the user would run: delete the request from the loader's
-                    // source (in the copy). Block the package only when the request is not found.
-                    let edit = sources.get(by).and_then(|src| remove_request(src, pkg)).map(|t| (PathBuf::from(by), t));
-                    let (edits, pretex) = match edit {
-                        Some(e) => (vec![e], None),
-                        None => (vec![], Some(blocking_pretex(pkg, options))),
-                    };
-                    let r = run::run(&RunOptions {
-                        latexmk: opts.latexmk,
-                        build: opts.build.clone(),
-                        out: Some(out_dir),
-                        env: opts.env.clone(),
-                        pretex,
-                        edits,
-                        timeout: Some(std::time::Duration::from_secs_f64(timeout)),
-                        ..RunOptions::new(opts.main.clone(), opts.engine)
-                    });
-                    let secs = t0.elapsed().as_secs_f64();
-                    let verdict = match r {
-                        Ok(out) => match judge(&base, &out, opts.compare) {
-                            Verdict::NoObservableEffect => {
-                                let still = run::parse_records(&out)
-                                    .ok()
-                                    .and_then(|r| BuildModel::from_records(&r, &out.records.display().to_string()).ok())
-                                    .and_then(|m| loaded_anyway(&m, &project_units, pkg));
-                                match still {
-                                    Some(by) => Verdict::LoadedAnyway { by },
-                                    None => Verdict::NoObservableEffect,
-                                }
-                            }
-                            v => v,
-                        },
-                        Err(run::RunError::TimedOut { .. }) => Verdict::TimedOut,
-                        Err(run::RunError::NoRecords { code, tail, .. }) => Verdict::Required {
-                            evidence: format!(
-                                "build produced no records (exit {code:?}): {}",
-                                tail.lines().last().unwrap_or("")
-                            ),
-                        },
-                        Err(e) => Verdict::Required { evidence: e.to_string() },
-                    };
-                    (progress.lock().unwrap())(&format!("{pkg}: {} ({secs:.1} s)", verdict_word(&verdict)));
-                    results.lock().unwrap().insert(pkg.clone(), (verdict, secs));
-                }
-            });
-        }
-    });
-    let results = results.into_inner().unwrap();
     let mut candidates: Vec<Candidate> = cands
         .iter()
         .map(|r| {
-            let (pkg, options, by) = (&r.package, &r.options, &r.loaded_by);
-            let (verdict, build_secs) = match results.get(pkg) {
+            let (verdict, build_secs) = match results.get(&r.package) {
                 Some((v, s)) => (v.clone(), Some(*s)),
                 None => (
                     Verdict::NotTested { reason: "side-effect package (skip list; --test-all overrides)".into() },
                     None,
                 ),
             };
-            Candidate { package: pkg.clone(), options: options.clone(), loaded_by: by.clone(), verdict, build_secs }
+            Candidate {
+                package: r.package.clone(),
+                options: r.options.clone(),
+                loaded_by: r.loaded_by.clone(),
+                verdict,
+                build_secs,
+            }
         })
         .collect();
     candidates.extend(redundant.into_iter().map(|(pkg, requester, by)| Candidate {
@@ -765,22 +816,12 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
     let cache = CacheFile {
         source_hash: hash,
         engine: opts.engine,
-        compare: format!("{:?}", opts.compare).to_lowercase(),
+        compare: compare_key(opts.compare),
         test_all: opts.test_all,
         candidates: candidates.iter().map(|c| serde_json::to_value(c).unwrap_or_default()).collect(),
     };
     let _ = std::fs::write(&cache_path, serde_json::to_string_pretty(&cache).unwrap_or_default());
-    Ok(UnusedReport {
-        schema: crate::JSON_SCHEMA,
-        job,
-        engine: opts.engine,
-        compare: opts.compare,
-        baseline_pages: base.pages,
-        baseline_secs,
-        candidates,
-        cached: false,
-        warnings: vec![],
-    })
+    Ok(report(candidates, false))
 }
 
 /// `prumo unused --corpus`: one loader (the user's class or package) judged against every

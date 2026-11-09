@@ -213,21 +213,33 @@ fn mounts_text(map: Option<&str>) -> String {
     parts.join("; ")
 }
 
-pub fn run() -> Report {
-    let mut checks = Vec::new();
-    if let Some(img) = image() {
-        checks.push(Check {
-            name: "image".into(),
-            status: Status::Ok,
-            detail: format!(
-                "{img}: the engines and TeX Live below are the image's, not this machine's; {}",
-                mounts_text(std::env::var("PRUMO_PATH_MAP").ok().as_deref())
-            ),
-        });
+/// A tool on `PATH` is ok with its version line; otherwise a warning that says `absent`.
+fn tool_check(tool: &str, version_arg: &str, absent: &str) -> Check {
+    match which(tool) {
+        Some(_) => {
+            Check { name: tool.into(), status: Status::Ok, detail: first_line(tool, version_arg).unwrap_or_default() }
+        }
+        None => Check { name: tool.into(), status: Status::Warn, detail: absent.into() },
     }
+}
+
+/// Inside a container image: say so, and what the image can see of the machine.
+fn image_check() -> Option<Check> {
+    image().map(|img| Check {
+        name: "image".into(),
+        status: Status::Ok,
+        detail: format!(
+            "{img}: the engines and TeX Live below are the image's, not this machine's; {}",
+            mounts_text(std::env::var("PRUMO_PATH_MAP").ok().as_deref())
+        ),
+    })
+}
+
+/// The cache directory, what it holds, and the command that empties it.
+fn cache_check() -> Check {
     let root = crate::run::cache_root();
     let cache = crate::cache::list(&root);
-    checks.push(Check {
+    Check {
         name: "cache".into(),
         status: Status::Ok,
         detail: format!(
@@ -237,138 +249,117 @@ pub fn run() -> Report {
             if cache.entries.len() == 1 { "y" } else { "ies" },
             crate::cache::human_bytes(cache.bytes)
         ),
-    });
+    }
+}
+
+/// The kernel date from `latex.ltx` against `MIN_KERNEL`. The flag says it is new enough.
+fn kernel_check() -> (Check, bool) {
+    let ltx = kpsewhich(&["latex.ltx"]).map(PathBuf::from);
+    let date = ltx.as_ref().and_then(|p| std::fs::read_to_string(p).ok()).and_then(|t| kernel_date_from_ltx(&t));
+    let name = || "LaTeX kernel".to_string();
+    match (&ltx, &date) {
+        (Some(p), Some(d)) if d.as_str() >= MIN_KERNEL => {
+            (Check { name: name(), status: Status::Ok, detail: format!("{d}  ({})", p.display()) }, true)
+        }
+        (Some(p), Some(d)) => (
+            Check {
+                name: name(),
+                status: Status::Missing,
+                detail: format!(
+                    "{d} is older than {MIN_KERNEL}, the oldest kernel prumo supports (hook system and raw package options)  ({})",
+                    p.display()
+                ),
+            },
+            false,
+        ),
+        (Some(p), None) => (
+            Check {
+                name: name(),
+                status: Status::Missing,
+                detail: format!("could not read \\fmtversion from {}", p.display()),
+            },
+            false,
+        ),
+        (None, _) => {
+            (Check { name: name(), status: Status::Missing, detail: "kpsewhich latex.ltx found nothing".into() }, false)
+        }
+    }
+}
+
+/// `-recorder`: every TeX Live engine since 2008 has it; ask the one prumo would use.
+fn recorder_check() -> (Check, bool) {
+    let recorder = ["pdftex", "xetex", "luahbtex", "luatex"]
+        .iter()
+        .find(|b| which(b).is_some())
+        .map(|b| (b, Command::new(b).arg("--help").output().ok()));
+    let name = || "-recorder".to_string();
+    match &recorder {
+        Some((b, Some(out))) if String::from_utf8_lossy(&out.stdout).contains("-recorder") => {
+            (Check { name: name(), status: Status::Ok, detail: format!("{b} --help lists it") }, true)
+        }
+        Some((b, _)) => {
+            (Check { name: name(), status: Status::Missing, detail: format!("{b} --help does not list it") }, false)
+        }
+        None => (Check { name: name(), status: Status::Missing, detail: "no engine binary to ask".into() }, false),
+    }
+}
+
+/// The kpathsea tree and the tlpdb: `TEXMFDIST` and `texlive.tlpdb` rows, or one
+/// `kpsewhich` row when there is no TeX at all. The path is the tlpdb when it exists.
+fn tlpdb_checks() -> (Vec<Check>, Option<PathBuf>) {
+    let Some(dist) = kpsewhich(&["-var-value", "TEXMFDIST"]) else {
+        let none = Check {
+            name: "kpsewhich".into(),
+            status: Status::Missing,
+            detail: "not on PATH; no TeX installation found".into(),
+        };
+        return (vec![none], None);
+    };
+    let mut checks = vec![Check { name: "TEXMFDIST".into(), status: Status::Ok, detail: dist }];
+    let db = tlpdb_candidate();
+    match std::fs::metadata(&db) {
+        Ok(m) => {
+            checks.push(Check {
+                name: "texlive.tlpdb".into(),
+                status: Status::Ok,
+                detail: format!("{} ({} MB); packages: full", db.display(), m.len() / 1_000_000),
+            });
+            (checks, Some(db))
+        }
+        Err(_) => {
+            checks.push(Check {
+                name: "texlive.tlpdb".into(),
+                status: Status::Warn,
+                detail: format!(
+                    "not at {}; packages: file-level only, prune unavailable (Debian/Ubuntu TeX Live?)",
+                    db.display()
+                ),
+            });
+            (checks, None)
+        }
+    }
+}
+
+pub fn run() -> Report {
+    let mut checks: Vec<Check> = image_check().into_iter().collect();
+    checks.push(cache_check());
     let mut engines = 0;
     for (name, bin) in [("pdflatex", "pdftex"), ("xelatex", "xetex"), ("lualatex", "luahbtex")] {
         let (c, ok) = engine_check(name, bin);
         engines += ok as u32;
         checks.push(c);
     }
-    checks.push(match which("latexmk") {
-        Some(_) => Check {
-            name: "latexmk".into(),
-            status: Status::Ok,
-            detail: first_line("latexmk", "--version").unwrap_or_default(),
-        },
-        None => {
-            Check { name: "latexmk".into(), status: Status::Warn, detail: "not on PATH; --latexmk unavailable".into() }
-        }
-    });
-
-    // Kernel date from latex.ltx.
-    let mut kernel_ok = false;
-    let ltx = kpsewhich(&["latex.ltx"]).map(PathBuf::from);
-    let date = ltx.as_ref().and_then(|p| std::fs::read_to_string(p).ok()).and_then(|t| kernel_date_from_ltx(&t));
-    checks.push(match (&ltx, &date) {
-        (Some(p), Some(d)) if d.as_str() >= MIN_KERNEL => {
-            kernel_ok = true;
-            Check { name: "LaTeX kernel".into(), status: Status::Ok, detail: format!("{d}  ({})", p.display()) }
-        }
-        (Some(p), Some(d)) => Check {
-            name: "LaTeX kernel".into(),
-            status: Status::Missing,
-            detail: format!(
-                "{d} is older than {MIN_KERNEL}, the oldest kernel prumo supports (hook system and raw package options)  ({})",
-                p.display()
-            ),
-        },
-        (Some(p), None) => Check {
-            name: "LaTeX kernel".into(),
-            status: Status::Missing,
-            detail: format!("could not read \\fmtversion from {}", p.display()),
-        },
-        (None, _) => Check {
-            name: "LaTeX kernel".into(),
-            status: Status::Missing,
-            detail: "kpsewhich latex.ltx found nothing".into(),
-        },
-    });
-
-    // -recorder: every TeX Live engine since 2008 has it; check the one we would use.
-    let recorder = ["pdftex", "xetex", "luahbtex", "luatex"]
-        .iter()
-        .find(|b| which(b).is_some())
-        .map(|b| (b, Command::new(b).arg("--help").output().ok()));
-    let recorder_ok = match &recorder {
-        Some((b, Some(out))) if String::from_utf8_lossy(&out.stdout).contains("-recorder") => {
-            checks.push(Check { name: "-recorder".into(), status: Status::Ok, detail: format!("{b} --help lists it") });
-            true
-        }
-        Some((b, _)) => {
-            checks.push(Check {
-                name: "-recorder".into(),
-                status: Status::Missing,
-                detail: format!("{b} --help does not list it"),
-            });
-            false
-        }
-        None => {
-            checks.push(Check {
-                name: "-recorder".into(),
-                status: Status::Missing,
-                detail: "no engine binary to ask".into(),
-            });
-            false
-        }
-    };
-
+    checks.push(tool_check("latexmk", "--version", "not on PATH; --latexmk unavailable"));
+    let (kernel, kernel_ok) = kernel_check();
+    checks.push(kernel);
+    let (recorder, recorder_ok) = recorder_check();
+    checks.push(recorder);
     for tool in ["pdffonts", "pdftotext", "pdfinfo", "pdftoppm"] {
-        checks.push(match which(tool) {
-            Some(_) => {
-                Check { name: tool.into(), status: Status::Ok, detail: first_line(tool, "-v").unwrap_or_default() }
-            }
-            None => Check {
-                name: tool.into(),
-                status: Status::Warn,
-                detail: "not on PATH (poppler-utils); font and text comparisons degrade".into(),
-            },
-        });
+        checks.push(tool_check(tool, "-v", "not on PATH (poppler-utils); font and text comparisons degrade"));
     }
-
-    // kpathsea trees and the tlpdb.
-    let mut tlpdb = None;
-    match kpsewhich(&["-var-value", "TEXMFDIST"]) {
-        Some(dist) => {
-            checks.push(Check { name: "TEXMFDIST".into(), status: Status::Ok, detail: dist });
-            let db = tlpdb_candidate();
-            checks.push(match std::fs::metadata(&db) {
-                Ok(m) => {
-                    tlpdb = Some(db.clone());
-                    Check {
-                        name: "texlive.tlpdb".into(),
-                        status: Status::Ok,
-                        detail: format!("{} ({} MB); packages: full", db.display(), m.len() / 1_000_000),
-                    }
-                }
-                Err(_) => Check {
-                    name: "texlive.tlpdb".into(),
-                    status: Status::Warn,
-                    detail: format!(
-                        "not at {}; packages: file-level only, prune unavailable (Debian/Ubuntu TeX Live?)",
-                        db.display()
-                    ),
-                },
-            });
-        }
-        None => checks.push(Check {
-            name: "kpsewhich".into(),
-            status: Status::Missing,
-            detail: "not on PATH; no TeX installation found".into(),
-        }),
-    }
-    checks.push(match which("tlmgr") {
-        Some(_) => Check {
-            name: "tlmgr".into(),
-            status: Status::Ok,
-            detail: first_line("tlmgr", "--version").unwrap_or_default(),
-        },
-        None => Check {
-            name: "tlmgr".into(),
-            status: Status::Warn,
-            detail: "not on PATH; prune --apply unavailable".into(),
-        },
-    });
-
+    let (tl, tlpdb) = tlpdb_checks();
+    checks.extend(tl);
+    checks.push(tool_check("tlmgr", "--version", "not on PATH; prune --apply unavailable"));
     Report { ready: engines > 0 && kernel_ok && recorder_ok, tlpdb, checks }
 }
 

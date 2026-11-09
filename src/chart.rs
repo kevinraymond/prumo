@@ -132,18 +132,9 @@ struct Row<'a> {
     frame: Option<&'a Frame>,
 }
 
-/// The load tree over time. Collapsed (the default): the main file, one row for the whole
-/// preamble, and the pages row (`░` typesetting, `▓` shipout hooks) on an axis from the
-/// engine start to the last record; the preamble is the same every build, so it stays
-/// folded. `preamble`: the axis ends at `\begin{document}` and every frame down to
-/// `depth` that is worth a cell gets a row. Phase boundaries are `┆`.
-pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
-    const MAX_ROWS: usize = 40;
-    let preamble = look.preamble;
-    let begindoc = m.phases.begindoc.unwrap_or(m.end);
-    let axis_end = if preamble { begindoc } else { m.end };
-    let total = (axis_end - m.start).max(1);
-    let threshold = total / 400; // a quarter of a percent: below that a bar is a sliver anyway
+/// The rows of the timeline: with the preamble expanded, every frame down to `depth` that
+/// is worth a cell; otherwise the main file and the folded preamble.
+fn rows<'a>(m: &'a BuildModel, depth: usize, preamble: bool, begindoc: Scaled, threshold: Scaled) -> Vec<Row<'a>> {
     let mut rows: Vec<Row> = Vec::new();
     if preamble {
         m.root.walk(&mut |fr, d| {
@@ -175,15 +166,11 @@ pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
             frame: None,
         });
     }
-    let hidden = rows.len().saturating_sub(MAX_ROWS);
-    rows.truncate(MAX_ROWS);
-    let label_w = rows.iter().map(|r| r.label.chars().count()).max().unwrap_or(10).clamp(10, 30);
-    let cells = look.width.saturating_sub(label_w + 2 + 10).clamp(20, 120);
-    let col = |t: Scaled| -> f64 { (t.saturating_sub(m.start).min(total)) as f64 / total as f64 * cells as f64 };
+    rows
+}
 
-    let mut s = String::new();
-    // Axis: tick labels, then the line.
-    let total_ms = ms(total);
+/// The axis: tick labels on one line, the line with a `┬` under each label.
+fn axis_lines(total_ms: f64, cells: usize, label_w: usize, color: bool) -> String {
     let step = nice_step(total_ms);
     let mut axis = vec![' '; cells + 8];
     let mut line = vec!['─'; cells];
@@ -200,9 +187,100 @@ pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
         }
         t += step;
     }
-    let _ = writeln!(s, "  {:label_w$}  {}", "", dim(axis.iter().collect::<String>().trim_end(), look.color));
-    let _ = writeln!(s, "  {:label_w$}  {}", "", dim(&line.iter().collect::<String>(), look.color));
+    let mut s = String::new();
+    let _ = writeln!(s, "  {:label_w$}  {}", "", dim(axis.iter().collect::<String>().trim_end(), color));
+    let _ = writeln!(s, "  {:label_w$}  {}", "", dim(&line.iter().collect::<String>(), color));
+    s
+}
 
+/// One bar from column `start` to `end`: full cells, the last one trimmed to eighths so a
+/// short frame reads as short, and a `┆` in every empty cell a phase boundary falls on.
+fn row_cells(start: f64, end: f64, cells: usize, phases: &[usize]) -> String {
+    let end = end.max(start + 0.125);
+    let mut cellrow: Vec<char> = vec![' '; cells];
+    let first = (start.floor() as usize).min(cells - 1);
+    let last = (end.ceil() as usize).min(cells);
+    for c in cellrow.iter_mut().take(last).skip(first) {
+        *c = '█';
+    }
+    if last > first && last <= cells {
+        let frac = end - (last - 1) as f64;
+        if frac < 1.0 && last > first {
+            cellrow[last - 1] = EIGHTHS[((frac * 8.0).round() as usize).clamp(1, 8)];
+        }
+    }
+    for &p in phases {
+        if cellrow[p] == ' ' {
+            cellrow[p] = '┆';
+        }
+    }
+    cellrow.iter().collect()
+}
+
+/// The pages row: for each cell, is the time mostly typesetting (`░`) or mostly shipout
+/// hooks (`▓`)?
+fn pages_strip(m: &BuildModel, cells: usize, total: Scaled, col: &dyn Fn(Scaled) -> f64) -> String {
+    let per_cell = total as f64 / cells as f64;
+    let mut typeset = vec![0.0f64; cells];
+    let mut ship = vec![0.0f64; cells];
+    let add = |acc: &mut Vec<f64>, a: Scaled, b: Scaled| {
+        if b <= a {
+            return;
+        }
+        let (a, b) = (col(a), col(b));
+        let (c0, c1) = (a.floor() as usize, (b.ceil() as usize).min(cells));
+        for (c, slot) in acc.iter_mut().enumerate().take(c1).skip(c0) {
+            let lo = a.max(c as f64);
+            let hi = b.min(c as f64 + 1.0);
+            *slot += (hi - lo).max(0.0) * per_cell;
+        }
+    };
+    let mut prev = m.phases.begindoc;
+    for p in &m.pages {
+        if let Some(t0) = prev {
+            match p.ship_start {
+                Some(sb) => {
+                    add(&mut typeset, t0, sb);
+                    add(&mut ship, sb, p.time);
+                }
+                None => add(&mut typeset, t0, p.time),
+            }
+        }
+        prev = Some(p.time);
+    }
+    (0..cells)
+        .map(|c| {
+            if typeset[c] + ship[c] <= 0.0 {
+                ' '
+            } else if ship[c] > typeset[c] {
+                '▓'
+            } else {
+                '░'
+            }
+        })
+        .collect()
+}
+
+/// The load tree over time. Collapsed (the default): the main file, one row for the whole
+/// preamble, and the pages row (`░` typesetting, `▓` shipout hooks) on an axis from the
+/// engine start to the last record; the preamble is the same every build, so it stays
+/// folded. `preamble`: the axis ends at `\begin{document}` and every frame down to
+/// `depth` that is worth a cell gets a row. Phase boundaries are `┆`.
+pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
+    const MAX_ROWS: usize = 40;
+    let preamble = look.preamble;
+    let begindoc = m.phases.begindoc.unwrap_or(m.end);
+    let axis_end = if preamble { begindoc } else { m.end };
+    let total = (axis_end - m.start).max(1);
+    // A quarter of a percent: below that a bar is a sliver anyway.
+    let mut rows = rows(m, depth, preamble, begindoc, total / 400);
+    let hidden = rows.len().saturating_sub(MAX_ROWS);
+    rows.truncate(MAX_ROWS);
+    let label_w = rows.iter().map(|r| r.label.chars().count()).max().unwrap_or(10).clamp(10, 30);
+    let cells = look.width.saturating_sub(label_w + 2 + 10).clamp(20, 120);
+    let col = |t: Scaled| -> f64 { (t.saturating_sub(m.start).min(total)) as f64 / total as f64 * cells as f64 };
+
+    let mut s = axis_lines(ms(total), cells, label_w, look.color);
     let phases: Vec<usize> = [m.phases.predoc.or(m.phases.begindoc), m.phases.enddoc]
         .into_iter()
         .flatten()
@@ -210,27 +288,7 @@ pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
         .map(|t| (col(t) as usize).min(cells - 1))
         .collect();
     for r in &rows {
-        let start = col(r.start);
-        let end = col(r.end).max(start + 0.125);
-        let mut cellrow: Vec<char> = vec![' '; cells];
-        let first = (start.floor() as usize).min(cells - 1);
-        let last = (end.ceil() as usize).min(cells);
-        for c in cellrow.iter_mut().take(last).skip(first) {
-            *c = '█';
-        }
-        // Trim the last cell to eighths so a short frame reads as short.
-        if last > first && last <= cells {
-            let frac = end - (last - 1) as f64;
-            if frac < 1.0 && last > first {
-                cellrow[last - 1] = EIGHTHS[((frac * 8.0).round() as usize).clamp(1, 8)];
-            }
-        }
-        for &p in &phases {
-            if cellrow[p] == ' ' {
-                cellrow[p] = '┆';
-            }
-        }
-        let bar: String = cellrow.iter().collect();
+        let bar = row_cells(col(r.start), col(r.end), cells, &phases);
         let label: String = r.label.chars().take(label_w).collect();
         let label = format!("{label:<label_w$}");
         let took = match r.frame {
@@ -248,47 +306,8 @@ pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
     if hidden > 0 {
         let _ = writeln!(s, "  {:<label_w$}  … {hidden} more rows (--depth, or --html)", "");
     }
-    // Pages row: for each cell, is the time mostly typesetting or mostly shipout hooks?
     if !m.pages.is_empty() && !preamble {
-        let mut cellrow: Vec<char> = vec![' '; cells];
-        let mut prev = m.phases.begindoc;
-        let per_cell = total as f64 / cells as f64;
-        let mut typeset = vec![0.0f64; cells];
-        let mut ship = vec![0.0f64; cells];
-        let add = |acc: &mut Vec<f64>, a: Scaled, b: Scaled| {
-            if b <= a {
-                return;
-            }
-            let (a, b) = (col(a), col(b));
-            let (c0, c1) = (a.floor() as usize, (b.ceil() as usize).min(cells));
-            for (c, slot) in acc.iter_mut().enumerate().take(c1).skip(c0) {
-                let lo = a.max(c as f64);
-                let hi = b.min(c as f64 + 1.0);
-                *slot += (hi - lo).max(0.0) * per_cell;
-            }
-        };
-        for p in &m.pages {
-            if let Some(t0) = prev {
-                match p.ship_start {
-                    Some(sb) => {
-                        add(&mut typeset, t0, sb);
-                        add(&mut ship, sb, p.time);
-                    }
-                    None => add(&mut typeset, t0, p.time),
-                }
-            }
-            prev = Some(p.time);
-        }
-        for c in 0..cells {
-            cellrow[c] = if typeset[c] + ship[c] <= 0.0 {
-                ' '
-            } else if ship[c] > typeset[c] {
-                '▓'
-            } else {
-                '░'
-            };
-        }
-        let strip: String = cellrow.iter().collect();
+        let strip = pages_strip(m, cells, total, &col);
         let painted = if look.color { format!("\x1b[34m{strip}\x1b[0m") } else { strip };
         let _ = writeln!(s, "  {:<label_w$}  {painted}{:>5} pages", "pages", m.pages.len());
     }
