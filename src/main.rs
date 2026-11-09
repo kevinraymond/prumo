@@ -266,11 +266,13 @@ fn fonts_report_of(out: &RunOutput, model: &BuildModel) -> anyhow::Result<prumo:
     Ok(prumo::fonts::report(
         &out.job,
         model,
-        &files,
-        map_text.as_deref(),
-        pdffonts.as_deref(),
-        &fd_texts,
-        prumo::doctor::Installer::detect(),
+        &prumo::fonts::FontSources {
+            files: &files,
+            map_text: map_text.as_deref(),
+            pdffonts_text: pdffonts.as_deref(),
+            fd_texts: &fd_texts,
+            installer: prumo::doctor::Installer::detect(),
+        },
     ))
 }
 

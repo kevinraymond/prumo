@@ -131,33 +131,13 @@ pub fn resolve(job: &str, model: &BuildModel, files: &[InputFile], db: &Tlpdb, f
             reasons.entry(t).or_insert(Reason::Format { format: format.into() });
         }
     }
-    // depend closure, remembering who pulled each package in.
+    // depend closure, remembering which package pulled each one in.
     let roots: Vec<String> = reasons.keys().cloned().collect();
-    let mut todo: Vec<(String, String)> = roots.iter().map(|r| (r.clone(), r.clone())).collect();
-    while let Some((name, of)) = todo.pop() {
-        if !reasons.contains_key(&name) {
-            reasons.insert(name.clone(), Reason::Depend { of: of.clone() });
-        } else if name != of {
-            continue;
+    db.walk_depends(roots.iter().map(String::as_str), |name, by| {
+        if !reasons.contains_key(name) {
+            reasons.insert(name.to_string(), Reason::Depend { of: by.to_string() });
         }
-        if let Some(p) = db.packages.get(&name) {
-            for d in &p.depends {
-                if d.contains(':') || d.contains('/') {
-                    continue;
-                }
-                if let Some(base) = d.strip_suffix(".ARCH") {
-                    let prefix = format!("{base}.");
-                    for n in db.packages.keys().filter(|n| n.starts_with(&prefix)) {
-                        if !reasons.contains_key(n) {
-                            todo.push((n.clone(), name.clone()));
-                        }
-                    }
-                } else if !reasons.contains_key(d) {
-                    todo.push((d.clone(), name.clone()));
-                }
-            }
-        }
-    }
+    });
     for (name, reason) in reasons {
         let (category, size) = db.packages.get(&name).map(|p| (p.category, p.run_size)).unwrap_or((None, 0));
         report.total_size += size;

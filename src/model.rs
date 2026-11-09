@@ -158,6 +158,29 @@ pub struct UnitRow {
     pub loads: u32,
 }
 
+/// One page's time: from the previous shipout (or `\begin{document}`) to its own.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PageTime {
+    pub page: u32,
+    pub time: Scaled,
+}
+
+/// One page's time split at the shipout. `ship` is `None` when the records have no `ship`
+/// events (an older probe).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PageSplit {
+    pub page: u32,
+    pub typeset: Scaled,
+    pub ship: Option<Scaled>,
+}
+
+impl PageSplit {
+    /// Typesetting and shipout together: the page's whole time.
+    pub fn total(&self) -> Scaled {
+        self.typeset + self.ship.unwrap_or(0)
+    }
+}
+
 impl BuildModel {
     /// Build from parsed records. `file` is for error messages only.
     pub fn from_records(records: &[Record], file: &str) -> Result<BuildModel, ModelError> {
@@ -277,14 +300,14 @@ impl BuildModel {
 
     /// Rule 5: per-page time. The first page counts from `begindoc` (0 if there was none,
     /// as in the oracle).
-    pub fn page_times(&self) -> Vec<(u32, Scaled)> {
+    pub fn page_times(&self) -> Vec<PageTime> {
         let mut prev = self.phases.begindoc;
         self.pages
             .iter()
             .map(|p| {
                 let dt = prev.map_or(0, |t| p.time.saturating_sub(t));
                 prev = Some(p.time);
-                (p.number, dt)
+                PageTime { page: p.number, time: dt }
             })
             .collect()
     }
@@ -313,9 +336,8 @@ impl BuildModel {
         rows
     }
 
-    /// Per page: (number, typesetting time, shipout time). Shipout time is `None` when the
-    /// records have no `ship` events (older probe).
-    pub fn page_split(&self) -> Vec<(u32, Scaled, Option<Scaled>)> {
+    /// Per page, the time split at the shipout: typesetting first, then the shipout hooks.
+    pub fn page_split(&self) -> Vec<PageSplit> {
         let mut prev = self.phases.begindoc;
         self.pages
             .iter()
@@ -323,10 +345,12 @@ impl BuildModel {
                 let total = prev.map_or(0, |t| p.time.saturating_sub(t));
                 prev = Some(p.time);
                 match p.ship_start {
-                    Some(s) => {
-                        (p.number, total.saturating_sub(p.time.saturating_sub(s)), Some(p.time.saturating_sub(s)))
-                    }
-                    None => (p.number, total, None),
+                    Some(s) => PageSplit {
+                        page: p.number,
+                        typeset: total.saturating_sub(p.time.saturating_sub(s)),
+                        ship: Some(p.time.saturating_sub(s)),
+                    },
+                    None => PageSplit { page: p.number, typeset: total, ship: None },
                 }
             })
             .collect()
@@ -434,7 +458,11 @@ end 470 1
         assert_eq!(siunitx.children[0].name, "translations");
         assert_eq!(siunitx.children[0].options.as_deref(), Some(""));
         assert_eq!(siunitx.exclusive(), 52 - 22);
-        assert_eq!(m.page_times(), vec![(1, 100), (2, 60)], "page 2 counts from page 1, not enddoc");
+        assert_eq!(
+            m.page_times(),
+            vec![PageTime { page: 1, time: 100 }, PageTime { page: 2, time: 60 }],
+            "page 2 counts from page 1, not enddoc"
+        );
         let rows = m.unit_table();
         assert_eq!(rows[0].name, "main.tex");
         assert_eq!(rows[0].exclusive, 370 - 32 - 52);

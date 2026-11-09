@@ -143,8 +143,17 @@ pub enum UnusedError {
     },
 }
 
+/// A package a project file asks for: what `unused` tests one at a time.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Request {
+    pub package: String,
+    pub options: String,
+    /// The project file that asked (`main.tex`, `obra.cls`).
+    pub loaded_by: String,
+}
+
 /// Candidates: `pkg` frames whose parent is the main file or a project-tree class/package.
-pub fn candidates(model: &BuildModel, project_units: &BTreeSet<String>) -> Vec<(String, String, String)> {
+pub fn candidates(model: &BuildModel, project_units: &BTreeSet<String>) -> Vec<Request> {
     candidates_in(model, project_units, &BTreeMap::new())
 }
 
@@ -280,12 +289,12 @@ pub(crate) fn candidates_in(
     model: &BuildModel,
     project_units: &BTreeSet<String>,
     sources: &BTreeMap<String, String>,
-) -> Vec<(String, String, String)> {
+) -> Vec<Request> {
     preamble_loads(model, project_units)
         .into_iter()
         .filter(|l| l.parent_is_project && l.start < u64::MAX)
         .filter(|l| sources.get(&l.parent).is_none_or(|src| requested_packages(src).contains(&l.name)))
-        .map(|l| (l.name, l.options, l.parent))
+        .map(|l| Request { package: l.name, options: l.options, loaded_by: l.parent })
         .collect()
 }
 
@@ -661,8 +670,8 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
     }
 
     let timeout = if opts.timeout_secs > 0 { opts.timeout_secs as f64 } else { (baseline_secs * 10.0).max(30.0) };
-    let to_test: Vec<&(String, String, String)> =
-        cands.iter().filter(|(p, _, _)| opts.test_all || !SKIP_LIST.contains(&p.as_str())).collect();
+    let to_test: Vec<&Request> =
+        cands.iter().filter(|r| opts.test_all || !SKIP_LIST.contains(&r.package.as_str())).collect();
     progress(&format!(
         "{} candidates × ~{:.1} s ≈ {:.0} s on {} job{}",
         to_test.len(),
@@ -680,7 +689,8 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
             s.spawn(|| {
                 loop {
                     let i = next.fetch_add(1, Ordering::SeqCst);
-                    let Some((pkg, options, by)) = to_test.get(i) else { break };
+                    let Some(r) = to_test.get(i) else { break };
+                    let (pkg, options, by) = (&r.package, &r.options, &r.loaded_by);
                     let t0 = std::time::Instant::now();
                     let out_dir = out_root.join(&job).join("unused").join(pkg);
                     // The experiment the user would run: delete the request from the loader's
@@ -733,7 +743,8 @@ pub fn run(opts: &UnusedOptions, mut progress: impl FnMut(&str) + Send) -> Resul
     let results = results.into_inner().unwrap();
     let mut candidates: Vec<Candidate> = cands
         .iter()
-        .map(|(pkg, options, by)| {
+        .map(|r| {
+            let (pkg, options, by) = (&r.package, &r.options, &r.loaded_by);
             let (verdict, build_secs) = match results.get(pkg) {
                 Some((v, s)) => (v.clone(), Some(*s)),
                 None => (
@@ -1070,7 +1081,8 @@ mod tests {
         .unwrap();
         let m = BuildModel::from_records(&recs, "t").unwrap();
         let c = candidates(&m, &["obra.cls".to_string()].into_iter().collect());
-        let names: Vec<(&str, &str, &str)> = c.iter().map(|(p, o, b)| (p.as_str(), o.as_str(), b.as_str())).collect();
+        let names: Vec<(&str, &str, &str)> =
+            c.iter().map(|r| (r.package.as_str(), r.options.as_str(), r.loaded_by.as_str())).collect();
         assert_eq!(
             names,
             [("siunitx", "a=b", "obra.cls"), ("graphicx", "", "main.tex")],
@@ -1078,7 +1090,7 @@ mod tests {
         );
         let c = candidates(&m, &BTreeSet::new());
         assert_eq!(
-            c.iter().map(|x| x.0.as_str()).collect::<Vec<_>>(),
+            c.iter().map(|x| x.package.as_str()).collect::<Vec<_>>(),
             ["graphicx"],
             "a distribution class's loads are not the user's call"
         );
@@ -1099,7 +1111,7 @@ mod tests {
                 .collect();
         let none = BTreeSet::new();
         let c = candidates_in(&m, &none, &src);
-        assert_eq!(c.iter().map(|x| x.0.as_str()).collect::<Vec<_>>(), ["tikz"], "amsmath is beamer's load");
+        assert_eq!(c.iter().map(|x| x.package.as_str()).collect::<Vec<_>>(), ["tikz"], "amsmath is beamer's load");
         let r = redundant_requests(&m, &none, &src);
         assert_eq!(
             r,
@@ -1126,11 +1138,11 @@ mod tests {
         let m = BuildModel::from_records(&recs, "t").unwrap();
         assert_eq!(m.phases.predoc, Some(9));
         let all = candidates(&m, &BTreeSet::new());
-        assert_eq!(all.iter().map(|c| c.0.as_str()).collect::<Vec<_>>(), ["siunitx", "color"]);
+        assert_eq!(all.iter().map(|c| c.package.as_str()).collect::<Vec<_>>(), ["siunitx", "color"]);
         let src: BTreeMap<String, String> =
             [("main.tex".to_string(), "\\usepackage{siunitx}".to_string())].into_iter().collect();
         let filtered = candidates_in(&m, &BTreeSet::new(), &src);
-        assert_eq!(filtered.iter().map(|c| c.0.as_str()).collect::<Vec<_>>(), ["siunitx"]);
+        assert_eq!(filtered.iter().map(|c| c.package.as_str()).collect::<Vec<_>>(), ["siunitx"]);
     }
 
     #[test]

@@ -401,7 +401,8 @@ code {{ font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12
     s.push_str("</table>");
     if !m.pages.is_empty() {
         s.push_str(r#"<h2>Pages</h2><table><tr><th class="n">page</th><th class="n">total ms</th><th class="n">typesetting</th><th class="n">shipout</th></tr>"#);
-        for (n, typeset, ship) in m.page_split() {
+        for p in m.page_split() {
+            let (n, typeset, ship) = (p.page, p.typeset, p.ship);
             let _ = write!(
                 s,
                 r#"<tr><td class="n">{n}</td><td class="n">{:.1}</td><td class="n">{:.1}</td><td class="n">{}</td></tr>"#,

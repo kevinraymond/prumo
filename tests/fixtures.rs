@@ -243,7 +243,8 @@ fn model_matches_the_oracle_on_every_set() {
             assert!(close(prumo::scaled_to_secs(r.exclusive), gu.exclusive), "{label}: {} exclusive", r.name);
             assert_eq!(r.loads, gu.loads, "{label}: {} loads", r.name);
         }
-        let pages: Vec<(u32, f64)> = m.page_times().into_iter().map(|(n, t)| (n, prumo::scaled_to_secs(t))).collect();
+        let pages: Vec<(u32, f64)> =
+            m.page_times().into_iter().map(|p| (p.page, prumo::scaled_to_secs(p.time))).collect();
         assert_eq!(pages.len(), g.pages.len(), "{label}: page count");
         for ((n, t), (gn, gt)) in pages.iter().zip(&g.pages) {
             assert!(n == gn && close(*t, *gt), "{label}: page {n}");
@@ -492,11 +493,13 @@ fn fonts_match_the_oracle() {
         let r = fonts::report(
             &s.job,
             &m,
-            &files,
-            Some(&read(&s.dir, "fontmap.txt")),
-            Some(&read(&s.dir, "pdffonts.txt")),
-            &[],
-            prumo::doctor::Installer::TexLive,
+            &prumo::fonts::FontSources {
+                files: &files,
+                map_text: Some(&read(&s.dir, "fontmap.txt")),
+                pdffonts_text: Some(&read(&s.dir, "pdffonts.txt")),
+                fd_texts: &[],
+                installer: prumo::doctor::Installer::TexLive,
+            },
         );
         let g: G = serde_json::from_str(&read(&s.dir, "golden.json")).unwrap();
         let g = g.fonts;
@@ -774,10 +777,10 @@ fn pages_split_into_typesetting_and_shipout() {
         let split = m.page_split();
         let times = m.page_times();
         assert_eq!(split.len(), times.len(), "{label}");
-        for ((n, typeset, ship), (n2, total)) in split.iter().zip(&times) {
-            assert_eq!(n, n2);
-            let ship = ship.unwrap_or_else(|| panic!("{label}: page {n} has no ship event"));
-            assert_eq!(typeset + ship, *total, "{label}: page {n}");
+        for (p, t) in split.iter().zip(&times) {
+            assert_eq!(p.page, t.page);
+            let ship = p.ship.unwrap_or_else(|| panic!("{label}: page {} has no ship event", p.page));
+            assert_eq!(p.typeset + ship, t.time, "{label}: page {}", p.page);
         }
         let j = serde_json::to_value(prumo::report::time_json(&m, &s.job)).unwrap();
         assert!(j["pages"][0]["shipout_ms"].is_number(), "{label}: {}", j["pages"][0]);
@@ -797,11 +800,13 @@ fn html_page_for_every_set() {
         let fonts = prumo::fonts::report(
             &s.job,
             &m,
-            &files,
-            std::fs::read_to_string(s.dir.join("fontmap.txt")).ok().as_deref(),
-            std::fs::read_to_string(s.dir.join("pdffonts.txt")).ok().as_deref(),
-            &[],
-            prumo::doctor::Installer::TexLive,
+            &prumo::fonts::FontSources {
+                files: &files,
+                map_text: std::fs::read_to_string(s.dir.join("fontmap.txt")).ok().as_deref(),
+                pdffonts_text: std::fs::read_to_string(s.dir.join("pdffonts.txt")).ok().as_deref(),
+                fd_texts: &[],
+                installer: prumo::doctor::Installer::TexLive,
+            },
         );
         let html = prumo::html::page(&m, &s.job, Some(files.len()), Some(&fonts));
         // Every frame is drawn once: preamble frames on the preamble chart, body frames on

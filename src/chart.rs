@@ -305,15 +305,15 @@ pub fn timeline(m: &BuildModel, depth: usize, look: Look) -> String {
 /// page number of each row as its label.
 pub(crate) fn page_spark(m: &BuildModel, look: Look) -> String {
     let times = m.page_times();
-    let Some(max) = times.iter().map(|p| p.1).max().filter(|m| *m > 0) else {
+    let Some(max) = times.iter().map(|p| p.time).max().filter(|m| *m > 0) else {
         return String::new();
     };
     let per_row = look.width.saturating_sub(12).clamp(20, 120);
     let mut s = String::new();
     for chunk in times.chunks(per_row) {
         let spark: String =
-            chunk.iter().map(|(_, dt)| SPARK[(((*dt as f64 / max as f64) * 7.0).round() as usize).min(7)]).collect();
-        let _ = writeln!(s, "  {:>6}  {}", format!("p{}", chunk[0].0), spark);
+            chunk.iter().map(|p| SPARK[(((p.time as f64 / max as f64) * 7.0).round() as usize).min(7)]).collect();
+        let _ = writeln!(s, "  {:>6}  {}", format!("p{}", chunk[0].page), spark);
     }
     s
 }

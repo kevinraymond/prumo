@@ -274,11 +274,13 @@ fn fonts_report_courier_and_type3() {
         let r = fonts::report(
             &out.job,
             &m,
-            &files,
-            std::fs::read_to_string(out.dir.join("fontmap.txt")).ok().as_deref(),
-            std::fs::read_to_string(out.dir.join("pdffonts.txt")).ok().as_deref(),
-            &fd,
-            prumo::doctor::Installer::TexLive,
+            &prumo::fonts::FontSources {
+                files: &files,
+                map_text: std::fs::read_to_string(out.dir.join("fontmap.txt")).ok().as_deref(),
+                pdffonts_text: std::fs::read_to_string(out.dir.join("pdffonts.txt")).ok().as_deref(),
+                fd_texts: &fd,
+                installer: prumo::doctor::Installer::TexLive,
+            },
         );
         let pcr = r.loaded.iter().find(|f| f.tfm == "pcrr8t").unwrap_or_else(|| panic!("{label}: pcrr8t not loaded"));
         assert_ne!(pcr.status, Status::Embedded, "{label}");
@@ -701,11 +703,13 @@ fn fontspec_on_xetex() {
     let r = fonts::report(
         &out.job,
         &m,
-        &files,
-        std::fs::read_to_string(out.dir.join("fontmap.txt")).ok().as_deref(),
-        std::fs::read_to_string(out.dir.join("pdffonts.txt")).ok().as_deref(),
-        &[],
-        prumo::doctor::Installer::TexLive,
+        &prumo::fonts::FontSources {
+            files: &files,
+            map_text: std::fs::read_to_string(out.dir.join("fontmap.txt")).ok().as_deref(),
+            pdffonts_text: std::fs::read_to_string(out.dir.join("pdffonts.txt")).ok().as_deref(),
+            fd_texts: &[],
+            installer: prumo::doctor::Installer::TexLive,
+        },
     );
     assert!(r.tfm_loaded.is_empty(), "{:?}", r.tfm_loaded);
     let names: Vec<&str> = r.opentype.iter().map(|o| o.name.as_str()).collect();

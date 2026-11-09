@@ -240,11 +240,23 @@ impl Tlpdb {
     /// the `00texlive.*` bookkeeping stanzas use them) are skipped.
     pub fn closure<'a, I: IntoIterator<Item = &'a str>>(&self, roots: I) -> BTreeSet<String> {
         let mut out = BTreeSet::new();
-        let mut todo: Vec<String> = roots.into_iter().map(str::to_string).collect();
-        while let Some(name) = todo.pop() {
-            if !out.insert(name.clone()) {
+        self.walk_depends(roots, |name, _| {
+            out.insert(name.to_string());
+        });
+        out
+    }
+
+    /// The walk behind `closure`: every package `roots` pull in, reported once to
+    /// `reached(name, by)` with the package whose `depend` line got there first (a root
+    /// reports itself). The same skipping rules as `closure`.
+    pub fn walk_depends<'a, I: IntoIterator<Item = &'a str>>(&self, roots: I, mut reached: impl FnMut(&str, &str)) {
+        let mut seen = BTreeSet::new();
+        let mut todo: Vec<(String, String)> = roots.into_iter().map(|r| (r.to_string(), r.to_string())).collect();
+        while let Some((name, by)) = todo.pop() {
+            if !seen.insert(name.clone()) {
                 continue;
             }
+            reached(&name, &by);
             if let Some(p) = self.packages.get(&name) {
                 for d in &p.depends {
                     if d.contains(':') || d.contains('/') {
@@ -254,19 +266,18 @@ impl Tlpdb {
                     if let Some(base) = d.strip_suffix(".ARCH") {
                         let prefix = format!("{base}.");
                         for n in self.packages.keys().filter(|n| n.starts_with(&prefix) && !n.ends_with(".ARCH")) {
-                            if !out.contains(n) {
-                                todo.push(n.clone());
+                            if !seen.contains(n) {
+                                todo.push((n.clone(), name.clone()));
                             }
                         }
                         continue;
                     }
-                    if !out.contains(d) {
-                        todo.push(d.clone());
+                    if !seen.contains(d) {
+                        todo.push((d.clone(), name.clone()));
                     }
                 }
             }
         }
-        out
     }
 
     /// Packages that provide a format via `execute AddFormat name=<fmt> …`.

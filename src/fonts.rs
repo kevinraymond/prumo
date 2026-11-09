@@ -251,18 +251,24 @@ fn base(f: &InputFile) -> String {
     f.path.file_name().map(|s| s.to_string_lossy().into_owned()).unwrap_or_default()
 }
 
-/// Build the report. `map_text` is `pdftex.map` (or the saved subset); `pdffonts_text` is
-/// `pdffonts` output; `fd_texts` are `(file name, contents)` of the `.fd` files read;
-/// `installer` picks the wording of the install hint (`tlmgr` or MiKTeX).
-pub fn report(
-    job: &str,
-    model: &BuildModel,
-    files: &[InputFile],
-    map_text: Option<&str>,
-    pdffonts_text: Option<&str>,
-    fd_texts: &[(String, String)],
-    installer: Installer,
-) -> FontReport {
+/// What a run leaves behind for the fonts report, besides its model.
+#[derive(Clone, Copy)]
+pub struct FontSources<'a> {
+    /// The `.fls` inputs, classified.
+    pub files: &'a [InputFile],
+    /// `pdftex.map`, or the subset the run saved.
+    pub map_text: Option<&'a str>,
+    /// `pdffonts` output for the PDF.
+    pub pdffonts_text: Option<&'a str>,
+    /// `(file name, contents)` of the `.fd` files the build read.
+    pub fd_texts: &'a [(String, String)],
+    /// Picks the wording of the install hint (`tlmgr` or MiKTeX).
+    pub installer: Installer,
+}
+
+/// Build the report.
+pub fn report(job: &str, model: &BuildModel, sources: &FontSources) -> FontReport {
+    let FontSources { files, map_text, pdffonts_text, fd_texts, installer } = *sources;
     let loaded: BTreeSet<String> = files.iter().filter(|f| f.kind == InputKind::Tfm).map(stem).collect();
     let virtual_fonts: BTreeSet<String> = files.iter().filter(|f| f.kind == InputKind::Vf).map(stem).collect();
     let outlines: BTreeSet<String> = files

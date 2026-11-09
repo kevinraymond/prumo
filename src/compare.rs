@@ -127,9 +127,9 @@ pub fn compare(opts: &CompareOptions, mut progress: impl FnMut(&str)) -> Result<
                 pages: pages.len(),
                 slowest_unit: slowest.as_ref().map(|r| r.name.clone()),
                 slowest_unit_ms: slowest.as_ref().map(|r| ms(r.exclusive)).unwrap_or(0.0),
-                page1_ms: pages.first().map(|p| ms(p.1)).unwrap_or(0.0),
+                page1_ms: pages.first().map(|p| ms(p.time)).unwrap_or(0.0),
                 later_pages_ms: (pages.len() > 1)
-                    .then(|| ms(pages[1..].iter().map(|p| p.1).sum::<Scaled>() / (pages.len() as Scaled - 1))),
+                    .then(|| ms(pages[1..].iter().map(|p| p.time).sum::<Scaled>() / (pages.len() as Scaled - 1))),
                 first_run_ms: first_total.filter(|_| opts.runs > 1).map(ms),
             },
         });

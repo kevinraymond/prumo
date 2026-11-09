@@ -87,7 +87,7 @@ pub fn time_json<'a>(m: &'a BuildModel, job: &'a str) -> TimeJson<'a> {
         pages: m
             .page_split()
             .into_iter()
-            .map(|(page, t, sh)| PageJson { page, ms: ms(t + sh.unwrap_or(0)), shipout_ms: sh.map(ms) })
+            .map(|p| PageJson { page: p.page, ms: ms(p.total()), shipout_ms: p.ship.map(ms) })
             .collect(),
         tree: m.root.children.iter().map(tree_json).collect(),
         warnings: &m.warnings,
@@ -160,15 +160,15 @@ pub fn time_text(
     }
     let _ = writeln!(s, "\n-- pages --");
     let split = m.page_split();
-    let has_ship = split.iter().any(|p| p.2.is_some());
+    let has_ship = split.iter().any(|p| p.ship.is_some());
     // With charts: one cell per page, then only the slowest pages as lines.
-    let listed: Vec<&(u32, Scaled, Option<Scaled>)> = match look {
+    let listed: Vec<&crate::model::PageSplit> = match look {
         Some(look) if by != TimeBy::Page => {
             s.push_str(&crate::chart::page_spark(m, look));
-            let mut by_time: Vec<&(u32, Scaled, Option<Scaled>)> = split.iter().collect();
-            by_time.sort_by_key(|p| std::cmp::Reverse(p.1 + p.2.unwrap_or(0)));
+            let mut by_time: Vec<&crate::model::PageSplit> = split.iter().collect();
+            by_time.sort_by_key(|p| std::cmp::Reverse(p.total()));
             let mut top5: Vec<_> = by_time.into_iter().take(5).collect();
-            top5.sort_by_key(|p| p.0);
+            top5.sort_by_key(|p| p.page);
             if top5.len() < split.len() {
                 let _ = writeln!(s, "  slowest {} of {} pages:", top5.len(), split.len());
             }
@@ -176,25 +176,26 @@ pub fn time_text(
         }
         _ => split.iter().collect(),
     };
-    for (n, typeset, ship) in listed {
-        match ship {
+    for p in listed {
+        match p.ship {
             Some(sh) => {
                 let _ = writeln!(
                     s,
-                    "  page {n}: {:.1} ms  (typesetting {:.1} ms, shipout {:.1} ms)",
-                    ms(typeset + sh),
-                    ms(*typeset),
-                    ms(*sh)
+                    "  page {}: {:.1} ms  (typesetting {:.1} ms, shipout {:.1} ms)",
+                    p.page,
+                    ms(p.typeset + sh),
+                    ms(p.typeset),
+                    ms(sh)
                 );
             }
             None => {
-                let _ = writeln!(s, "  page {n}: {:.1} ms", ms(*typeset));
+                let _ = writeln!(s, "  page {}: {:.1} ms", p.page, ms(p.typeset));
             }
         }
     }
     if has_ship {
-        let ship_total: Scaled = split.iter().filter_map(|p| p.2).sum();
-        let body: Scaled = split.iter().map(|p| p.1 + p.2.unwrap_or(0)).sum();
+        let ship_total: Scaled = split.iter().filter_map(|p| p.ship).sum();
+        let body: Scaled = split.iter().map(|p| p.total()).sum();
         if body > 0 && ship_total * 4 > body {
             let _ = writeln!(
                 s,
@@ -205,20 +206,20 @@ pub fn time_text(
     }
     if m.pages.len() > 1 {
         let times = m.page_times();
-        if let Some((n, dt)) = times.iter().max_by_key(|(_, dt)| *dt) {
-            let first = times[0].1;
-            if *n == 1
+        if let Some(slowest) = times.iter().max_by_key(|p| p.time) {
+            let first = times[0].time;
+            if slowest.page == 1
                 && times.len() > 1
-                && first > 2 * times[1..].iter().map(|p| p.1).sum::<Scaled>() / (times.len() as Scaled - 1).max(1)
+                && first > 2 * times[1..].iter().map(|p| p.time).sum::<Scaled>() / (times.len() as Scaled - 1).max(1)
             {
                 let _ = writeln!(
                     s,
                     "  hint: page 1 carries font loading and first-shipout setup ({:.1} ms); later pages average {:.1} ms",
                     ms(first),
-                    ms(times[1..].iter().map(|p| p.1).sum::<Scaled>() / (times.len() as Scaled - 1))
+                    ms(times[1..].iter().map(|p| p.time).sum::<Scaled>() / (times.len() as Scaled - 1))
                 );
             } else {
-                let _ = writeln!(s, "  hint: slowest page is {n} at {:.1} ms", ms(*dt));
+                let _ = writeln!(s, "  hint: slowest page is {} at {:.1} ms", slowest.page, ms(slowest.time));
             }
         }
     }
