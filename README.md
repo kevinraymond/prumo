@@ -37,7 +37,13 @@ Windows, in PowerShell:
 irm https://github.com/kevinraymond/prumo/raw/main/install.ps1 | iex
 ```
 
-Both download the binary for your machine from the latest release, check its sha256, and put
+Homebrew, on macOS or Linux:
+
+```
+brew install kevinraymond/tap/prumo
+```
+
+The scripts download the binary for your machine from the latest release, check its sha256, and put
 it in `~/.local/bin` or `%LOCALAPPDATA%\Programs\prumo`. They say so if that directory is not
 on your `PATH` (the PowerShell one adds it). `PRUMO_VERSION` picks a release and
 `PRUMO_INSTALL_DIR` a directory. The other ways in: `cargo install prumo` (Rust 1.88 or

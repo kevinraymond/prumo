@@ -239,6 +239,12 @@ The last gaps before I announce it are the ones a stranger hits first:
   builds and runs. The repo has its topics and v0.1.0 has real release notes: what it is,
   the four ways in, what it was tested on. The trusted publisher is registered and enforced,
   so from here only the release workflow can publish.
+- Homebrew. `kevinraymond/homebrew-tap` has `Formula/prumo.rb`, a binary formula with the
+  four release archives (macOS and Linux, Intel and arm) and their sha256s, written by
+  `scripts/homebrew-formula.sh` from the `.sha256` files on the release. The tap's own CI
+  taps the checkout and installs from it on macOS and Linux. A `homebrew` job in the release
+  workflow rewrites the formula on every tag once the `HOMEBREW_TAP_TOKEN` secret exists (a
+  fine-grained PAT with contents: write on the tap); until then it says so and stops.
 
 CTAN upload of `prumo.sty` alone comes later.
 
