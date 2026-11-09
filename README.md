@@ -25,11 +25,24 @@ This project was made with the assistance of AI (Claude).
 prumo is one binary. It needs a TeX installation to measure (TeX Live or MiKTeX) and
 `pdffonts` from poppler-utils for the fonts report. `prumo doctor` tells you what it found.
 
-- `cargo install prumo` builds it from crates.io (Rust 1.88 or newer).
-- The [release page](https://github.com/kevinraymond/prumo/releases) has prebuilt binaries
-  for Linux (x86-64 and arm64, static), macOS (Intel and Apple silicon) and Windows. Unpack
-  the archive and put `prumo` on your `PATH`.
-- No TeX at all? The Docker image below has a full TeX Live and prumo in it.
+Linux and macOS:
+
+```
+curl -fsSL https://github.com/kevinraymond/prumo/raw/main/install.sh | sh
+```
+
+Windows, in PowerShell:
+
+```
+irm https://github.com/kevinraymond/prumo/raw/main/install.ps1 | iex
+```
+
+Both download the binary for your machine from the latest release, check its sha256, and put
+it in `~/.local/bin` or `%LOCALAPPDATA%\Programs\prumo`. They say so if that directory is not
+on your `PATH` (the PowerShell one adds it). `PRUMO_VERSION` picks a release and
+`PRUMO_INSTALL_DIR` a directory. The other ways in: `cargo install prumo` (Rust 1.88 or
+newer), the archives on the [release page](https://github.com/kevinraymond/prumo/releases)
+by hand, or the Docker image below when there is no TeX at all.
 
 ## Usage
 

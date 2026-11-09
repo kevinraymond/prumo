@@ -64,3 +64,20 @@ fn windows_wrapper_takes_the_same_knobs() {
     }
     assert!(cmd.contains("%LOCALAPPDATA%\\prumo") && cmd.contains("IsOutputRedirected"));
 }
+
+/// `install.sh` parses under `sh`, refuses an unknown option without touching the network,
+/// and the README's one-liners name files that exist.
+#[test]
+fn installers_parse_and_are_named_in_the_readme() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+    let parsed = Command::new("sh").arg("-n").arg(root.join("install.sh")).status().unwrap();
+    assert!(parsed.success(), "sh -n install.sh");
+    let out = Command::new("sh").arg(root.join("install.sh")).arg("--bogus").output().unwrap();
+    assert_eq!(out.status.code(), Some(2));
+    assert!(String::from_utf8_lossy(&out.stderr).contains("unknown option --bogus"));
+    let readme = std::fs::read_to_string(root.join("README.md")).unwrap();
+    for script in ["install.sh", "install.ps1"] {
+        assert!(root.join(script).is_file(), "{script} is missing");
+        assert!(readme.contains(&format!("raw/main/{script}")), "README does not point at {script}");
+    }
+}

@@ -229,6 +229,12 @@ The last gaps before I announce it are the ones a stranger hits first:
 - The announcement drafts (r/LaTeX, a TeX.SE answer on the per-page timing question, a short
   post, fuller release notes) are in `~/ai/prumo-announce.md`, outside the repo, for me to
   edit and post.
+- Rust users had a one-liner and everyone else had a tarball. Now `install.sh` (Linux, macOS)
+  and `install.ps1` (Windows) are the first lines of the README: pick the archive for the
+  machine, check the published sha256, put the binary in `~/.local/bin` or
+  `%LOCALAPPDATA%\Programs\prumo`, say when that is not on PATH (PowerShell adds it). Tested
+  against the v0.1.0 assets here and on the Windows box. A Homebrew tap is the next step for
+  Mac users; it needs a second repo and a token, so it waits for me.
 
 CTAN upload of `prumo.sty` alone comes later.
 
