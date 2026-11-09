@@ -1,0 +1,189 @@
+{
+  "total_s": 0.1026763916015625,
+  "preamble_s": 0.09881591796875,
+  "units": [
+    {
+      "kind": "pkg",
+      "name": "fontspec-xetex",
+      "inclusive": 0.062408447265625,
+      "exclusive": 0.0613250732421875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "glyphs.tex",
+      "inclusive": 0.1026763916015625,
+      "exclusive": 0.0192413330078125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "size10.clo",
+      "inclusive": 0.0067596435546875,
+      "exclusive": 0.0067596435546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "metalogo",
+      "inclusive": 0.0090789794921875,
+      "exclusive": 0.001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "graphics",
+      "inclusive": 0.00311279296875,
+      "exclusive": 0.0019378662109375,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.0086822509765625,
+      "exclusive": 0.001922607421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fontspec",
+      "inclusive": 0.0643157958984375,
+      "exclusive": 0.0019073486328125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "graphicx",
+      "inclusive": 0.005401611328125,
+      "exclusive": 0.0016021728515625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ifxetex",
+      "inclusive": 0.0016937255859375,
+      "exclusive": 0.0009918212890625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fontenc",
+      "inclusive": 0.0007781982421875,
+      "exclusive": 0.0007781982421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "url",
+      "inclusive": 0.0007476806640625,
+      "exclusive": 0.0007476806640625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.000701904296875,
+      "exclusive": 0.000701904296875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.0006866455078125,
+      "exclusive": 0.0006866455078125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "trig",
+      "inclusive": 0.0006256103515625,
+      "exclusive": 0.0006256103515625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-xetex.def",
+      "inclusive": 0.0006103515625,
+      "exclusive": 0.0006103515625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "xetex.def",
+      "inclusive": 0.0003509521484375,
+      "exclusive": 0.0003509521484375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "fontspec.cfg",
+      "inclusive": 0.00030517578125,
+      "exclusive": 0.00030517578125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "graphics.cfg",
+      "inclusive": 0.0001983642578125,
+      "exclusive": 0.0001983642578125,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.0035552978515625
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [],
+    "embedded": [
+      [
+        "LMRoman10-Bold-Identity-H",
+        "CID Type"
+      ],
+      [
+        "LMRoman10-Regular-Identity-H",
+        "CID Type"
+      ],
+      [
+        "LMRoman10-Italic-Identity-H",
+        "CID Type"
+      ],
+      [
+        "LMSans10-Regular-Identity-H",
+        "CID Type"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [],
+    "ps_names": {},
+    "virtual": [],
+    "embedded_resolved": [],
+    "loaded_not_embedded_resolved": [],
+    "no_map_entry": [],
+    "preloaded": [],
+    "opentype": [
+      {
+        "name": "LMRoman10-Bold",
+        "file": null
+      },
+      {
+        "name": "LMRoman10-Italic",
+        "file": null
+      },
+      {
+        "name": "LMRoman10-Regular",
+        "file": null
+      },
+      {
+        "name": "LMSans10-Regular",
+        "file": null
+      }
+    ],
+    "unknown_embedded": [],
+    "partial": false,
+    "map_entries": 5091
+  }
+}

@@ -1,0 +1,137 @@
+start 5274 0 pdftex 2023-11-01
+file+ 5274 0 main.tex
+cls+ 5317 1 obra
+file+ 5344 1 obra.cls
+cls+ 5395 2 article
+file+ 5430 2 article.cls
+file+ 5486 3 size11.clo
+file- 5539 3 size11.clo
+file- 5628 2 article.cls
+cls- 5649 2 article
+pkg+ 5704 2 geometry
+opts 5705 2 a4paper,margin=25mm
+file+ 5740 2 geometry.sty
+pkg+ 5789 3 keyval
+opts 5790 3 
+file+ 5821 3 keyval.sty
+file- 5841 3 keyval.sty
+pkg- 5860 3 keyval
+pkg+ 5907 3 ifvtex
+opts 5907 3 
+file+ 5936 3 ifvtex.sty
+pkg+ 5982 4 iftex
+opts 5983 4 
+file+ 6014 4 iftex.sty
+file- 6038 4 iftex.sty
+pkg- 6057 4 iftex
+file- 6069 3 ifvtex.sty
+pkg- 6088 3 ifvtex
+file- 6726 2 geometry.sty
+pkg- 6747 2 geometry
+pkg+ 6798 2 booktabs
+opts 6798 2 
+file+ 6830 2 booktabs.sty
+file- 6865 2 booktabs.sty
+pkg- 6884 2 booktabs
+pkg+ 6930 2 siunitx
+opts 6930 2 
+file+ 6960 2 siunitx.sty
+pkg+ 7909 3 translations
+opts 7910 3 
+file+ 7947 3 translations.sty
+pkg+ 8002 4 etoolbox
+opts 8002 4 
+file+ 8033 4 etoolbox.sty
+file- 8179 4 etoolbox.sty
+pkg- 8201 4 etoolbox
+pkg+ 8253 4 pdftexcmds
+opts 8254 4 
+file+ 8287 4 pdftexcmds.sty
+pkg+ 8346 5 infwarerr
+opts 8347 5 
+file+ 8382 5 infwarerr.sty
+file- 8404 5 infwarerr.sty
+pkg- 8424 5 infwarerr
+pkg+ 8485 5 ltxcmds
+opts 8485 5 
+file+ 8517 5 ltxcmds.sty
+file- 8551 5 ltxcmds.sty
+pkg- 8571 5 ltxcmds
+file- 8596 4 pdftexcmds.sty
+pkg- 8618 4 pdftexcmds
+file- 9361 3 translations.sty
+pkg- 9384 3 translations
+pkg+ 9459 3 amstext
+opts 9459 3 
+file+ 9493 3 amstext.sty
+pkg+ 9544 4 amsgen
+opts 9546 4 
+file+ 9578 4 amsgen.sty
+file- 9599 4 amsgen.sty
+pkg- 9620 4 amsgen
+file- 9635 3 amstext.sty
+pkg- 9654 3 amstext
+pkg+ 11594 3 array
+opts 11595 3 
+file+ 11626 3 array.sty
+file- 11674 3 array.sty
+pkg- 11694 3 array
+file- 12236 2 siunitx.sty
+pkg- 12258 2 siunitx
+pkg+ 12317 2 fancyhdr
+opts 12318 2 
+file+ 12351 2 fancyhdr.sty
+file- 12474 2 fancyhdr.sty
+pkg- 12497 2 fancyhdr
+pkg+ 12558 2 enumitem
+opts 12558 2 
+file+ 12593 2 enumitem.sty
+file- 12714 2 enumitem.sty
+pkg- 12736 2 enumitem
+file- 12763 1 obra.cls
+cls- 12781 1 obra
+pkg+ 12836 1 graphicx
+opts 12836 1 
+file+ 12869 1 graphicx.sty
+pkg+ 12935 2 graphics
+opts 12935 2 
+file+ 12970 2 graphics.sty
+pkg+ 13023 3 trig
+opts 13023 3 
+file+ 13053 3 trig.sty
+file- 13074 3 trig.sty
+pkg- 13304 3 trig
+file+ 13358 3 graphics.cfg
+file- 13377 3 graphics.cfg
+file+ 13421 3 pdftex.def
+file- 13645 3 pdftex.def
+file- 13674 2 graphics.sty
+pkg- 13735 2 graphics
+file- 13763 1 graphicx.sty
+pkg- 13782 1 graphicx
+pkg+ 14192 1 color
+opts 14193 1 
+file+ 14216 1 color.sty
+file+ 14251 2 color.cfg
+file- 14260 2 color.cfg
+file+ 14424 2 mathcolor.ltx
+file- 14454 2 mathcolor.ltx
+file- 14462 1 color.sty
+pkg- 14475 1 color
+file+ 14550 1 l3backend-pdftex.def
+file- 14642 1 l3backend-pdftex.def
+begindoc 14683 1 
+file+ 15125 1 translations-basic-dictionary-english.trsl
+file- 15342 1 translations-basic-dictionary-english.trsl
+file+ 15370 1 supp-pdf.mkii
+file- 15444 1 supp-pdf.mkii
+pkg+ 15487 1 epstopdf-base
+opts 15488 1 
+file+ 15515 1 epstopdf-base.sty
+file+ 15559 2 epstopdf-sys.cfg
+file- 15568 2 epstopdf-sys.cfg
+file- 15592 1 epstopdf-base.sty
+pkg- 15606 1 epstopdf-base
+enddoc 15923 1 
+page 16177 1 1
+end 16208 1 

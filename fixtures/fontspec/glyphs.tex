@@ -1,0 +1,18 @@
+% Fixture: fontspec (OpenType text fonts on XeTeX)
+% !TEX program = xelatex
+% - fontspec loads Latin Modern OpenType files by file name -> no .tfm is read for the text; XeTeX opens the .otf itself, so the .fls lists none
+% - pdffonts names them LMRoman10-Regular-Identity-H etc.    -> the fonts report lists them as OpenType opened by the engine, not "preloaded by the format", and warns that XeTeX records no font files
+% - packages: lm is not read as a file                       -> prune keeps lm anyway (xelatex's format triggers it; Q7 matches LMRoman10-Regular to lmroman10-regular.otf)
+% - url is loaded and never used                             -> unused-package candidate (no observable effect)
+% - metalogo is used (\XeLaTeX)                              -> blocking it must fail the build
+\documentclass{article}
+\usepackage{fontspec}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf, ItalicFont=lmroman10-italic.otf]
+\setsansfont{lmsans10-regular.otf}
+\usepackage{metalogo}
+\usepackage{url}
+\begin{document}
+\section{Glyphs}
+Set with \XeLaTeX: \textbf{bold}, \textit{italic}, \textsf{sans}.
+Ligatures: office, fluffy. Dashes---and “quotes”.
+\end{document}

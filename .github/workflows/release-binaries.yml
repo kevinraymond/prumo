@@ -1,0 +1,105 @@
+name: release binaries
+
+# Prebuilt prumo binaries on the GitHub release for a `vX.Y.Z` tag: Linux x86-64 and
+# arm64 (static, musl), macOS x86-64 and Apple silicon, Windows x86-64. Each archive holds
+# the binary, the README and the licenses. A tag with a `-` in it
+# (v0.2.0-rc.1) makes a prerelease. The tests run first; the image workflow runs alongside.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    name: tests at the tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --locked
+      - name: The tag is the crate's version
+        run: |
+          v=$(grep -m1 '^version' Cargo.toml | sed 's/.*"\(.*\)".*/\1/')
+          case "${GITHUB_REF_NAME#v}" in "$v"|"$v"-*) ;; *) echo "tag $GITHUB_REF_NAME, Cargo.toml $v"; exit 1 ;; esac
+
+  release:
+    name: the release entry
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create it (prerelease when the tag has a -)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pre=""; case "$GITHUB_REF_NAME" in *-*) pre="--prerelease" ;; esac
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" $pre --verify-tag \
+            --title "prumo $GITHUB_REF_NAME" \
+            --notes "Prebuilt binaries below; the Docker image is \`ghcr.io/${{ github.repository }}:${GITHUB_REF_NAME#v}\` (\`-small\` for scheme-small). See the README for both."
+
+  binaries:
+    name: ${{ matrix.target }}
+    needs: release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: x86_64-unknown-linux-musl, os: ubuntu-latest, cross: true }
+          - { target: aarch64-unknown-linux-musl, os: ubuntu-latest, cross: true }
+          - { target: x86_64-apple-darwin, os: macos-latest }
+          - { target: aarch64-apple-darwin, os: macos-latest }
+          - { target: x86_64-pc-windows-msvc, os: windows-latest }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.target }}
+      - name: cross, for the Linux targets (static musl builds in its containers)
+        if: matrix.cross
+        uses: taiki-e/install-action@cross
+      - name: Build
+        shell: bash
+        run: |
+          if [ "${{ matrix.cross }}" = true ]; then
+            cross build --release --locked --target "${{ matrix.target }}"
+          else
+            cargo build --release --locked --target "${{ matrix.target }}"
+          fi
+      - name: Archive
+        id: archive
+        shell: bash
+        run: |
+          set -eu
+          name="prumo-${GITHUB_REF_NAME}-${{ matrix.target }}"
+          mkdir "$name"
+          cp README.md LICENSE-MIT LICENSE-APACHE "$name"/
+          if [ "${{ runner.os }}" = Windows ]; then
+            cp "target/${{ matrix.target }}/release/prumo.exe" "$name"/
+            7z a -tzip "$name.zip" "$name" >/dev/null
+            certutil -hashfile "$name.zip" SHA256 | sed -n 2p | tr -d ' \r' > "$name.zip.sha256"
+            echo "file=$name.zip" >> "$GITHUB_OUTPUT"
+          else
+            cp "target/${{ matrix.target }}/release/prumo" "$name"/
+            tar czf "$name.tar.gz" "$name"
+            shasum -a 256 "$name.tar.gz" | cut -d' ' -f1 > "$name.tar.gz.sha256"
+            echo "file=$name.tar.gz" >> "$GITHUB_OUTPUT"
+          fi
+      - name: The binary runs
+        if: ${{ !matrix.cross || matrix.target == 'x86_64-unknown-linux-musl' }}
+        shell: bash
+        run: |
+          b="target/${{ matrix.target }}/release/prumo"; [ "${{ runner.os }}" = Windows ] && b="$b.exe"
+          "$b" --version
+          "$b" doctor || true   # no TeX here; it must still report, not crash
+      - name: Upload
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" "${{ steps.archive.outputs.file }}" "${{ steps.archive.outputs.file }}.sha256" --clobber

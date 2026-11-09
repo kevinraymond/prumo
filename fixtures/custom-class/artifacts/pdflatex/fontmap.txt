@@ -1,0 +1,12 @@
+cmbx12 CMBX12 <cmbx12.pfb
+cmcsc10 CMCSC10 <cmcsc10.pfb
+cmmi10 CMMI10 <cmmi10.pfb
+cmmi6 CMMI6 <cmmi6.pfb
+cmmi8 CMMI8 <cmmi8.pfb
+cmr10 CMR10 <cmr10.pfb
+cmr12 CMR12 <cmr12.pfb
+cmr6 CMR6 <cmr6.pfb
+cmr8 CMR8 <cmr8.pfb
+cmsy10 CMSY10 <cmsy10.pfb
+cmsy6 CMSY6 <cmsy6.pfb
+cmsy8 CMSY8 <cmsy8.pfb

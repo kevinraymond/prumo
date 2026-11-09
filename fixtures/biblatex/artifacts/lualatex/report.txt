@@ -1,0 +1,48 @@
+== prumo report: paper  (total 362 ms, preamble 324 ms, 1 pages, 107 files read)
+
+-- slowest units (exclusive) --
+    280.8 ms    301.1 ms incl  pkg  biblatex
+     47.6 ms    362.3 ms incl  file paper.tex
+      6.3 ms      7.9 ms incl  pkg  csquotes
+      3.3 ms      3.3 ms incl  file size10.clo
+      2.6 ms      5.1 ms incl  pkg  pdftexcmds
+      2.5 ms      3.6 ms incl  pkg  blx-case-expl3
+      2.0 ms      2.0 ms incl  pkg  etoolbox
+      2.0 ms      5.3 ms incl  cls  article
+      2.0 ms      2.9 ms incl  pkg  expl3
+      1.8 ms      2.6 ms incl  pkg  kvoptions
+      1.4 ms      1.8 ms incl  pkg  logreq
+      1.4 ms      1.4 ms incl  file csquotes.def
+
+-- pages --
+  page 1: 38.1 ms
+
+-- load tree --
+  paper.tex  (362.3 ms incl, 47.6 ms excl)
+    article  (5.3 ms incl, 2.0 ms excl)
+      size10.clo  (3.3 ms incl, 3.3 ms excl)
+    biblatex  (301.1 ms incl, 280.8 ms excl)
+      pdftexcmds  (5.1 ms incl, 2.6 ms excl)
+        infwarerr  (0.8 ms incl, 0.8 ms excl)
+        iftex  (0.8 ms incl, 0.8 ms excl)
+        ltxcmds  (0.9 ms incl, 0.9 ms excl)
+      etoolbox  (2.0 ms incl, 2.0 ms excl)
+      keyval  (0.8 ms incl, 0.8 ms excl)
+      kvoptions  (2.6 ms incl, 1.8 ms excl)
+        kvsetkeys  (0.9 ms incl, 0.9 ms excl)
+      logreq  (1.8 ms incl, 1.4 ms excl)
+        logreq.def  (0.4 ms incl, 0.4 ms excl)
+      ifthen  (0.7 ms incl, 0.7 ms excl)
+      url  (0.8 ms incl, 0.8 ms excl)
+      expl3  (2.9 ms incl, 2.0 ms excl)
+        l3backend-luatex.def  (0.9 ms incl, 0.9 ms excl)
+      blx-case-expl3  (3.6 ms incl, 2.5 ms excl)
+        xparse  (1.1 ms incl, 1.1 ms excl)
+    csquotes  (7.9 ms incl, 6.3 ms excl)
+      csquotes.def  (1.4 ms incl, 1.4 ms excl)
+      csquotes.cfg  (0.2 ms incl, 0.2 ms excl)
+    paper.bbl  (0.5 ms incl, 0.5 ms excl)
+
+-- fonts --
+  TFMs loaded: 0, embedded in PDF: 3, Type 3: 0, bitmap .pk read: 0
+  OpenType, opened by the engine: LMRoman10-Italic <- lmroman10-italic.luc, LMRoman10-Regular <- lmroman10-regular.luc, LMRoman12-Bold <- lmroman12-bold.luc

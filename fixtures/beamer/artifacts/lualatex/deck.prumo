@@ -1,0 +1,579 @@
+start 14311 0 luatex 2026-11-01
+file+ 14311 0 deck.tex
+cls+ 14342 1 beamer
+file+ 14363 1 beamer.cls
+pkg+ 14404 2 beamerbasemodes
+opts 14404 2 
+file+ 14427 2 beamerbasemodes.sty
+pkg+ 14461 3 etoolbox
+opts 14461 3 
+file+ 14481 3 etoolbox.sty
+file- 14575 3 etoolbox.sty
+pkg- 14589 3 etoolbox
+pkg+ 14630 3 beamerbasedecode
+opts 14630 3 
+file+ 14653 3 beamerbasedecode.sty
+file- 14671 3 beamerbasedecode.sty
+pkg- 14685 3 beamerbasedecode
+file- 14704 2 beamerbasemodes.sty
+pkg- 14718 2 beamerbasemodes
+pkg+ 14748 2 iftex
+opts 14749 2 
+file+ 14768 2 iftex.sty
+file- 14787 2 iftex.sty
+pkg- 14800 2 iftex
+pkg+ 14846 2 beamerbaseoptions
+opts 14847 2 
+file+ 14871 2 beamerbaseoptions.sty
+pkg+ 14902 3 keyval
+opts 14902 3 
+file+ 14922 3 keyval.sty
+file- 14936 3 keyval.sty
+pkg- 14948 3 keyval
+file- 14959 2 beamerbaseoptions.sty
+pkg- 14973 2 beamerbaseoptions
+pkg+ 15030 2 geometry
+opts 15030 2 papersize={\beamer@paperwidth ,\beamer@paperheight }, hmargin=1cm,vmargin=0cm,head=0.5cm,headsep=0pt,foot=0.5cm
+file+ 15051 2 geometry.sty
+pkg+ 15090 3 ifvtex
+opts 15090 3 
+file+ 15110 3 ifvtex.sty
+file- 15130 3 ifvtex.sty
+pkg- 15142 3 ifvtex
+file- 15238 2 geometry.sty
+pkg- 15251 2 geometry
+pkg+ 15280 2 pgfmath
+opts 15281 2 
+file+ 15300 2 pgfmath.sty
+pkg+ 15331 3 pgfrcs
+opts 15331 3 
+file+ 15350 3 pgfrcs.sty
+file+ 15375 4 pgfutil-common.tex
+file- 15406 4 pgfutil-common.tex
+file+ 15425 4 pgfutil-latex.def
+file- 15450 4 pgfutil-latex.def
+file+ 15470 4 pgfrcs.code.tex
+file+ 15496 5 pgf.revision.tex
+file- 15506 5 pgf.revision.tex
+file- 15516 4 pgfrcs.code.tex
+file- 15521 3 pgfrcs.sty
+pkg- 15535 3 pgfrcs
+pkg+ 15564 3 pgfkeys
+opts 15564 3 
+file+ 15584 3 pgfkeys.sty
+file+ 15606 4 pgfkeys.code.tex
+file+ 15717 5 pgfkeyslibraryfiltered.code.tex
+file- 15780 5 pgfkeyslibraryfiltered.code.tex
+file- 15786 4 pgfkeys.code.tex
+file- 15792 3 pgfkeys.sty
+pkg- 15804 3 pgfkeys
+file+ 15825 3 pgfmath.code.tex
+file+ 15848 4 pgfmathutil.code.tex
+file- 15869 4 pgfmathutil.code.tex
+file+ 15890 4 pgfmathparser.code.tex
+file- 15939 4 pgfmathparser.code.tex
+file+ 15961 4 pgfmathfunctions.code.tex
+file- 15991 4 pgfmathfunctions.code.tex
+file+ 16016 4 pgfmathfunctions.basic.code.tex
+file- 16064 4 pgfmathfunctions.basic.code.tex
+file+ 16091 4 pgfmathfunctions.trigonometric.code.tex
+file- 16239 4 pgfmathfunctions.trigonometric.code.tex
+file+ 16266 4 pgfmathfunctions.random.code.tex
+file- 16285 4 pgfmathfunctions.random.code.tex
+file+ 16310 4 pgfmathfunctions.comparison.code.tex
+file- 16340 4 pgfmathfunctions.comparison.code.tex
+file+ 16364 4 pgfmathfunctions.base.code.tex
+file- 16389 4 pgfmathfunctions.base.code.tex
+file+ 16413 4 pgfmathfunctions.round.code.tex
+file- 16431 4 pgfmathfunctions.round.code.tex
+file+ 16454 4 pgfmathfunctions.misc.code.tex
+file- 16485 4 pgfmathfunctions.misc.code.tex
+file+ 16514 4 pgfmathfunctions.integerarithmetics.code.tex
+file- 16532 4 pgfmathfunctions.integerarithmetics.code.tex
+file+ 16553 4 pgfmathcalc.code.tex
+file- 16570 4 pgfmathcalc.code.tex
+file+ 16590 4 pgfmathfloat.code.tex
+file- 16776 4 pgfmathfloat.code.tex
+file- 16783 3 pgfmath.code.tex
+file- 16789 2 pgfmath.sty
+pkg- 16802 2 pgfmath
+file+ 16822 2 size11.clo
+file- 17102 2 size11.clo
+pkg+ 17134 2 pgfcore
+opts 17134 2 
+file+ 17154 2 pgfcore.sty
+pkg+ 17187 3 graphicx
+opts 17187 3 
+file+ 17208 3 graphicx.sty
+pkg+ 17251 4 graphics
+opts 17251 4 
+file+ 17272 4 graphics.sty
+pkg+ 17302 5 trig
+opts 17303 5 
+file+ 17321 5 trig.sty
+file- 17335 5 trig.sty
+pkg- 17347 5 trig
+file+ 17374 5 graphics.cfg
+file- 17387 5 graphics.cfg
+file+ 17413 5 luatex.def
+file- 17457 5 luatex.def
+file- 17476 4 graphics.sty
+pkg- 17496 4 graphics
+file- 17513 3 graphicx.sty
+pkg- 17525 3 graphicx
+pkg+ 17554 3 pgfsys
+opts 17555 3 
+file+ 17575 3 pgfsys.sty
+file+ 17609 4 pgfsys.code.tex
+file+ 17669 5 pgf.cfg
+file- 17682 5 pgf.cfg
+file+ 17704 5 pgfsys-luatex.def
+file+ 17731 6 pgfsys-common-pdf.def
+file- 17747 6 pgfsys-common-pdf.def
+file- 17764 5 pgfsys-luatex.def
+file- 17777 4 pgfsys.code.tex
+file+ 17798 4 pgfsyssoftpath.code.tex
+file- 17814 4 pgfsyssoftpath.code.tex
+file+ 17835 4 pgfsysprotocol.code.tex
+file- 17847 4 pgfsysprotocol.code.tex
+file- 17853 3 pgfsys.sty
+pkg- 17865 3 pgfsys
+pkg+ 17903 3 xcolor
+opts 17903 3 
+file+ 17923 3 xcolor.sty
+file+ 18303 4 color.cfg
+file- 18317 4 color.cfg
+file+ 18395 4 mathcolor.ltx
+file- 18423 4 mathcolor.ltx
+file- 18530 3 xcolor.sty
+pkg- 18544 3 xcolor
+file+ 18566 3 pgfcore.code.tex
+file+ 18592 4 pgfint.code.tex
+file- 18604 4 pgfint.code.tex
+file+ 18625 4 pgfcorepoints.code.tex
+file- 18681 4 pgfcorepoints.code.tex
+file+ 18706 4 pgfcorepathconstruct.code.tex
+file- 18747 4 pgfcorepathconstruct.code.tex
+file+ 18770 4 pgfcorepathusage.code.tex
+file- 18813 4 pgfcorepathusage.code.tex
+file+ 18835 4 pgfcorescopes.code.tex
+file- 18879 4 pgfcorescopes.code.tex
+file+ 18903 4 pgfcoregraphicstate.code.tex
+file- 18919 4 pgfcoregraphicstate.code.tex
+file+ 18942 4 pgfcoretransformations.code.tex
+file- 18967 4 pgfcoretransformations.code.tex
+file+ 18988 4 pgfcorequick.code.tex
+file- 19001 4 pgfcorequick.code.tex
+file+ 19022 4 pgfcoreobjects.code.tex
+file- 19034 4 pgfcoreobjects.code.tex
+file+ 19057 4 pgfcorepathprocessing.code.tex
+file- 19079 4 pgfcorepathprocessing.code.tex
+file+ 19100 4 pgfcorearrows.code.tex
+file- 19279 4 pgfcorearrows.code.tex
+file+ 19301 4 pgfcoreshade.code.tex
+file- 19335 4 pgfcoreshade.code.tex
+file+ 19359 4 pgfcoreimage.code.tex
+file- 19388 4 pgfcoreimage.code.tex
+file+ 19411 4 pgfcoreexternal.code.tex
+file- 19459 4 pgfcoreexternal.code.tex
+file+ 19481 4 pgfcorelayers.code.tex
+file- 19496 4 pgfcorelayers.code.tex
+file+ 19518 4 pgfcoretransparency.code.tex
+file- 19545 4 pgfcoretransparency.code.tex
+file+ 19567 4 pgfcorepatterns.code.tex
+file- 19584 4 pgfcorepatterns.code.tex
+file+ 19604 4 pgfcorerdf.code.tex
+file- 19617 4 pgfcorerdf.code.tex
+file- 19627 3 pgfcore.code.tex
+file- 19633 2 pgfcore.sty
+pkg- 19645 2 pgfcore
+pkg+ 19676 2 xxcolor
+opts 19676 2 
+file+ 19697 2 xxcolor.sty
+file- 19756 2 xxcolor.sty
+pkg- 19771 2 xxcolor
+pkg+ 19813 2 atbegshi-ltx
+opts 19813 2 
+file+ 19841 2 atbegshi-ltx.sty
+file- 19854 2 atbegshi-ltx.sty
+pkg- 19868 2 atbegshi-ltx
+pkg+ 19899 2 hyperref
+opts 19899 2 bookmarks=true,bookmarksopen=true,pdfborder={0 0 0},pdfhighlight={/N},linkbordercolor=[rgb]{0.5,0.5,0.5},implicit=false
+file+ 19920 2 hyperref.sty
+pkg+ 19974 3 kvsetkeys
+opts 19975 3 
+file+ 19996 3 kvsetkeys.sty
+file- 20016 3 kvsetkeys.sty
+pkg- 20029 3 kvsetkeys
+pkg+ 20063 3 kvdefinekeys
+opts 20063 3 
+file+ 20085 3 kvdefinekeys.sty
+file- 20100 3 kvdefinekeys.sty
+pkg- 20114 3 kvdefinekeys
+pkg+ 20145 3 pdfescape
+opts 20146 3 
+file+ 20166 3 pdfescape.sty
+pkg+ 20205 4 ltxcmds
+opts 20205 4 
+file+ 20226 4 ltxcmds.sty
+file- 20250 4 ltxcmds.sty
+pkg- 20262 4 ltxcmds
+pkg+ 20300 4 pdftexcmds
+opts 20300 4 
+file+ 20322 4 pdftexcmds.sty
+pkg+ 20361 5 infwarerr
+opts 20361 5 
+file+ 20382 5 infwarerr.sty
+file- 20399 5 infwarerr.sty
+pkg- 20413 5 infwarerr
+file- 20469 4 pdftexcmds.sty
+pkg- 20483 4 pdftexcmds
+file- 20492 3 pdfescape.sty
+pkg- 20505 3 pdfescape
+pkg+ 20539 3 hycolor
+opts 20540 3 
+file+ 20560 3 hycolor.sty
+file- 20668 3 hycolor.sty
+pkg- 20681 3 hycolor
+pkg+ 20712 3 nameref
+opts 20712 3 
+file+ 20733 3 nameref.sty
+pkg+ 20766 4 refcount
+opts 20766 4 
+file+ 20787 4 refcount.sty
+file- 20828 4 refcount.sty
+pkg- 20841 4 refcount
+pkg+ 20877 4 gettitlestring
+opts 20877 4 
+file+ 20900 4 gettitlestring.sty
+pkg+ 20938 5 kvoptions
+opts 20938 5 
+file+ 20959 5 kvoptions.sty
+file- 21019 5 kvoptions.sty
+pkg- 21033 5 kvoptions
+file- 21065 4 gettitlestring.sty
+pkg- 21080 4 gettitlestring
+file- 21266 3 nameref.sty
+pkg- 21279 3 nameref
+pkg+ 21320 3 stringenc
+opts 21320 3 
+file+ 21342 3 stringenc.sty
+file- 21401 3 stringenc.sty
+pkg- 21414 3 stringenc
+file+ 21470 3 pd1enc.def
+file- 21538 3 pd1enc.def
+pkg+ 21572 3 intcalc
+opts 21572 3 
+file+ 21592 3 intcalc.sty
+file- 21611 3 intcalc.sty
+pkg- 21623 3 intcalc
+file+ 21701 3 puenc.def
+file- 22136 3 puenc.def
+pkg+ 22282 3 url
+opts 22282 3 
+file+ 22303 3 url.sty
+file- 22326 3 url.sty
+pkg- 22338 3 url
+pkg+ 22401 3 bitset
+opts 22402 3 
+file+ 22422 3 bitset.sty
+pkg+ 22481 4 bigintcalc
+opts 22481 4 
+file+ 22503 4 bigintcalc.sty
+file- 22549 4 bigintcalc.sty
+pkg- 22563 4 bigintcalc
+file- 22591 3 bitset.sty
+pkg- 22604 3 bitset
+file- 22751 2 hyperref.sty
+file+ 22773 2 hluatex.def
+pkg+ 22859 3 rerunfilecheck
+opts 22860 3 
+file+ 22884 3 rerunfilecheck.sty
+pkg+ 23001 4 uniquecounter
+opts 23001 4 
+file+ 23024 4 uniquecounter.sty
+file- 23064 4 uniquecounter.sty
+pkg- 23079 4 uniquecounter
+file- 23090 3 rerunfilecheck.sty
+pkg- 23103 3 rerunfilecheck
+file- 23111 2 hluatex.def
+pkg- 23137 2 hyperref
+pkg+ 23193 2 beamerbaserequires
+opts 23194 2 
+file+ 23221 2 beamerbaserequires.sty
+pkg+ 23266 3 beamerbasecompatibility
+opts 23266 3 
+file+ 23294 3 beamerbasecompatibility.sty
+file- 23471 3 beamerbasecompatibility.sty
+pkg- 23488 3 beamerbasecompatibility
+pkg+ 23524 3 beamerbasefont
+opts 23525 3 
+file+ 23549 3 beamerbasefont.sty
+pkg+ 23581 4 amssymb
+opts 23582 4 
+file+ 23602 4 amssymb.sty
+pkg+ 23637 5 amsfonts
+opts 23638 5 
+file+ 23659 5 amsfonts.sty
+file- 23695 5 amsfonts.sty
+pkg- 23709 5 amsfonts
+file- 23796 4 amssymb.sty
+pkg- 23808 4 amssymb
+file- 23893 3 beamerbasefont.sty
+pkg- 23908 3 beamerbasefont
+pkg+ 23948 3 beamerbasetranslator
+opts 23949 3 
+file+ 23976 3 beamerbasetranslator.sty
+pkg+ 24011 4 translator
+opts 24011 4 
+file+ 24032 4 translator.sty
+file- 24114 4 translator.sty
+pkg- 24128 4 translator
+file- 24139 3 beamerbasetranslator.sty
+pkg- 24154 3 beamerbasetranslator
+pkg+ 24190 3 beamerbasemisc
+opts 24191 3 
+file+ 24214 3 beamerbasemisc.sty
+file- 24305 3 beamerbasemisc.sty
+pkg- 24319 3 beamerbasemisc
+pkg+ 24362 3 beamerbasetwoscreens
+opts 24362 3 
+file+ 24390 3 beamerbasetwoscreens.sty
+file- 24407 3 beamerbasetwoscreens.sty
+pkg- 24422 3 beamerbasetwoscreens
+pkg+ 24462 3 beamerbaseoverlay
+opts 24463 3 
+file+ 24488 3 beamerbaseoverlay.sty
+file- 24630 3 beamerbaseoverlay.sty
+pkg- 24645 3 beamerbaseoverlay
+pkg+ 24685 3 beamerbasetitle
+opts 24685 3 
+file+ 24710 3 beamerbasetitle.sty
+file- 24760 3 beamerbasetitle.sty
+pkg- 24775 3 beamerbasetitle
+pkg+ 24814 3 beamerbasesection
+opts 24814 3 
+file+ 24841 3 beamerbasesection.sty
+file- 24905 3 beamerbasesection.sty
+pkg- 24922 3 beamerbasesection
+pkg+ 24959 3 beamerbaseframe
+opts 24960 3 
+file+ 24984 3 beamerbaseframe.sty
+file- 25049 3 beamerbaseframe.sty
+pkg- 25064 3 beamerbaseframe
+pkg+ 25104 3 beamerbaseverbatim
+opts 25104 3 
+file+ 25130 3 beamerbaseverbatim.sty
+file- 25153 3 beamerbaseverbatim.sty
+pkg- 25168 3 beamerbaseverbatim
+pkg+ 25208 3 beamerbaseframesize
+opts 25209 3 
+file+ 25235 3 beamerbaseframesize.sty
+file- 25263 3 beamerbaseframesize.sty
+pkg- 25279 3 beamerbaseframesize
+pkg+ 25323 3 beamerbaseframecomponents
+opts 25324 3 
+file+ 25353 3 beamerbaseframecomponents.sty
+file- 25396 3 beamerbaseframecomponents.sty
+pkg- 25413 3 beamerbaseframecomponents
+pkg+ 25451 3 beamerbasecolor
+opts 25452 3 
+file+ 25476 3 beamerbasecolor.sty
+file- 25648 3 beamerbasecolor.sty
+pkg- 25663 3 beamerbasecolor
+pkg+ 25700 3 beamerbasenotes
+opts 25701 3 
+file+ 25725 3 beamerbasenotes.sty
+file- 25751 3 beamerbasenotes.sty
+pkg- 25765 3 beamerbasenotes
+pkg+ 25801 3 beamerbasetoc
+opts 25801 3 
+file+ 25826 3 beamerbasetoc.sty
+file- 25850 3 beamerbasetoc.sty
+pkg- 25864 3 beamerbasetoc
+pkg+ 25904 3 beamerbasetemplates
+opts 25904 3 
+file+ 25932 3 beamerbasetemplates.sty
+pkg+ 25987 4 beamerbaseauxtemplates
+opts 25987 4 
+file+ 26016 4 beamerbaseauxtemplates.sty
+pkg+ 26057 5 beamerbaseboxes
+opts 26057 5 
+file+ 26084 5 beamerbaseboxes.sty
+file- 26105 5 beamerbaseboxes.sty
+pkg- 26120 5 beamerbaseboxes
+file- 26429 4 beamerbaseauxtemplates.sty
+pkg- 26445 4 beamerbaseauxtemplates
+file- 26455 3 beamerbasetemplates.sty
+pkg- 26470 3 beamerbasetemplates
+pkg+ 26515 3 beamerbaselocalstructure
+opts 26515 3 
+file+ 26544 3 beamerbaselocalstructure.sty
+pkg+ 26580 4 enumerate
+opts 26580 4 
+file+ 26602 4 enumerate.sty
+file- 26616 4 enumerate.sty
+pkg- 26628 4 enumerate
+file- 26710 3 beamerbaselocalstructure.sty
+pkg- 26726 3 beamerbaselocalstructure
+pkg+ 26767 3 beamerbasenavigation
+opts 26768 3 
+file+ 26794 3 beamerbasenavigation.sty
+file+ 26844 4 beamerbasenavigationsymbols.tex
+file- 27007 4 beamerbasenavigationsymbols.tex
+file- 27043 3 beamerbasenavigation.sty
+pkg- 27058 3 beamerbasenavigation
+pkg+ 27098 3 beamerbasetheorems
+opts 27098 3 
+file+ 27124 3 beamerbasetheorems.sty
+pkg+ 27161 4 amsmath
+opts 27161 4 
+file+ 27182 4 amsmath.sty
+pkg+ 27233 5 amstext
+opts 27233 5 
+file+ 27254 5 amstext.sty
+pkg+ 27286 6 amsgen
+opts 27287 6 
+file+ 27307 6 amsgen.sty
+file- 27322 6 amsgen.sty
+pkg- 27335 6 amsgen
+file- 27345 5 amstext.sty
+pkg- 27358 5 amstext
+pkg+ 27388 5 amsbsy
+opts 27388 5 
+file+ 27408 5 amsbsy.sty
+file- 27431 5 amsbsy.sty
+pkg- 27444 5 amsbsy
+pkg+ 27472 5 amsopn
+opts 27472 5 namelimits,
+file+ 27492 5 amsopn.sty
+file- 27520 5 amsopn.sty
+pkg- 27533 5 amsopn
+file- 27749 4 amsmath.sty
+pkg- 27770 4 amsmath
+pkg+ 27801 4 amsthm
+opts 27801 4 
+file+ 27821 4 amsthm.sty
+file- 27851 4 amsthm.sty
+pkg- 27876 4 amsthm
+file- 27921 3 beamerbasetheorems.sty
+pkg- 27936 3 beamerbasetheorems
+pkg+ 27975 3 beamerbasethemes
+opts 27975 3 
+file+ 28000 3 beamerbasethemes.sty
+file- 28020 3 beamerbasethemes.sty
+pkg- 28035 3 beamerbasethemes
+file- 28046 2 beamerbaserequires.sty
+pkg- 28061 2 beamerbaserequires
+pkg+ 30265 2 beamerthemedefault
+opts 30266 2 
+file+ 30295 2 beamerthemedefault.sty
+pkg+ 30347 3 beamerfontthemedefault
+opts 30347 3 
+file+ 30377 3 beamerfontthemedefault.sty
+file- 30417 3 beamerfontthemedefault.sty
+pkg- 30433 3 beamerfontthemedefault
+pkg+ 30477 3 beamercolorthemedefault
+opts 30478 3 
+file+ 30506 3 beamercolorthemedefault.sty
+file- 30567 3 beamercolorthemedefault.sty
+pkg- 30584 3 beamercolorthemedefault
+pkg+ 30628 3 beamerinnerthemedefault
+opts 30628 3 
+file+ 30657 3 beamerinnerthemedefault.sty
+file- 30967 3 beamerinnerthemedefault.sty
+pkg- 30984 3 beamerinnerthemedefault
+pkg+ 31028 3 beamerouterthemedefault
+opts 31028 3 
+file+ 31058 3 beamerouterthemedefault.sty
+file- 31158 3 beamerouterthemedefault.sty
+pkg- 31175 3 beamerouterthemedefault
+file- 31185 2 beamerthemedefault.sty
+pkg- 31199 2 beamerthemedefault
+file- 31208 1 beamer.cls
+cls- 31220 1 beamer
+pkg+ 31260 1 booktabs
+opts 31261 1 
+file+ 31283 1 booktabs.sty
+file- 31316 1 booktabs.sty
+pkg- 31329 1 booktabs
+pkg+ 31357 1 tikz
+opts 31357 1 
+file+ 31378 1 tikz.sty
+pkg+ 31407 2 pgf
+opts 31408 2 
+file+ 31427 2 pgf.sty
+file+ 31476 3 pgfmoduleshapes.code.tex
+file- 31537 3 pgfmoduleshapes.code.tex
+file+ 31560 3 pgfmoduleplot.code.tex
+file- 31611 3 pgfmoduleplot.code.tex
+pkg+ 31650 3 pgfcomp-version-0-65
+opts 31650 3 
+file+ 31676 3 pgfcomp-version-0-65.sty
+file- 31771 3 pgfcomp-version-0-65.sty
+pkg- 31787 3 pgfcomp-version-0-65
+pkg+ 31825 3 pgfcomp-version-1-18
+opts 31825 3 
+file+ 31851 3 pgfcomp-version-1-18.sty
+file- 31876 3 pgfcomp-version-1-18.sty
+pkg- 31891 3 pgfcomp-version-1-18
+file- 31899 2 pgf.sty
+pkg- 31910 2 pgf
+pkg+ 31939 2 pgffor
+opts 31940 2 
+file+ 31960 2 pgffor.sty
+file+ 32010 3 pgffor.code.tex
+file- 32056 3 pgffor.code.tex
+file- 32062 2 pgffor.sty
+pkg- 32076 2 pgffor
+file+ 32097 2 tikz.code.tex
+file+ 32128 3 pgflibraryplothandlers.code.tex
+file- 32172 3 pgflibraryplothandlers.code.tex
+file+ 32483 3 pgfmodulematrix.code.tex
+file- 32509 3 pgfmodulematrix.code.tex
+file+ 32770 3 tikzlibrarytopaths.code.tex
+file- 32813 3 tikzlibrarytopaths.code.tex
+file- 32820 2 tikz.code.tex
+file- 32826 1 tikz.sty
+pkg- 32839 1 tikz
+predoc 33423 1 
+file+ 33469 1 l3backend-luatex.def
+file- 33520 1 l3backend-luatex.def
+begindoc 33544 1 
+file+ 33607 1 supp-pdf.mkii
+file- 33655 1 supp-pdf.mkii
+pkg+ 33683 1 epstopdf-base
+opts 33683 1 
+file+ 33703 1 epstopdf-base.sty
+file+ 33757 2 epstopdf-sys.cfg
+file- 33763 2 epstopdf-sys.cfg
+file- 33774 1 epstopdf-base.sty
+pkg- 33783 1 epstopdf-base
+file+ 33939 1 translator-basic-dictionary-English.dict
+file- 33979 1 translator-basic-dictionary-English.dict
+file+ 34004 1 translator-bibliography-dictionary-English.dict
+file- 34019 1 translator-bibliography-dictionary-English.dict
+file+ 34042 1 translator-environment-dictionary-English.dict
+file- 34054 1 translator-environment-dictionary-English.dict
+file+ 34075 1 translator-months-dictionary-English.dict
+file- 34096 1 translator-months-dictionary-English.dict
+file+ 34117 1 translator-numbers-dictionary-English.dict
+file- 34141 1 translator-numbers-dictionary-English.dict
+file+ 34165 1 translator-theorem-dictionary-English.dict
+file- 34200 1 translator-theorem-dictionary-English.dict
+ship 39202 1 1
+page 39418 1 1
+file+ 39661 1 umsa.fd
+file- 39671 1 umsa.fd
+file+ 39713 1 umsb.fd
+file- 39721 1 umsb.fd
+ship 44120 1 2
+page 44163 1 2
+ship 44801 1 3
+page 44837 1 3
+ship 45550 1 4
+page 45592 1 4
+ship 46259 1 5
+page 46284 1 5
+enddoc 46292 1 
+end 46341 1 

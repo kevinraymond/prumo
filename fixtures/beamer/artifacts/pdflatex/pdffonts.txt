@@ -1,0 +1,6 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+LGQLDA+CMSS12                        Type 1            Builtin          yes yes yes     38  0
+SKEJLV+CMSS10                        Type 1            Builtin          yes yes yes     39  0
+ZFKFZI+CMSSI10                       Type 1            Builtin          yes yes yes     66  0
+NKIGCX+CMSS8                         Type 1            Builtin          yes yes yes     67  0

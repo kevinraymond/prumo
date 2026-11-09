@@ -1,0 +1,61 @@
+== prumo report: notes  (total 128 ms, preamble 119 ms, 1 pages, 97 files read)
+
+-- slowest units (exclusive) --
+     22.6 ms     22.6 ms incl  file pgfcore.code.tex
+     14.6 ms    128.3 ms incl  file notes.tex
+     12.6 ms     12.6 ms incl  file tikz.code.tex
+     11.6 ms     12.6 ms incl  pkg  xcolor
+      7.6 ms     77.9 ms incl  pkg  pgf
+      4.8 ms      7.7 ms incl  cls  article
+      4.7 ms      5.5 ms incl  pkg  pgfrcs
+      4.6 ms     60.4 ms incl  pkg  pgfcore
+      4.6 ms      4.6 ms incl  file pgfsys.code.tex
+      3.8 ms     13.1 ms incl  pkg  graphicx
+      3.6 ms      7.4 ms incl  pkg  graphics
+      3.5 ms    101.3 ms incl  pkg  tikz
+
+-- pages --
+  page 1: 8.5 ms
+
+-- load tree --
+  notes.tex  (128.3 ms incl, 14.6 ms excl)
+    article  (7.7 ms incl, 4.8 ms excl)
+      size10.clo  (2.9 ms incl, 2.3 ms excl)
+        ot1lmr.fd  (0.6 ms incl, 0.6 ms excl)
+    tikz  (101.3 ms incl, 3.5 ms excl)
+      pgf  (77.9 ms incl, 7.6 ms excl)
+        pgfrcs  (5.5 ms incl, 4.7 ms excl)
+          pgfrcs.code.tex  (0.9 ms incl, 0.9 ms excl)
+        pgfcore  (60.4 ms incl, 4.6 ms excl)
+          graphicx  (13.1 ms incl, 3.8 ms excl)
+            keyval  (1.9 ms incl, 1.9 ms excl)
+            graphics  (7.4 ms incl, 3.6 ms excl)
+              trig  (0.9 ms incl, 0.9 ms excl)
+              graphics.cfg  (0.2 ms incl, 0.2 ms excl)
+              luatex.def  (2.7 ms incl, 2.7 ms excl)
+          pgfsys  (7.5 ms incl, 2.4 ms excl)
+            pgfsys.code.tex  (4.6 ms incl, 4.6 ms excl)
+            pgfsyssoftpath.code.tex  (0.3 ms incl, 0.3 ms excl)
+            pgfsysprotocol.code.tex  (0.2 ms incl, 0.2 ms excl)
+          xcolor  (12.6 ms incl, 11.6 ms excl)
+            color.cfg  (0.3 ms incl, 0.3 ms excl)
+            mathcolor.ltx  (0.7 ms incl, 0.7 ms excl)
+          pgfcore.code.tex  (22.6 ms incl, 22.6 ms excl)
+        pgfcomp-version-0-65  (3.0 ms incl, 3.0 ms excl)
+        pgfcomp-version-1-18  (1.3 ms incl, 1.3 ms excl)
+      pgffor  (7.4 ms incl, 2.8 ms excl)
+        pgfkeys  (1.4 ms incl, 1.2 ms excl)
+          pgfkeys.code.tex  (0.2 ms incl, 0.2 ms excl)
+        pgfmath  (2.2 ms incl, 2.0 ms excl)
+          pgfmath.code.tex  (0.2 ms incl, 0.2 ms excl)
+        pgffor.code.tex  (1.0 ms incl, 1.0 ms excl)
+      tikz.code.tex  (12.6 ms incl, 12.6 ms excl)
+    l3backend-luatex.def  (1.5 ms incl, 1.5 ms excl)
+    ts1cmr.fd  (0.2 ms incl, 0.2 ms excl)
+    supp-pdf.mkii  (0.9 ms incl, 0.9 ms excl)
+    epstopdf-base  (2.0 ms incl, 1.9 ms excl)
+      epstopdf-sys.cfg  (0.1 ms incl, 0.1 ms excl)
+
+-- fonts --
+  TFMs loaded: 1, embedded in PDF: 1, Type 3: 0, bitmap .pk read: 0
+  loaded but not embedded: rm-lmr10

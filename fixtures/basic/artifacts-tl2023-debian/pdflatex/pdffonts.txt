@@ -1,0 +1,8 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+F44                                  Type 3            Custom           yes no  no      10  0
+F37                                  Type 3            Custom           yes no  no      11  0
+AUUZAN+CMMI10                        Type 1            Builtin          yes yes yes     12  0
+RKDUWA+CMR7                          Type 1            Builtin          yes yes yes     13  0
+RFLZJB+CMR10                         Type 1            Builtin          yes yes yes     14  0
+F55                                  Type 3            Custom           yes no  no      21  0

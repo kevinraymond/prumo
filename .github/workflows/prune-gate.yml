@@ -1,0 +1,22 @@
+name: prune gate
+
+# The M4 verification gate: prune a full TeX Live to the fixtures, rebuild, compare text and
+# page counts. Pulls the 2.8 GB full image and removes ~5,000 packages, so weekly and on demand.
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Full TeX Live image with poppler
+        run: |
+          printf 'FROM texlive/texlive:latest\nRUN apt-get update && apt-get install -y --no-install-recommends poppler-utils && rm -rf /var/lib/apt/lists/*\n' \
+            | docker build -q -t prumo-dev:tl2026-full -
+      - run: scripts/verify_prune.sh prumo-dev:tl2026-full

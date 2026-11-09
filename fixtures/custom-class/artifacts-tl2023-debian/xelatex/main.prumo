@@ -1,0 +1,130 @@
+start 9345 0 xetex 2023-11-01
+file+ 9345 0 main.tex
+cls+ 9378 1 obra
+file+ 9399 1 obra.cls
+cls+ 9440 2 article
+file+ 9462 2 article.cls
+file+ 9506 3 size11.clo
+file- 9968 3 size11.clo
+file- 10043 2 article.cls
+cls- 10062 2 article
+pkg+ 10109 2 geometry
+opts 10110 2 a4paper,margin=25mm
+file+ 10134 2 geometry.sty
+pkg+ 10173 3 keyval
+opts 10173 3 
+file+ 10196 3 keyval.sty
+file- 10213 3 keyval.sty
+pkg- 10229 3 keyval
+pkg+ 10264 3 ifvtex
+opts 10264 3 
+file+ 10287 3 ifvtex.sty
+pkg+ 10322 4 iftex
+opts 10323 4 
+file+ 10348 4 iftex.sty
+file- 10367 4 iftex.sty
+pkg- 10381 4 iftex
+file- 10390 3 ifvtex.sty
+pkg- 10404 3 ifvtex
+file- 10901 2 geometry.sty
+pkg- 10918 2 geometry
+pkg+ 10956 2 booktabs
+opts 10956 2 
+file+ 10980 2 booktabs.sty
+file- 11007 2 booktabs.sty
+pkg- 11022 2 booktabs
+pkg+ 11056 2 siunitx
+opts 11056 2 
+file+ 11080 2 siunitx.sty
+pkg+ 11793 3 translations
+opts 11793 3 
+file+ 11820 3 translations.sty
+pkg+ 11864 4 etoolbox
+opts 11864 4 
+file+ 11888 4 etoolbox.sty
+file- 12000 4 etoolbox.sty
+pkg- 12016 4 etoolbox
+pkg+ 12056 4 pdftexcmds
+opts 12057 4 
+file+ 12081 4 pdftexcmds.sty
+pkg+ 12128 5 infwarerr
+opts 12128 5 
+file+ 12153 5 infwarerr.sty
+file- 12172 5 infwarerr.sty
+pkg- 12189 5 infwarerr
+pkg+ 12234 5 ltxcmds
+opts 12234 5 
+file+ 12259 5 ltxcmds.sty
+file- 12285 5 ltxcmds.sty
+pkg- 12300 5 ltxcmds
+file- 12320 4 pdftexcmds.sty
+pkg- 12336 4 pdftexcmds
+file- 12897 3 translations.sty
+pkg- 12915 3 translations
+pkg+ 12986 3 amstext
+opts 12987 3 
+file+ 13013 3 amstext.sty
+pkg+ 13057 4 amsgen
+opts 13057 4 
+file+ 13082 4 amsgen.sty
+file- 13101 4 amsgen.sty
+pkg- 13117 4 amsgen
+file- 13128 3 amstext.sty
+pkg- 13143 3 amstext
+pkg+ 14592 3 array
+opts 14593 3 
+file+ 14618 3 array.sty
+file- 14656 3 array.sty
+pkg- 14676 3 array
+file- 15093 2 siunitx.sty
+pkg- 15111 2 siunitx
+pkg+ 15154 2 fancyhdr
+opts 15155 2 
+file+ 15180 2 fancyhdr.sty
+file- 15259 2 fancyhdr.sty
+pkg- 15275 2 fancyhdr
+pkg+ 15314 2 enumitem
+opts 15314 2 
+file+ 15340 2 enumitem.sty
+file- 15426 2 enumitem.sty
+pkg- 15442 2 enumitem
+file- 15461 1 obra.cls
+cls- 15475 1 obra
+pkg+ 15513 1 graphicx
+opts 15513 1 
+file+ 15538 1 graphicx.sty
+pkg+ 15590 2 graphics
+opts 15590 2 
+file+ 15614 2 graphics.sty
+pkg+ 15652 3 trig
+opts 15652 3 
+file+ 15674 3 trig.sty
+file- 15688 3 trig.sty
+pkg- 15703 3 trig
+file+ 15734 3 graphics.cfg
+file- 15748 3 graphics.cfg
+file+ 15779 3 xetex.def
+file- 15860 3 xetex.def
+file- 15880 2 graphics.sty
+pkg- 15896 2 graphics
+file- 15915 1 graphicx.sty
+pkg- 15930 1 graphicx
+pkg+ 16246 1 color
+opts 16246 1 
+file+ 16262 1 color.sty
+file+ 16288 2 color.cfg
+file- 16295 2 color.cfg
+file+ 16405 2 mathcolor.ltx
+file- 16429 2 mathcolor.ltx
+file- 16434 1 color.sty
+pkg- 16443 1 color
+file+ 16497 1 l3backend-xetex.def
+file- 16589 1 l3backend-xetex.def
+file+ 16633 1 ts1cmr.fd
+file- 16646 1 ts1cmr.fd
+begindoc 16655 1 
+file+ 16987 1 translations-basic-dictionary-english.trsl
+file- 17154 1 translations-basic-dictionary-english.trsl
+enddoc 17470 1 
+page 17560 1 1
+end 17586 1 

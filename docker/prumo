@@ -1,0 +1,50 @@
+#!/bin/sh
+# Runs prumo from the Docker image, as a command. Copy this file somewhere on your PATH:
+#
+#   curl -fsSL https://github.com/kevinraymond/prumo/raw/main/docker/prumo -o ~/.local/bin/prumo
+#   chmod +x ~/.local/bin/prumo
+#   prumo time main.tex
+#
+# It types the docker run line so you don't have to. The current directory and your prumo
+# cache directory are mounted inside the container at the same paths they have here, so
+# printed paths are yours, runs survive the container, and `prumo clean` sees them. The
+# container runs as you, so the files it writes are yours too. Docker gets a terminal only
+# when stdout is one: `time` draws its charts at the prompt, and `--json | jq` stays clean.
+#
+# The container sees only the current directory, so run this from the one your document
+# is in.
+#
+#   PRUMO_IMAGE        the image to run (default ghcr.io/kevinraymond/prumo)
+#   PRUMO_CACHE        the cache directory (default: where a native prumo keeps it)
+#   PRUMO_DOCKER       the container engine (default docker; podman works)
+#   PRUMO_DOCKER_OPTS  extra options for docker run, e.g. --platform linux/amd64
+set -e
+
+image="${PRUMO_IMAGE:-ghcr.io/kevinraymond/prumo}"
+engine="${PRUMO_DOCKER:-docker}"
+cache="${PRUMO_CACHE:-}"
+if [ -z "$cache" ]; then
+    case "$(uname -s 2>/dev/null)" in
+        Darwin) cache="$HOME/Library/Caches/prumo" ;;
+        *) cache="${XDG_CACHE_HOME:-$HOME/.cache}/prumo" ;;
+    esac
+fi
+
+if ! command -v "$engine" >/dev/null 2>&1; then
+    echo "prumo: $engine is not installed or not on PATH; this command runs prumo from the $image image" >&2
+    exit 1
+fi
+
+mkdir -p "$cache"
+cwd="$(pwd -P)"
+tty=""
+[ -t 1 ] && tty="-t"
+
+# shellcheck disable=SC2086  # $tty and $PRUMO_DOCKER_OPTS are meant to split
+exec "$engine" run --rm $tty $PRUMO_DOCKER_OPTS \
+    --user "$(id -u):$(id -g)" \
+    -v "$cwd:$cwd" -w "$cwd" \
+    -v "$cache:$cache" -e "PRUMO_CACHE=$cache" \
+    -e "PRUMO_PATH_MAP=$cwd=$cwd;$cache=$cache" \
+    -e "PRUMO_IMAGE=$image" -e TERM -e NO_COLOR -e COLUMNS \
+    "$image" "$@"

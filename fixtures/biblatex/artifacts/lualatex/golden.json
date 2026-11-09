@@ -1,0 +1,223 @@
+{
+  "total_s": 0.3622894287109375,
+  "preamble_s": 0.3238067626953125,
+  "units": [
+    {
+      "kind": "pkg",
+      "name": "biblatex",
+      "inclusive": 0.3010711669921875,
+      "exclusive": 0.28076171875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "paper.tex",
+      "inclusive": 0.3622894287109375,
+      "exclusive": 0.0475616455078125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "csquotes",
+      "inclusive": 0.0078582763671875,
+      "exclusive": 0.00628662109375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "size10.clo",
+      "inclusive": 0.003326416015625,
+      "exclusive": 0.003326416015625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdftexcmds",
+      "inclusive": 0.0050811767578125,
+      "exclusive": 0.0026092529296875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "blx-case-expl3",
+      "inclusive": 0.0036468505859375,
+      "exclusive": 0.002532958984375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "etoolbox",
+      "inclusive": 0.001983642578125,
+      "exclusive": 0.001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.0052947998046875,
+      "exclusive": 0.0019683837890625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "expl3",
+      "inclusive": 0.0028839111328125,
+      "exclusive": 0.001953125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvoptions",
+      "inclusive": 0.0026397705078125,
+      "exclusive": 0.0017547607421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "logreq",
+      "inclusive": 0.0017852783203125,
+      "exclusive": 0.0014190673828125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "csquotes.def",
+      "inclusive": 0.0013885498046875,
+      "exclusive": 0.0013885498046875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "xparse",
+      "inclusive": 0.0011138916015625,
+      "exclusive": 0.0011138916015625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-luatex.def",
+      "inclusive": 0.0009307861328125,
+      "exclusive": 0.0009307861328125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ltxcmds",
+      "inclusive": 0.00091552734375,
+      "exclusive": 0.00091552734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvsetkeys",
+      "inclusive": 0.000885009765625,
+      "exclusive": 0.000885009765625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.00079345703125,
+      "exclusive": 0.00079345703125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "url",
+      "inclusive": 0.00079345703125,
+      "exclusive": 0.00079345703125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "infwarerr",
+      "inclusive": 0.000762939453125,
+      "exclusive": 0.000762939453125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.000762939453125,
+      "exclusive": 0.000762939453125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ifthen",
+      "inclusive": 0.000732421875,
+      "exclusive": 0.000732421875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "paper.bbl",
+      "inclusive": 0.0005035400390625,
+      "exclusive": 0.0005035400390625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "logreq.def",
+      "inclusive": 0.0003662109375,
+      "exclusive": 0.0003662109375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "csquotes.cfg",
+      "inclusive": 0.00018310546875,
+      "exclusive": 0.00018310546875,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.0380706787109375
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [],
+    "embedded": [
+      [
+        "LMRoman10-Regular",
+        "CID Type"
+      ],
+      [
+        "LMRoman12-Bold",
+        "CID Type"
+      ],
+      [
+        "LMRoman10-Italic",
+        "CID Type"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [],
+    "ps_names": {},
+    "virtual": [],
+    "embedded_resolved": [],
+    "loaded_not_embedded_resolved": [],
+    "no_map_entry": [],
+    "preloaded": [],
+    "opentype": [
+      {
+        "name": "LMRoman10-Italic",
+        "file": "lmroman10-italic.luc"
+      },
+      {
+        "name": "LMRoman10-Regular",
+        "file": "lmroman10-regular.luc"
+      },
+      {
+        "name": "LMRoman12-Bold",
+        "file": "lmroman12-bold.luc"
+      }
+    ],
+    "unknown_embedded": [],
+    "partial": false,
+    "map_entries": 5091
+  }
+}

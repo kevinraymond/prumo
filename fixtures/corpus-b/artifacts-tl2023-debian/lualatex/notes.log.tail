@@ -1,0 +1,40 @@
+\MPscratchDim=\dimen193
+\MPnumerator=\count287
+\makeMPintoPDFobject=\count288
+\everyMPtoPDFconversion=\toks31
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./notes.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+ ***********
+)
+
+Here is how much of LuaTeX's memory you used:
+ 11998 strings out of 476553
+ 100000,1977958 words of node,token memory allocated
+ 371 words of node memory still in use:
+   3 hlist, 1 vlist, 1 rule, 2 glue, 48 glue_spec, 2 write nodes
+   avail lists: 2:18,3:39,4:10,5:22,6:2,7:44,9:32
+ 33675 multiletter control sequences out of 65536+600000
+ 15 fonts using 633019 bytes
+ 114i,5n,104p,427b,367s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf/fonts/type1/pub
+lic/lm/lmr10.pfb>
+Output written on notes.pdf (1 page, 17285 bytes).
+
+PDF statistics: 16 PDF objects out of 1000 (max. 8388607)
+ 11 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 131072)
+ 16 words of extra memory for PDF output out of 10000 (max. 100000000)
+

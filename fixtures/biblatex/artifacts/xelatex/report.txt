@@ -1,0 +1,48 @@
+== prumo report: paper  (total 335 ms, preamble 307 ms, 1 pages, 94 files read)
+
+-- slowest units (exclusive) --
+    263.6 ms    281.9 ms incl  pkg  biblatex
+     36.7 ms    334.9 ms incl  file paper.tex
+      6.9 ms      6.9 ms incl  file size10.clo
+      5.7 ms      7.1 ms incl  pkg  csquotes
+      2.4 ms      3.4 ms incl  pkg  blx-case-expl3
+      2.2 ms      4.5 ms incl  pkg  pdftexcmds
+      2.0 ms      8.8 ms incl  cls  article
+      1.8 ms      2.5 ms incl  pkg  expl3
+      1.8 ms      1.8 ms incl  pkg  etoolbox
+      1.6 ms      2.4 ms incl  pkg  kvoptions
+      1.3 ms      1.7 ms incl  pkg  logreq
+      1.2 ms      1.2 ms incl  file csquotes.def
+
+-- pages --
+  page 1: 27.6 ms
+
+-- load tree --
+  paper.tex  (334.9 ms incl, 36.7 ms excl)
+    article  (8.8 ms incl, 2.0 ms excl)
+      size10.clo  (6.9 ms incl, 6.9 ms excl)
+    biblatex  (281.9 ms incl, 263.6 ms excl)
+      pdftexcmds  (4.5 ms incl, 2.2 ms excl)
+        infwarerr  (0.7 ms incl, 0.7 ms excl)
+        iftex  (0.7 ms incl, 0.7 ms excl)
+        ltxcmds  (0.8 ms incl, 0.8 ms excl)
+      etoolbox  (1.8 ms incl, 1.8 ms excl)
+      keyval  (0.7 ms incl, 0.7 ms excl)
+      kvoptions  (2.4 ms incl, 1.6 ms excl)
+        kvsetkeys  (0.8 ms incl, 0.8 ms excl)
+      logreq  (1.7 ms incl, 1.3 ms excl)
+        logreq.def  (0.3 ms incl, 0.3 ms excl)
+      ifthen  (0.7 ms incl, 0.7 ms excl)
+      url  (0.7 ms incl, 0.7 ms excl)
+      expl3  (2.5 ms incl, 1.8 ms excl)
+        l3backend-xetex.def  (0.7 ms incl, 0.7 ms excl)
+      blx-case-expl3  (3.4 ms incl, 2.4 ms excl)
+        xparse  (1.0 ms incl, 1.0 ms excl)
+    csquotes  (7.1 ms incl, 5.7 ms excl)
+      csquotes.def  (1.2 ms incl, 1.2 ms excl)
+      csquotes.cfg  (0.2 ms incl, 0.2 ms excl)
+    paper.bbl  (0.4 ms incl, 0.4 ms excl)
+
+-- fonts --
+  TFMs loaded: 0, embedded in PDF: 3, Type 3: 0, bitmap .pk read: 0
+  OpenType, opened by the engine: LMRoman10-Italic (not in the .fls), LMRoman10-Regular (not in the .fls), LMRoman12-Bold (not in the .fls)

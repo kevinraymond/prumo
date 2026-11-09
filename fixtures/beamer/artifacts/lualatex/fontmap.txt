@@ -1,0 +1,47 @@
+cmex10 CMEX10 <cmex10.pfb
+cmmi10 CMMI10 <cmmi10.pfb
+cmmi6 CMMI6 <cmmi6.pfb
+cmmi8 CMMI8 <cmmi8.pfb
+cmss10 CMSS10 <cmss10.pfb
+cmss8 CMSS8 <cmss8.pfb
+cmsy10 CMSY10 <cmsy10.pfb
+cmsy6 CMSY6 <cmsy6.pfb
+cmsy8 CMSY8 <cmsy8.pfb
+cmex7 CMEX7 <cmex7.pfb
+cmex8 CMEX8 <cmex8.pfb
+msam10 MSAM10 <msam10.pfb
+msam7 MSAM7 <msam7.pfb
+msbm10 MSBM10 <msbm10.pfb
+msbm7 MSBM7 <msbm7.pfb
+cs-lmss10 LMSans10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss10.pfb
+cs-lmss12 LMSans12-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss12.pfb
+cs-lmss8 LMSans8-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmss8.pfb
+cs-lmsso10 LMSans10-Oblique " enclmcs ReEncodeFont " <lm-cs.enc <lmsso10.pfb
+ec-lmss10 LMSans10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss10.pfb
+ec-lmss12 LMSans12-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss12.pfb
+ec-lmss8 LMSans8-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmss8.pfb
+ec-lmsso10 LMSans10-Oblique " enclmec ReEncodeFont " <lm-ec.enc <lmsso10.pfb
+l7x-lmss10 LMSans10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss10.pfb
+l7x-lmss12 LMSans12-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss12.pfb
+l7x-lmss8 LMSans8-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmss8.pfb
+l7x-lmsso10 LMSans10-Oblique " enclml7x ReEncodeFont " <lm-l7x.enc <lmsso10.pfb
+qx-lmss10 LMSans10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss10.pfb
+qx-lmss12 LMSans12-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss12.pfb
+qx-lmss8 LMSans8-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmss8.pfb
+qx-lmsso10 LMSans10-Oblique " enclmqx ReEncodeFont " <lm-qx.enc <lmsso10.pfb
+rm-lmss10 LMSans10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss10.pfb
+rm-lmss12 LMSans12-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss12.pfb
+rm-lmss8 LMSans8-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmss8.pfb
+rm-lmsso10 LMSans10-Oblique " enclmrm ReEncodeFont " <lm-rm.enc <lmsso10.pfb
+t5-lmss10 LMSans10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss10.pfb
+t5-lmss12 LMSans12-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss12.pfb
+t5-lmss8 LMSans8-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmss8.pfb
+t5-lmsso10 LMSans10-Oblique " enclmt5 ReEncodeFont " <lm-t5.enc <lmsso10.pfb
+texnansi-lmss10 LMSans10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss10.pfb
+texnansi-lmss12 LMSans12-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss12.pfb
+texnansi-lmss8 LMSans8-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmss8.pfb
+texnansi-lmsso10 LMSans10-Oblique " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmsso10.pfb
+ts1-lmss10 LMSans10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss10.pfb
+ts1-lmss12 LMSans12-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss12.pfb
+ts1-lmss8 LMSans8-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmss8.pfb
+ts1-lmsso10 LMSans10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmsso10.pfb

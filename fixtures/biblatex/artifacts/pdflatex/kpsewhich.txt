@@ -1,0 +1,8 @@
+TEXMFROOT=/usr/local/texlive/2026
+TEXMFDIST=/usr/local/texlive/2026/texmf-dist
+TEXMFVAR=/tmp/home/.texlive2026/texmf-var
+TEXMFSYSVAR=/usr/local/texlive/2026/texmf-var
+TEXMFCONFIG=/tmp/home/.texlive2026/texmf-config
+TEXMFSYSCONFIG=/usr/local/texlive/2026/texmf-config
+TEXMFLOCAL=/usr/local/texlive/texmf-local
+TEXMFHOME=/tmp/home/texmf

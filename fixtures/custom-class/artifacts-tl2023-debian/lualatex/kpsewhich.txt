@@ -1,0 +1,8 @@
+TEXMFROOT=/usr/share/texlive
+TEXMFDIST=/usr/share/texlive/texmf-dist
+TEXMFVAR=/home/claude/.texlive2023/texmf-var
+TEXMFSYSVAR=/var/lib/texmf
+TEXMFCONFIG=/home/claude/.texlive2023/texmf-config
+TEXMFSYSCONFIG=/etc/texmf
+TEXMFLOCAL=/usr/local/share/texmf
+TEXMFHOME=/home/claude/texmf

@@ -1,0 +1,33 @@
+# The TeX image for `cargo test --features tex` and for regenerating fixture artifacts.
+#
+# scheme-small plus exactly what the fixtures need on top of it. The list was
+# computed from the fixtures' .fls files against a TeX Live 2026 tlpdb (closure over
+# `depend`, minus scheme-small's own closure) — the same computation `prumo packages`
+# makes. Rebuild the list when a fixture changes: see docs/STATUS.md (M0).
+#
+#   docker build -t prumo-tex -f docker/Dockerfile.tex .
+#   docker run --rm -v "$PWD:/w" -w /w prumo-tex scripts/make_artifacts.sh
+# Pinned by digest so the checked-in artifacts (made with this exact TeX Live) and CI agree;
+# bump it with `docker pull texlive/texlive:latest-small`, regenerate the artifacts, commit both.
+FROM texlive/texlive:latest-small@sha256:450840e075c9b9475338c23ccfadc4fb1e020af22e8ae06e64ef31e1ea101cee AS clean
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends poppler-utils python3 \
+ && rm -rf /var/lib/apt/lists/*
+
+# cm-super: T1-encoded CM outlines, so the basic fixture gets Type 1 instead of Type 3.
+# courier/fontname: the loaded-but-never-embedded font in the basic fixture.
+# siunitx/translations: the custom-class fixture.
+# csquotes: the biblatex fixture (beamer, biblatex, biber, fontspec, metalogo, lm are in scheme-small).
+RUN tlmgr install cm-super courier fontname siunitx translations csquotes \
+ && tlmgr path add
+
+# Fixture builds run as the invoking user with HOME under /tmp; keep tlmgr quiet about it.
+ENV HOME=/tmp/home
+
+# A second target without cm-super: T1-encoded CM text falls back to bitmap (.pk) fonts and
+# the PDF gets Type 3 fonts. `docker build --target nocmsuper -t prumo-tex-nocmsuper ...`
+# gives the TeX job the Type 3 case; build with `--target clean` for the clean case (Docker
+# builds the last stage by default, which is this one).
+FROM clean AS nocmsuper
+RUN tlmgr remove --force cm-super && mktexlsr && updmap-sys --quiet >/dev/null 2>&1 || true

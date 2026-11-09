@@ -1,0 +1,216 @@
+start 2483 0 pdftex 2026-11-01
+file+ 2483 0 notes.tex
+cls+ 2513 1 article
+file+ 2533 1 article.cls
+file+ 2564 2 size10.clo
+file- 2589 2 size10.clo
+file- 2643 1 article.cls
+cls- 2656 1 article
+pkg+ 2683 1 tikz
+opts 2683 1 
+file+ 2701 1 tikz.sty
+pkg+ 2728 2 pgf
+opts 2728 2 
+file+ 2746 2 pgf.sty
+pkg+ 2774 3 pgfrcs
+opts 2775 3 
+file+ 2794 3 pgfrcs.sty
+file+ 2814 4 pgfutil-common.tex
+file- 2843 4 pgfutil-common.tex
+file+ 2862 4 pgfutil-latex.def
+file- 2884 4 pgfutil-latex.def
+file+ 2903 4 pgfrcs.code.tex
+file+ 2929 5 pgf.revision.tex
+file- 2939 5 pgf.revision.tex
+file- 2949 4 pgfrcs.code.tex
+file- 2955 3 pgfrcs.sty
+pkg- 2967 3 pgfrcs
+pkg+ 2999 3 pgfcore
+opts 3000 3 
+file+ 3019 3 pgfcore.sty
+pkg+ 3049 4 graphicx
+opts 3049 4 
+file+ 3070 4 graphicx.sty
+pkg+ 3101 5 keyval
+opts 3101 5 
+file+ 3120 5 keyval.sty
+file- 3133 5 keyval.sty
+pkg- 3145 5 keyval
+pkg+ 3175 5 graphics
+opts 3175 5 
+file+ 3196 5 graphics.sty
+pkg+ 3224 6 trig
+opts 3225 6 
+file+ 3243 6 trig.sty
+file- 3254 6 trig.sty
+pkg- 3266 6 trig
+file+ 3292 6 graphics.cfg
+file- 3302 6 graphics.cfg
+file+ 3328 6 pdftex.def
+file- 3366 6 pdftex.def
+file- 3383 5 graphics.sty
+pkg- 3401 5 graphics
+file- 3417 4 graphicx.sty
+pkg- 3429 4 graphicx
+pkg+ 3458 4 pgfsys
+opts 3459 4 
+file+ 3478 4 pgfsys.sty
+file+ 3509 5 pgfsys.code.tex
+file+ 3531 6 pgfkeys.code.tex
+file+ 3635 7 pgfkeyslibraryfiltered.code.tex
+file- 3694 7 pgfkeyslibraryfiltered.code.tex
+file- 3701 6 pgfkeys.code.tex
+file+ 3751 6 pgf.cfg
+file- 3760 6 pgf.cfg
+file+ 3781 6 pgfsys-pdftex.def
+file+ 3804 7 pgfsys-common-pdf.def
+file- 3817 7 pgfsys-common-pdf.def
+file- 3832 6 pgfsys-pdftex.def
+file- 3843 5 pgfsys.code.tex
+file+ 3865 5 pgfsyssoftpath.code.tex
+file- 3882 5 pgfsyssoftpath.code.tex
+file+ 3903 5 pgfsysprotocol.code.tex
+file- 3914 5 pgfsysprotocol.code.tex
+file- 3920 4 pgfsys.sty
+pkg- 3932 4 pgfsys
+pkg+ 3971 4 xcolor
+opts 3971 4 
+file+ 3991 4 xcolor.sty
+file+ 4362 5 color.cfg
+file- 4374 5 color.cfg
+file+ 4445 5 mathcolor.ltx
+file- 4468 5 mathcolor.ltx
+file- 4542 4 xcolor.sty
+pkg- 4554 4 xcolor
+file+ 4576 4 pgfcore.code.tex
+file+ 4600 5 pgfmath.code.tex
+file+ 4623 6 pgfmathutil.code.tex
+file- 4642 6 pgfmathutil.code.tex
+file+ 4664 6 pgfmathparser.code.tex
+file- 4707 6 pgfmathparser.code.tex
+file+ 4730 6 pgfmathfunctions.code.tex
+file- 4761 6 pgfmathfunctions.code.tex
+file+ 4786 6 pgfmathfunctions.basic.code.tex
+file- 4832 6 pgfmathfunctions.basic.code.tex
+file+ 4859 6 pgfmathfunctions.trigonometric.code.tex
+file- 4984 6 pgfmathfunctions.trigonometric.code.tex
+file+ 5011 6 pgfmathfunctions.random.code.tex
+file- 5029 6 pgfmathfunctions.random.code.tex
+file+ 5054 6 pgfmathfunctions.comparison.code.tex
+file- 5085 6 pgfmathfunctions.comparison.code.tex
+file+ 5109 6 pgfmathfunctions.base.code.tex
+file- 5130 6 pgfmathfunctions.base.code.tex
+file+ 5154 6 pgfmathfunctions.round.code.tex
+file- 5170 6 pgfmathfunctions.round.code.tex
+file+ 5193 6 pgfmathfunctions.misc.code.tex
+file- 5222 6 pgfmathfunctions.misc.code.tex
+file+ 5250 6 pgfmathfunctions.integerarithmetics.code.tex
+file- 5267 6 pgfmathfunctions.integerarithmetics.code.tex
+file+ 5287 6 pgfmathcalc.code.tex
+file- 5305 6 pgfmathcalc.code.tex
+file+ 5325 6 pgfmathfloat.code.tex
+file- 5499 6 pgfmathfloat.code.tex
+file- 5506 5 pgfmath.code.tex
+file+ 5526 5 pgfint.code.tex
+file- 5538 5 pgfint.code.tex
+file+ 5559 5 pgfcorepoints.code.tex
+file- 5614 5 pgfcorepoints.code.tex
+file+ 5638 5 pgfcorepathconstruct.code.tex
+file- 5677 5 pgfcorepathconstruct.code.tex
+file+ 5699 5 pgfcorepathusage.code.tex
+file- 5743 5 pgfcorepathusage.code.tex
+file+ 5764 5 pgfcorescopes.code.tex
+file- 5805 5 pgfcorescopes.code.tex
+file+ 5827 5 pgfcoregraphicstate.code.tex
+file- 5843 5 pgfcoregraphicstate.code.tex
+file+ 5866 5 pgfcoretransformations.code.tex
+file- 5890 5 pgfcoretransformations.code.tex
+file+ 5912 5 pgfcorequick.code.tex
+file- 5924 5 pgfcorequick.code.tex
+file+ 5945 5 pgfcoreobjects.code.tex
+file- 5956 5 pgfcoreobjects.code.tex
+file+ 5978 5 pgfcorepathprocessing.code.tex
+file- 5998 5 pgfcorepathprocessing.code.tex
+file+ 6018 5 pgfcorearrows.code.tex
+file- 6193 5 pgfcorearrows.code.tex
+file+ 6216 5 pgfcoreshade.code.tex
+file- 6246 5 pgfcoreshade.code.tex
+file+ 6267 5 pgfcoreimage.code.tex
+file- 6297 5 pgfcoreimage.code.tex
+file+ 6319 5 pgfcoreexternal.code.tex
+file- 6365 5 pgfcoreexternal.code.tex
+file+ 6386 5 pgfcorelayers.code.tex
+file- 6400 5 pgfcorelayers.code.tex
+file+ 6424 5 pgfcoretransparency.code.tex
+file- 6451 5 pgfcoretransparency.code.tex
+file+ 6473 5 pgfcorepatterns.code.tex
+file- 6489 5 pgfcorepatterns.code.tex
+file+ 6510 5 pgfcorerdf.code.tex
+file- 6524 5 pgfcorerdf.code.tex
+file- 6533 4 pgfcore.code.tex
+file- 6538 3 pgfcore.sty
+pkg- 6552 3 pgfcore
+file+ 6576 3 pgfmoduleshapes.code.tex
+file- 6633 3 pgfmoduleshapes.code.tex
+file+ 6655 3 pgfmoduleplot.code.tex
+file- 6704 3 pgfmoduleplot.code.tex
+pkg+ 6742 3 pgfcomp-version-0-65
+opts 6742 3 
+file+ 6768 3 pgfcomp-version-0-65.sty
+file- 6856 3 pgfcomp-version-0-65.sty
+pkg- 6872 3 pgfcomp-version-0-65
+pkg+ 6908 3 pgfcomp-version-1-18
+opts 6909 3 
+file+ 6934 3 pgfcomp-version-1-18.sty
+file- 6954 3 pgfcomp-version-1-18.sty
+pkg- 6969 3 pgfcomp-version-1-18
+file- 6976 2 pgf.sty
+pkg- 6987 2 pgf
+pkg+ 7016 2 pgffor
+opts 7017 2 
+file+ 7036 2 pgffor.sty
+pkg+ 7075 3 pgfkeys
+opts 7076 3 
+file+ 7097 3 pgfkeys.sty
+file+ 7115 4 pgfkeys.code.tex
+file- 7125 4 pgfkeys.code.tex
+file- 7130 3 pgfkeys.sty
+pkg- 7143 3 pgfkeys
+pkg+ 7171 3 pgfmath
+opts 7172 3 
+file+ 7192 3 pgfmath.sty
+file+ 7227 4 pgfmath.code.tex
+file- 7238 4 pgfmath.code.tex
+file- 7243 3 pgfmath.sty
+pkg- 7256 3 pgfmath
+file+ 7276 3 pgffor.code.tex
+file- 7319 3 pgffor.code.tex
+file- 7325 2 pgffor.sty
+pkg- 7338 2 pgffor
+file+ 7358 2 tikz.code.tex
+file+ 7387 3 pgflibraryplothandlers.code.tex
+file- 7428 3 pgflibraryplothandlers.code.tex
+file+ 7693 3 pgfmodulematrix.code.tex
+file- 7717 3 pgfmodulematrix.code.tex
+file+ 7959 3 tikzlibrarytopaths.code.tex
+file- 8000 3 tikzlibrarytopaths.code.tex
+file- 8007 2 tikz.code.tex
+file- 8013 1 tikz.sty
+pkg- 8025 1 tikz
+predoc 8328 1 
+file+ 8377 1 l3backend-pdftex.def
+file- 8412 1 l3backend-pdftex.def
+begindoc 8433 1 
+file+ 8459 1 supp-pdf.mkii
+file- 8517 1 supp-pdf.mkii
+pkg+ 8546 1 epstopdf-base
+opts 8546 1 
+file+ 8564 1 epstopdf-base.sty
+file+ 8593 2 epstopdf-sys.cfg
+file- 8599 2 epstopdf-sys.cfg
+file- 8608 1 epstopdf-base.sty
+pkg- 8616 1 epstopdf-base
+enddoc 8712 1 
+ship 8727 1 1
+page 9007 1 1
+end 9028 1 

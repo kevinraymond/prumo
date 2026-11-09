@@ -1,0 +1,192 @@
+start 14562 0 luatex 2026-11-01
+file+ 14563 0 main.tex
+cls+ 14598 1 article
+file+ 14619 1 article.cls
+file+ 14656 2 size10.clo
+file- 14954 2 size10.clo
+file- 15018 1 article.cls
+cls- 15031 1 article
+pkg+ 15067 1 fontenc
+opts 15068 1 T1
+file+ 15088 1 fontenc.sty
+file+ 15119 2 t1lmr.fd
+file- 15134 2 t1lmr.fd
+file- 15199 1 fontenc.sty
+pkg- 15214 1 fontenc
+pkg+ 15247 1 amsmath
+opts 15248 1 
+file+ 15268 1 amsmath.sty
+pkg+ 15325 2 amstext
+opts 15325 2 
+file+ 15346 2 amstext.sty
+pkg+ 15380 3 amsgen
+opts 15380 3 
+file+ 15400 3 amsgen.sty
+file- 15416 3 amsgen.sty
+pkg- 15429 3 amsgen
+file- 15439 2 amstext.sty
+pkg- 15452 2 amstext
+pkg+ 15483 2 amsbsy
+opts 15483 2 
+file+ 15507 2 amsbsy.sty
+file- 15533 2 amsbsy.sty
+pkg- 15549 2 amsbsy
+pkg+ 15578 2 amsopn
+opts 15579 2 namelimits,
+file+ 15600 2 amsopn.sty
+file- 15630 2 amsopn.sty
+pkg- 15645 2 amsopn
+file- 15819 1 amsmath.sty
+pkg- 15834 1 amsmath
+pkg+ 15865 1 xcolor
+opts 15865 1 
+file+ 15886 1 xcolor.sty
+file+ 16293 2 color.cfg
+file- 16309 2 color.cfg
+file+ 16371 2 luatex.def
+file- 16419 2 luatex.def
+file+ 16462 2 mathcolor.ltx
+file- 16490 2 mathcolor.ltx
+file- 16578 1 xcolor.sty
+pkg- 16597 1 xcolor
+pkg+ 16629 1 microtype
+opts 16630 1 
+file+ 16651 1 microtype.sty
+pkg+ 16699 2 keyval
+opts 16699 2 
+file+ 16718 2 keyval.sty
+file- 16733 2 keyval.sty
+pkg- 16745 2 keyval
+pkg+ 16776 2 etoolbox
+opts 16776 2 
+file+ 16797 2 etoolbox.sty
+file- 16891 2 etoolbox.sty
+pkg- 16904 2 etoolbox
+file+ 17056 2 microtype-luatex.def
+file- 17127 2 microtype-luatex.def
+file+ 17154 2 microtype.cfg
+file- 17574 2 microtype.cfg
+file- 17608 1 microtype.sty
+pkg- 17622 1 microtype
+pkg+ 17654 1 hyperref
+opts 17654 1 
+file+ 17674 1 hyperref.sty
+pkg+ 17710 2 iftex
+opts 17711 2 
+file+ 17731 2 iftex.sty
+file- 17751 2 iftex.sty
+pkg- 17763 2 iftex
+pkg+ 17804 2 kvsetkeys
+opts 17805 2 
+file+ 17826 2 kvsetkeys.sty
+file- 17847 2 kvsetkeys.sty
+pkg- 17861 2 kvsetkeys
+pkg+ 17895 2 kvdefinekeys
+opts 17895 2 
+file+ 17918 2 kvdefinekeys.sty
+file- 17932 2 kvdefinekeys.sty
+pkg- 17946 2 kvdefinekeys
+pkg+ 17979 2 pdfescape
+opts 17979 2 
+file+ 18000 2 pdfescape.sty
+pkg+ 18037 3 ltxcmds
+opts 18038 3 
+file+ 18057 3 ltxcmds.sty
+file- 18081 3 ltxcmds.sty
+pkg- 18094 3 ltxcmds
+pkg+ 18132 3 pdftexcmds
+opts 18133 3 
+file+ 18153 3 pdftexcmds.sty
+pkg+ 18194 4 infwarerr
+opts 18194 4 
+file+ 18215 4 infwarerr.sty
+file- 18231 4 infwarerr.sty
+pkg- 18244 4 infwarerr
+file- 18305 3 pdftexcmds.sty
+pkg- 18319 3 pdftexcmds
+file- 18327 2 pdfescape.sty
+pkg- 18342 2 pdfescape
+pkg+ 18374 2 hycolor
+opts 18375 2 
+file+ 18394 2 hycolor.sty
+file- 18504 2 hycolor.sty
+pkg- 18518 2 hycolor
+pkg+ 18548 2 nameref
+opts 18549 2 
+file+ 18569 2 nameref.sty
+pkg+ 18603 3 refcount
+opts 18604 3 
+file+ 18624 3 refcount.sty
+file- 18665 3 refcount.sty
+pkg- 18678 3 refcount
+pkg+ 18715 3 gettitlestring
+opts 18716 3 
+file+ 18739 3 gettitlestring.sty
+pkg+ 18777 4 kvoptions
+opts 18777 4 
+file+ 18799 4 kvoptions.sty
+file- 18861 4 kvoptions.sty
+pkg- 18874 4 kvoptions
+file- 18906 3 gettitlestring.sty
+pkg- 18920 3 gettitlestring
+file- 19099 2 nameref.sty
+pkg- 19111 2 nameref
+pkg+ 19154 2 stringenc
+opts 19154 2 
+file+ 19176 2 stringenc.sty
+file- 19235 2 stringenc.sty
+pkg- 19248 2 stringenc
+file+ 19302 2 pd1enc.def
+file- 19369 2 pd1enc.def
+pkg+ 19403 2 intcalc
+opts 19404 2 
+file+ 19424 2 intcalc.sty
+file- 19444 2 intcalc.sty
+pkg- 19457 2 intcalc
+file+ 19564 2 puenc.def
+file- 20006 2 puenc.def
+pkg+ 20152 2 url
+opts 20152 2 
+file+ 20173 2 url.sty
+file- 20196 2 url.sty
+pkg- 20209 2 url
+pkg+ 20274 2 bitset
+opts 20275 2 
+file+ 20294 2 bitset.sty
+pkg+ 20356 3 bigintcalc
+opts 20356 3 
+file+ 20378 3 bigintcalc.sty
+file- 20425 3 bigintcalc.sty
+pkg- 20441 3 bigintcalc
+file- 20471 2 bitset.sty
+pkg- 20484 2 bitset
+file- 20836 1 hyperref.sty
+file+ 20857 1 hluatex.def
+pkg+ 20943 2 rerunfilecheck
+opts 20943 2 
+file+ 20967 2 rerunfilecheck.sty
+pkg+ 21084 3 uniquecounter
+opts 21085 3 
+file+ 21108 3 uniquecounter.sty
+file- 21152 3 uniquecounter.sty
+pkg- 21167 3 uniquecounter
+file- 21177 2 rerunfilecheck.sty
+pkg- 21190 2 rerunfilecheck
+file- 21204 1 hluatex.def
+pkg- 21229 1 hyperref
+file+ 21250 1 t1pcr.fd
+file- 21265 1 t1pcr.fd
+predoc 21717 1 
+file+ 21763 1 l3backend-luatex.def
+file- 21819 1 l3backend-luatex.def
+begindoc 21844 1 
+file+ 21865 1 supp-pdf.mkii
+file- 21914 1 supp-pdf.mkii
+file+ 22022 1 mt-cmr.cfg
+file- 22136 1 mt-cmr.cfg
+ship 23126 1 1
+page 23343 1 1
+enddoc 23472 1 
+ship 23492 1 2
+page 23508 1 2
+end 23540 1 

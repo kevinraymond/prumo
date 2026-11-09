@@ -1,0 +1,7 @@
+# The user image compiles prumo in a builder stage from Cargo.*, src/ and tex/; the TeX
+# test image (docker/Dockerfile.tex) is built from its own COPY list. Nothing else is needed.
+target/
+.git/
+.prumo/
+fixtures/*/artifacts*/
+docs/img/

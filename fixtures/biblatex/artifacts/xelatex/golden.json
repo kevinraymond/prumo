@@ -1,0 +1,223 @@
+{
+  "total_s": 0.334930419921875,
+  "preamble_s": 0.3069305419921875,
+  "units": [
+    {
+      "kind": "pkg",
+      "name": "biblatex",
+      "inclusive": 0.2819366455078125,
+      "exclusive": 0.2635650634765625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "paper.tex",
+      "inclusive": 0.3349151611328125,
+      "exclusive": 0.0367431640625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "size10.clo",
+      "inclusive": 0.006866455078125,
+      "exclusive": 0.006866455078125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "csquotes",
+      "inclusive": 0.0070648193359375,
+      "exclusive": 0.0057220458984375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "blx-case-expl3",
+      "inclusive": 0.003387451171875,
+      "exclusive": 0.0023651123046875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdftexcmds",
+      "inclusive": 0.004486083984375,
+      "exclusive": 0.0022125244140625,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.008819580078125,
+      "exclusive": 0.001953125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "expl3",
+      "inclusive": 0.0025177001953125,
+      "exclusive": 0.001800537109375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "etoolbox",
+      "inclusive": 0.0017852783203125,
+      "exclusive": 0.0017852783203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvoptions",
+      "inclusive": 0.0023956298828125,
+      "exclusive": 0.0016326904296875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "logreq",
+      "inclusive": 0.001678466796875,
+      "exclusive": 0.0013427734375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "csquotes.def",
+      "inclusive": 0.0011749267578125,
+      "exclusive": 0.0011749267578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "xparse",
+      "inclusive": 0.0010223388671875,
+      "exclusive": 0.0010223388671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ltxcmds",
+      "inclusive": 0.000823974609375,
+      "exclusive": 0.000823974609375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvsetkeys",
+      "inclusive": 0.000762939453125,
+      "exclusive": 0.000762939453125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "url",
+      "inclusive": 0.0007476806640625,
+      "exclusive": 0.0007476806640625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "infwarerr",
+      "inclusive": 0.000732421875,
+      "exclusive": 0.000732421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.0007171630859375,
+      "exclusive": 0.0007171630859375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-xetex.def",
+      "inclusive": 0.0007171630859375,
+      "exclusive": 0.0007171630859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.0006866455078125,
+      "exclusive": 0.0006866455078125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ifthen",
+      "inclusive": 0.0006866455078125,
+      "exclusive": 0.0006866455078125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "paper.bbl",
+      "inclusive": 0.0003509521484375,
+      "exclusive": 0.0003509521484375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "logreq.def",
+      "inclusive": 0.000335693359375,
+      "exclusive": 0.000335693359375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "csquotes.cfg",
+      "inclusive": 0.0001678466796875,
+      "exclusive": 0.0001678466796875,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.027618408203125
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [],
+    "embedded": [
+      [
+        "LMRoman10-Regular-Identity-H",
+        "CID Type"
+      ],
+      [
+        "LMRoman12-Bold-Identity-H",
+        "CID Type"
+      ],
+      [
+        "LMRoman10-Italic-Identity-H",
+        "CID Type"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [],
+    "ps_names": {},
+    "virtual": [],
+    "embedded_resolved": [],
+    "loaded_not_embedded_resolved": [],
+    "no_map_entry": [],
+    "preloaded": [],
+    "opentype": [
+      {
+        "name": "LMRoman10-Italic",
+        "file": null
+      },
+      {
+        "name": "LMRoman10-Regular",
+        "file": null
+      },
+      {
+        "name": "LMRoman12-Bold",
+        "file": null
+      }
+    ],
+    "unknown_embedded": [],
+    "partial": false,
+    "map_entries": 5091
+  }
+}

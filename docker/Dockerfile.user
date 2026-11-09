@@ -1,0 +1,81 @@
+# The image people run prumo from without installing anything:
+#
+#   docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/doc" ghcr.io/kevinraymond/prumo time main.tex
+#
+# time/graph/fonts/compare are about the document and work as on a native install. packages
+# gives the same package names as any TeX Live. prune's removal list describes *this* image,
+# not your machine, so --apply is pointless here; its keep.txt and install-tl profile are the
+# portable result ("the minimal TeX Live these documents need").
+#
+# docker/prumo is the same as a command: it mounts the current directory and the user's
+# cache directory at their own paths, runs as the user, and passes -t only at a terminal.
+#
+# PRUMO_CACHE=/doc/.prumo: the container's own cache directory vanishes with it, so with
+# the bare docker run above the artifacts go into the mapped directory, owned by you (on a
+# native install they go to the user's cache directory; `prumo where`; docker/prumo
+# overrides this with the user's). PRUMO_IMAGE makes doctor and every build say they run
+# in the image, since a wrapper hides that; PRUMO_PATH_MAP ("<inside>=<host>;..." pairs,
+# set by docker/prumo) makes printed paths the user's own.
+#
+# Build: docker build -t prumo -f docker/Dockerfile.user .   (prumo is compiled inside, in
+# a builder stage that runs on the building machine and cross-compiles for the target, so
+# `--platform linux/amd64,linux/arm64` does not emulate a Rust build.)
+# BASE=texlive/texlive:latest-small for a 0.6 GB variant that compiles fewer documents.
+# IMAGE_NAME is what doctor and the build line call the image (the published tag).
+# .github/workflows/release.yml builds and publishes both variants.
+ARG BASE=texlive/texlive:latest
+ARG IMAGE_NAME=ghcr.io/kevinraymond/prumo
+
+FROM --platform=$BUILDPLATFORM rust:1-bookworm AS build
+ARG TARGETARCH
+WORKDIR /src
+COPY Cargo.toml Cargo.lock ./
+COPY src ./src
+COPY tex ./tex
+# Native when the target is this machine's architecture; otherwise the GNU cross linker.
+# bookworm's glibc (2.36) is older than the TeX Live image's, so the binary runs there.
+RUN --mount=type=cache,target=/usr/local/cargo/registry \
+    --mount=type=cache,target=/src/target,sharing=locked \
+    set -eu; \
+    case "$TARGETARCH" in amd64) t=x86_64-unknown-linux-gnu ;; arm64) t=aarch64-unknown-linux-gnu ;; \
+      *) echo "no target for $TARGETARCH" >&2; exit 1 ;; esac; \
+    if [ "$(uname -m)" = "$(echo "$t" | cut -d- -f1)" ]; then \
+      cargo build --release --locked && cp target/release/prumo /prumo; \
+    else \
+      apt-get update && apt-get install -y --no-install-recommends gcc-aarch64-linux-gnu libc6-dev-arm64-cross gcc-x86-64-linux-gnu libc6-dev-amd64-cross \
+        && rm -rf /var/lib/apt/lists/*; \
+      rustup target add "$t"; \
+      CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
+      CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-linux-gnu-gcc \
+      cargo build --release --locked --target "$t" && cp "target/$t/release/prumo" /prumo; \
+    fi
+
+FROM ${BASE}
+ARG IMAGE_NAME
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends poppler-utils \
+ && rm -rf /var/lib/apt/lists/*
+
+# Font caches are per-HOME; the container runs as the invoking user with a throwaway HOME,
+# so warm them once here where every user can read them (findings 20 and 26: a cold
+# luaotfload cache scans every font, a cold fontconfig cache costs XeTeX ~750 ms).
+ENV HOME=/tmp/prumo-home TEXMFVAR=/opt/prumo/texmf-var TEXMFCONFIG=/opt/prumo/texmf-config \
+    XDG_CACHE_HOME=/opt/prumo/cache PRUMO_CACHE=/doc/.prumo \
+    PRUMO_IMAGE=${IMAGE_NAME}
+RUN mkdir -p /opt/prumo /tmp/prumo-home && cd /tmp \
+ && printf '\\documentclass{article}\\begin{document}x\\end{document}\n' > warm.tex \
+ && lualatex -interaction=batchmode warm.tex >/dev/null 2>&1 \
+ && xelatex -interaction=batchmode warm.tex >/dev/null 2>&1 \
+ && pdflatex -interaction=batchmode warm.tex >/dev/null 2>&1 \
+ && rm -f warm.* \
+ # root's run put the luaotfload database under TEXMFSYSVAR; copy it where a non-root
+ # user's TEXMFVAR points, or every container pays the ~4 s font scan again.
+ && mkdir -p /opt/prumo/texmf-var \
+ && cp -rn "$(kpsewhich -var-value TEXMFSYSVAR)/luatex-cache" /opt/prumo/texmf-var/ 2>/dev/null || true \
+ && chmod -R a+rwX /opt/prumo /tmp/prumo-home
+
+COPY --from=build /prumo /usr/local/bin/prumo
+WORKDIR /doc
+ENTRYPOINT ["prumo"]
+CMD ["--help"]

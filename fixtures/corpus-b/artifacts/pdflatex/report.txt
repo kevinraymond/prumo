@@ -1,0 +1,64 @@
+== prumo report: notes  (total 100 ms, preamble 91 ms, 1 pages, 228 files read)
+
+-- slowest units (exclusive) --
+     13.7 ms     99.9 ms incl  file notes.tex
+      8.4 ms      8.9 ms incl  pkg  xcolor
+      8.3 ms      9.9 ms incl  file tikz.code.tex
+      6.5 ms     29.9 ms incl  file pgfcore.code.tex
+      5.0 ms     14.0 ms incl  file pgfmath.code.tex
+      3.3 ms     65.0 ms incl  pkg  pgf
+      2.7 ms      2.7 ms incl  file pgfcorearrows.code.tex
+      2.7 ms      2.7 ms incl  file pgfmathfloat.code.tex
+      2.4 ms     54.2 ms incl  pkg  pgfcore
+      2.1 ms      3.4 ms incl  pkg  graphics
+      2.0 ms      2.0 ms incl  pkg  pgfcomp-version-0-65
+      1.9 ms      4.9 ms incl  pkg  pgffor
+
+-- pages --
+  page 1: 8.8 ms
+
+-- load tree --
+  notes.tex  (99.9 ms incl, 13.7 ms excl)
+    article  (2.2 ms incl, 1.8 ms excl)
+      size10.clo  (0.4 ms incl, 0.4 ms excl)
+    tikz  (81.5 ms incl, 1.7 ms excl)
+      pgf  (65.0 ms incl, 3.3 ms excl)
+        pgfrcs  (2.9 ms incl, 1.5 ms excl)
+          pgfutil-common.tex  (0.4 ms incl, 0.4 ms excl)
+          pgfutil-latex.def  (0.3 ms incl, 0.3 ms excl)
+          pgfrcs.code.tex  (0.7 ms incl, 0.5 ms excl)
+            pgf.revision.tex  (0.2 ms incl, 0.2 ms excl)
+        pgfcore  (54.2 ms incl, 2.4 ms excl)
+          graphicx  (5.8 ms incl, 1.7 ms excl)
+            keyval  (0.7 ms incl, 0.7 ms excl)
+            graphics  (3.4 ms incl, 2.1 ms excl)
+              trig  (0.6 ms incl, 0.6 ms excl)
+              graphics.cfg  (0.2 ms incl, 0.2 ms excl)
+              pdftex.def  (0.6 ms incl, 0.6 ms excl)
+          pgfsys  (7.2 ms incl, 1.7 ms excl)
+            pgfsys.code.tex  (5.1 ms incl, 1.6 ms excl)
+              pgfkeys.code.tex  (2.6 ms incl, 1.7 ms excl)
+                pgfkeyslibraryfiltered.code.tex  (0.9 ms incl, 0.9 ms excl)
+              pgf.cfg  (0.1 ms incl, 0.1 ms excl)
+              pgfsys-pdftex.def  (0.8 ms incl, 0.6 ms excl)
+                pgfsys-common-pdf.def  (0.2 ms incl, 0.2 ms excl)
+            pgfsyssoftpath.code.tex  (0.3 ms incl, 0.3 ms excl)
+            pgfsysprotocol.code.tex  (0.2 ms incl, 0.2 ms excl)
+          xcolor  (8.9 ms incl, 8.4 ms excl)
+            color.cfg  (0.2 ms incl, 0.2 ms excl)
+            mathcolor.ltx  (0.4 ms incl, 0.4 ms excl)
+          pgfcore.code.tex  (29.9 ms incl, 6.5 ms excl)
+            pgfmath.code.tex  (13.8 ms incl, 4.9 ms excl)
+              pgfmathutil.code.tex  (0.3 ms incl, 0.3 ms excl)
+              pgfmathparser.code.tex  (0.7 ms incl, 0.7 ms excl)
+              pgfmathfunctions.code.tex  (0.5 ms incl, 0.5 ms excl)
+              pgfmathfunctions.basic.code.tex  (0.7 ms incl, 0.7 ms excl)
+              pgfmathfunctions.trigonometric.code.tex  (1.9 ms incl, 1.9 ms excl)
+              pgfmathfunctions.random.code.tex  (0.3 ms incl, 0.3 ms excl)
+              pgfmathfunctions.comparison.code.tex  (0.5 ms incl, 0.5 ms excl)
+              pgfmathfunctions.base.code.tex  (0.3 ms incl, 0.3 ms excl)
+              pgfmathfunctions.round.code.tex  (0.2 ms incl, 0.2 ms excl)
+
+-- fonts --
+  TFMs loaded: 0, embedded in PDF: 1, Type 3: 0, bitmap .pk read: 0
+  preloaded by the format, embedded: cmr10

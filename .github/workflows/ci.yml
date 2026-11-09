@@ -1,0 +1,86 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
+
+jobs:
+  check:
+    name: fmt, clippy, test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test
+
+  package:
+    name: the crate packages (crates.io dry run)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo package --locked
+      - name: Size (crates.io allows 10 MB)
+        run: ls -l target/package/*.crate && test "$(stat -c %s target/package/*.crate)" -lt 5000000
+
+  tex:
+    name: fixtures through a real engine
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the TeX image (scheme-small + fixture packages)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile.tex
+          target: clean
+          tags: prumo-tex:ci
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Regenerate artifacts and compare with the checked-in ones
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/w" -w /w prumo-tex:ci \
+            bash scripts/make_artifacts.sh
+          # Timings differ run to run; the record *shape* must not: every removed line must
+          # have an added line with the same kind and the same last field (the unit, or
+          # the path for .fls), so the pairs cancel and anything left is a real change.
+          git diff --stat -- fixtures
+          status=0
+          for f in $(git diff --name-only -- fixtures | grep -E '\.(prumo|fls)$'); do
+            if git diff --unified=0 "$f" | grep -E '^[-+][^-+]' | awk '{print substr($1, 2), $NF}' | sort | uniq -u | grep .; then
+              echo "record shape changed: $f"; status=1
+            fi
+          done
+          exit $status
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Rust tests that need TeX, plus the demos (cm-super present)
+        run: scripts/tex_tests.sh prumo-tex:ci
+      - name: Build the same image without cm-super (the Type 3 case)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile.tex
+          target: nocmsuper
+          tags: prumo-tex:nocmsuper
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Font tests with Type 3 output
+        run: scripts/tex_tests.sh prumo-tex:nocmsuper fonts_report_courier_and_type3

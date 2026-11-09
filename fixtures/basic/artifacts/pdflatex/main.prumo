@@ -1,0 +1,190 @@
+start 2308 0 pdftex 2026-11-01
+file+ 2308 0 main.tex
+cls+ 2341 1 article
+file+ 2364 1 article.cls
+file+ 2400 2 size10.clo
+file- 2428 2 size10.clo
+file- 2485 1 article.cls
+cls- 2499 1 article
+pkg+ 2530 1 fontenc
+opts 2530 1 T1
+file+ 2550 1 fontenc.sty
+file- 2582 1 fontenc.sty
+pkg- 2595 1 fontenc
+pkg+ 2625 1 amsmath
+opts 2625 1 
+file+ 2644 1 amsmath.sty
+pkg+ 2696 2 amstext
+opts 2696 2 
+file+ 2717 2 amstext.sty
+pkg+ 2748 3 amsgen
+opts 2748 3 
+file+ 2767 3 amsgen.sty
+file- 2780 3 amsgen.sty
+pkg- 2793 3 amsgen
+file- 2804 2 amstext.sty
+pkg- 2816 2 amstext
+pkg+ 2845 2 amsbsy
+opts 2845 2 
+file+ 2865 2 amsbsy.sty
+file- 2886 2 amsbsy.sty
+pkg- 2898 2 amsbsy
+pkg+ 2925 2 amsopn
+opts 2925 2 namelimits,
+file+ 2945 2 amsopn.sty
+file- 2972 2 amsopn.sty
+pkg- 2984 2 amsopn
+file- 3141 1 amsmath.sty
+pkg- 3153 1 amsmath
+pkg+ 3185 1 xcolor
+opts 3185 1 
+file+ 3205 1 xcolor.sty
+file+ 3584 2 color.cfg
+file- 3598 2 color.cfg
+file+ 3651 2 pdftex.def
+file- 3691 2 pdftex.def
+file+ 3728 2 mathcolor.ltx
+file- 3752 2 mathcolor.ltx
+file- 3830 1 xcolor.sty
+pkg- 3848 1 xcolor
+pkg+ 3881 1 microtype
+opts 3882 1 
+file+ 3903 1 microtype.sty
+pkg+ 3948 2 keyval
+opts 3949 2 
+file+ 3968 2 keyval.sty
+file- 3980 2 keyval.sty
+pkg- 3993 2 keyval
+pkg+ 4023 2 etoolbox
+opts 4023 2 
+file+ 4043 2 etoolbox.sty
+file- 4132 2 etoolbox.sty
+pkg- 4147 2 etoolbox
+file+ 4284 2 microtype-pdftex.def
+file- 4341 2 microtype-pdftex.def
+file+ 4366 2 microtype.cfg
+file- 4850 2 microtype.cfg
+file- 4888 1 microtype.sty
+pkg- 4901 1 microtype
+pkg+ 4934 1 hyperref
+opts 4934 1 
+file+ 4955 1 hyperref.sty
+pkg+ 4989 2 iftex
+opts 4989 2 
+file+ 5008 2 iftex.sty
+file- 5024 2 iftex.sty
+pkg- 5036 2 iftex
+pkg+ 5076 2 kvsetkeys
+opts 5076 2 
+file+ 5097 2 kvsetkeys.sty
+file- 5116 2 kvsetkeys.sty
+pkg- 5129 2 kvsetkeys
+pkg+ 5161 2 kvdefinekeys
+opts 5162 2 
+file+ 5185 2 kvdefinekeys.sty
+file- 5200 2 kvdefinekeys.sty
+pkg- 5214 2 kvdefinekeys
+pkg+ 5245 2 pdfescape
+opts 5245 2 
+file+ 5267 2 pdfescape.sty
+pkg+ 5305 3 ltxcmds
+opts 5305 3 
+file+ 5325 3 ltxcmds.sty
+file- 5346 3 ltxcmds.sty
+pkg- 5359 3 ltxcmds
+pkg+ 5395 3 pdftexcmds
+opts 5395 3 
+file+ 5417 3 pdftexcmds.sty
+pkg+ 5455 4 infwarerr
+opts 5456 4 
+file+ 5477 4 infwarerr.sty
+file- 5491 4 infwarerr.sty
+pkg- 5505 4 infwarerr
+file- 5539 3 pdftexcmds.sty
+pkg- 5552 3 pdftexcmds
+file- 5560 2 pdfescape.sty
+pkg- 5574 2 pdfescape
+pkg+ 5604 2 hycolor
+opts 5604 2 
+file+ 5624 2 hycolor.sty
+file- 5728 2 hycolor.sty
+pkg- 5742 2 hycolor
+pkg+ 5771 2 nameref
+opts 5772 2 
+file+ 5793 2 nameref.sty
+pkg+ 5825 3 refcount
+opts 5826 3 
+file+ 5846 3 refcount.sty
+file- 5887 3 refcount.sty
+pkg- 5899 3 refcount
+pkg+ 5934 3 gettitlestring
+opts 5934 3 
+file+ 5957 3 gettitlestring.sty
+pkg+ 5993 4 kvoptions
+opts 5994 4 
+file+ 6015 4 kvoptions.sty
+file- 6072 4 kvoptions.sty
+pkg- 6086 4 kvoptions
+file- 6116 3 gettitlestring.sty
+pkg- 6130 3 gettitlestring
+file- 6304 2 nameref.sty
+pkg- 6319 2 nameref
+pkg+ 6361 2 stringenc
+opts 6361 2 
+file+ 6384 2 stringenc.sty
+file- 6441 2 stringenc.sty
+pkg- 6454 2 stringenc
+file+ 6503 2 pd1enc.def
+file- 6573 2 pd1enc.def
+pkg+ 6606 2 intcalc
+opts 6606 2 
+file+ 6626 2 intcalc.sty
+file- 6643 2 intcalc.sty
+pkg- 6655 2 intcalc
+file+ 6726 2 puenc.def
+file- 7123 2 puenc.def
+pkg+ 7251 2 url
+opts 7251 2 
+file+ 7271 2 url.sty
+file- 7291 2 url.sty
+pkg- 7304 2 url
+pkg+ 7364 2 bitset
+opts 7365 2 
+file+ 7385 2 bitset.sty
+pkg+ 7443 3 bigintcalc
+opts 7443 3 
+file+ 7466 3 bigintcalc.sty
+file- 7508 3 bigintcalc.sty
+pkg- 7522 3 bigintcalc
+file- 7546 2 bitset.sty
+pkg- 7558 2 bitset
+file- 7890 1 hyperref.sty
+file+ 7910 1 hpdftex.def
+pkg+ 7986 2 rerunfilecheck
+opts 7986 2 
+file+ 8009 2 rerunfilecheck.sty
+pkg+ 8122 3 uniquecounter
+opts 8122 3 
+file+ 8145 3 uniquecounter.sty
+file- 8186 3 uniquecounter.sty
+pkg- 8200 3 uniquecounter
+file- 8210 2 rerunfilecheck.sty
+pkg- 8222 2 rerunfilecheck
+file- 8234 1 hpdftex.def
+pkg- 8259 1 hyperref
+file+ 8279 1 t1pcr.fd
+file- 8292 1 t1pcr.fd
+predoc 8692 1 
+file+ 8739 1 l3backend-pdftex.def
+file- 8776 1 l3backend-pdftex.def
+begindoc 8797 1 
+file+ 8817 1 supp-pdf.mkii
+file- 8860 1 supp-pdf.mkii
+file+ 8951 1 mt-cmr.cfg
+file- 9058 1 mt-cmr.cfg
+ship 9717 1 1
+page 10020 1 1
+enddoc 10091 1 
+ship 10107 1 2
+page 10121 1 2
+end 10143 1 

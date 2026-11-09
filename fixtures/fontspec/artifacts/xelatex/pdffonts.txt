@@ -1,0 +1,6 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+ZQAJKN+LMRoman10-Bold-Identity-H     CID Type 0C       Identity-H       yes yes yes      4  0
+WTNUSX+LMRoman10-Regular-Identity-H  CID Type 0C       Identity-H       yes yes yes      6  0
+GGAIIP+LMRoman10-Italic-Identity-H   CID Type 0C       Identity-H       yes yes yes      8  0
+OWEMWK+LMSans10-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     10  0

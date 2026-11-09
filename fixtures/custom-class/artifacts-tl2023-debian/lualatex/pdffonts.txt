@@ -1,0 +1,7 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+FOPIEO+LMRomanCaps10-Regular         Type 1            Custom           yes yes no       4  0
+AJMXES+LMRoman12-Bold                Type 1            Custom           yes yes no       5  0
+GGGVWQ+LMRoman10-Regular             Type 1            Custom           yes yes no       6  0
+QKJJIJ+CMR10                         Type 1            Builtin          yes yes no       7  0
+CUJHND+CMMI10                        Type 1            Builtin          yes yes no       8  0

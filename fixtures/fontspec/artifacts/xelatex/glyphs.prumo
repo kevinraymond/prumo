@@ -1,0 +1,77 @@
+start 4975 0 xetex 2026-11-01
+file+ 4975 0 glyphs.tex
+cls+ 5006 1 article
+file+ 5027 1 article.cls
+file+ 5060 2 size10.clo
+file- 5503 2 size10.clo
+file- 5561 1 article.cls
+cls- 5575 1 article
+pkg+ 5608 1 fontspec
+opts 5608 1 
+file+ 5628 1 fontspec.sty
+pkg+ 5714 2 fontspec-xetex
+opts 5715 2 
+file+ 5737 2 fontspec-xetex.sty
+pkg+ 5814 3 fontenc
+opts 5815 3 TU
+file+ 5834 3 fontenc.sty
+file- 5853 3 fontenc.sty
+pkg- 5865 3 fontenc
+file+ 9724 3 fontspec.cfg
+file- 9744 3 fontspec.cfg
+file- 9789 2 fontspec-xetex.sty
+pkg- 9804 2 fontspec-xetex
+file- 9812 1 fontspec.sty
+pkg- 9823 1 fontspec
+pkg+ 10396 1 metalogo
+opts 10397 1 
+file+ 10417 1 metalogo.sty
+pkg+ 10448 2 graphicx
+opts 10448 2 
+file+ 10467 2 graphicx.sty
+pkg+ 10499 3 keyval
+opts 10500 3 
+file+ 10518 3 keyval.sty
+file- 10532 3 keyval.sty
+pkg- 10544 3 keyval
+pkg+ 10572 3 graphics
+opts 10572 3 
+file+ 10591 3 graphics.sty
+pkg+ 10620 4 trig
+opts 10621 4 
+file+ 10637 4 trig.sty
+file- 10649 4 trig.sty
+pkg- 10661 4 trig
+file+ 10686 4 graphics.cfg
+file- 10699 4 graphics.cfg
+file+ 10724 4 xetex.def
+file- 10747 4 xetex.def
+file- 10763 3 graphics.sty
+pkg- 10776 3 graphics
+file- 10790 2 graphicx.sty
+pkg- 10802 2 graphicx
+pkg+ 10831 2 ifxetex
+opts 10831 2 
+file+ 10849 2 ifxetex.sty
+pkg+ 10877 3 iftex
+opts 10878 3 
+file+ 10896 3 iftex.sty
+file- 10911 3 iftex.sty
+pkg- 10923 3 iftex
+file- 10930 2 ifxetex.sty
+pkg- 10942 2 ifxetex
+file- 10977 1 metalogo.sty
+pkg- 10991 1 metalogo
+pkg+ 11015 1 url
+opts 11016 1 
+file+ 11032 1 url.sty
+file- 11052 1 url.sty
+pkg- 11064 1 url
+predoc 11351 1 
+file+ 11391 1 l3backend-xetex.def
+file- 11431 1 l3backend-xetex.def
+begindoc 11451 1 
+enddoc 11637 1 
+ship 11652 1 1
+page 11684 1 1
+end 11704 1 

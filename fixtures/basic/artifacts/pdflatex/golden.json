@@ -1,0 +1,407 @@
+{
+  "total_s": 0.1195526123046875,
+  "preamble_s": 0.0990142822265625,
+  "units": [
+    {
+      "kind": "file",
+      "name": "main.tex",
+      "inclusive": 0.1195526123046875,
+      "exclusive": 0.02862548828125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "hyperref",
+      "inclusive": 0.0507354736328125,
+      "exclusive": 0.0149078369140625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "xcolor",
+      "inclusive": 0.0101165771484375,
+      "exclusive": 0.0089263916015625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "microtype.cfg",
+      "inclusive": 0.00738525390625,
+      "exclusive": 0.00738525390625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "puenc.def",
+      "inclusive": 0.0060577392578125,
+      "exclusive": 0.0060577392578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "microtype",
+      "inclusive": 0.01556396484375,
+      "exclusive": 0.004730224609375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsmath",
+      "inclusive": 0.008056640625,
+      "exclusive": 0.0045166015625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "nameref",
+      "inclusive": 0.00836181640625,
+      "exclusive": 0.004241943359375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "rerunfilecheck",
+      "inclusive": 0.00360107421875,
+      "exclusive": 0.002410888671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "hycolor",
+      "inclusive": 0.002105712890625,
+      "exclusive": 0.002105712890625,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.002410888671875,
+      "exclusive": 0.001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "etoolbox",
+      "inclusive": 0.00189208984375,
+      "exclusive": 0.00189208984375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdfescape",
+      "inclusive": 0.0050201416015625,
+      "exclusive": 0.001800537109375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "bitset",
+      "inclusive": 0.002960205078125,
+      "exclusive": 0.0017547607421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdftexcmds",
+      "inclusive": 0.0023956298828125,
+      "exclusive": 0.0016326904296875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mt-cmr.cfg",
+      "inclusive": 0.0016326904296875,
+      "exclusive": 0.0016326904296875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "gettitlestring",
+      "inclusive": 0.00299072265625,
+      "exclusive": 0.0015716552734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvoptions",
+      "inclusive": 0.0014190673828125,
+      "exclusive": 0.0014190673828125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "stringenc",
+      "inclusive": 0.0014190673828125,
+      "exclusive": 0.0014190673828125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "hpdftex.def",
+      "inclusive": 0.00494384765625,
+      "exclusive": 0.0013427734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "bigintcalc",
+      "inclusive": 0.0012054443359375,
+      "exclusive": 0.0012054443359375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "uniquecounter",
+      "inclusive": 0.001190185546875,
+      "exclusive": 0.001190185546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amstext",
+      "inclusive": 0.0018310546875,
+      "exclusive": 0.0011444091796875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "refcount",
+      "inclusive": 0.001129150390625,
+      "exclusive": 0.001129150390625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pd1enc.def",
+      "inclusive": 0.001068115234375,
+      "exclusive": 0.001068115234375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fontenc",
+      "inclusive": 0.0009918212890625,
+      "exclusive": 0.0009918212890625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsopn",
+      "inclusive": 0.0009002685546875,
+      "exclusive": 0.0009002685546875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "microtype-pdftex.def",
+      "inclusive": 0.0008697509765625,
+      "exclusive": 0.0008697509765625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ltxcmds",
+      "inclusive": 0.000823974609375,
+      "exclusive": 0.000823974609375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsbsy",
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvsetkeys",
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvdefinekeys",
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "url",
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "infwarerr",
+      "inclusive": 0.000762939453125,
+      "exclusive": 0.000762939453125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "intcalc",
+      "inclusive": 0.0007476806640625,
+      "exclusive": 0.0007476806640625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.0007171630859375,
+      "exclusive": 0.0007171630859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsgen",
+      "inclusive": 0.0006866455078125,
+      "exclusive": 0.0006866455078125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.0006866455078125,
+      "exclusive": 0.0006866455078125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "supp-pdf.mkii",
+      "inclusive": 0.0006561279296875,
+      "exclusive": 0.0006561279296875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pdftex.def",
+      "inclusive": 0.0006103515625,
+      "exclusive": 0.0006103515625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-pdftex.def",
+      "inclusive": 0.0005645751953125,
+      "exclusive": 0.0005645751953125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "size10.clo",
+      "inclusive": 0.00042724609375,
+      "exclusive": 0.00042724609375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mathcolor.ltx",
+      "inclusive": 0.0003662109375,
+      "exclusive": 0.0003662109375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "color.cfg",
+      "inclusive": 0.000213623046875,
+      "exclusive": 0.000213623046875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "t1pcr.fd",
+      "inclusive": 0.0001983642578125,
+      "exclusive": 0.0001983642578125,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.0186614990234375
+    ],
+    [
+      2,
+      0.0015411376953125
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [
+      "cmex7",
+      "ecbx1440",
+      "ecrm1000",
+      "ecrm1440",
+      "ecti1000",
+      "pcrr8t"
+    ],
+    "embedded": [
+      [
+        "SFBX1440",
+        "Type 1"
+      ],
+      [
+        "SFRM1000",
+        "Type 1"
+      ],
+      [
+        "CMMI10",
+        "Type 1"
+      ],
+      [
+        "CMR7",
+        "Type 1"
+      ],
+      [
+        "CMR10",
+        "Type 1"
+      ],
+      [
+        "SFTI1000",
+        "Type 1"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [
+      "cmex7",
+      "ecbx1440",
+      "ecrm1000",
+      "ecrm1440",
+      "ecti1000",
+      "pcrr8t"
+    ],
+    "ps_names": {
+      "cmex7": "CMEX7",
+      "ecbx1440": "SFBX1440",
+      "ecrm1000": "SFRM1000",
+      "ecrm1440": "SFRM1440",
+      "ecti1000": "SFTI1000"
+    },
+    "virtual": [],
+    "embedded_resolved": [
+      "ecbx1440",
+      "ecrm1000",
+      "ecti1000"
+    ],
+    "loaded_not_embedded_resolved": [
+      "cmex7",
+      "ecrm1440",
+      "pcrr8t"
+    ],
+    "no_map_entry": [
+      "pcrr8t"
+    ],
+    "preloaded": [
+      "cmmi10",
+      "cmr10",
+      "cmr7"
+    ],
+    "opentype": [],
+    "unknown_embedded": [],
+    "partial": false,
+    "map_entries": 5091
+  }
+}

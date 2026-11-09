@@ -1,0 +1,27 @@
+% Fixture: beamer (a slide deck; the class does most of the loading)
+% - beamer loads amsmath, xcolor, hyperref, pgfcore itself  -> those frames sit under beamer.cls in the tree, not under deck.tex
+% - \usepackage{amsmath} after \documentclass{beamer}       -> redundant: unused says "already loaded by beamer" without a rebuild
+% - title frame + 3 frames, one of them with \pause         -> 5 shipouts; a frame is not a page
+% - booktabs is loaded and never used                       -> unused-package candidate (no observable effect)
+% - tikz is used in frame Two                               -> blocking it must fail the build
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tikz}
+\title{Fixture}
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+\begin{frame}{One}
+  First point. \pause Second point, with $a^2+b^2=c^2$.
+\end{frame}
+\begin{frame}{Two}
+  \begin{tikzpicture}
+    \draw (0,0) -- (1,1);
+  \end{tikzpicture}
+\end{frame}
+\begin{frame}{Three}
+  Done.
+\end{frame}
+\end{document}

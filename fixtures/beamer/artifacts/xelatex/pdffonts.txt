@@ -1,0 +1,7 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+XRZGLT+LMSans12-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     26  0
+BXIZUD+LMSans10-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     28  0
+PCAQJJ+LMSans10-Oblique-Identity-H   CID Type 0C       Identity-H       yes yes yes     53  0
+UOLAIY+LMSans8-Regular-Identity-H    CID Type 0C       Identity-H       yes yes yes     55  0
+CRIXDO+CMSS10                        Type 1C           Builtin          yes yes yes     57  0

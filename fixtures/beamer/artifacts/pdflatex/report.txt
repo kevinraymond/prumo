@@ -1,0 +1,68 @@
+== prumo report: deck  (total 324 ms, preamble 257 ms, 5 pages, 447 files read)
+
+-- slowest units (exclusive) --
+     74.1 ms    323.9 ms incl  file deck.tex
+     12.8 ms     73.0 ms incl  pkg  beamerbaserequires
+     11.9 ms     48.8 ms incl  pkg  hyperref
+      9.4 ms      9.9 ms incl  pkg  xcolor
+      8.8 ms     10.5 ms incl  file tikz.code.tex
+      7.9 ms    221.9 ms incl  cls  beamer
+      6.8 ms     16.9 ms incl  file pgfcore.code.tex
+      6.2 ms      6.2 ms incl  file puenc.def
+      5.9 ms      5.9 ms incl  pkg  beamerinnerthemedefault
+      5.8 ms      6.7 ms incl  pkg  beamerbaseauxtemplates
+      5.4 ms      9.1 ms incl  pkg  amsmath
+      5.3 ms     14.8 ms incl  file pgfmath.code.tex
+
+-- pages --
+  page 1: 27.2 ms
+  page 2: 11.1 ms
+  page 3: 8.6 ms
+  page 4: 9.8 ms
+  page 5: 9.4 ms
+
+-- load tree --
+  deck.tex  (323.9 ms incl, 74.1 ms excl)
+    beamer  (221.9 ms incl, 7.9 ms excl)
+      beamerbasemodes  (4.9 ms incl, 2.1 ms excl)
+        etoolbox  (1.9 ms incl, 1.9 ms excl)
+        beamerbasedecode  (0.9 ms incl, 0.9 ms excl)
+      iftex  (0.8 ms incl, 0.8 ms excl)
+      beamerbaseoptions  (2.1 ms incl, 1.4 ms excl)
+        keyval  (0.8 ms incl, 0.8 ms excl)
+      geometry  (3.5 ms incl, 2.7 ms excl)
+        ifvtex  (0.8 ms incl, 0.8 ms excl)
+      pgfmath  (23.9 ms incl, 2.0 ms excl)
+        pgfrcs  (3.3 ms incl, 1.6 ms excl)
+          pgfutil-common.tex  (0.5 ms incl, 0.5 ms excl)
+          pgfutil-latex.def  (0.4 ms incl, 0.4 ms excl)
+          pgfrcs.code.tex  (0.8 ms incl, 0.7 ms excl)
+            pgf.revision.tex  (0.2 ms incl, 0.2 ms excl)
+        pgfkeys  (3.7 ms incl, 0.9 ms excl)
+          pgfkeys.code.tex  (2.8 ms incl, 1.9 ms excl)
+            pgfkeyslibraryfiltered.code.tex  (0.9 ms incl, 0.9 ms excl)
+        pgfmath.code.tex  (14.8 ms incl, 5.3 ms excl)
+          pgfmathutil.code.tex  (0.3 ms incl, 0.3 ms excl)
+          pgfmathparser.code.tex  (0.7 ms incl, 0.7 ms excl)
+          pgfmathfunctions.code.tex  (0.5 ms incl, 0.5 ms excl)
+          pgfmathfunctions.basic.code.tex  (0.7 ms incl, 0.7 ms excl)
+          pgfmathfunctions.trigonometric.code.tex  (2.1 ms incl, 2.1 ms excl)
+          pgfmathfunctions.random.code.tex  (0.3 ms incl, 0.3 ms excl)
+          pgfmathfunctions.comparison.code.tex  (0.5 ms incl, 0.5 ms excl)
+          pgfmathfunctions.base.code.tex  (0.4 ms incl, 0.4 ms excl)
+          pgfmathfunctions.round.code.tex  (0.3 ms incl, 0.3 ms excl)
+          pgfmathfunctions.misc.code.tex  (0.5 ms incl, 0.5 ms excl)
+          pgfmathfunctions.integerarithmetics.code.tex  (0.3 ms incl, 0.3 ms excl)
+          pgfmathcalc.code.tex  (0.3 ms incl, 0.3 ms excl)
+          pgfmathfloat.code.tex  (2.9 ms incl, 2.9 ms excl)
+      size11.clo  (0.5 ms incl, 0.5 ms excl)
+      pgfcore  (39.6 ms incl, 2.6 ms excl)
+        graphicx  (5.3 ms incl, 1.5 ms excl)
+          graphics  (3.8 ms incl, 2.2 ms excl)
+            trig  (0.7 ms incl, 0.7 ms excl)
+            graphics.cfg  (0.2 ms incl, 0.2 ms excl)
+            pdftex.def  (0.7 ms incl, 0.7 ms excl)
+
+-- fonts --
+  TFMs loaded: 19, embedded in PDF: 4, Type 3: 0, bitmap .pk read: 0
+  loaded but not embedded: cmex10, cmex7, cmex8, cmmi10, cmmi6, cmmi8, cmr10, cmssi8, cmsy10, cmsy6, cmsy8, msam10, msam7, msbm10, msbm7

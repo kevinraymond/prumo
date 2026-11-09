@@ -1,0 +1,22 @@
+% Fixture: basic
+% - xcolor is loaded and never used        -> unused-package candidate
+% - amsmath IS used (align)                -> blocking it must fail the build
+% - microtype is loaded, no macro called   -> side-effect package (must NOT be reported as unused)
+% - \prumoUnusedFont loads a Courier TFM   -> font loaded but never embedded
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{hyperref}
+\DeclareFixedFont{\prumoUnusedFont}{T1}{pcr}{m}{n}{10}
+\begin{document}
+\section{Hello}
+Some text with
+\begin{align}
+  a^2+b^2 &= c^2
+\end{align}
+and a \href{https://example.org}{link}.
+\newpage
+Second page, \emph{emphasised}.
+\end{document}

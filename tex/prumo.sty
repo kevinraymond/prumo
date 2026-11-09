@@ -1,0 +1,141 @@
+%% prumo.sty — build probe for LaTeX documents
+%%
+%% Loaded *before* \documentclass by the prumo CLI:
+%%   pdflatex -recorder -jobname=main "\RequirePackage{prumo}\input{main}"
+%%
+%% It never changes typesetting. It only listens to the LaTeX hook
+%% management system and writes one event per line to \jobname.prumo:
+%%
+%%   <event> <timer> <depth> <name>
+%%
+%%   event : start | file+ | file- | pkg+ | pkg- | cls+ | cls- |
+%%           predoc | begindoc | ship | page | enddoc | end
+%%   timer : \sys_timer: value — scaled seconds (1/65536 s) since engine start
+%%   depth : current file nesting depth (0 = command line / main file)
+%%   name  : file name as read, \CurrentFileUsed (may contain spaces; always the last field)
+%%
+%% Requires LaTeX 2021-06-01 or later (hook system since 2020-10, raw package
+%% options since 2021-06; prumo supports no older kernel).
+%% Works on pdfTeX, XeTeX and LuaTeX. \sys_timer: resolves to
+%% \pdfelapsedtime, \elapsedtime or os.clock() respectively.
+%%
+\NeedsTeXFormat{LaTeX2e}[2021/06/01]
+\ProvidesPackage{prumo}[2026/11/06 v0.1 build probe: timing, load graph, font records]
+
+\ExplSyntaxOn
+
+\iow_new:N  \g__prumo_iow
+\int_new:N  \g__prumo_depth_int
+\int_new:N  \g__prumo_page_int
+\bool_new:N \g__prumo_open_bool
+
+% \__prumo_rec:nn {event} {name}
+\cs_new_protected:Npn \__prumo_rec:nn #1#2
+  {
+    \bool_if:NT \g__prumo_open_bool
+      {
+        \iow_now:Nx \g__prumo_iow
+          {
+            #1 \c_space_tl
+            \sys_timer: \c_space_tl
+            \int_use:N \g__prumo_depth_int \c_space_tl
+            #2
+          }
+      }
+  }
+
+% Open the record file lazily, on the first event, so that \jobname is
+% already fixed by the -jobname switch (or by the first \input).
+\cs_new_protected:Npn \__prumo_open:
+  {
+    \bool_if:NF \g__prumo_open_bool
+      {
+        \iow_open:Nn \g__prumo_iow { \c_sys_jobname_str .prumo }
+        \bool_gset_true:N \g__prumo_open_bool
+        \__prumo_rec:nn { start } { \c_sys_engine_str \c_space_tl \fmtversion }
+      }
+  }
+
+\sys_if_timer_exist:F
+  {
+    \msg_new:nnn { prumo } { no-timer }
+      { No~elapsed-time~primitive~in~this~engine;~timings~will~be~zero. }
+    \msg_warning:nn { prumo } { no-timer }
+  }
+
+% Loading a package before the main file is \input makes TeX fall back to
+% the job name "texput" unless -jobname is given. Verified on TeX Live 2023.
+\str_if_eq:eeT { \c_sys_jobname_str } { texput }
+  {
+    \msg_new:nnn { prumo } { texput }
+      { Job~name~is~"texput":~run~with~-jobname=<main>~so~outputs~are~named~correctly. }
+    \msg_warning:nn { prumo } { texput }
+  }
+
+% ---- file-level events (everything that goes through \input machinery:
+%      .sty .cls .fd .def .cfg .clo .tex \include ...) ----
+% The name is \CurrentFileUsed, the file actually read: when the kernel substitutes a
+% package (atbegshi.sty -> atbegshi-ltx.sty) \CurrentFile still says atbegshi.sty, while
+% \@currname, the log and the .fls all say atbegshi-ltx.
+\AddToHook { file/before }
+  {
+    \__prumo_open:
+    \__prumo_rec:nn { file+ } { \CurrentFileUsed }
+    \int_gincr:N \g__prumo_depth_int
+  }
+% prumo.sty's own file/after fires once the hooks exist, but its file/before
+% never did; skip it so depth stays balanced.
+\AddToHook { file/after }
+  {
+    \str_if_eq:eeF { \CurrentFileUsed } { prumo.sty }
+      {
+        \int_gdecr:N \g__prumo_depth_int
+        \__prumo_rec:nn { file- } { \CurrentFileUsed }
+      }
+  }
+
+% ---- package / class events (carry the LaTeX-level name and options) ----
+% pkg+ is followed by an "opts" event carrying the raw option list the
+% document asked for (kernel stores it in \@raw@opt@<name>.<ext>, 2021-06+).
+% The unused-package pass needs it to block a package without option clashes.
+\AddToHook { package/before }
+  {
+    \__prumo_rec:nn { pkg+ } { \@currname }
+    \cs_if_exist:cT { @raw@opt@ \@currname . \@currext }
+      { \__prumo_rec:nn { opts } { \use:c { @raw@opt@ \@currname . \@currext } } }
+  }
+\AddToHook { package/after }
+  { \__prumo_rec:nn { pkg- } { \@currname } }
+\AddToHook { class/before }
+  { \__prumo_rec:nn { cls+ } { \@currname } }
+\AddToHook { class/after }
+  { \__prumo_rec:nn { cls- } { \@currname } }
+
+% ---- document phases and pages ----
+% predoc fires at the start of \begin{document}, before other packages' begindocument/before
+% code runs (siunitx loads color there): it is the end of the preamble proper. begindoc is
+% the begindocument hook, after those loads.
+\AddToHook { begindocument/before }
+  { \__prumo_rec:nn { predoc } { } }
+\AddToHook { begindocument }
+  { \__prumo_rec:nn { begindoc } { } }
+% ship marks the start of the shipout (shipout/before); page its end. What runs in between
+% is the shipout hooks (eso-pic backgrounds, florilegium's margins, hyperref's links):
+% page time = typesetting (since the previous page) + shipout (ship..page).
+\AddToHook { shipout/before }
+  { \__prumo_rec:nn { ship } { \int_eval:n { \g__prumo_page_int + 1 } } }
+\AddToHook { shipout/after }
+  {
+    \int_gincr:N \g__prumo_page_int
+    \__prumo_rec:nn { page } { \int_use:N \g__prumo_page_int }
+  }
+\AddToHook { enddocument }
+  { \__prumo_rec:nn { enddoc } { } }
+\AddToHook { enddocument/end }
+  {
+    \__prumo_rec:nn { end } { }
+    \iow_close:N \g__prumo_iow
+  }
+
+\ExplSyntaxOff
+\endinput

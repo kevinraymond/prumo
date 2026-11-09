@@ -1,0 +1,454 @@
+{
+  "total_s": 0.17413330078125,
+  "preamble_s": 0.1457672119140625,
+  "units": [
+    {
+      "kind": "file",
+      "name": "main.tex",
+      "inclusive": 0.17413330078125,
+      "exclusive": 0.0372467041015625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "hyperref",
+      "inclusive": 0.0778656005859375,
+      "exclusive": 0.02215576171875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "xcolor",
+      "inclusive": 0.0160980224609375,
+      "exclusive": 0.012542724609375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "microtype.cfg",
+      "inclusive": 0.008636474609375,
+      "exclusive": 0.008636474609375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "puenc.def",
+      "inclusive": 0.00811767578125,
+      "exclusive": 0.00811767578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "microtype",
+      "inclusive": 0.0205078125,
+      "exclusive": 0.0067596435546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsmath",
+      "inclusive": 0.0109710693359375,
+      "exclusive": 0.0063323974609375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "nameref",
+      "inclusive": 0.0117034912109375,
+      "exclusive": 0.0059051513671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "rerunfilecheck",
+      "inclusive": 0.005218505859375,
+      "exclusive": 0.0036468505859375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "hluatex.def",
+      "inclusive": 0.0120086669921875,
+      "exclusive": 0.0036163330078125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "etoolbox",
+      "inclusive": 0.0028076171875,
+      "exclusive": 0.0028076171875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "luatex.def",
+      "inclusive": 0.002777099609375,
+      "exclusive": 0.002777099609375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "hycolor",
+      "inclusive": 0.0027618408203125,
+      "exclusive": 0.0027618408203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdftexcmds",
+      "inclusive": 0.003753662109375,
+      "exclusive": 0.00274658203125,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.004058837890625,
+      "exclusive": 0.0025787353515625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdfescape",
+      "inclusive": 0.0074462890625,
+      "exclusive": 0.0024871826171875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "bitset",
+      "inclusive": 0.0041351318359375,
+      "exclusive": 0.00244140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mt-cmr.cfg",
+      "inclusive": 0.0023956298828125,
+      "exclusive": 0.0023956298828125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "gettitlestring",
+      "inclusive": 0.004241943359375,
+      "exclusive": 0.002288818359375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "stringenc",
+      "inclusive": 0.0019989013671875,
+      "exclusive": 0.0019989013671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvoptions",
+      "inclusive": 0.001953125,
+      "exclusive": 0.001953125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "bigintcalc",
+      "inclusive": 0.0016937255859375,
+      "exclusive": 0.0016937255859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fontenc",
+      "inclusive": 0.0019073486328125,
+      "exclusive": 0.00164794921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-luatex.def",
+      "inclusive": 0.0016021728515625,
+      "exclusive": 0.0016021728515625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "uniquecounter",
+      "inclusive": 0.0015716552734375,
+      "exclusive": 0.0015716552734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "refcount",
+      "inclusive": 0.001556396484375,
+      "exclusive": 0.001556396484375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amstext",
+      "inclusive": 0.00238037109375,
+      "exclusive": 0.0014495849609375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "microtype-luatex.def",
+      "inclusive": 0.0013427734375,
+      "exclusive": 0.0013427734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvsetkeys",
+      "inclusive": 0.0013427734375,
+      "exclusive": 0.0013427734375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pd1enc.def",
+      "inclusive": 0.001312255859375,
+      "exclusive": 0.001312255859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "url",
+      "inclusive": 0.0012359619140625,
+      "exclusive": 0.0012359619140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "size10.clo",
+      "inclusive": 0.0014801025390625,
+      "exclusive": 0.001220703125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ltxcmds",
+      "inclusive": 0.0012054443359375,
+      "exclusive": 0.0012054443359375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvdefinekeys",
+      "inclusive": 0.001190185546875,
+      "exclusive": 0.001190185546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsopn",
+      "inclusive": 0.0011749267578125,
+      "exclusive": 0.0011749267578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "intcalc",
+      "inclusive": 0.00115966796875,
+      "exclusive": 0.00115966796875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsbsy",
+      "inclusive": 0.0010833740234375,
+      "exclusive": 0.0010833740234375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.00103759765625,
+      "exclusive": 0.00103759765625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "auxhook",
+      "inclusive": 0.0010223388671875,
+      "exclusive": 0.0010223388671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "infwarerr",
+      "inclusive": 0.001007080078125,
+      "exclusive": 0.001007080078125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "supp-pdf.mkii",
+      "inclusive": 0.0009765625,
+      "exclusive": 0.0009765625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.0009613037109375,
+      "exclusive": 0.0009613037109375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsgen",
+      "inclusive": 0.0009307861328125,
+      "exclusive": 0.0009307861328125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "atbegshi-ltx",
+      "inclusive": 0.0012359619140625,
+      "exclusive": 0.0009307861328125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "atveryend-ltx",
+      "inclusive": 0.0011749267578125,
+      "exclusive": 0.0008544921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mathcolor.ltx",
+      "inclusive": 0.0005035400390625,
+      "exclusive": 0.0005035400390625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "atveryend.sty",
+      "inclusive": 0.0003204345703125,
+      "exclusive": 0.0003204345703125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "t1pcr.fd",
+      "inclusive": 0.0003204345703125,
+      "exclusive": 0.0003204345703125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "atbegshi.sty",
+      "inclusive": 0.00030517578125,
+      "exclusive": 0.00030517578125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "color.cfg",
+      "inclusive": 0.000274658203125,
+      "exclusive": 0.000274658203125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "ot1lmr.fd",
+      "inclusive": 0.0002593994140625,
+      "exclusive": 0.0002593994140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "t1lmr.fd",
+      "inclusive": 0.0002593994140625,
+      "exclusive": 0.0002593994140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "ts1cmr.fd",
+      "inclusive": 0.00018310546875,
+      "exclusive": 0.00018310546875,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.0249481201171875
+    ],
+    [
+      2,
+      0.0028228759765625
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [
+      "cmex10",
+      "cmex7",
+      "cmmi10",
+      "cmmi5",
+      "cmmi7",
+      "cmr10",
+      "cmr5",
+      "cmr7",
+      "cmsy10",
+      "cmsy5",
+      "cmsy7",
+      "ec-lmbx12",
+      "ec-lmr10",
+      "ec-lmr12",
+      "ec-lmri10",
+      "pcrr8r",
+      "pcrr8t",
+      "rm-lmr10"
+    ],
+    "embedded": [
+      [
+        "LMRoman12-Bold",
+        "Type 1"
+      ],
+      [
+        "LMRoman10-Regular",
+        "Type 1"
+      ],
+      [
+        "CMMI10",
+        "Type 1"
+      ],
+      [
+        "CMR7",
+        "Type 1"
+      ],
+      [
+        "CMR10",
+        "Type 1"
+      ],
+      [
+        "LMRoman10-Italic",
+        "Type 1"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [
+      "cmex10",
+      "cmex7",
+      "cmmi5",
+      "cmmi7",
+      "cmr5",
+      "cmsy10",
+      "cmsy5",
+      "cmsy7",
+      "ec-lmbx12",
+      "ec-lmr10",
+      "ec-lmr12",
+      "ec-lmri10",
+      "pcrr8r",
+      "pcrr8t",
+      "rm-lmr10"
+    ]
+  }
+}

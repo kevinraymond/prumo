@@ -1,0 +1,56 @@
+== prumo report: notes  (total 135 ms, preamble 131 ms, 1 pages, 141 files read)
+
+-- slowest units (exclusive) --
+     28.6 ms     28.6 ms incl  file pgfcore.code.tex
+     14.6 ms     14.6 ms incl  file tikz.code.tex
+     13.4 ms     14.3 ms incl  pkg  xcolor
+     12.4 ms    135.1 ms incl  file notes.tex
+     10.2 ms     10.2 ms incl  file size10.clo
+      7.2 ms     81.8 ms incl  pkg  pgf
+      5.7 ms      5.7 ms incl  file pgfsys.code.tex
+      3.9 ms     65.7 ms incl  pkg  pgfcore
+      3.4 ms      3.4 ms incl  pkg  pgfcomp-version-0-65
+      3.2 ms     13.3 ms incl  cls  article
+      3.1 ms      3.8 ms incl  pkg  pgfrcs
+      3.1 ms      5.8 ms incl  pkg  graphics
+
+-- pages --
+  page 1: 3.6 ms
+
+-- load tree --
+  notes.tex  (135.1 ms incl, 12.4 ms excl)
+    article  (13.3 ms incl, 3.2 ms excl)
+      size10.clo  (10.2 ms incl, 10.2 ms excl)
+    tikz  (107.3 ms incl, 2.8 ms excl)
+      pgf  (81.8 ms incl, 7.2 ms excl)
+        pgfrcs  (3.8 ms incl, 3.1 ms excl)
+          pgfrcs.code.tex  (0.7 ms incl, 0.7 ms excl)
+        pgfcore  (65.7 ms incl, 3.9 ms excl)
+          graphicx  (9.5 ms incl, 2.6 ms excl)
+            keyval  (1.1 ms incl, 1.1 ms excl)
+            graphics  (5.8 ms incl, 3.1 ms excl)
+              trig  (1.0 ms incl, 1.0 ms excl)
+              graphics.cfg  (0.3 ms incl, 0.3 ms excl)
+              xetex.def  (1.4 ms incl, 1.4 ms excl)
+          pgfsys  (9.5 ms incl, 2.9 ms excl)
+            pgfsys.code.tex  (5.7 ms incl, 5.7 ms excl)
+            pgfsyssoftpath.code.tex  (0.5 ms incl, 0.5 ms excl)
+            pgfsysprotocol.code.tex  (0.3 ms incl, 0.3 ms excl)
+          xcolor  (14.3 ms incl, 13.4 ms excl)
+            color.cfg  (0.3 ms incl, 0.3 ms excl)
+            mathcolor.ltx  (0.6 ms incl, 0.6 ms excl)
+          pgfcore.code.tex  (28.6 ms incl, 28.6 ms excl)
+        pgfcomp-version-0-65  (3.4 ms incl, 3.4 ms excl)
+        pgfcomp-version-1-18  (1.6 ms incl, 1.6 ms excl)
+      pgffor  (8.2 ms incl, 3.1 ms excl)
+        pgfkeys  (1.8 ms incl, 1.5 ms excl)
+          pgfkeys.code.tex  (0.3 ms incl, 0.3 ms excl)
+        pgfmath  (2.2 ms incl, 1.9 ms excl)
+          pgfmath.code.tex  (0.3 ms incl, 0.3 ms excl)
+        pgffor.code.tex  (1.1 ms incl, 1.1 ms excl)
+      tikz.code.tex  (14.6 ms incl, 14.6 ms excl)
+    l3backend-xetex.def  (1.9 ms incl, 1.9 ms excl)
+    ts1cmr.fd  (0.3 ms incl, 0.3 ms excl)
+
+-- fonts --
+  TFMs loaded: 0, embedded in PDF: 1, Type 3: 0, bitmap .pk read: 0

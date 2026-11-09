@@ -1,0 +1,65 @@
+== prumo report: main  (total 189 ms, preamble 162 ms, 2 pages, 133 files read)
+
+-- slowest units (exclusive) --
+     37.8 ms    189.5 ms incl  file main.tex
+     25.3 ms     87.5 ms incl  pkg  hyperref
+     14.6 ms     17.4 ms incl  pkg  xcolor
+      8.2 ms      8.2 ms incl  file puenc.def
+      7.6 ms     13.1 ms incl  pkg  nameref
+      7.4 ms      7.4 ms incl  file microtype.cfg
+      7.3 ms      7.3 ms incl  file size10.clo
+      6.7 ms     11.7 ms incl  pkg  amsmath
+      6.4 ms     17.5 ms incl  pkg  microtype
+      5.3 ms      8.8 ms incl  pkg  rerunfilecheck
+      3.5 ms      3.5 ms incl  pkg  hycolor
+      3.3 ms     14.2 ms incl  file hxetex.def
+
+-- pages --
+  page 1: 23.6 ms
+  page 2: 3.2 ms
+
+-- load tree --
+  main.tex  (189.5 ms incl, 37.8 ms excl)
+    article  (9.8 ms incl, 2.5 ms excl)
+      size10.clo  (7.3 ms incl, 7.3 ms excl)
+    fontenc  (2.2 ms incl, 1.9 ms excl)
+      t1lmr.fd  (0.3 ms incl, 0.3 ms excl)
+    amsmath  (11.7 ms incl, 6.7 ms excl)
+      amstext  (2.9 ms incl, 1.5 ms excl)
+        amsgen  (1.4 ms incl, 1.4 ms excl)
+      amsbsy  (1.0 ms incl, 1.0 ms excl)
+      amsopn  (1.1 ms incl, 1.1 ms excl)
+    xcolor  (17.4 ms incl, 14.6 ms excl)
+      color.cfg  (0.3 ms incl, 0.3 ms excl)
+      xetex.def  (1.7 ms incl, 1.7 ms excl)
+      mathcolor.ltx  (0.8 ms incl, 0.8 ms excl)
+    microtype  (17.5 ms incl, 6.4 ms excl)
+      keyval  (0.9 ms incl, 0.9 ms excl)
+      etoolbox  (2.4 ms incl, 2.4 ms excl)
+      microtype-xetex.def  (0.4 ms incl, 0.4 ms excl)
+      microtype.cfg  (7.4 ms incl, 7.4 ms excl)
+    hyperref  (87.5 ms incl, 25.3 ms excl)
+      iftex  (0.9 ms incl, 0.9 ms excl)
+      kvsetkeys  (1.6 ms incl, 1.6 ms excl)
+      kvdefinekeys  (1.4 ms incl, 1.4 ms excl)
+      pdfescape  (7.1 ms incl, 2.6 ms excl)
+        ltxcmds  (1.2 ms incl, 1.2 ms excl)
+        pdftexcmds  (3.3 ms incl, 2.3 ms excl)
+          infwarerr  (1.0 ms incl, 1.0 ms excl)
+      hycolor  (3.5 ms incl, 3.5 ms excl)
+      auxhook  (1.4 ms incl, 1.4 ms excl)
+      nameref  (13.1 ms incl, 7.6 ms excl)
+        refcount  (1.6 ms incl, 1.6 ms excl)
+        gettitlestring  (3.9 ms incl, 2.1 ms excl)
+          kvoptions  (1.8 ms incl, 1.8 ms excl)
+      pd1enc.def  (1.4 ms incl, 1.4 ms excl)
+      intcalc  (1.3 ms incl, 1.3 ms excl)
+      puenc.def  (8.2 ms incl, 8.2 ms excl)
+      url  (1.3 ms incl, 1.3 ms excl)
+      bitset  (4.7 ms incl, 2.8 ms excl)
+        bigintcalc  (1.9 ms incl, 1.9 ms excl)
+      atbegshi-ltx  (2.0 ms incl, 1.3 ms excl)
+
+-- fonts --
+  TFMs loaded: 7, embedded in PDF: 6, Type 3: 0, bitmap .pk read: 0
+  loaded but not embedded: cmex7, ec-lmbx12, ec-lmr10, ec-lmr12, ec-lmri10, pcrr8t, pzdr

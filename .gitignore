@@ -1,0 +1,4 @@
+/target
+.prumo/
+*.pdf
+/fixtures/tlpdb/*.full

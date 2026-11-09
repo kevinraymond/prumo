@@ -1,0 +1,3 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+SDXKYB+CMR10                         Type 1            Builtin          yes yes yes      7  0

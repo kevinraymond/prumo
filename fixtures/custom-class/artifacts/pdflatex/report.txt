@@ -1,0 +1,57 @@
+== prumo report: main  (total 123 ms, preamble 105 ms, 1 pages, 103 files read)
+
+-- slowest units (exclusive) --
+     43.9 ms     67.4 ms incl  pkg  siunitx
+     22.5 ms    123.1 ms incl  file main.tex
+     11.9 ms     19.8 ms incl  pkg  translations
+      4.5 ms     88.8 ms incl  cls  obra
+      4.1 ms      7.7 ms incl  pkg  geometry
+      2.9 ms      2.9 ms incl  pkg  fancyhdr
+      2.8 ms      5.1 ms incl  pkg  pdftexcmds
+      2.8 ms      2.8 ms incl  pkg  etoolbox
+      2.7 ms      3.6 ms incl  cls  article
+      2.2 ms      2.5 ms incl  pkg  color
+      2.1 ms      3.8 ms incl  pkg  graphics
+      1.9 ms      1.9 ms incl  file translations-basic-dictionary-english.trsl
+
+-- pages --
+  page 1: 18.0 ms
+
+-- load tree --
+  main.tex  (123.1 ms incl, 22.5 ms excl)
+    obra  (88.8 ms incl, 4.5 ms excl)
+      article  (3.6 ms incl, 2.7 ms excl)
+        size11.clo  (0.8 ms incl, 0.8 ms excl)
+      geometry  (7.7 ms incl, 4.1 ms excl)
+        keyval  (1.0 ms incl, 1.0 ms excl)
+        ifvtex  (2.6 ms incl, 1.6 ms excl)
+          iftex  (1.0 ms incl, 1.0 ms excl)
+      booktabs  (1.2 ms incl, 1.2 ms excl)
+      siunitx  (67.4 ms incl, 43.9 ms excl)
+        translations  (19.8 ms incl, 11.9 ms excl)
+          etoolbox  (2.8 ms incl, 2.8 ms excl)
+          pdftexcmds  (5.1 ms incl, 2.8 ms excl)
+            infwarerr  (1.1 ms incl, 1.1 ms excl)
+            ltxcmds  (1.2 ms incl, 1.2 ms excl)
+        amstext  (2.6 ms incl, 1.6 ms excl)
+          amsgen  (1.0 ms incl, 1.0 ms excl)
+        array  (1.1 ms incl, 1.1 ms excl)
+      fancyhdr  (2.9 ms incl, 2.9 ms excl)
+      enumitem  (1.5 ms incl, 1.5 ms excl)
+    graphicx  (5.2 ms incl, 1.4 ms excl)
+      graphics  (3.8 ms incl, 2.1 ms excl)
+        trig  (0.7 ms incl, 0.7 ms excl)
+        graphics.cfg  (0.2 ms incl, 0.2 ms excl)
+        pdftex.def  (0.9 ms incl, 0.9 ms excl)
+    color  (2.5 ms incl, 2.2 ms excl)
+      color.cfg  (0.1 ms incl, 0.1 ms excl)
+      mathcolor.ltx  (0.3 ms incl, 0.3 ms excl)
+    l3backend-pdftex.def  (0.5 ms incl, 0.5 ms excl)
+    translations-basic-dictionary-english.trsl  (1.9 ms incl, 1.9 ms excl)
+    supp-pdf.mkii  (0.6 ms incl, 0.6 ms excl)
+    epstopdf-base  (1.0 ms incl, 0.9 ms excl)
+      epstopdf-sys.cfg  (0.1 ms incl, 0.1 ms excl)
+
+-- fonts --
+  TFMs loaded: 12, embedded in PDF: 4, Type 3: 0, bitmap .pk read: 0
+  loaded but not embedded: cmmi6, cmmi8, cmr12, cmr6, cmr8, cmsy10, cmsy6, cmsy8

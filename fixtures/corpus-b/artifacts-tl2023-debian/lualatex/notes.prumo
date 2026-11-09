@@ -1,0 +1,128 @@
+start 16245 0 luatex 2023-11-01
+file+ 16247 0 notes.tex
+cls+ 16333 1 article
+file+ 16397 1 article.cls
+file+ 16494 2 size10.clo
+file+ 16558 3 ot1lmr.fd
+file- 16595 3 ot1lmr.fd
+file- 16681 2 size10.clo
+file- 16804 1 article.cls
+cls- 16837 1 article
+pkg+ 16911 1 tikz
+opts 16913 1 
+file+ 16966 1 tikz.sty
+pkg+ 17046 2 pgf
+opts 17047 2 
+file+ 17098 2 pgf.sty
+pkg+ 17183 3 pgfrcs
+opts 17185 3 
+file+ 17242 3 pgfrcs.sty
+file+ 17435 4 pgfrcs.code.tex
+file- 17492 4 pgfrcs.code.tex
+file- 17508 3 pgfrcs.sty
+pkg- 17546 3 pgfrcs
+pkg+ 17635 3 pgfcore
+opts 17636 3 
+file+ 17696 3 pgfcore.sty
+pkg+ 17780 4 graphicx
+opts 17781 4 
+file+ 17841 4 graphicx.sty
+pkg+ 17932 5 keyval
+opts 17933 5 
+file+ 17985 5 keyval.sty
+file- 18024 5 keyval.sty
+pkg- 18057 5 keyval
+pkg+ 18114 5 graphics
+opts 18115 5 
+file+ 18148 5 graphics.sty
+pkg+ 18196 6 trig
+opts 18197 6 
+file+ 18222 6 trig.sty
+file- 18239 6 trig.sty
+pkg- 18257 6 trig
+file+ 18295 6 graphics.cfg
+file- 18308 6 graphics.cfg
+file+ 18344 6 luatex.def
+file- 18522 6 luatex.def
+file- 18547 5 graphics.sty
+pkg- 18602 5 graphics
+file- 18624 4 graphicx.sty
+pkg- 18640 4 graphicx
+pkg+ 18683 4 pgfsys
+opts 18683 4 
+file+ 18710 4 pgfsys.sty
+file+ 18754 5 pgfsys.code.tex
+file- 19055 5 pgfsys.code.tex
+file+ 19088 5 pgfsyssoftpath.code.tex
+file- 19107 5 pgfsyssoftpath.code.tex
+file+ 19137 5 pgfsysprotocol.code.tex
+file- 19151 5 pgfsysprotocol.code.tex
+file- 19159 4 pgfsys.sty
+pkg- 19177 4 pgfsys
+pkg+ 19229 4 xcolor
+opts 19230 4 
+file+ 19258 4 xcolor.sty
+file+ 19743 5 color.cfg
+file- 19762 5 color.cfg
+file+ 19866 5 mathcolor.ltx
+file- 19913 5 mathcolor.ltx
+file- 20034 4 xcolor.sty
+pkg- 20053 4 xcolor
+file+ 20085 4 pgfcore.code.tex
+file- 21565 4 pgfcore.code.tex
+file- 21575 3 pgfcore.sty
+pkg- 21596 3 pgfcore
+pkg+ 21787 3 pgfcomp-version-0-65
+opts 21788 3 
+file+ 21827 3 pgfcomp-version-0-65.sty
+file- 21959 3 pgfcomp-version-0-65.sty
+pkg- 21981 3 pgfcomp-version-0-65
+pkg+ 22035 3 pgfcomp-version-1-18
+opts 22035 3 
+file+ 22071 3 pgfcomp-version-1-18.sty
+file- 22098 3 pgfcomp-version-1-18.sty
+pkg- 22121 3 pgfcomp-version-1-18
+file- 22133 2 pgf.sty
+pkg- 22148 2 pgf
+pkg+ 22186 2 pgffor
+opts 22187 2 
+file+ 22215 2 pgffor.sty
+pkg+ 22268 3 pgfkeys
+opts 22268 3 
+file+ 22294 3 pgfkeys.sty
+file+ 22324 4 pgfkeys.code.tex
+file- 22335 4 pgfkeys.code.tex
+file- 22343 3 pgfkeys.sty
+pkg- 22360 3 pgfkeys
+pkg+ 22401 3 pgfmath
+opts 22402 3 
+file+ 22428 3 pgfmath.sty
+file+ 22490 4 pgfmath.code.tex
+file- 22502 4 pgfmath.code.tex
+file- 22520 3 pgfmath.sty
+pkg- 22544 3 pgfmath
+file+ 22574 3 pgffor.code.tex
+file- 22641 3 pgffor.code.tex
+file- 22653 2 pgffor.sty
+pkg- 22671 2 pgffor
+file+ 22701 2 tikz.code.tex
+file- 23525 2 tikz.code.tex
+file- 23535 1 tikz.sty
+pkg- 23552 1 tikz
+file+ 23896 1 l3backend-luatex.def
+file- 23997 1 l3backend-luatex.def
+file+ 24039 1 ts1cmr.fd
+file- 24050 1 ts1cmr.fd
+begindoc 24060 1 
+file+ 24104 1 supp-pdf.mkii
+file- 24166 1 supp-pdf.mkii
+pkg+ 24205 1 epstopdf-base
+opts 24206 1 
+file+ 24233 1 epstopdf-base.sty
+file+ 24298 2 epstopdf-sys.cfg
+file- 24305 2 epstopdf-sys.cfg
+file- 24323 1 epstopdf-base.sty
+pkg- 24336 1 epstopdf-base
+enddoc 24476 1 
+page 24620 1 1
+end 24655 1 

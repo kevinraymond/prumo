@@ -1,0 +1,14 @@
+% Fixture: biblatex (a bibliography that needs biber, so the build needs latexmk)
+% prumo: build with latexmk
+% - with latexmk, biber runs and the last pass reads paper.bbl -> the .fls lists paper.bbl; the PDF cites [1] and lists Knuth
+% - one engine pass has no .bbl                                -> still builds (warnings), no bibliography; the probe records all the same
+% - biblatex loads etoolbox, kvoptions, logreq, url itself     -> those frames sit under biblatex.sty, not under paper.tex
+% - csquotes is loaded and never used (book title, no quotes)  -> unused-package candidate (no observable effect)
+\documentclass{article}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{csquotes}
+\addbibresource{refs.bib}
+\begin{document}
+Knuth wrote \TeX\ \cite{knuth84}.
+\printbibliography
+\end{document}

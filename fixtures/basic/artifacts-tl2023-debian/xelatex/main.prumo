@@ -1,0 +1,204 @@
+start 10073 0 xetex 2023-11-01
+file+ 10073 0 main.tex
+cls+ 10114 1 article
+file+ 10139 1 article.cls
+file+ 10184 2 size10.clo
+file- 10664 2 size10.clo
+file- 10734 1 article.cls
+cls- 10755 1 article
+pkg+ 10801 1 fontenc
+opts 10802 1 T1
+file+ 10827 1 fontenc.sty
+file+ 10870 2 t1lmr.fd
+file- 10889 2 t1lmr.fd
+file- 10921 1 fontenc.sty
+pkg- 10945 1 fontenc
+pkg+ 10990 1 amsmath
+opts 10990 1 
+file+ 11015 1 amsmath.sty
+pkg+ 11089 2 amstext
+opts 11089 2 
+file+ 11115 2 amstext.sty
+pkg+ 11158 3 amsgen
+opts 11158 3 
+file+ 11197 3 amsgen.sty
+file- 11224 3 amsgen.sty
+pkg- 11247 3 amsgen
+file- 11259 2 amstext.sty
+pkg- 11279 2 amstext
+pkg+ 11322 2 amsbsy
+opts 11322 2 
+file+ 11346 2 amsbsy.sty
+file- 11374 2 amsbsy.sty
+pkg- 11389 2 amsbsy
+pkg+ 11420 2 amsopn
+opts 11421 2 namelimits,
+file+ 11446 2 amsopn.sty
+file- 11478 2 amsopn.sty
+pkg- 11494 2 amsopn
+file- 11741 1 amsmath.sty
+pkg- 11760 1 amsmath
+pkg+ 11799 1 xcolor
+opts 11799 1 
+file+ 11829 1 xcolor.sty
+file+ 12429 2 color.cfg
+file- 12448 2 color.cfg
+file+ 12565 2 xetex.def
+file- 12675 2 xetex.def
+file+ 12732 2 mathcolor.ltx
+file- 12785 2 mathcolor.ltx
+file- 12918 1 xcolor.sty
+pkg- 12937 1 xcolor
+pkg+ 12984 1 microtype
+opts 12984 1 
+file+ 13035 1 microtype.sty
+pkg+ 13103 2 keyval
+opts 13104 2 
+file+ 13131 2 keyval.sty
+file- 13148 2 keyval.sty
+pkg- 13163 2 keyval
+pkg+ 13201 2 etoolbox
+opts 13202 2 
+file+ 13227 2 etoolbox.sty
+file- 13343 2 etoolbox.sty
+pkg- 13359 2 etoolbox
+file+ 13531 2 microtype-xetex.def
+file- 13558 2 microtype-xetex.def
+file+ 13587 2 microtype.cfg
+file- 14069 2 microtype.cfg
+file- 14114 1 microtype.sty
+pkg- 14131 1 microtype
+pkg+ 14178 1 hyperref
+opts 14179 1 
+file+ 14204 1 hyperref.sty
+pkg+ 14247 2 iftex
+opts 14248 2 
+file+ 14270 2 iftex.sty
+file- 14291 2 iftex.sty
+pkg- 14306 2 iftex
+pkg+ 14354 2 kvsetkeys
+opts 14355 2 
+file+ 14395 2 kvsetkeys.sty
+file- 14434 2 kvsetkeys.sty
+pkg- 14459 2 kvsetkeys
+pkg+ 14521 2 kvdefinekeys
+opts 14522 2 
+file+ 14560 2 kvdefinekeys.sty
+file- 14590 2 kvdefinekeys.sty
+pkg- 14613 2 kvdefinekeys
+pkg+ 14670 2 pdfescape
+opts 14671 2 
+file+ 14704 2 pdfescape.sty
+pkg+ 14758 3 ltxcmds
+opts 14758 3 
+file+ 14787 3 ltxcmds.sty
+file- 14817 3 ltxcmds.sty
+pkg- 14836 3 ltxcmds
+pkg+ 14887 3 pdftexcmds
+opts 14888 3 
+file+ 14917 3 pdftexcmds.sty
+pkg+ 14975 4 infwarerr
+opts 14975 4 
+file+ 15002 4 infwarerr.sty
+file- 15023 4 infwarerr.sty
+pkg- 15043 4 infwarerr
+file- 15086 3 pdftexcmds.sty
+pkg- 15106 3 pdftexcmds
+file- 15122 2 pdfescape.sty
+pkg- 15138 2 pdfescape
+pkg+ 15182 2 hycolor
+opts 15182 2 
+file+ 15208 2 hycolor.sty
+file- 15389 2 hycolor.sty
+pkg- 15414 2 hycolor
+pkg+ 15470 2 auxhook
+opts 15470 2 
+file+ 15509 2 auxhook.sty
+file- 15541 2 auxhook.sty
+pkg- 15565 2 auxhook
+pkg+ 15611 2 nameref
+opts 15611 2 
+file+ 15642 2 nameref.sty
+pkg+ 15694 3 refcount
+opts 15695 3 
+file+ 15726 3 refcount.sty
+file- 15783 3 refcount.sty
+pkg- 15800 3 refcount
+pkg+ 15844 3 gettitlestring
+opts 15844 3 
+file+ 15872 3 gettitlestring.sty
+pkg+ 15918 4 kvoptions
+opts 15918 4 
+file+ 15946 4 kvoptions.sty
+file- 16020 4 kvoptions.sty
+pkg- 16037 4 kvoptions
+file- 16080 3 gettitlestring.sty
+pkg- 16099 3 gettitlestring
+file- 16445 2 nameref.sty
+pkg- 16467 2 nameref
+file+ 16578 2 pd1enc.def
+file- 16669 2 pd1enc.def
+pkg+ 16720 2 intcalc
+opts 16721 2 
+file+ 16754 2 intcalc.sty
+file- 16782 2 intcalc.sty
+pkg- 16804 2 intcalc
+file+ 16952 2 puenc.def
+file- 17489 2 puenc.def
+pkg+ 17709 2 url
+opts 17709 2 
+file+ 17740 2 url.sty
+file- 17774 2 url.sty
+pkg- 17794 2 url
+pkg+ 17894 2 bitset
+opts 17895 2 
+file+ 17928 2 bitset.sty
+pkg+ 18020 3 bigintcalc
+opts 18021 3 
+file+ 18055 3 bigintcalc.sty
+file- 18124 3 bigintcalc.sty
+pkg- 18146 3 bigintcalc
+file- 18183 2 bitset.sty
+pkg- 18202 2 bitset
+pkg+ 18354 2 atbegshi-ltx
+opts 18355 2 
+file+ 18407 2 atbegshi.sty
+file- 18450 2 atbegshi.sty
+pkg- 18485 2 atbegshi-ltx
+file- 18901 1 hyperref.sty
+file+ 18935 1 hxetex.def
+pkg+ 18999 2 stringenc
+opts 19000 2 
+file+ 19033 2 stringenc.sty
+file- 19118 2 stringenc.sty
+pkg- 19139 2 stringenc
+pkg+ 19270 2 rerunfilecheck
+opts 19270 2 
+file+ 19311 2 rerunfilecheck.sty
+pkg+ 19522 3 atveryend-ltx
+opts 19522 3 
+file+ 19564 3 atveryend.sty
+file- 19599 3 atveryend.sty
+pkg- 19624 3 atveryend-ltx
+pkg+ 19680 3 uniquecounter
+opts 19681 3 
+file+ 19716 3 uniquecounter.sty
+file- 19782 3 uniquecounter.sty
+pkg- 19805 3 uniquecounter
+file- 19824 2 rerunfilecheck.sty
+pkg- 19845 2 rerunfilecheck
+file- 19864 1 hxetex.def
+pkg- 19910 1 hyperref
+file+ 19948 1 t1pcr.fd
+file- 19969 1 t1pcr.fd
+file+ 20461 1 l3backend-xetex.def
+file- 20612 1 l3backend-xetex.def
+file+ 20667 1 ts1cmr.fd
+file- 20683 1 ts1cmr.fd
+begindoc 20694 1 
+file+ 20869 1 mt-cmr.cfg
+file- 21051 1 mt-cmr.cfg
+page 22243 1 1
+enddoc 22408 1 
+page 22453 1 2
+end 22492 1 

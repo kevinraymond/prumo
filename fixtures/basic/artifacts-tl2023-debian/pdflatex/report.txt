@@ -1,0 +1,66 @@
+== prumo report: main  (total 219 ms, preamble 185 ms, 2 pages, 134 files read)
+
+-- slowest units (exclusive) --
+     44.5 ms    219.1 ms incl  file main.tex
+     27.4 ms    101.2 ms incl  pkg  hyperref
+     16.0 ms     16.0 ms incl  file microtype.cfg
+     13.1 ms     13.1 ms incl  file puenc.def
+     12.0 ms     15.5 ms incl  pkg  xcolor
+      8.2 ms     17.4 ms incl  pkg  amsmath
+      7.9 ms     15.8 ms incl  pkg  nameref
+      6.9 ms      8.5 ms incl  pkg  rerunfilecheck
+      6.7 ms     27.4 ms incl  pkg  microtype
+      4.6 ms      6.5 ms incl  pkg  pdftexcmds
+      3.7 ms     13.9 ms incl  file hpdftex.def
+      3.6 ms      4.4 ms incl  cls  article
+
+-- pages --
+  page 1: 30.1 ms
+  page 2: 3.1 ms
+
+-- load tree --
+  main.tex  (219.1 ms incl, 44.5 ms excl)
+    article  (4.4 ms incl, 3.6 ms excl)
+      size10.clo  (0.8 ms incl, 0.8 ms excl)
+    fontenc  (1.8 ms incl, 1.8 ms excl)
+    amsmath  (17.4 ms incl, 8.2 ms excl)
+      amstext  (5.1 ms incl, 2.9 ms excl)
+        amsgen  (2.2 ms incl, 2.2 ms excl)
+      amsbsy  (2.6 ms incl, 2.6 ms excl)
+      amsopn  (1.4 ms incl, 1.4 ms excl)
+    xcolor  (15.5 ms incl, 12.0 ms excl)
+      color.cfg  (0.2 ms incl, 0.2 ms excl)
+      pdftex.def  (2.8 ms incl, 2.8 ms excl)
+      mathcolor.ltx  (0.5 ms incl, 0.5 ms excl)
+    microtype  (27.4 ms incl, 6.7 ms excl)
+      keyval  (1.1 ms incl, 1.1 ms excl)
+      etoolbox  (2.3 ms incl, 2.3 ms excl)
+      microtype-pdftex.def  (1.3 ms incl, 1.3 ms excl)
+      microtype.cfg  (16.0 ms incl, 16.0 ms excl)
+    hyperref  (101.2 ms incl, 27.4 ms excl)
+      iftex  (1.5 ms incl, 1.5 ms excl)
+      kvsetkeys  (1.6 ms incl, 1.6 ms excl)
+      kvdefinekeys  (1.7 ms incl, 1.7 ms excl)
+      pdfescape  (11.6 ms incl, 3.5 ms excl)
+        ltxcmds  (1.6 ms incl, 1.6 ms excl)
+        pdftexcmds  (6.5 ms incl, 4.6 ms excl)
+          infwarerr  (1.9 ms incl, 1.9 ms excl)
+      hycolor  (2.7 ms incl, 2.7 ms excl)
+      auxhook  (1.0 ms incl, 1.0 ms excl)
+      nameref  (15.8 ms incl, 7.9 ms excl)
+        refcount  (1.8 ms incl, 1.8 ms excl)
+        gettitlestring  (6.1 ms incl, 3.3 ms excl)
+          kvoptions  (2.9 ms incl, 2.9 ms excl)
+      pd1enc.def  (1.5 ms incl, 1.5 ms excl)
+      intcalc  (1.0 ms incl, 1.0 ms excl)
+      puenc.def  (13.1 ms incl, 13.1 ms excl)
+      url  (1.3 ms incl, 1.3 ms excl)
+      bitset  (5.7 ms incl, 3.1 ms excl)
+        bigintcalc  (2.6 ms incl, 2.6 ms excl)
+      atbegshi-ltx  (1.6 ms incl, 1.1 ms excl)
+        atbegshi.sty  (0.4 ms incl, 0.4 ms excl)
+
+-- fonts --
+  TFMs loaded: 6, embedded in PDF: 6, Type 3: 3, bitmap .pk read: 3
+  loaded but not embedded: cmex7, ecbx1440, ecrm1000, ecrm1440, ecti1000, pcrr8t
+  WARNING: Type 3 (bitmap) fonts in output — usually a missing cm-super/lmodern

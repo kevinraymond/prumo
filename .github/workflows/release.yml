@@ -1,0 +1,120 @@
+name: release image
+
+# Publishes the no-install way to run prumo: docker/Dockerfile.user as
+# ghcr.io/kevinraymond/prumo (full TeX Live + poppler, warm font caches, prumo as the
+# entrypoint) for linux/amd64 and linux/arm64, plus a `small` variant on scheme-small.
+#
+# Tags: a `vX.Y.Z` git tag gives `:X.Y.Z`, `:latest`, `:X.Y.Z-small` and `:small`; a
+# prerelease tag (`v0.2.0-rc.1`) only its own `:0.2.0-rc.1[-small]`. A manual run from a
+# branch pushes `:edge` and `:edge-small` only.
+#
+# Each image is smoke-tested on this runner's architecture through docker/prumo (the
+# script users install) before anything is pushed.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  image:
+    name: ${{ matrix.variant }} (${{ matrix.base }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: full
+            base: texlive/texlive:latest
+            suffix: ""
+          - variant: small
+            base: texlive/texlive:latest-small
+            suffix: "-small"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tags for this run
+        id: tags
+        run: |
+          set -eu
+          s='${{ matrix.suffix }}'            # "" or "-small"
+          moving="${s#-}"; moving="${moving:-latest}" # "latest" or "small"
+          if [ "${GITHUB_REF_TYPE}" != tag ]; then
+            tags="${IMAGE}:edge${s}"
+          elif case "$GITHUB_REF_NAME" in *-*) true ;; *) false ;; esac; then
+            tags="${IMAGE}:${GITHUB_REF_NAME#v}${s}"      # a prerelease does not move latest/small
+          else
+            tags="${IMAGE}:${GITHUB_REF_NAME#v}${s},${IMAGE}:${moving}"
+          fi
+          echo "tags=$tags" >> "$GITHUB_OUTPUT"
+          echo "first=${tags%%,*}" >> "$GITHUB_OUTPUT"
+          echo "$tags"
+
+      - name: Free disk (the full TeX Live is 5 GB per architecture; the runner has 14 GB)
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/lib/jvm
+          sudo docker image prune -af >/dev/null
+          df -h / | tail -1
+
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build for this runner and load it
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile.user
+          build-args: |
+            BASE=${{ matrix.base }}
+            IMAGE_NAME=${{ steps.tags.outputs.first }}
+          tags: prumo:smoke
+          load: true
+          cache-from: type=gha,scope=${{ matrix.variant }}
+          cache-to: type=gha,scope=${{ matrix.variant }},mode=max
+
+      - name: Smoke test through docker/prumo
+        run: |
+          set -eu
+          export PRUMO_IMAGE=prumo:smoke
+          docker/prumo doctor
+          cd fixtures/basic
+          ../../docker/prumo time main.tex --json > /tmp/main.json
+          python3 -c 'import json; d=json.load(open("/tmp/main.json")); assert len(d["pages"]) >= 1; print("basic:", d["total_ms"], "ms")'
+          # The container sees only this directory, so the page lands here; then nothing
+          # else may have been written into the document's directory.
+          ../../docker/prumo time main.tex --html report.html && test -s report.html && rm report.html
+          ../../docker/prumo doctor | grep -E '^ok +image +prumo:smoke'
+          git status --short --untracked-files=all . | grep . && { echo "the image wrote into the document directory"; exit 1; } || true
+          # The loaded copy is not needed for the push build (buildx has the layers cached).
+          docker image rm prumo:smoke >/dev/null && df -h / | tail -1
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build for amd64 and arm64 and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile.user
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            BASE=${{ matrix.base }}
+            IMAGE_NAME=${{ steps.tags.outputs.first }}
+          tags: ${{ steps.tags.outputs.tags }}
+          push: true
+          cache-from: type=gha,scope=${{ matrix.variant }}
+          cache-to: type=gha,scope=${{ matrix.variant }},mode=max
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.description=prumo, the LaTeX build analyzer, with a ${{ matrix.variant }} TeX Live
+            org.opencontainers.image.licenses=MIT OR Apache-2.0

@@ -1,0 +1,289 @@
+{
+  "total_s": 0.166839599609375,
+  "preamble_s": 0.1435699462890625,
+  "units": [
+    {
+      "kind": "pkg",
+      "name": "siunitx",
+      "inclusive": 0.081298828125,
+      "exclusive": 0.054290771484375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "main.tex",
+      "inclusive": 0.166839599609375,
+      "exclusive": 0.0265350341796875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "translations",
+      "inclusive": 0.0225067138671875,
+      "exclusive": 0.0139007568359375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "geometry",
+      "inclusive": 0.0159149169921875,
+      "exclusive": 0.0120697021484375,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "obra",
+      "inclusive": 0.1138916015625,
+      "exclusive": 0.0060272216796875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "trig",
+      "inclusive": 0.0042877197265625,
+      "exclusive": 0.0042877197265625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "graphics",
+      "inclusive": 0.01220703125,
+      "exclusive": 0.00421142578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "color",
+      "inclusive": 0.0043182373046875,
+      "exclusive": 0.00372314453125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pdftex.def",
+      "inclusive": 0.00341796875,
+      "exclusive": 0.00341796875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "translations-basic-dictionary-english.trsl",
+      "inclusive": 0.0033111572265625,
+      "exclusive": 0.0033111572265625,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.003875732421875,
+      "exclusive": 0.0030670166015625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdftexcmds",
+      "inclusive": 0.0055694580078125,
+      "exclusive": 0.0030670166015625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "etoolbox",
+      "inclusive": 0.0030364990234375,
+      "exclusive": 0.0030364990234375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fancyhdr",
+      "inclusive": 0.00274658203125,
+      "exclusive": 0.00274658203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "enumitem",
+      "inclusive": 0.002716064453125,
+      "exclusive": 0.002716064453125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "graphicx",
+      "inclusive": 0.014434814453125,
+      "exclusive": 0.002227783203125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amstext",
+      "inclusive": 0.0029754638671875,
+      "exclusive": 0.0018157958984375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "epstopdf-base",
+      "inclusive": 0.0018157958984375,
+      "exclusive": 0.001678466796875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ifvtex",
+      "inclusive": 0.0027618408203125,
+      "exclusive": 0.001617431640625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "array",
+      "inclusive": 0.00152587890625,
+      "exclusive": 0.00152587890625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-pdftex.def",
+      "inclusive": 0.00140380859375,
+      "exclusive": 0.00140380859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "booktabs",
+      "inclusive": 0.001312255859375,
+      "exclusive": 0.001312255859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ltxcmds",
+      "inclusive": 0.001312255859375,
+      "exclusive": 0.001312255859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "infwarerr",
+      "inclusive": 0.001190185546875,
+      "exclusive": 0.001190185546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsgen",
+      "inclusive": 0.00115966796875,
+      "exclusive": 0.00115966796875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.0011444091796875,
+      "exclusive": 0.0011444091796875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "supp-pdf.mkii",
+      "inclusive": 0.001129150390625,
+      "exclusive": 0.001129150390625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.0010833740234375,
+      "exclusive": 0.0010833740234375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "size11.clo",
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mathcolor.ltx",
+      "inclusive": 0.000457763671875,
+      "exclusive": 0.000457763671875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "graphics.cfg",
+      "inclusive": 0.0002899169921875,
+      "exclusive": 0.0002899169921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "color.cfg",
+      "inclusive": 0.0001373291015625,
+      "exclusive": 0.0001373291015625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "epstopdf-sys.cfg",
+      "inclusive": 0.0001373291015625,
+      "exclusive": 0.0001373291015625,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.022796630859375
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [
+      "cmbx12",
+      "cmcsc10",
+      "cmmi10",
+      "cmmi6",
+      "cmmi8",
+      "cmr10",
+      "cmr12",
+      "cmr6",
+      "cmr8",
+      "cmsy10",
+      "cmsy6",
+      "cmsy8"
+    ],
+    "embedded": [
+      [
+        "CMCSC10",
+        "Type 1"
+      ],
+      [
+        "CMBX12",
+        "Type 1"
+      ],
+      [
+        "CMR10",
+        "Type 1"
+      ],
+      [
+        "CMMI10",
+        "Type 1"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [
+      "cmmi6",
+      "cmmi8",
+      "cmr12",
+      "cmr6",
+      "cmr8",
+      "cmsy10",
+      "cmsy6",
+      "cmsy8"
+    ]
+  }
+}

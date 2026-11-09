@@ -1,0 +1,585 @@
+{
+  "total_s": 0.1077880859375,
+  "preamble_s": 0.0995330810546875,
+  "units": [
+    {
+      "kind": "file",
+      "name": "notes.tex",
+      "inclusive": 0.1077728271484375,
+      "exclusive": 0.01275634765625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "tikz.code.tex",
+      "inclusive": 0.0105438232421875,
+      "exclusive": 0.00885009765625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "xcolor",
+      "inclusive": 0.009124755859375,
+      "exclusive": 0.0084991455078125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcore.code.tex",
+      "inclusive": 0.031524658203125,
+      "exclusive": 0.0066070556640625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmath.code.tex",
+      "inclusive": 0.0147857666015625,
+      "exclusive": 0.0050048828125,
+      "loads": 2
+    },
+    {
+      "kind": "file",
+      "name": "size10.clo",
+      "inclusive": 0.0045166015625,
+      "exclusive": 0.0045166015625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgf",
+      "inclusive": 0.0681915283203125,
+      "exclusive": 0.003509521484375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorearrows.code.tex",
+      "inclusive": 0.0031280517578125,
+      "exclusive": 0.0031280517578125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfloat.code.tex",
+      "inclusive": 0.0028533935546875,
+      "exclusive": 0.0028533935546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgfcore",
+      "inclusive": 0.056793212890625,
+      "exclusive": 0.00244140625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "graphics",
+      "inclusive": 0.0037689208984375,
+      "exclusive": 0.0022430419921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.trigonometric.code.tex",
+      "inclusive": 0.0022430419921875,
+      "exclusive": 0.0022430419921875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgfcomp-version-0-65",
+      "inclusive": 0.0021209716796875,
+      "exclusive": 0.0021209716796875,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.006500244140625,
+      "exclusive": 0.001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgffor",
+      "inclusive": 0.00506591796875,
+      "exclusive": 0.001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfkeys.code.tex",
+      "inclusive": 0.0028076171875,
+      "exclusive": 0.0019073486328125,
+      "loads": 2
+    },
+    {
+      "kind": "pkg",
+      "name": "tikz",
+      "inclusive": 0.0855560302734375,
+      "exclusive": 0.0017547607421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "graphicx",
+      "inclusive": 0.006195068359375,
+      "exclusive": 0.0017242431640625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgfsys",
+      "inclusive": 0.00750732421875,
+      "exclusive": 0.001708984375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfsys.code.tex",
+      "inclusive": 0.0053863525390625,
+      "exclusive": 0.00164794921875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgfrcs",
+      "inclusive": 0.0030670166015625,
+      "exclusive": 0.0015106201171875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "epstopdf-base",
+      "inclusive": 0.0014495849609375,
+      "exclusive": 0.0013580322265625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgfmath",
+      "inclusive": 0.0013275146484375,
+      "exclusive": 0.0011749267578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgfcomp-version-1-18",
+      "inclusive": 0.0009765625,
+      "exclusive": 0.0009765625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmoduleshapes.code.tex",
+      "inclusive": 0.000946044921875,
+      "exclusive": 0.000946044921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorepoints.code.tex",
+      "inclusive": 0.00091552734375,
+      "exclusive": 0.00091552734375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfkeyslibraryfiltered.code.tex",
+      "inclusive": 0.0009002685546875,
+      "exclusive": 0.0009002685546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pgfkeys",
+      "inclusive": 0.00103759765625,
+      "exclusive": 0.000885009765625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-luatex.def",
+      "inclusive": 0.00079345703125,
+      "exclusive": 0.00079345703125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmoduleplot.code.tex",
+      "inclusive": 0.0007781982421875,
+      "exclusive": 0.0007781982421875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathparser.code.tex",
+      "inclusive": 0.0007476806640625,
+      "exclusive": 0.0007476806640625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.basic.code.tex",
+      "inclusive": 0.000732421875,
+      "exclusive": 0.000732421875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcoreexternal.code.tex",
+      "inclusive": 0.000732421875,
+      "exclusive": 0.000732421875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgffor.code.tex",
+      "inclusive": 0.0007171630859375,
+      "exclusive": 0.0007171630859375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "supp-pdf.mkii",
+      "inclusive": 0.0007171630859375,
+      "exclusive": 0.0007171630859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.000701904296875,
+      "exclusive": 0.000701904296875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "trig",
+      "inclusive": 0.000701904296875,
+      "exclusive": 0.000701904296875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgflibraryplothandlers.code.tex",
+      "inclusive": 0.00067138671875,
+      "exclusive": 0.00067138671875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "luatex.def",
+      "inclusive": 0.000640869140625,
+      "exclusive": 0.000640869140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfsys-luatex.def",
+      "inclusive": 0.000885009765625,
+      "exclusive": 0.000640869140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorepathconstruct.code.tex",
+      "inclusive": 0.000640869140625,
+      "exclusive": 0.000640869140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorepathusage.code.tex",
+      "inclusive": 0.000640869140625,
+      "exclusive": 0.000640869140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorescopes.code.tex",
+      "inclusive": 0.000640869140625,
+      "exclusive": 0.000640869140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "tikzlibrarytopaths.code.tex",
+      "inclusive": 0.000640869140625,
+      "exclusive": 0.000640869140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfrcs.code.tex",
+      "inclusive": 0.000701904296875,
+      "exclusive": 0.0005645751953125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.comparison.code.tex",
+      "inclusive": 0.000518798828125,
+      "exclusive": 0.000518798828125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcoreshade.code.tex",
+      "inclusive": 0.0005035400390625,
+      "exclusive": 0.0005035400390625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfutil-common.tex",
+      "inclusive": 0.00048828125,
+      "exclusive": 0.00048828125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.code.tex",
+      "inclusive": 0.000457763671875,
+      "exclusive": 0.000457763671875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.misc.code.tex",
+      "inclusive": 0.000457763671875,
+      "exclusive": 0.000457763671875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcoreimage.code.tex",
+      "inclusive": 0.0004425048828125,
+      "exclusive": 0.0004425048828125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcoretransparency.code.tex",
+      "inclusive": 0.00042724609375,
+      "exclusive": 0.00042724609375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mathcolor.ltx",
+      "inclusive": 0.000396728515625,
+      "exclusive": 0.000396728515625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcoretransformations.code.tex",
+      "inclusive": 0.0003814697265625,
+      "exclusive": 0.0003814697265625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmodulematrix.code.tex",
+      "inclusive": 0.0003814697265625,
+      "exclusive": 0.0003814697265625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfutil-latex.def",
+      "inclusive": 0.0003662109375,
+      "exclusive": 0.0003662109375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.base.code.tex",
+      "inclusive": 0.0003662109375,
+      "exclusive": 0.0003662109375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorepathprocessing.code.tex",
+      "inclusive": 0.0003204345703125,
+      "exclusive": 0.0003204345703125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathutil.code.tex",
+      "inclusive": 0.00030517578125,
+      "exclusive": 0.00030517578125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.random.code.tex",
+      "inclusive": 0.0002899169921875,
+      "exclusive": 0.0002899169921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.integerarithmetics.code.tex",
+      "inclusive": 0.000274658203125,
+      "exclusive": 0.000274658203125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathcalc.code.tex",
+      "inclusive": 0.000274658203125,
+      "exclusive": 0.000274658203125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorepatterns.code.tex",
+      "inclusive": 0.000274658203125,
+      "exclusive": 0.000274658203125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfmathfunctions.round.code.tex",
+      "inclusive": 0.0002593994140625,
+      "exclusive": 0.0002593994140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfsys-common-pdf.def",
+      "inclusive": 0.000244140625,
+      "exclusive": 0.000244140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcoregraphicstate.code.tex",
+      "inclusive": 0.000244140625,
+      "exclusive": 0.000244140625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfsyssoftpath.code.tex",
+      "inclusive": 0.0002288818359375,
+      "exclusive": 0.0002288818359375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "color.cfg",
+      "inclusive": 0.0002288818359375,
+      "exclusive": 0.0002288818359375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorelayers.code.tex",
+      "inclusive": 0.0002288818359375,
+      "exclusive": 0.0002288818359375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorerdf.code.tex",
+      "inclusive": 0.000213623046875,
+      "exclusive": 0.000213623046875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgf.cfg",
+      "inclusive": 0.0001983642578125,
+      "exclusive": 0.0001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcorequick.code.tex",
+      "inclusive": 0.0001983642578125,
+      "exclusive": 0.0001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "graphics.cfg",
+      "inclusive": 0.00018310546875,
+      "exclusive": 0.00018310546875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfsysprotocol.code.tex",
+      "inclusive": 0.00018310546875,
+      "exclusive": 0.00018310546875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfint.code.tex",
+      "inclusive": 0.00018310546875,
+      "exclusive": 0.00018310546875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgfcoreobjects.code.tex",
+      "inclusive": 0.0001678466796875,
+      "exclusive": 0.0001678466796875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pgf.revision.tex",
+      "inclusive": 0.0001373291015625,
+      "exclusive": 0.0001373291015625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "epstopdf-sys.cfg",
+      "inclusive": 9.1552734375e-05,
+      "exclusive": 9.1552734375e-05,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.0079345703125
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [],
+    "embedded": [
+      [
+        "LMRoman10-Regular",
+        "CID Type"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [],
+    "ps_names": {},
+    "virtual": [],
+    "embedded_resolved": [],
+    "loaded_not_embedded_resolved": [],
+    "no_map_entry": [],
+    "preloaded": [],
+    "opentype": [
+      {
+        "name": "LMRoman10-Regular",
+        "file": "lmroman10-regular.luc"
+      }
+    ],
+    "unknown_embedded": [],
+    "partial": false,
+    "map_entries": 5091
+  }
+}

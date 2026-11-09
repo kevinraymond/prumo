@@ -1,0 +1,421 @@
+{
+  "total_s": 0.1894989013671875,
+  "preamble_s": 0.1620635986328125,
+  "units": [
+    {
+      "kind": "file",
+      "name": "main.tex",
+      "inclusive": 0.1894989013671875,
+      "exclusive": 0.0377960205078125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "hyperref",
+      "inclusive": 0.08746337890625,
+      "exclusive": 0.02532958984375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "xcolor",
+      "inclusive": 0.017364501953125,
+      "exclusive": 0.01458740234375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "puenc.def",
+      "inclusive": 0.0081939697265625,
+      "exclusive": 0.0081939697265625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "nameref",
+      "inclusive": 0.0130615234375,
+      "exclusive": 0.0075531005859375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "microtype.cfg",
+      "inclusive": 0.007354736328125,
+      "exclusive": 0.007354736328125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "size10.clo",
+      "inclusive": 0.00732421875,
+      "exclusive": 0.00732421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsmath",
+      "inclusive": 0.011749267578125,
+      "exclusive": 0.0066986083984375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "microtype",
+      "inclusive": 0.0175018310546875,
+      "exclusive": 0.00640869140625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "rerunfilecheck",
+      "inclusive": 0.0087738037109375,
+      "exclusive": 0.00531005859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "hycolor",
+      "inclusive": 0.0035400390625,
+      "exclusive": 0.0035400390625,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "hxetex.def",
+      "inclusive": 0.0141754150390625,
+      "exclusive": 0.003265380859375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "bitset",
+      "inclusive": 0.00469970703125,
+      "exclusive": 0.002777099609375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mt-cmr.cfg",
+      "inclusive": 0.002777099609375,
+      "exclusive": 0.002777099609375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdfescape",
+      "inclusive": 0.00714111328125,
+      "exclusive": 0.0026092529296875,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.0097808837890625,
+      "exclusive": 0.0024566650390625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "etoolbox",
+      "inclusive": 0.002410888671875,
+      "exclusive": 0.002410888671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "pdftexcmds",
+      "inclusive": 0.0033416748046875,
+      "exclusive": 0.0023040771484375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "l3backend-xetex.def",
+      "inclusive": 0.0023040771484375,
+      "exclusive": 0.0023040771484375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "stringenc",
+      "inclusive": 0.00213623046875,
+      "exclusive": 0.00213623046875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "gettitlestring",
+      "inclusive": 0.0038909912109375,
+      "exclusive": 0.0020751953125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "bigintcalc",
+      "inclusive": 0.001922607421875,
+      "exclusive": 0.001922607421875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fontenc",
+      "inclusive": 0.002197265625,
+      "exclusive": 0.0019073486328125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "uniquecounter",
+      "inclusive": 0.0019073486328125,
+      "exclusive": 0.0019073486328125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvoptions",
+      "inclusive": 0.0018157958984375,
+      "exclusive": 0.0018157958984375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "xetex.def",
+      "inclusive": 0.001678466796875,
+      "exclusive": 0.001678466796875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "refcount",
+      "inclusive": 0.001617431640625,
+      "exclusive": 0.001617431640625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvsetkeys",
+      "inclusive": 0.0016021728515625,
+      "exclusive": 0.0016021728515625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amstext",
+      "inclusive": 0.002899169921875,
+      "exclusive": 0.0015411376953125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "auxhook",
+      "inclusive": 0.0014495849609375,
+      "exclusive": 0.0014495849609375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "kvdefinekeys",
+      "inclusive": 0.00140380859375,
+      "exclusive": 0.00140380859375,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "pd1enc.def",
+      "inclusive": 0.0013885498046875,
+      "exclusive": 0.0013885498046875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsgen",
+      "inclusive": 0.0013580322265625,
+      "exclusive": 0.0013580322265625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "atbegshi-ltx",
+      "inclusive": 0.0019989013671875,
+      "exclusive": 0.0013427734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "url",
+      "inclusive": 0.0012969970703125,
+      "exclusive": 0.0012969970703125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "intcalc",
+      "inclusive": 0.00128173828125,
+      "exclusive": 0.00128173828125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ltxcmds",
+      "inclusive": 0.001190185546875,
+      "exclusive": 0.001190185546875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsopn",
+      "inclusive": 0.001129150390625,
+      "exclusive": 0.001129150390625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "infwarerr",
+      "inclusive": 0.00103759765625,
+      "exclusive": 0.00103759765625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amsbsy",
+      "inclusive": 0.0010223388671875,
+      "exclusive": 0.0010223388671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "atveryend-ltx",
+      "inclusive": 0.001556396484375,
+      "exclusive": 0.0010223388671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.00091552734375,
+      "exclusive": 0.00091552734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.0009002685546875,
+      "exclusive": 0.0009002685546875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "mathcolor.ltx",
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "atbegshi.sty",
+      "inclusive": 0.0006561279296875,
+      "exclusive": 0.0006561279296875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "atveryend.sty",
+      "inclusive": 0.0005340576171875,
+      "exclusive": 0.0005340576171875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "microtype-xetex.def",
+      "inclusive": 0.0004119873046875,
+      "exclusive": 0.0004119873046875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "t1pcr.fd",
+      "inclusive": 0.0003204345703125,
+      "exclusive": 0.0003204345703125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "t1lmr.fd",
+      "inclusive": 0.0002899169921875,
+      "exclusive": 0.0002899169921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "color.cfg",
+      "inclusive": 0.0002899169921875,
+      "exclusive": 0.0002899169921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "ts1cmr.fd",
+      "inclusive": 0.000244140625,
+      "exclusive": 0.000244140625,
+      "loads": 1
+    }
+  ],
+  "pages": [
+    [
+      1,
+      0.0236358642578125
+    ],
+    [
+      2,
+      0.003204345703125
+    ]
+  ],
+  "fonts": {
+    "tfm_loaded": [
+      "cmex7",
+      "ec-lmbx12",
+      "ec-lmr10",
+      "ec-lmr12",
+      "ec-lmri10",
+      "pcrr8t",
+      "pzdr"
+    ],
+    "embedded": [
+      [
+        "LMRoman12-Bold",
+        "Type 1C"
+      ],
+      [
+        "LMRoman10-Regular",
+        "Type 1C"
+      ],
+      [
+        "CMMI10",
+        "Type 1C"
+      ],
+      [
+        "CMR7",
+        "Type 1C"
+      ],
+      [
+        "CMR10",
+        "Type 1C"
+      ],
+      [
+        "LMRoman10-Italic",
+        "Type 1C"
+      ]
+    ],
+    "type3": 0,
+    "bitmap_pk": [],
+    "loaded_not_embedded": [
+      "cmex7",
+      "ec-lmbx12",
+      "ec-lmr10",
+      "ec-lmr12",
+      "ec-lmri10",
+      "pcrr8t",
+      "pzdr"
+    ]
+  }
+}

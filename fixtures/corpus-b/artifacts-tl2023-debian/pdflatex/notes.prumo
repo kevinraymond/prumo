@@ -1,0 +1,124 @@
+start 6713 0 pdftex 2023-11-01
+file+ 6714 0 notes.tex
+cls+ 6760 1 article
+file+ 6794 1 article.cls
+file+ 6847 2 size10.clo
+file- 6894 2 size10.clo
+file- 6975 1 article.cls
+cls- 6995 1 article
+pkg+ 7041 1 tikz
+opts 7042 1 
+file+ 7070 1 tikz.sty
+pkg+ 7113 2 pgf
+opts 7113 2 
+file+ 7143 2 pgf.sty
+pkg+ 7191 3 pgfrcs
+opts 7192 3 
+file+ 7223 3 pgfrcs.sty
+file+ 7346 4 pgfrcs.code.tex
+file- 7381 4 pgfrcs.code.tex
+file- 7391 3 pgfrcs.sty
+pkg- 7413 3 pgfrcs
+pkg+ 7467 3 pgfcore
+opts 7467 3 
+file+ 7499 3 pgfcore.sty
+pkg+ 7544 4 graphicx
+opts 7546 4 
+file+ 7579 4 graphicx.sty
+pkg+ 7632 5 keyval
+opts 7633 5 
+file+ 7663 5 keyval.sty
+file- 7687 5 keyval.sty
+pkg- 7707 5 keyval
+pkg+ 7754 5 graphics
+opts 7755 5 
+file+ 7786 5 graphics.sty
+pkg+ 7836 6 trig
+opts 7836 6 
+file+ 7864 6 trig.sty
+file- 7885 6 trig.sty
+pkg- 7904 6 trig
+file+ 7949 6 graphics.cfg
+file- 7965 6 graphics.cfg
+file+ 8017 6 pdftex.def
+file- 8221 6 pdftex.def
+file- 8249 5 graphics.sty
+pkg- 8302 5 graphics
+file- 8327 4 graphicx.sty
+pkg- 8348 4 graphicx
+pkg+ 8395 4 pgfsys
+opts 8396 4 
+file+ 8427 4 pgfsys.sty
+file+ 8480 5 pgfsys.code.tex
+file- 8863 5 pgfsys.code.tex
+file+ 8899 5 pgfsyssoftpath.code.tex
+file- 8971 5 pgfsyssoftpath.code.tex
+file+ 9038 5 pgfsysprotocol.code.tex
+file- 9061 5 pgfsysprotocol.code.tex
+file- 9070 4 pgfsys.sty
+pkg- 9090 4 pgfsys
+pkg+ 9154 4 xcolor
+opts 9155 4 
+file+ 9187 4 xcolor.sty
+file+ 9892 5 color.cfg
+file- 9915 5 color.cfg
+file+ 10043 5 mathcolor.ltx
+file- 10081 5 mathcolor.ltx
+file- 10207 4 xcolor.sty
+pkg- 10226 4 xcolor
+file+ 10267 4 pgfcore.code.tex
+file- 11998 4 pgfcore.code.tex
+file- 12010 3 pgfcore.sty
+pkg- 12031 3 pgfcore
+pkg+ 12241 3 pgfcomp-version-0-65
+opts 12242 3 
+file+ 12306 3 pgfcomp-version-0-65.sty
+file- 12450 3 pgfcomp-version-0-65.sty
+pkg- 12483 3 pgfcomp-version-0-65
+pkg+ 12571 3 pgfcomp-version-1-18
+opts 12571 3 
+file+ 12613 3 pgfcomp-version-1-18.sty
+file- 12649 3 pgfcomp-version-1-18.sty
+pkg- 12677 3 pgfcomp-version-1-18
+file- 12688 2 pgf.sty
+pkg- 12704 2 pgf
+pkg+ 12750 2 pgffor
+opts 12750 2 
+file+ 12801 2 pgffor.sty
+pkg+ 12865 3 pgfkeys
+opts 12865 3 
+file+ 12924 3 pgfkeys.sty
+file+ 12958 4 pgfkeys.code.tex
+file- 12974 4 pgfkeys.code.tex
+file- 12984 3 pgfkeys.sty
+pkg- 13009 3 pgfkeys
+pkg+ 13058 3 pgfmath
+opts 13059 3 
+file+ 13088 3 pgfmath.sty
+file+ 13174 4 pgfmath.code.tex
+file- 13192 4 pgfmath.code.tex
+file- 13202 3 pgfmath.sty
+pkg- 13222 3 pgfmath
+file+ 13255 3 pgffor.code.tex
+file- 13343 3 pgffor.code.tex
+file- 13353 2 pgffor.sty
+pkg- 13373 2 pgffor
+file+ 13409 2 tikz.code.tex
+file- 14401 2 tikz.code.tex
+file- 14411 1 tikz.sty
+pkg- 14433 1 tikz
+file+ 14919 1 l3backend-pdftex.def
+file- 15028 1 l3backend-pdftex.def
+begindoc 15070 1 
+file+ 15118 1 supp-pdf.mkii
+file- 15201 1 supp-pdf.mkii
+pkg+ 15251 1 epstopdf-base
+opts 15252 1 
+file+ 15285 1 epstopdf-base.sty
+file+ 15333 2 epstopdf-sys.cfg
+file- 15342 2 epstopdf-sys.cfg
+file- 15364 1 epstopdf-base.sty
+pkg- 15379 1 epstopdf-base
+enddoc 15560 1 
+page 15813 1 1
+end 15850 1 

@@ -1,0 +1,23 @@
+ecbx1440 SFBX1440 " T1Encoding ReEncodeFont " <cm-super-t1.enc <sfbx1440.pfb
+ecrm1000 SFRM1000 " T1Encoding ReEncodeFont " <cm-super-t1.enc <sfrm1000.pfb
+ecrm1440 SFRM1440 " T1Encoding ReEncodeFont " <cm-super-t1.enc <sfrm1440.pfb
+ecti1000 SFTI1000 " T1Encoding ReEncodeFont " <cm-super-t1.enc <sfti1000.pfb
+labx1440 SFBX1440 " T2AEncoding ReEncodeFont " <cm-super-t2a.enc <sfbx1440.pfb
+larm1000 SFRM1000 " T2AEncoding ReEncodeFont " <cm-super-t2a.enc <sfrm1000.pfb
+lati1000 SFTI1000 " T2AEncoding ReEncodeFont " <cm-super-t2a.enc <sfti1000.pfb
+lbbx1440 SFBX1440 " T2BEncoding ReEncodeFont " <cm-super-t2b.enc <sfbx1440.pfb
+lbrm1000 SFRM1000 " T2BEncoding ReEncodeFont " <cm-super-t2b.enc <sfrm1000.pfb
+lbti1000 SFTI1000 " T2BEncoding ReEncodeFont " <cm-super-t2b.enc <sfti1000.pfb
+lcbx1440 SFBX1440 " T2CEncoding ReEncodeFont " <cm-super-t2c.enc <sfbx1440.pfb
+lcrm1000 SFRM1000 " T2CEncoding ReEncodeFont " <cm-super-t2c.enc <sfrm1000.pfb
+lcti1000 SFTI1000 " T2CEncoding ReEncodeFont " <cm-super-t2c.enc <sfti1000.pfb
+tcbx1440 SFBX1440 " TS1Encoding ReEncodeFont " <cm-super-ts1.enc <sfbx1440.pfb
+tcrm1000 SFRM1000 " TS1Encoding ReEncodeFont " <cm-super-ts1.enc <sfrm1000.pfb
+tcti1000 SFTI1000 " TS1Encoding ReEncodeFont " <cm-super-ts1.enc <sfti1000.pfb
+rxbx1440 SFBX1440 " X2Encoding ReEncodeFont " <cm-super-x2.enc <sfbx1440.pfb
+rxrm1000 SFRM1000 " X2Encoding ReEncodeFont " <cm-super-x2.enc <sfrm1000.pfb
+rxti1000 SFTI1000 " X2Encoding ReEncodeFont " <cm-super-x2.enc <sfti1000.pfb
+cmmi10 CMMI10 <cmmi10.pfb
+cmr10 CMR10 <cmr10.pfb
+cmr7 CMR7 <cmr7.pfb
+cmex7 CMEX7 <cmex7.pfb

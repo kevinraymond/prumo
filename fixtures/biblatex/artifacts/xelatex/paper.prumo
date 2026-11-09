@@ -1,0 +1,104 @@
+start 5009 0 xetex 2026-11-01
+file+ 5010 0 paper.tex
+cls+ 5042 1 article
+file+ 5062 1 article.cls
+file+ 5096 2 size10.clo
+file- 5546 2 size10.clo
+file- 5606 1 article.cls
+cls- 5620 1 article
+pkg+ 5653 1 biblatex
+opts 5654 1 backend=biber,style=numeric
+file+ 5674 1 biblatex.sty
+pkg+ 5711 2 pdftexcmds
+opts 5712 2 
+file+ 5732 2 pdftexcmds.sty
+pkg+ 5770 3 infwarerr
+opts 5770 3 
+file+ 5790 3 infwarerr.sty
+file- 5805 3 infwarerr.sty
+pkg- 5818 3 infwarerr
+pkg+ 5846 3 iftex
+opts 5847 3 
+file+ 5865 3 iftex.sty
+file- 5881 3 iftex.sty
+pkg- 5893 3 iftex
+pkg+ 5923 3 ltxcmds
+opts 5923 3 
+file+ 5942 3 ltxcmds.sty
+file- 5964 3 ltxcmds.sty
+pkg- 5977 3 ltxcmds
+file- 5992 2 pdftexcmds.sty
+pkg- 6005 2 pdftexcmds
+pkg+ 6034 2 etoolbox
+opts 6034 2 
+file+ 6055 2 etoolbox.sty
+file- 6138 2 etoolbox.sty
+pkg- 6151 2 etoolbox
+pkg+ 6180 2 keyval
+opts 6180 2 
+file+ 6198 2 keyval.sty
+file- 6213 2 keyval.sty
+pkg- 6225 2 keyval
+pkg+ 6254 2 kvoptions
+opts 6254 2 
+file+ 6274 2 kvoptions.sty
+pkg+ 6318 3 kvsetkeys
+opts 6318 3 
+file+ 6338 3 kvsetkeys.sty
+file- 6356 3 kvsetkeys.sty
+pkg- 6368 3 kvsetkeys
+file- 6399 2 kvoptions.sty
+pkg- 6411 2 kvoptions
+pkg+ 6439 2 logreq
+opts 6440 2 
+file+ 6458 2 logreq.sty
+file+ 6509 3 logreq.def
+file- 6531 3 logreq.def
+file- 6537 2 logreq.sty
+pkg- 6549 2 logreq
+pkg+ 6577 2 ifthen
+opts 6577 2 
+file+ 6596 2 ifthen.sty
+file- 6610 2 ifthen.sty
+pkg- 6622 2 ifthen
+pkg+ 6647 2 url
+opts 6647 2 
+file+ 6665 2 url.sty
+file- 6684 2 url.sty
+pkg- 6696 2 url
+pkg+ 23257 2 expl3
+opts 23257 2 
+file+ 23276 2 expl3.sty
+file+ 23354 3 l3backend-xetex.def
+file- 23401 3 l3backend-xetex.def
+file- 23410 2 expl3.sty
+pkg- 23422 2 expl3
+pkg+ 23456 2 blx-case-expl3
+opts 23456 2 
+file+ 23478 2 blx-case-expl3.sty
+pkg+ 23517 3 xparse
+opts 23518 3 
+file+ 23536 3 xparse.sty
+file- 23571 3 xparse.sty
+pkg- 23584 3 xparse
+file- 23664 2 blx-case-expl3.sty
+pkg- 23678 2 blx-case-expl3
+file- 24099 1 biblatex.sty
+pkg- 24130 1 biblatex
+pkg+ 24162 1 csquotes
+opts 24162 1 
+file+ 24182 1 csquotes.sty
+file+ 24499 2 csquotes.def
+file- 24576 2 csquotes.def
+file+ 24595 2 csquotes.cfg
+file- 24606 2 csquotes.cfg
+file- 24613 1 csquotes.sty
+pkg- 24625 1 csquotes
+predoc 24994 1 
+begindoc 25124 1 
+file+ 26388 1 paper.bbl
+file- 26411 1 paper.bbl
+enddoc 26899 1 
+ship 26927 1 1
+page 26934 1 1
+end 26959 1 

@@ -1,0 +1,58 @@
+== prumo report: main  (total 149 ms, preamble 88 ms, 1 pages, 117 files read)
+
+-- slowest units (exclusive) --
+     64.9 ms    149.0 ms incl  file main.tex
+     33.1 ms     50.2 ms incl  pkg  siunitx
+      8.2 ms     14.1 ms incl  pkg  translations
+      4.2 ms      4.2 ms incl  file size11.clo
+      3.5 ms     70.9 ms incl  cls  obra
+      3.0 ms      3.0 ms incl  pkg  fancyhdr
+      2.9 ms      5.5 ms incl  pkg  geometry
+      2.3 ms      3.9 ms incl  pkg  pdftexcmds
+      2.3 ms      2.7 ms incl  pkg  color
+      2.3 ms      4.3 ms incl  pkg  graphics
+      2.1 ms      2.1 ms incl  file translations-basic-dictionary-english.trsl
+      2.0 ms      6.2 ms incl  cls  article
+
+-- pages --
+  page 1: 60.7 ms
+
+-- load tree --
+  main.tex  (149.0 ms incl, 64.9 ms excl)
+    obra  (70.9 ms incl, 3.5 ms excl)
+      article  (6.2 ms incl, 2.0 ms excl)
+        size11.clo  (4.2 ms incl, 4.2 ms excl)
+      geometry  (5.5 ms incl, 2.9 ms excl)
+        keyval  (0.7 ms incl, 0.7 ms excl)
+        ifvtex  (1.8 ms incl, 1.0 ms excl)
+          iftex  (0.8 ms incl, 0.8 ms excl)
+      booktabs  (0.9 ms incl, 0.9 ms excl)
+      siunitx  (50.2 ms incl, 33.1 ms excl)
+        translations  (14.1 ms incl, 8.2 ms excl)
+          etoolbox  (1.9 ms incl, 1.9 ms excl)
+          pdftexcmds  (3.9 ms incl, 2.3 ms excl)
+            infwarerr  (0.7 ms incl, 0.7 ms excl)
+            ltxcmds  (0.9 ms incl, 0.9 ms excl)
+        amstext  (1.9 ms incl, 1.2 ms excl)
+          amsgen  (0.7 ms incl, 0.7 ms excl)
+        array  (1.1 ms incl, 1.1 ms excl)
+      fancyhdr  (3.0 ms incl, 3.0 ms excl)
+      enumitem  (1.6 ms incl, 1.6 ms excl)
+    graphicx  (5.7 ms incl, 1.4 ms excl)
+      graphics  (4.3 ms incl, 2.3 ms excl)
+        trig  (0.7 ms incl, 0.7 ms excl)
+        graphics.cfg  (0.2 ms incl, 0.2 ms excl)
+        luatex.def  (1.2 ms incl, 1.2 ms excl)
+    color  (2.7 ms incl, 2.3 ms excl)
+      color.cfg  (0.1 ms incl, 0.1 ms excl)
+      mathcolor.ltx  (0.3 ms incl, 0.3 ms excl)
+    l3backend-luatex.def  (0.8 ms incl, 0.8 ms excl)
+    translations-basic-dictionary-english.trsl  (2.1 ms incl, 2.1 ms excl)
+    supp-pdf.mkii  (0.7 ms incl, 0.7 ms excl)
+    epstopdf-base  (1.1 ms incl, 1.0 ms excl)
+      epstopdf-sys.cfg  (0.1 ms incl, 0.1 ms excl)
+
+-- fonts --
+  TFMs loaded: 10, embedded in PDF: 5, Type 3: 0, bitmap .pk read: 0
+  loaded but not embedded: cmex10, cmmi6, cmmi8, cmr6, cmr8, cmsy10, cmsy6, cmsy8
+  OpenType, opened by the engine: LMRoman10-Regular <- lmroman10-regular.luc, LMRoman12-Bold <- lmroman12-bold.luc, LMRomanCaps10-Regular <- lmromancaps10-regular.otf
