@@ -253,6 +253,33 @@ All three workflows green on the tag: ten assets, the crate on crates.io from th
 (the first publish under the enforced trusted publisher), the four image tags for both
 architectures. `install.sh` from the README fetched 0.1.1 on its own a minute later.
 
+### API hygiene (2026-11-09)
+
+The leftovers from the idiomatic review, in three commits, with no change to any output:
+every report of the v0.1.1 binary and the new build on the cached runs here (florilegium's
+manual, lshort, `doctor`, `--check-log`, `--html`) is identical byte for byte.
+
+- The public surface. The library has one consumer, `main.rs`, plus the tests, so there is
+  no case for `#![warn(missing_docs)]`. The 41 helpers nothing outside the crate calls are
+  `pub(crate)` now and the three the crate itself never called are gone. `JSON_SCHEMA` is
+  one constant where ten literal 1s were.
+- `RunOptions::new(main, engine)` holds the defaults; the literals in `src` say only what
+  differs. `hook_coverage` and `coverage_text` live in `doctor`, with the command that uses
+  them.
+- Structs for the tuples: `PageTime` and `PageSplit` (with `total()`) from the model,
+  `Request {package, options, loaded_by}` for the lines `unused` tests, and `FontSources`
+  for the five artifact inputs of `fonts::report`.
+- One depend walk. `Tlpdb::walk_depends` reports each package once with the dependent that
+  reached it; `closure()` and `packages::resolve` both use it, so `resolve` lost its own copy
+  of the `.ARCH` and `platform:` rules.
+- The four long functions are named pieces now: `doctor::run` is a list of checks,
+  `chart::timeline` is `rows`, `axis_lines`, `row_cells` and `pages_strip`, `run::run` is
+  `stage`, the build, `collect`, `engine_of` and `save_sidecars`, and `unused::run` is
+  `base_run`, `cached_candidates`, `try_without` and `test_candidates`.
+
+Still long, and fine as they are: the parsers (`run::parse`, `texlog`, `tlpdb`), the text
+renderers, `html::flame_svg`, `prune::plan` and `main`.
+
 CTAN upload of `prumo.sty` alone comes later.
 
 ## Hardening 2 — build commands, Windows paths, three more document types (2026-11-07)
