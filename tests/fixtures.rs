@@ -496,6 +496,7 @@ fn fonts_match_the_oracle() {
             Some(&read(&s.dir, "fontmap.txt")),
             Some(&read(&s.dir, "pdffonts.txt")),
             &[],
+            prumo::doctor::Installer::TexLive,
         );
         let g: G = serde_json::from_str(&read(&s.dir, "golden.json")).unwrap();
         let g = g.fonts;
@@ -800,6 +801,7 @@ fn html_page_for_every_set() {
             std::fs::read_to_string(s.dir.join("fontmap.txt")).ok().as_deref(),
             std::fs::read_to_string(s.dir.join("pdffonts.txt")).ok().as_deref(),
             &[],
+            prumo::doctor::Installer::TexLive,
         );
         let html = prumo::html::page(&m, &s.job, Some(files.len()), Some(&fonts));
         // Every frame is drawn once: preamble frames on the preamble chart, body frames on

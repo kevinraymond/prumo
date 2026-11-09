@@ -3,8 +3,8 @@
 ## M6 — polish and release (2026-11-07 to 2026-11-09)
 
 Where things stand: every command exists, the charts are in, the artifacts live in the cache
-directory, and the release pipeline has run end to end on a private repo. Nothing is public
-yet. That is my call, and I'll make it when it is solid.
+directory, and v0.1.0 is public: one commit, CI green, binaries for five targets, two images
+for two architectures. crates.io is the last install path before I announce it.
 
 ### `--html` (2026-11-07)
 
@@ -207,9 +207,30 @@ generation; the second took 0.6 s), and its timer has 1 ms resolution, so small 
 0.0 ms. `prumo.cmd` is still untested: that box cannot run Docker Desktop (no admin, no
 WSL, and the engine wants a desktop session).
 
-Next: crates.io. Then crates.io: flip `publish = false` and add a
-`publish.yml` on the tag that uses crates.io trusted publishing (OIDC, no stored token), after
-the binaries job. CTAN upload of `prumo.sty` alone comes later.
+### Toward the announcement (2026-11-09)
+
+The last gaps before I announce it are the ones a stranger hits first:
+
+- The README had no install section. Now it has one: `cargo install prumo`, the release
+  binaries, or the image. The "nothing has run on Windows" line is gone, replaced by the one
+  real limitation there (no tlpdb on MiKTeX, so no `prune`).
+- crates.io is prepared, not done. `publish = false` is gone and `release-binaries.yml` has
+  a `crate` job after the binaries that publishes through crates.io trusted publishing (OIDC,
+  no stored token). It publishes only when the tag is exactly the crate's version, so an rc
+  tag on a release version does nothing. crates.io wants the first version published by hand
+  before a trusted publisher can be registered, so 0.1.0 is a manual `cargo publish`, then
+  Settings, Trusted Publishing on the crate: owner `kevinraymond`, repository `prumo`,
+  workflow `release-binaries.yml`. From the next tag on, the job does it.
+- Two hints from the lshort and MiKTeX runs. The Type 3 warning now picks its install
+  command from what is on `PATH`: `tlmgr install cm-super` on TeX Live, `miktex packages
+  install cm-super` on MiKTeX, plain "install cm-super" when neither is there. When fontspec
+  cannot find a font, the build-failed message names the font and says whether it looked on
+  this machine or in the image.
+- The announcement drafts (r/LaTeX, a TeX.SE answer on the per-page timing question, a short
+  post, fuller release notes) are in `~/ai/prumo-announce.md`, outside the repo, for me to
+  edit and post.
+
+CTAN upload of `prumo.sty` alone comes later.
 
 ## Hardening 2 — build commands, Windows paths, three more document types (2026-11-07)
 

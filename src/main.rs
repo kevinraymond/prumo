@@ -263,7 +263,15 @@ fn fonts_report_of(out: &RunOutput, model: &BuildModel) -> anyhow::Result<prumo:
         .flatten()
         .filter_map(|e| Some((e.file_name().to_string_lossy().into_owned(), std::fs::read_to_string(e.path()).ok()?)))
         .collect();
-    Ok(prumo::fonts::report(&out.job, model, &files, map_text.as_deref(), pdffonts.as_deref(), &fd_texts))
+    Ok(prumo::fonts::report(
+        &out.job,
+        model,
+        &files,
+        map_text.as_deref(),
+        pdffonts.as_deref(),
+        &fd_texts,
+        prumo::doctor::Installer::detect(),
+    ))
 }
 
 /// Parse the cached records of a run into a model.
@@ -368,8 +376,33 @@ fn ensure_run(b: &BuildArgs, quiet: bool) -> anyhow::Result<RunOutput> {
         if let Some(hint) = small_image_hint(&out.log) {
             eprintln!("prumo: hint: {hint}");
         }
+        if let Some(hint) = font_hint(&out.log) {
+            eprintln!("prumo: hint: {hint}");
+        }
     }
     Ok(out)
+}
+
+/// When fontspec gives up on a font, name it. The log says `The font "X" cannot be found`
+/// (wrapped over `(fontspec)` lines, the name stays on one). Inside an image, say so: the
+/// container has TeX Live's fonts and the mounted directory, not the machine's fonts.
+fn font_hint(log: &std::path::Path) -> Option<String> {
+    let text = std::fs::read_to_string(log).ok()?;
+    let name = missing_font(&text)?;
+    Some(match prumo::doctor::image() {
+        Some(image) => format!(
+            "fontspec cannot find the font \"{name}\" in the {image} image, which has TeX Live's fonts and the mounted directory, not this machine's fonts"
+        ),
+        None => format!("fontspec cannot find the font \"{name}\" on this machine"),
+    })
+}
+
+/// The font name in fontspec's `The font "X" cannot be found` message, if the log has one.
+fn missing_font(log: &str) -> Option<&str> {
+    const OPEN: &str = "The font \"";
+    let rest = &log[log.find(OPEN)? + OPEN.len()..];
+    let name = &rest[..rest.find('"')?];
+    (rest[name.len()..].starts_with("\" cannot be found") && !name.contains('\n') && !name.is_empty()).then_some(name)
 }
 
 /// In the `small` image (scheme-small), a missing file or font usually means the package
@@ -677,4 +710,17 @@ fn main() -> anyhow::Result<()> {
         }
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::missing_font;
+
+    #[test]
+    fn fontspec_font_name_is_read_from_the_log() {
+        let log = "! Package fontspec Error: \n(fontspec)                The font \"IranNastaliq-Web\" cannot be found; this\n(fontspec)                may be but usually is not a fontspec bug.\n";
+        assert_eq!(missing_font(log), Some("IranNastaliq-Web"));
+        assert_eq!(missing_font("(fontspec) Font family 'lmroman10-regular.otf(0)' created\n"), None);
+        assert_eq!(missing_font("The font \"x\" is fine\n"), None);
+    }
 }

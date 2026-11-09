@@ -48,6 +48,38 @@ pub fn tlpdb_path() -> Option<PathBuf> {
     db.is_file().then_some(db)
 }
 
+/// The TeX distribution's package manager on `PATH`, for the wording of install hints.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Installer {
+    /// `tlmgr` is on `PATH`.
+    TexLive,
+    /// MiKTeX (`initexmf` or `miktex` on `PATH`), which has no `tlmgr`.
+    MikTex,
+    /// Neither: a distribution's TeX Live without `tlmgr` (Debian), or no TeX at all.
+    Unknown,
+}
+
+impl Installer {
+    pub fn detect() -> Self {
+        if which("initexmf").is_some() || which("miktex").is_some() {
+            Self::MikTex
+        } else if which("tlmgr").is_some() {
+            Self::TexLive
+        } else {
+            Self::Unknown
+        }
+    }
+
+    /// How to install `pkg` here, phrased for a hint.
+    pub fn install(self, pkg: &str) -> String {
+        match self {
+            Self::TexLive => format!("`tlmgr install {pkg}`"),
+            Self::MikTex => format!("`miktex packages install {pkg}`"),
+            Self::Unknown => format!("install {pkg} with your TeX distribution's package manager"),
+        }
+    }
+}
+
 /// Find `cmd` on `PATH`. On Windows the file is `cmd.exe` (or another `PATHEXT` suffix).
 pub fn which(cmd: &str) -> Option<PathBuf> {
     let path = std::env::var_os("PATH")?;

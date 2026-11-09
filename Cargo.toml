@@ -9,7 +9,6 @@ repository = "https://github.com/kevinraymond/prumo"
 readme = "README.md"
 keywords = ["latex", "tex", "texlive", "profiler", "build"]
 categories = ["command-line-utilities", "development-tools::profiling"]
-publish = false
 
 [[bin]]
 name = "prumo"

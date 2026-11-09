@@ -20,6 +20,17 @@ It has been run on one real corpus so far (mine). Please report what breaks!
 
 This project was made with the assistance of AI (Claude).
 
+## Install
+
+prumo is one binary. It needs a TeX installation to measure (TeX Live or MiKTeX) and
+`pdffonts` from poppler-utils for the fonts report. `prumo doctor` tells you what it found.
+
+- `cargo install prumo` builds it from crates.io (Rust 1.88 or newer).
+- The [release page](https://github.com/kevinraymond/prumo/releases) has prebuilt binaries
+  for Linux (x86-64 and arm64, static), macOS (Intel and Apple silicon) and Windows. Unpack
+  the archive and put `prumo` on your `PATH`.
+- No TeX at all? The Docker image below has a full TeX Live and prumo in it.
+
 ## Usage
 
 ```
@@ -83,8 +94,8 @@ directory, `PRUMO_DOCKER=podman` another engine, and `PRUMO_DOCKER_OPTS` adds op
 
 On Windows, `docker/prumo.cmd` is the same command for Docker Desktop. Save it in a directory
 on your `PATH`. It mounts `C:\Users\you\thesis` at `/C/Users/you/thesis` and prumo prints the
-Windows names back (the cache is in `%LOCALAPPDATA%\prumo`). I have not tried it on a real
-Windows machine yet.
+Windows names back (the cache is in `%LOCALAPPDATA%\prumo`). I have not tried the `.cmd`
+with a real Docker Desktop yet. The native binary is tested on Windows.
 
 Without the script, the one-off form works too. The image then keeps its cache in `.prumo/`
 under the mounted directory, because its own cache directory vanishes with the container:
@@ -155,8 +166,9 @@ match; its output on the fixtures is frozen under `fixtures/*/artifacts/`.
   says so every time.
 - Resolve system fonts on XeTeX. XeTeX opens OpenType fonts outside kpathsea, so the loaded
   side of the fonts report stops at what the PDF says; LuaTeX's are paired through luaotfload.
-- Work on MiKTeX or Windows yet. The `.fls` parser understands Windows paths, but nothing has
-  run there.
+- Plan a `prune` on MiKTeX. MiKTeX has no `texlive.tlpdb`, so `packages` reports files, not
+  packages, and `prune` has nothing to work from. Everything else runs there (tested on
+  MiKTeX 25.12, Windows 10).
 
 ## Building
 
