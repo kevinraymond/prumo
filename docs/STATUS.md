@@ -3,8 +3,8 @@
 ## M6 — polish and release (2026-11-07 to 2026-11-09)
 
 Where things stand: every command exists, the charts are in, the artifacts live in the cache
-directory, and v0.1.0 is public: one commit, CI green, binaries for five targets, two images
-for two architectures. crates.io is the last install path before I announce it.
+directory, and v0.1.0 is public: CI green, binaries for five targets, two images for two
+architectures, the crate on crates.io, one-line installers. Ready to announce.
 
 ### `--html` (2026-11-07)
 
@@ -235,6 +235,9 @@ The last gaps before I announce it are the ones a stranger hits first:
   `%LOCALAPPDATA%\Programs\prumo`, say when that is not on PATH (PowerShell adds it). Tested
   against the v0.1.0 assets here and on the Windows box. A Homebrew tap is the next step for
   Mac users; it needs a second repo and a token, so it waits for me.
+- Published 0.1.0 to crates.io by hand (17:31). `cargo install prumo` into a clean root
+  builds and runs. The repo has its topics and v0.1.0 has real release notes: what it is,
+  the four ways in, what it was tested on.
 
 CTAN upload of `prumo.sty` alone comes later.
 
