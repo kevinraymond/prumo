@@ -1,0 +1,917 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "6.59",
+   "3.39",
+   "2.36"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "lualatex": {
+  "plain_ms": [
+   1621.364,
+   1613.067,
+   1631.529,
+   1633.858,
+   1606.224
+  ],
+  "probed_ms": [
+   1664.008,
+   1665.276,
+   1648.179,
+   1640.52,
+   1639.88
+  ],
+  "units": {
+   "file florilegium-doc.tex": [
+    1040.634,
+    1041.199,
+    1024.49,
+    1025.635,
+    1027.863
+   ],
+   "pkg fontspec-luatex": [
+    67.932,
+    67.917,
+    67.719,
+    65.231,
+    64.651
+   ],
+   "pkg hyperref": [
+    16.922,
+    16.632,
+    16.785,
+    16.174,
+    16.006
+   ],
+   "file size11.clo": [
+    15.503,
+    10.696,
+    14.984,
+    15.594,
+    14.984
+   ],
+   "file tikzlibraryflorilegium.code.tex": [
+    10.773,
+    10.452,
+    10.559,
+    10.422,
+    10.422
+   ],
+   "file tikz.code.tex": [
+    9.43,
+    9.079,
+    9.125,
+    8.774,
+    8.591
+   ],
+   "pkg xcolor": [
+    9.323,
+    9.216,
+    9.201,
+    8.835,
+    8.896
+   ],
+   "pkg florilegium": [
+    8.728,
+    8.224,
+    8.667,
+    8.682,
+    8.636
+   ],
+   "pkg fvextra": [
+    7.782,
+    7.736,
+    7.721,
+    7.507,
+    7.507
+   ],
+   "file pgfcore.code.tex": [
+    7.309,
+    7.126,
+    7.187,
+    6.958,
+    6.927
+   ],
+   "file puenc.def": [
+    6.805,
+    6.546,
+    6.744,
+    6.516,
+    6.5
+   ],
+   "file pgfmath.code.tex": [
+    5.539,
+    5.402,
+    5.447,
+    5.295,
+    5.219
+   ],
+   "pkg nameref": [
+    4.608,
+    4.593,
+    4.623,
+    4.349,
+    4.395
+   ],
+   "pkg lineno": [
+    3.937,
+    3.937,
+    3.922,
+    3.784,
+    3.784
+   ],
+   "pkg pgf": [
+    3.662,
+    3.677,
+    3.662,
+    3.525,
+    3.494
+   ],
+   "pkg geometry": [
+    3.067,
+    3.082,
+    3.036,
+    2.96,
+    2.914
+   ],
+   "file pgfmathfloat.code.tex": [
+    2.975,
+    2.869,
+    2.899,
+    2.792,
+    2.762
+   ],
+   "file pgfcorearrows.code.tex": [
+    2.899,
+    2.838,
+    2.838,
+    2.701,
+    2.701
+   ],
+   "file pgfmathfunctions.trigonometric.code.tex": [
+    2.731,
+    2.579,
+    2.731,
+    2.518,
+    2.548
+   ],
+   "pkg rerunfilecheck": [
+    2.609,
+    2.686,
+    2.655,
+    2.502,
+    2.487
+   ],
+   "pkg fontspec": [
+    2.533,
+    2.579,
+    2.533,
+    2.487,
+    2.411
+   ],
+   "pkg graphics": [
+    2.35,
+    2.319,
+    2.319,
+    2.258,
+    2.243
+   ],
+   "pkg pgfcore": [
+    2.289,
+    2.319,
+    2.274,
+    2.197,
+    2.167
+   ],
+   "pkg hycolor": [
+    2.274,
+    2.243,
+    2.243,
+    2.151,
+    2.151
+   ],
+   "pkg eso-pic": [
+    2.213,
+    2.197,
+    2.182,
+    2.136,
+    2.106
+   ],
+   "pkg kvoptions": [
+    2.167,
+    2.136,
+    2.151,
+    2.106,
+    2.075
+   ],
+   "pkg pdftexcmds": [
+    2.167,
+    2.151,
+    2.151,
+    2.029,
+    2.045
+   ],
+   "pkg pgfcomp-version-0-65": [
+    2.121,
+    2.121,
+    2.075,
+    2.014,
+    2.029
+   ],
+   "pkg pgffor": [
+    2.121,
+    2.121,
+    2.09,
+    2.045,
+    1.999
+   ],
+   "cls article": [
+    2.06,
+    1.999,
+    2.045,
+    1.999,
+    1.953
+   ],
+   "pkg etoolbox": [
+    2.014,
+    2.014,
+    2.014,
+    1.953,
+    1.984
+   ],
+   "file pgfkeys.code.tex": [
+    1.984,
+    1.999,
+    1.999,
+    1.923,
+    1.907
+   ],
+   "pkg fancyvrb": [
+    1.953,
+    1.923,
+    1.953,
+    1.892,
+    1.892
+   ],
+   "pkg tikz": [
+    1.907,
+    1.877,
+    1.877,
+    1.831,
+    1.816
+   ],
+   "pkg bitset": [
+    1.892,
+    1.892,
+    1.877,
+    1.816,
+    1.816
+   ],
+   "pkg pgfsys": [
+    1.831,
+    1.862,
+    1.831,
+    1.785,
+    1.755
+   ],
+   "file pgfsys.code.tex": [
+    1.831,
+    1.785,
+    1.831,
+    1.785,
+    1.755
+   ],
+   "file florilegium-doc.out": [
+    1.724,
+    1.724,
+    1.724,
+    1.74,
+    1.694
+   ],
+   "pkg pgfrcs": [
+    1.617,
+    1.663,
+    1.617,
+    1.556,
+    1.556
+   ],
+   "pkg pdfescape": [
+    1.556,
+    1.541,
+    1.541,
+    1.48,
+    1.48
+   ],
+   "file hluatex.def": [
+    1.541,
+    1.511,
+    1.511,
+    1.465,
+    1.45
+   ],
+   "pkg graphicx": [
+    1.526,
+    1.526,
+    1.541,
+    1.45,
+    1.45
+   ],
+   "pkg stringenc": [
+    1.48,
+    1.45,
+    1.511,
+    1.404,
+    1.419
+   ],
+   "pkg epstopdf-base": [
+    1.48,
+    1.48,
+    1.48,
+    1.45,
+    1.434
+   ],
+   "file pgflibraryfpu.code.tex": [
+    1.404,
+    1.358,
+    1.404,
+    1.343,
+    1.343
+   ],
+   "pkg gettitlestring": [
+    1.389,
+    1.404,
+    1.419,
+    1.358,
+    1.312
+   ],
+   "pkg bigintcalc": [
+    1.297,
+    1.282,
+    1.297,
+    1.266,
+    1.251
+   ],
+   "pkg uniquecounter": [
+    1.251,
+    1.236,
+    1.251,
+    1.175,
+    1.19
+   ],
+   "pkg upquote": [
+    1.205,
+    1.205,
+    1.205,
+    1.144,
+    1.129
+   ],
+   "pkg pgfmath": [
+    1.205,
+    1.221,
+    1.236,
+    1.16,
+    1.16
+   ],
+   "pkg refcount": [
+    1.19,
+    1.175,
+    1.175,
+    1.144,
+    1.144
+   ],
+   "pkg longtable": [
+    1.175,
+    1.144,
+    1.144,
+    1.129,
+    1.114
+   ],
+   "pkg array": [
+    1.129,
+    1.129,
+    1.129,
+    1.099,
+    1.114
+   ],
+   "pkg ifvtex": [
+    1.114,
+    1.099,
+    1.083,
+    1.053,
+    1.053
+   ],
+   "pkg pgfcomp-version-1-18": [
+    1.022,
+    1.007,
+    1.022,
+    0.961,
+    0.961
+   ],
+   "file pd1enc.def": [
+    1.022,
+    1.038,
+    1.038,
+    1.007,
+    0.992
+   ],
+   "pkg textcomp": [
+    0.992,
+    0.977,
+    0.992,
+    0.931,
+    0.946
+   ],
+   "pkg pgfkeys": [
+    0.961,
+    0.946,
+    0.946,
+    0.9,
+    0.916
+   ],
+   "file pgfmoduleshapes.code.tex": [
+    0.946,
+    0.946,
+    0.916,
+    0.9,
+    0.916
+   ],
+   "file pgfkeyslibraryfiltered.code.tex": [
+    0.931,
+    0.9,
+    0.916,
+    0.9,
+    0.87
+   ],
+   "pkg ltxcmds": [
+    0.9,
+    0.885,
+    0.9,
+    0.885,
+    0.885
+   ],
+   "pkg booktabs": [
+    0.885,
+    0.87,
+    0.9,
+    0.854,
+    0.854
+   ],
+   "pkg kvsetkeys": [
+    0.885,
+    0.854,
+    0.87,
+    0.839,
+    0.839
+   ],
+   "file l3backend-luatex.def": [
+    0.885,
+    0.87,
+    0.916,
+    0.885,
+    0.885
+   ],
+   "pkg fontenc": [
+    0.87,
+    0.854,
+    0.854,
+    0.87,
+    0.809
+   ],
+   "file pgfcorepoints.code.tex": [
+    0.87,
+    0.839,
+    0.839,
+    0.839,
+    0.809
+   ],
+   "pkg url": [
+    0.87,
+    0.87,
+    0.854,
+    0.87,
+    0.824
+   ],
+   "file pgfcoreexternal.code.tex": [
+    0.854,
+    0.839,
+    0.824,
+    0.824,
+    0.809
+   ],
+   "pkg intcalc": [
+    0.839,
+    0.839,
+    0.854,
+    0.809,
+    0.809
+   ],
+   "file pgfmoduleplot.code.tex": [
+    0.824,
+    0.793,
+    0.793,
+    0.763,
+    0.763
+   ],
+   "pkg kvdefinekeys": [
+    0.824,
+    0.824,
+    0.809,
+    0.778,
+    0.793
+   ],
+   "file supp-pdf.mkii": [
+    0.824,
+    0.824,
+    0.824,
+    0.839,
+    0.809
+   ],
+   "pkg iftex": [
+    0.809,
+    0.824,
+    0.809,
+    0.793,
+    0.778
+   ],
+   "pkg infwarerr": [
+    0.809,
+    0.793,
+    0.809,
+    0.763,
+    0.732
+   ],
+   "file pgfmathparser.code.tex": [
+    0.778,
+    0.748,
+    0.778,
+    0.763,
+    0.732
+   ],
+   "file pgfmathfunctions.basic.code.tex": [
+    0.763,
+    0.763,
+    0.763,
+    0.748,
+    0.732
+   ],
+   "pkg keyval": [
+    0.717,
+    0.717,
+    0.732,
+    0.702,
+    0.717
+   ],
+   "file pgffor.code.tex": [
+    0.717,
+    0.687,
+    0.671,
+    0.671,
+    0.656
+   ],
+   "pkg trig": [
+    0.702,
+    0.717,
+    0.717,
+    0.687,
+    0.687
+   ],
+   "file luatex.def": [
+    0.702,
+    0.717,
+    0.687,
+    0.687,
+    0.687
+   ],
+   "file pgflibraryplothandlers.code.tex": [
+    0.702,
+    0.656,
+    0.656,
+    0.641,
+    0.641
+   ],
+   "file pgfcorepathusage.code.tex": [
+    0.687,
+    0.656,
+    0.671,
+    0.656,
+    0.641
+   ],
+   "file pgfcorescopes.code.tex": [
+    0.671,
+    0.641,
+    0.641,
+    0.626,
+    0.626
+   ],
+   "file tikzlibrarytopaths.code.tex": [
+    0.671,
+    0.656,
+    0.656,
+    0.641,
+    0.626
+   ],
+   "file pgfsys-luatex.def": [
+    0.641,
+    0.641,
+    0.641,
+    0.626,
+    0.626
+   ],
+   "file pgfcorepathconstruct.code.tex": [
+    0.626,
+    0.61,
+    0.61,
+    0.626,
+    0.61
+   ],
+   "file pgfrcs.code.tex": [
+    0.58,
+    0.595,
+    0.626,
+    0.565,
+    0.565
+   ],
+   "file pgfutil-common.tex": [
+    0.504,
+    0.473,
+    0.488,
+    0.504,
+    0.488
+   ],
+   "file pgfmathfunctions.comparison.code.tex": [
+    0.504,
+    0.488,
+    0.488,
+    0.488,
+    0.488
+   ],
+   "file pgfcoreshade.code.tex": [
+    0.504,
+    0.488,
+    0.488,
+    0.488,
+    0.473
+   ],
+   "file pgfmathfunctions.misc.code.tex": [
+    0.488,
+    0.473,
+    0.488,
+    0.473,
+    0.473
+   ],
+   "file pgfmathfunctions.code.tex": [
+    0.473,
+    0.473,
+    0.473,
+    0.458,
+    0.458
+   ],
+   "file pgfcoreimage.code.tex": [
+    0.473,
+    0.458,
+    0.458,
+    0.443,
+    0.443
+   ],
+   "file pgfcoretransparency.code.tex": [
+    0.443,
+    0.427,
+    0.427,
+    0.427,
+    0.412
+   ],
+   "file pgfutil-latex.def": [
+    0.427,
+    0.412,
+    0.427,
+    0.427,
+    0.412
+   ],
+   "file pgfmodulematrix.code.tex": [
+    0.412,
+    0.381,
+    0.397,
+    0.412,
+    0.397
+   ],
+   "file mathcolor.ltx": [
+    0.397,
+    0.397,
+    0.381,
+    0.397,
+    0.366
+   ],
+   "file fontspec.cfg": [
+    0.381,
+    0.366,
+    0.366,
+    0.366,
+    0.366
+   ],
+   "file pgfcoretransformations.code.tex": [
+    0.381,
+    0.381,
+    0.381,
+    0.381,
+    0.366
+   ],
+   "file pgfmathfunctions.base.code.tex": [
+    0.366,
+    0.351,
+    0.351,
+    0.351,
+    0.336
+   ],
+   "file pgfcorepathprocessing.code.tex": [
+    0.336,
+    0.32,
+    0.32,
+    0.32,
+    0.305
+   ],
+   "file pgfmathutil.code.tex": [
+    0.305,
+    0.32,
+    0.305,
+    0.305,
+    0.305
+   ],
+   "file pgfmathfunctions.random.code.tex": [
+    0.305,
+    0.29,
+    0.305,
+    0.29,
+    0.29
+   ],
+   "file pgfmathfunctions.integerarithmetics.code.tex": [
+    0.275,
+    0.259,
+    0.259,
+    0.275,
+    0.275
+   ],
+   "file pgfmathcalc.code.tex": [
+    0.275,
+    0.259,
+    0.259,
+    0.259,
+    0.275
+   ],
+   "file pgfmathfunctions.round.code.tex": [
+    0.259,
+    0.259,
+    0.275,
+    0.275,
+    0.259
+   ],
+   "file pgfcoregraphicstate.code.tex": [
+    0.259,
+    0.244,
+    0.244,
+    0.259,
+    0.229
+   ],
+   "file pgfsyssoftpath.code.tex": [
+    0.244,
+    0.229,
+    0.244,
+    0.244,
+    0.229
+   ],
+   "file pgfcorepatterns.code.tex": [
+    0.244,
+    0.259,
+    0.244,
+    0.244,
+    0.244
+   ],
+   "file pgfsys-common-pdf.def": [
+    0.229,
+    0.214,
+    0.229,
+    0.229,
+    0.214
+   ],
+   "file color.cfg": [
+    0.229,
+    0.229,
+    0.229,
+    0.229,
+    0.214
+   ],
+   "file pgfcorelayers.code.tex": [
+    0.214,
+    0.214,
+    0.214,
+    0.198,
+    0.214
+   ],
+   "file pgfcorerdf.code.tex": [
+    0.214,
+    0.214,
+    0.214,
+    0.198,
+    0.198
+   ],
+   "file graphics.cfg": [
+    0.198,
+    0.198,
+    0.198,
+    0.183,
+    0.183
+   ],
+   "file pgfint.code.tex": [
+    0.198,
+    0.183,
+    0.198,
+    0.183,
+    0.168
+   ],
+   "file pgf.cfg": [
+    0.183,
+    0.198,
+    0.198,
+    0.198,
+    0.168
+   ],
+   "file pgfsysprotocol.code.tex": [
+    0.183,
+    0.168,
+    0.183,
+    0.183,
+    0.168
+   ],
+   "file pgfcorequick.code.tex": [
+    0.183,
+    0.183,
+    0.198,
+    0.183,
+    0.183
+   ],
+   "file pgfcoreobjects.code.tex": [
+    0.183,
+    0.168,
+    0.168,
+    0.168,
+    0.168
+   ],
+   "file pgf.revision.tex": [
+    0.153,
+    0.137,
+    0.137,
+    0.153,
+    0.137
+   ],
+   "file epstopdf-sys.cfg": [
+    0.107,
+    0.107,
+    0.107,
+    0.107,
+    0.107
+   ]
+  },
+  "exit_codes": [
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "pages": 35,
+  "records": 502
+ }
+}

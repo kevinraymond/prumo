@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Build every fixture (a directory under fixtures/ with a \documentclass) with every engine using the probe, and check in the
 # artifacts parsers are tested against (.prumo, .fls, log tail, pdffonts, golden JSON).
-# Usage: scripts/make_artifacts.sh   (run from repo root; needs TeX Live + poppler-utils)
+# Usage: scripts/make_artifacts.sh [fixture...]   (run from repo root; needs TeX Live + poppler-utils;
+# with names, only those fixtures are rebuilt). CI checks the checked-in artifacts against a
+# full run. On LuaLaTeX a fixture rebuilt alone can meet a colder font cache than in the full
+# run, where earlier fixtures' latexmk passes compile fonts first, and its .fls then lists
+# cache builds the full run does not: take LuaLaTeX artifacts from a full run.
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
 # Fixed build directory so the PWD line in every .fls is stable across regenerations.
@@ -17,6 +21,7 @@ envs=tikzpicture,axis,tcolorbox,tblr,longtable,tabularx,minted,lstlisting,forest
 pretex="\\RequirePackage{prumo}\\PrumoEnvironments{$envs}"
 for dir in "$root"/fixtures/*/; do
   fx=$(basename "$dir")
+  if [ $# -gt 0 ] && ! printf '%s\n' "$@" | grep -qx "$fx"; then continue; fi
   main=$(grep -l '\\documentclass' "$dir"/*.tex 2>/dev/null | head -1) || true
   [ -n "$main" ] || continue
   job=$(basename "${main%.tex}")

@@ -1,0 +1,116 @@
+# The benchmark documents. fetch.py lays them out under one directory and bench.py builds
+# them. Each document comes from one of three places:
+#
+#   source = "docs/<dir>"   this repository
+#   generate = "<script>"   a script in this directory writes it
+#   repo + commit           its own repository at that commit. It is never stored here: the
+#                           license says on what terms it is published, and share-alike
+#                           and GFDL terms are why it is fetched instead.
+#
+# title    what the charts and the README call it
+# dir      the document's directory, from the top of what was laid out (default: the top)
+# main     the main file in that directory
+# prepare  shell commands run at the top, inside the TeX image, before the first build
+# engines  the engines it builds with (default: all three)
+# runs     timed runs for `bench.py` and `bench.py --whatif` (default: --runs)
+#
+# Tried and left out: kaobook's examples (fmarotta/kaobook 22225a1, class LPPL 1.3c,
+# examples CC0) all fail on TeX Live 2026 with `Command \c@proposition already defined`.
+# thmtools' `sibling=` key fails on the 2026-11-01 kernel, in a five-line document too.
+
+[minimal]
+title = "minimal"
+source = "docs/minimal"
+main = "main.tex"
+
+[standard]
+title = "paper"
+source = "docs/standard"
+main = "main.tex"
+
+[large]
+title = "generated book"
+generate = "gen_large.py"
+main = "main.tex"
+runs = 3
+
+[florilegium]
+title = "florilegium manual"
+repo = "https://github.com/kevinraymond/florilegium"
+commit = "833c4fc9ff776c51d0609fd6c96b4a2868806efa"
+license = "MIT"
+main = "florilegium-doc.tex"
+engines = ["lualatex"]
+
+[acmart]
+title = "ACM paper"
+repo = "https://github.com/borisveytsman/acmart"
+commit = "0537b243395b23ad85c5036929f4b1f28429b3a5"
+license = "LPPL 1.3c"
+dir = "samples"
+main = "sigconf.tex"
+# The class and the samples are generated from their .dtx, as the samples' Makefile does.
+prepare = '''
+tex -interaction=batchmode acmart.ins >/dev/null
+cd samples && pdflatex -interaction=batchmode samples.ins >/dev/null
+cp ../acmart.cls ../ACM-Reference-Format.bst ../acm-jdslogo.png ../*.bbx ../*.cbx ../*.dbx .
+'''
+
+[acmart-biblatex]
+title = "ACM paper, biblatex"
+repo = "https://github.com/borisveytsman/acmart"
+commit = "0537b243395b23ad85c5036929f4b1f28429b3a5"
+license = "LPPL 1.3c"
+dir = "samples"
+main = "sigconf-biblatex.tex"
+prepare = '''
+tex -interaction=batchmode acmart.ins >/dev/null
+cd samples && pdflatex -interaction=batchmode samples.ins >/dev/null
+cp ../acmart.cls ../ACM-Reference-Format.bst ../acm-jdslogo.png ../*.bbx ../*.cbx ../*.dbx .
+'''
+
+[metropolis]
+title = "beamer deck"
+repo = "https://github.com/matze/mtheme"
+commit = "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8"
+license = "CC BY-SA 4.0"
+dir = "demo"
+main = "demo.tex"
+
+[hott]
+title = "HoTT book"
+repo = "https://github.com/HoTT/book"
+commit = "578b85cc8d586b1677ec4335148adeb443057d24"
+license = "CC BY-SA 3.0"
+main = "hott-online.tex"
+# xypdf needs pdfTeX, and bmpsize reads images with \pdf@filedump.
+engines = ["pdflatex"]
+# The Makefile writes version.tex from `git describe`.
+prepare = '''
+printf '%s\n' '\newcommand{\OPTversion}{578b85c}' > version.tex
+'''
+
+[open-logic]
+title = "Open Logic"
+repo = "https://github.com/OpenLogicProject/OpenLogic"
+commit = "1e960beff9ed7835bf3e3f1335e21af3439cd107"
+license = "CC BY 4.0"
+main = "open-logic-complete.tex"
+runs = 3
+
+[stacks]
+title = "Stacks Project"
+repo = "https://github.com/stacks/stacks-project"
+commit = "a04446e57ec1fbc252a871afcec7752fb2807b14"
+license = "GFDL 1.2"
+main = "book.tex"
+# Its own build is pdflatex; at 7,710 pages the other two would triple the longest run.
+engines = ["pdflatex"]
+runs = 2
+# The Makefile's tmp/index.tex and tmp/book.tex, with the book at the top so its \input
+# paths resolve.
+prepare = '''
+mkdir -p tmp
+python3 scripts/make_index.py "$PWD/" > tmp/index.tex 2>/dev/null
+python3 scripts/make_book.py "$PWD/" > book.tex 2>/dev/null
+'''

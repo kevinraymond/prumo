@@ -254,3 +254,42 @@ Items 1–18 hold, with these corrections and additions:
     inside page 1's brackets (`[1{.../pdftex.map}]`). On a one-line document the shipout phase
     is 45 ms of 132 ms on pdfLaTeX, all of it page 1; how much of that is the map was not
     isolated.
+60. **A precompiled preamble works on pdfTeX only.** mylatexformat
+    (`pdftex -ini -jobname=main-fmt "&pdflatex" mylatexformat.ltx main.tex`, then
+    `pdflatex -fmt=main-fmt main.tex`) takes the whatif fixture from 244 ms to 91 ms on TeX
+    Live 2026 and from 137 ms to 58 ms on TeX Live 2021, with the same text. XeTeX stops with
+    `! Can't \dump a format with native fonts or font-mappings.` even without fontspec: the
+    class's `\normalsize` loads Latin Modern as an OpenType font for the TU encoding. On TeX
+    Live 2026, LuaHBTeX writes the format but exits 1 after a Lua error in lua-uni-algos
+    (`lua-uni-stage-tables.lua:141: attempt to perform arithmetic on a string value`), and a
+    build on that format dies with `(pdf backend): referenced object has wrong type`. On TeX
+    Live 2021 the dump succeeds and the build on it dies the same way.
+61. **tikz's external library from the command line.** With
+    `\AddToHook{package/tikz/after}{\usetikzlibrary{external}\tikzexternalize}\input{main}`
+    on the command line, each picture build runs `\def\tikzexternalrealjob{main}\input{main}`,
+    which never sees the hook. It typesets the whole document as "the picture", and a full
+    letter page goes where the picture was: 1 page became 2 on the test document. That is
+    most likely the 2 → 3 pages in the brief, whose document was not run here. Passing `system call=` with the hook in the picture's
+    command line fixes it. The text and page count are then identical on all three engines,
+    on TeX Live 2026 and 2021. tikz's default system call is pdflatex unless the driver says
+    otherwise, so the system call also names the document's engine. Ten pictures of 150 lines
+    each went from 944 ms to 138 ms, against the probe's 828 ms in `tikzpicture`.
+62. **An existence check is not a read.** siunitx runs `\RequirePackage{color}` at
+    `begindocument/before`. When tikz has already loaded xcolor, which claims `color.sty`,
+    the kernel opens `color.sty` and does not read it. pdfTeX's and XeTeX's `.fls` list it,
+    LuaTeX's does not, and neither the log nor the records show it. `doctor --check-log`
+    called it "read outside the LaTeX file hooks". With a log it now lists such files as
+    opened but never read.
+63. **`pdftotext -layout` moves an externalized picture's text.** On the benchmark paper,
+    externalize was reported as changing the output: line 64 of the text differed. The pages
+    render the same (78 of 240,000 pixels differ at 50 dpi, antialiasing) and every page has
+    the same words. The picture is an included PDF now, and `-layout` places its text a column
+    or a line away. `whatif` compares the words on each page and a 24 dpi render instead
+    (the render check is `unused`'s), and then catches a real one: one page of the metropolis
+    deck on XeLaTeX and LuaLaTeX has the same words and 0.9% of its pixels changed.
+64. **thmtools' `sibling=` fails on the 2026-11-01 kernel.** `\usepackage{amsthm,thmtools}`,
+    `\declaretheorem[numberwithin=section]{theorem}` and
+    `\declaretheorem[sibling=theorem]{proposition}` stop with `Command \c@proposition already
+    defined` (thmtools 0.76, TeX Live 2026). The same file builds on TeX Live 2021 (thmtools
+    0.72, kernel 2021-11-15). Every kaobook example fails this way, so kaobook is not in the
+    benchmarks.

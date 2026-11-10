@@ -1,0 +1,76 @@
+== prumo report: main  (total 235 ms, preamble 209 ms, 1 pages, 321 files read)
+
+-- slowest units (exclusive) --
+     36.1 ms    234.8 ms incl  file main.tex
+     31.4 ms     46.8 ms incl  pkg  siunitx
+     14.6 ms     45.5 ms incl  pkg  hyperref
+      8.7 ms      8.7 ms incl  file pgflibraryarrows.meta.code.tex
+      8.7 ms      9.2 ms incl  pkg  xcolor
+      8.1 ms      9.7 ms incl  file tikz.code.tex
+      8.0 ms     14.3 ms incl  pkg  translations
+      6.4 ms     29.6 ms incl  file pgfcore.code.tex
+      5.7 ms      5.7 ms incl  file puenc.def
+      4.9 ms     14.0 ms incl  file pgfmath.code.tex
+      4.4 ms      8.5 ms incl  pkg  nameref
+      4.3 ms      7.7 ms incl  pkg  amsmath
+
+-- phases --
+  startup             35.7 ms
+  preamble           207.3 ms
+  begin-document      14.8 ms
+  typesetting          6.2 ms
+  shipout              6.0 ms
+  end-document         0.6 ms
+
+-- environments --
+      3.1 ms     1x  max    3.1 ms  tikzpicture
+
+-- pages --
+  page 1: 12.3 ms
+
+-- load tree --
+  main.tex  (234.8 ms incl, 36.1 ms excl)
+    article  (2.1 ms incl, 1.8 ms excl)
+      size10.clo  (0.4 ms incl, 0.4 ms excl)
+    amsmath  (7.7 ms incl, 4.3 ms excl)
+      amstext  (1.8 ms incl, 1.1 ms excl)
+        amsgen  (0.7 ms incl, 0.7 ms excl)
+      amsbsy  (0.8 ms incl, 0.8 ms excl)
+      amsopn  (0.9 ms incl, 0.9 ms excl)
+    siunitx  (46.8 ms incl, 31.4 ms excl)
+      translations  (14.3 ms incl, 8.0 ms excl)
+        etoolbox  (1.8 ms incl, 1.8 ms excl)
+        pdftexcmds  (4.5 ms incl, 2.2 ms excl)
+          infwarerr  (0.7 ms incl, 0.7 ms excl)
+          iftex  (0.7 ms incl, 0.7 ms excl)
+          ltxcmds  (0.8 ms incl, 0.8 ms excl)
+      array  (1.0 ms incl, 1.0 ms excl)
+    booktabs  (0.9 ms incl, 0.9 ms excl)
+    tikz  (81.7 ms incl, 1.7 ms excl)
+      pgf  (65.4 ms incl, 3.3 ms excl)
+        pgfrcs  (3.0 ms incl, 1.5 ms excl)
+          pgfutil-common.tex  (0.4 ms incl, 0.4 ms excl)
+          pgfutil-latex.def  (0.4 ms incl, 0.4 ms excl)
+          pgfrcs.code.tex  (0.7 ms incl, 0.6 ms excl)
+            pgf.revision.tex  (0.2 ms incl, 0.2 ms excl)
+        pgfcore  (54.4 ms incl, 2.4 ms excl)
+          graphicx  (6.1 ms incl, 1.7 ms excl)
+            keyval  (0.7 ms incl, 0.7 ms excl)
+            graphics  (3.7 ms incl, 2.1 ms excl)
+              trig  (0.6 ms incl, 0.6 ms excl)
+              graphics.cfg  (0.2 ms incl, 0.2 ms excl)
+              pdftex.def  (0.7 ms incl, 0.7 ms excl)
+          pgfsys  (7.2 ms incl, 1.7 ms excl)
+            pgfsys.code.tex  (5.1 ms incl, 1.6 ms excl)
+              pgfkeys.code.tex  (2.5 ms incl, 1.6 ms excl)
+                pgfkeyslibraryfiltered.code.tex  (0.9 ms incl, 0.9 ms excl)
+              pgf.cfg  (0.1 ms incl, 0.1 ms excl)
+              pgfsys-pdftex.def  (0.8 ms incl, 0.6 ms excl)
+                pgfsys-common-pdf.def  (0.2 ms incl, 0.2 ms excl)
+            pgfsyssoftpath.code.tex  (0.2 ms incl, 0.2 ms excl)
+            pgfsysprotocol.code.tex  (0.2 ms incl, 0.2 ms excl)
+
+-- fonts --
+  TFMs loaded: 3, embedded in PDF: 3, Type 3: 0, bitmap .pk read: 0
+  loaded but not embedded: cmex7, cmr12
+  preloaded by the format, embedded: cmmi10, cmr10

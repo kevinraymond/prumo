@@ -61,8 +61,8 @@ fn artifact_sets() -> Vec<ArtifactSet> {
     out.sort_by(|a, b| a.dir.cmp(&b.dir));
     assert_eq!(
         out.len(),
-        28,
-        "3 fixtures × 2 artifact sets × 3 engines, beamer, biblatex and environments × 3, fontspec on xelatex: {:?}",
+        31,
+        "3 fixtures × 2 artifact sets × 3 engines, beamer, biblatex, environments and whatif × 3, fontspec on xelatex: {:?}",
         out.iter().map(|s| &s.dir).collect::<Vec<_>>()
     );
     out
@@ -205,6 +205,12 @@ fn tlpdb_excerpt_resolves_the_fixtures_main_packages() {
                 assert_eq!(pkg_of("longtable.sty"), Some("tools"), "{label}");
                 assert_eq!(pkg_of("listings.sty"), Some("listings"), "{label}");
             }
+            "whatif" => {
+                assert_eq!(pkg_of("siunitx.sty"), Some("siunitx"), "{label}");
+                assert_eq!(pkg_of("booktabs.sty"), Some("booktabs"), "{label}");
+                assert_eq!(pkg_of("tikz.sty"), Some("pgf"), "{label}");
+                assert_eq!(pkg_of("hyperref.sty"), Some("hyperref"), "{label}");
+            }
             other => panic!("unknown fixture {other}"),
         }
         if s.fixture != "beamer" {
@@ -337,6 +343,13 @@ fn log_file_opens_versus_hook_records() {
             outside.iter().all(|n| n.ends_with(".aux") || n.ends_with(".out") || blx(n)),
             "{label}: outside hooks: {outside:?}"
         );
+        // siunitx asks for color at begindocument/before, after tikz loaded xcolor, which
+        // claims color.sty: the kernel opens the file and does not read it. LuaTeX's
+        // recorder does not list the open.
+        let opened: Vec<String> =
+            c.opened_not_read.iter().map(|o| o.path.file_name().unwrap().to_string_lossy().into_owned()).collect();
+        let expected: &[&str] = if s.fixture == "whatif" && s.engine_dir != "lualatex" { &["color.sty"] } else { &[] };
+        assert_eq!(opened, expected, "{label}: opened but not read");
         if s.fixture == "biblatex" {
             assert!(outside.iter().any(|n| n == "biblatex.def"), "{label}: doctor must list biblatex.def: {outside:?}");
             assert!(
@@ -450,6 +463,11 @@ fn packages_resolve_with_attribution() {
             }
             "environments" => {
                 for n in ["pgf", "tools", "listings"] {
+                    assert_eq!(via(n), "main.tex", "{label}: {n}");
+                }
+            }
+            "whatif" => {
+                for n in ["amsmath", "siunitx", "booktabs", "pgf", "hyperref"] {
                     assert_eq!(via(n), "main.tex", "{label}: {n}");
                 }
             }
@@ -598,7 +616,7 @@ fn fonts_match_the_oracle() {
         assert!(t.contains("-- loaded --") && t.contains("-- in the PDF --"), "{t}");
         checked += 1;
     }
-    assert_eq!(checked, 19, "every TL2026 set has a fontmap.txt");
+    assert_eq!(checked, 22, "every TL2026 set has a fontmap.txt");
 }
 
 /// `prune::plan` on the excerpt with the three fixtures' TL2026 runs: nothing a document
@@ -637,7 +655,7 @@ fn prune_plan_on_the_excerpt() {
                 .collect(),
         });
     }
-    assert_eq!(runs.len(), 8, "6 pdflatex + basic/xelatex + fontspec/xelatex");
+    assert_eq!(runs.len(), 9, "7 pdflatex + basic/xelatex + fontspec/xelatex");
     let biblatex = runs.iter().find(|r| r.main.ends_with("paper.tex")).unwrap();
     assert_eq!(biblatex.tools, ["biber"], "a .bcf was written");
     assert!(runs.iter().filter(|r| !r.main.ends_with("paper.tex")).all(|r| r.tools.is_empty()));
@@ -651,7 +669,7 @@ fn prune_plan_on_the_excerpt() {
         env: vec![],
     };
     let p = prune::plan(&db, &runs, &opts);
-    assert_eq!(p.documents.len(), 8);
+    assert_eq!(p.documents.len(), 9);
     assert_eq!(p.installed, 128, "130 stanzas minus the two 00texlive.* ones");
     // Everything any document read stays; the acceptance list from docs/07-phases.md.
     for n in [
@@ -920,7 +938,7 @@ fn phases_and_environments_match_the_oracle() {
         assert!(j["phases"]["finalization_ms"].is_null(), "{label}: no wall time without a run");
         assert!(j["phases"]["startup_ms"].as_f64().unwrap() > 0.0, "{label}");
     }
-    assert_eq!(checked, 19, "every TeX Live 2026 set");
+    assert_eq!(checked, 22, "every TeX Live 2026 set");
 }
 
 /// fixtures/environments/main.tex: every claim in its header, on all three engines.
@@ -967,6 +985,30 @@ fn environments_fixture_claims() {
         assert!(m.phases.enddoc.unwrap() < p3.ship_start.unwrap(), "{label}");
         assert!(p3.time <= m.phases.lastpage.unwrap(), "{label}");
         // 7 is tests/tex.rs::probe_leaves_the_pdf_byte_identical.
+    }
+}
+
+/// fixtures/whatif/main.tex, claim 7: the bounds `whatif` prints come from the probe's
+/// records. The rest of its header is tests/tex.rs::whatif_fixture_claims.
+#[test]
+fn whatif_fixture_bounds() {
+    use prumo::whatif::{Experiment, bound_ms};
+    let sets: Vec<ArtifactSet> = artifact_sets().into_iter().filter(|s| s.fixture == "whatif").collect();
+    assert_eq!(sets.len(), 3);
+    for s in sets {
+        let label = s.engine_dir.clone();
+        let recs = records::parse_file(&s.dir.join(format!("{}.prumo", s.job))).unwrap();
+        let m = prumo::model::BuildModel::from_records(&recs, &label).unwrap();
+        let envs = m.env_table();
+        let tikz = envs.iter().find(|r| r.name == "tikzpicture").unwrap();
+        assert_eq!(tikz.count, 1, "{label}: one picture");
+        assert_eq!(bound_ms(&m, Experiment::Externalize), Some(prumo::report::ms(tikz.total)), "{label}");
+        let p = m.run_phases();
+        let preamble = p.preamble.unwrap();
+        assert_eq!(bound_ms(&m, Experiment::Preamble), Some(prumo::report::ms(preamble)), "{label}");
+        let others = [Some(p.startup), p.begin_document, p.typesetting, Some(p.shipout), p.end_document];
+        assert!(others.iter().all(|o| o.unwrap() < preamble), "{label}: the preamble is the longest phase: {p:?}");
+        assert_eq!(bound_ms(&m, Experiment::Draft), None);
     }
 }
 

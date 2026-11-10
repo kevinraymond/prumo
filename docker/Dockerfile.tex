@@ -22,6 +22,9 @@ RUN apt-get update \
 RUN tlmgr install cm-super courier fontname siunitx translations csquotes \
  && tlmgr path add
 
+# mylatexformat: `whatif` precompiles the whatif fixture's preamble with it.
+RUN tlmgr install mylatexformat
+
 # Fixture builds run as the invoking user with HOME under /tmp; keep tlmgr quiet about it.
 ENV HOME=/tmp/home
 

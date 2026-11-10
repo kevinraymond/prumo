@@ -1,0 +1,363 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="792" viewBox="0 0 860 792" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" role="img">
+<title>What the probe costs</title><desc>For each benchmark document and engine, every build without prumo and every build with it (the probe and -recorder), as a difference from the median build without it.</desc>
+<rect width="860" height="792" rx="8" fill="#fcfcfb"/>
+<text x="24.0" y="34.0" font-size="17" fill="#0b0b0b" text-anchor="start" font-weight="600">What the probe costs</text>
+<text x="24.0" y="56.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">Builds with the probe and -recorder against builds without, in turns. 0 is the median without, the tick the median with.</text>
+<circle cx="28.0" cy="80.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>a build without prumo</title></circle>
+<text x="38.0" y="84.0" font-size="12" fill="#52514e" text-anchor="start">without prumo</text>
+<circle cx="142.0" cy="80.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>a build with prumo</title></circle>
+<text x="152.0" y="84.0" font-size="12" fill="#52514e" text-anchor="start">with prumo</text>
+<line x1="250.0" y1="106.0" x2="250.0" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="250.0" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">-4%</text>
+<line x1="301.1" y1="106.0" x2="301.1" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="301.1" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">-2%</text>
+<line x1="352.2" y1="106.0" x2="352.2" y2="728.0" stroke="#c3c2b7" stroke-width="1" stroke-linecap="round"></line>
+<text x="352.2" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">0</text>
+<line x1="403.3" y1="106.0" x2="403.3" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="403.3" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">+2%</text>
+<line x1="454.4" y1="106.0" x2="454.4" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="454.4" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">+4%</text>
+<line x1="505.6" y1="106.0" x2="505.6" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="505.6" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">+6%</text>
+<line x1="556.7" y1="106.0" x2="556.7" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="556.7" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">+8%</text>
+<line x1="607.8" y1="106.0" x2="607.8" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="607.8" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">+10%</text>
+<line x1="658.9" y1="106.0" x2="658.9" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="658.9" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">+12%</text>
+<line x1="710.0" y1="106.0" x2="710.0" y2="728.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="710.0" y="744.0" font-size="10" fill="#898781" text-anchor="middle" font-variant-numeric="tabular-nums">+14%</text>
+<text x="24.0" y="125.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">minimal</text>
+<text x="238.0" y="125.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="352.2" cy="121.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>minimal, pdfLaTeX: 133 ms without prumo</title></circle>
+<circle cx="333.4" cy="121.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>minimal, pdfLaTeX: 132 ms without prumo</title></circle>
+<circle cx="311.4" cy="121.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>minimal, pdfLaTeX: 131 ms without prumo</title></circle>
+<circle cx="365.5" cy="121.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>minimal, pdfLaTeX: 134 ms without prumo</title></circle>
+<circle cx="409.4" cy="121.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>minimal, pdfLaTeX: 136 ms without prumo</title></circle>
+<circle cx="454.6" cy="121.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>minimal, pdfLaTeX: 138 ms with prumo</title></circle>
+<circle cx="480.9" cy="121.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>minimal, pdfLaTeX: 140 ms with prumo</title></circle>
+<circle cx="491.4" cy="121.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>minimal, pdfLaTeX: 140 ms with prumo</title></circle>
+<circle cx="607.1" cy="121.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>minimal, pdfLaTeX: 146 ms with prumo</title></circle>
+<circle cx="543.2" cy="121.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>minimal, pdfLaTeX: 143 ms with prumo</title></circle>
+<line x1="491.4" y1="113.0" x2="491.4" y2="129.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>minimal, pdfLaTeX: median with prumo 140 ms, without 133 ms</title></line>
+<text x="724.0" y="125.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+7 ms (+5.4%)</text>
+<text x="238.0" y="147.0" font-size="12" fill="#52514e" text-anchor="end">XeLaTeX</text>
+<circle cx="261.2" cy="143.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 258 ms without prumo</title></circle>
+<circle cx="386.3" cy="143.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 271 ms without prumo</title></circle>
+<circle cx="364.4" cy="143.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 269 ms without prumo</title></circle>
+<circle cx="313.9" cy="143.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 263 ms without prumo</title></circle>
+<circle cx="352.2" cy="143.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 267 ms without prumo</title></circle>
+<circle cx="381.3" cy="143.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 270 ms with prumo</title></circle>
+<circle cx="427.0" cy="143.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 275 ms with prumo</title></circle>
+<circle cx="497.7" cy="143.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 283 ms with prumo</title></circle>
+<circle cx="364.6" cy="143.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 269 ms with prumo</title></circle>
+<circle cx="455.0" cy="143.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 278 ms with prumo</title></circle>
+<line x1="427.0" y1="135.0" x2="427.0" y2="151.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, XeLaTeX: median with prumo 275 ms, without 267 ms</title></line>
+<text x="724.0" y="147.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+8 ms (+2.9%)</text>
+<text x="238.0" y="169.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="332.0" cy="165.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 314 ms without prumo</title></circle>
+<circle cx="354.5" cy="165.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 317 ms without prumo</title></circle>
+<circle cx="371.5" cy="165.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 319 ms without prumo</title></circle>
+<circle cx="352.2" cy="165.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 316 ms without prumo</title></circle>
+<circle cx="330.5" cy="165.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 314 ms without prumo</title></circle>
+<circle cx="412.5" cy="165.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 324 ms with prumo</title></circle>
+<circle cx="411.4" cy="165.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 324 ms with prumo</title></circle>
+<circle cx="393.1" cy="165.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 321 ms with prumo</title></circle>
+<circle cx="399.5" cy="165.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 322 ms with prumo</title></circle>
+<circle cx="460.1" cy="165.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 330 ms with prumo</title></circle>
+<line x1="411.4" y1="157.0" x2="411.4" y2="173.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, LuaLaTeX: median with prumo 324 ms, without 316 ms</title></line>
+<text x="724.0" y="169.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+7 ms (+2.3%)</text>
+<line x1="24.0" y1="181.0" x2="242.0" y2="181.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="201.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">paper</text>
+<text x="238.0" y="201.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="352.2" cy="197.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>paper, pdfLaTeX: 839 ms without prumo</title></circle>
+<circle cx="345.2" cy="197.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>paper, pdfLaTeX: 836 ms without prumo</title></circle>
+<circle cx="375.2" cy="197.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>paper, pdfLaTeX: 846 ms without prumo</title></circle>
+<circle cx="328.2" cy="197.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>paper, pdfLaTeX: 831 ms without prumo</title></circle>
+<circle cx="359.7" cy="197.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>paper, pdfLaTeX: 841 ms without prumo</title></circle>
+<circle cx="499.8" cy="197.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>paper, pdfLaTeX: 887 ms with prumo</title></circle>
+<circle cx="508.7" cy="197.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>paper, pdfLaTeX: 890 ms with prumo</title></circle>
+<circle cx="491.7" cy="197.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>paper, pdfLaTeX: 885 ms with prumo</title></circle>
+<circle cx="486.9" cy="197.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>paper, pdfLaTeX: 883 ms with prumo</title></circle>
+<circle cx="513.3" cy="197.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>paper, pdfLaTeX: 892 ms with prumo</title></circle>
+<line x1="499.8" y1="189.0" x2="499.8" y2="205.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>paper, pdfLaTeX: median with prumo 887 ms, without 839 ms</title></line>
+<text x="724.0" y="201.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+48 ms (+5.8%)</text>
+<text x="238.0" y="223.0" font-size="12" fill="#52514e" text-anchor="end">XeLaTeX</text>
+<circle cx="466.3" cy="219.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.20 s without prumo</title></circle>
+<circle cx="352.0" cy="219.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.14 s without prumo</title></circle>
+<circle cx="352.2" cy="219.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.14 s without prumo</title></circle>
+<circle cx="346.5" cy="219.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.14 s without prumo</title></circle>
+<circle cx="372.6" cy="219.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.15 s without prumo</title></circle>
+<circle cx="464.2" cy="219.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.20 s with prumo</title></circle>
+<circle cx="454.1" cy="219.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.19 s with prumo</title></circle>
+<circle cx="480.4" cy="219.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.20 s with prumo</title></circle>
+<circle cx="448.6" cy="219.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.19 s with prumo</title></circle>
+<circle cx="529.8" cy="219.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.22 s with prumo</title></circle>
+<line x1="464.2" y1="211.0" x2="464.2" y2="227.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, XeLaTeX: median with prumo 1.20 s, without 1.14 s</title></line>
+<text x="724.0" y="223.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+50 ms (+4.4%)</text>
+<text x="238.0" y="245.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="272.6" cy="241.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.33 s without prumo</title></circle>
+<circle cx="321.7" cy="241.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.35 s without prumo</title></circle>
+<circle cx="354.1" cy="241.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.37 s without prumo</title></circle>
+<circle cx="352.2" cy="241.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.37 s without prumo</title></circle>
+<circle cx="371.5" cy="241.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.38 s without prumo</title></circle>
+<circle cx="374.1" cy="241.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.38 s with prumo</title></circle>
+<circle cx="446.1" cy="241.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.42 s with prumo</title></circle>
+<circle cx="457.8" cy="241.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.42 s with prumo</title></circle>
+<circle cx="449.1" cy="241.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.42 s with prumo</title></circle>
+<circle cx="447.3" cy="241.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.42 s with prumo</title></circle>
+<line x1="447.3" y1="233.0" x2="447.3" y2="249.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, LuaLaTeX: median with prumo 1.42 s, without 1.37 s</title></line>
+<text x="724.0" y="245.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+51 ms (+3.7%)</text>
+<line x1="24.0" y1="257.0" x2="242.0" y2="257.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="277.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">beamer deck</text>
+<text x="238.0" y="277.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="364.4" cy="273.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>beamer deck, pdfLaTeX: 1.10 s without prumo</title></circle>
+<circle cx="352.2" cy="273.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>beamer deck, pdfLaTeX: 1.10 s without prumo</title></circle>
+<circle cx="333.7" cy="273.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>beamer deck, pdfLaTeX: 1.09 s without prumo</title></circle>
+<circle cx="336.5" cy="273.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>beamer deck, pdfLaTeX: 1.09 s without prumo</title></circle>
+<circle cx="429.9" cy="273.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>beamer deck, pdfLaTeX: 1.13 s without prumo</title></circle>
+<circle cx="459.7" cy="273.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>beamer deck, pdfLaTeX: 1.14 s with prumo</title></circle>
+<circle cx="453.2" cy="273.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>beamer deck, pdfLaTeX: 1.14 s with prumo</title></circle>
+<circle cx="453.4" cy="273.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>beamer deck, pdfLaTeX: 1.14 s with prumo</title></circle>
+<circle cx="458.6" cy="273.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>beamer deck, pdfLaTeX: 1.14 s with prumo</title></circle>
+<circle cx="538.4" cy="273.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>beamer deck, pdfLaTeX: 1.18 s with prumo</title></circle>
+<line x1="458.6" y1="265.0" x2="458.6" y2="281.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>beamer deck, pdfLaTeX: median with prumo 1.14 s, without 1.10 s</title></line>
+<text x="724.0" y="277.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+46 ms (+4.2%)</text>
+<text x="238.0" y="299.0" font-size="12" fill="#52514e" text-anchor="end">XeLaTeX</text>
+<circle cx="368.1" cy="295.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.44 s without prumo</title></circle>
+<circle cx="352.2" cy="295.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.43 s without prumo</title></circle>
+<circle cx="337.4" cy="295.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.42 s without prumo</title></circle>
+<circle cx="325.3" cy="295.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.41 s without prumo</title></circle>
+<circle cx="356.8" cy="295.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 1.43 s without prumo</title></circle>
+<circle cx="457.6" cy="295.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.49 s with prumo</title></circle>
+<circle cx="444.2" cy="295.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.48 s with prumo</title></circle>
+<circle cx="412.5" cy="295.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.46 s with prumo</title></circle>
+<circle cx="480.6" cy="295.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.50 s with prumo</title></circle>
+<circle cx="439.5" cy="295.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 1.48 s with prumo</title></circle>
+<line x1="444.2" y1="287.0" x2="444.2" y2="303.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, XeLaTeX: median with prumo 1.48 s, without 1.43 s</title></line>
+<text x="724.0" y="299.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+51 ms (+3.6%)</text>
+<text x="238.0" y="321.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="351.1" cy="317.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.74 s without prumo</title></circle>
+<circle cx="352.2" cy="317.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.74 s without prumo</title></circle>
+<circle cx="354.1" cy="317.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.74 s without prumo</title></circle>
+<circle cx="306.5" cy="317.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.71 s without prumo</title></circle>
+<circle cx="354.4" cy="317.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 1.74 s without prumo</title></circle>
+<circle cx="432.9" cy="317.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.79 s with prumo</title></circle>
+<circle cx="445.1" cy="317.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.80 s with prumo</title></circle>
+<circle cx="431.1" cy="317.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.79 s with prumo</title></circle>
+<circle cx="426.3" cy="317.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.79 s with prumo</title></circle>
+<circle cx="438.3" cy="317.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 1.80 s with prumo</title></circle>
+<line x1="432.9" y1="309.0" x2="432.9" y2="325.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, LuaLaTeX: median with prumo 1.79 s, without 1.74 s</title></line>
+<text x="724.0" y="321.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+55 ms (+3.2%)</text>
+<line x1="24.0" y1="333.0" x2="242.0" y2="333.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="353.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">florilegium manual</text>
+<text x="238.0" y="353.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="352.2" cy="349.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>florilegium manual, LuaLaTeX: 1.62 s without prumo</title></circle>
+<circle cx="339.1" cy="349.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>florilegium manual, LuaLaTeX: 1.61 s without prumo</title></circle>
+<circle cx="368.2" cy="349.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>florilegium manual, LuaLaTeX: 1.63 s without prumo</title></circle>
+<circle cx="371.9" cy="349.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>florilegium manual, LuaLaTeX: 1.63 s without prumo</title></circle>
+<circle cx="328.4" cy="349.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>florilegium manual, LuaLaTeX: 1.61 s without prumo</title></circle>
+<circle cx="419.4" cy="349.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>florilegium manual, LuaLaTeX: 1.66 s with prumo</title></circle>
+<circle cx="421.4" cy="349.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>florilegium manual, LuaLaTeX: 1.67 s with prumo</title></circle>
+<circle cx="394.5" cy="349.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>florilegium manual, LuaLaTeX: 1.65 s with prumo</title></circle>
+<circle cx="382.4" cy="349.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>florilegium manual, LuaLaTeX: 1.64 s with prumo</title></circle>
+<circle cx="381.4" cy="349.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>florilegium manual, LuaLaTeX: 1.64 s with prumo</title></circle>
+<line x1="394.5" y1="341.0" x2="394.5" y2="357.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>florilegium manual, LuaLaTeX: median with prumo 1.65 s, without 1.62 s</title></line>
+<text x="724.0" y="353.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+27 ms (+1.7%)</text>
+<line x1="24.0" y1="365.0" x2="242.0" y2="365.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="385.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">ACM paper</text>
+<text x="238.0" y="385.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="294.0" cy="381.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, pdfLaTeX: 2.47 s without prumo</title></circle>
+<circle cx="368.1" cy="381.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, pdfLaTeX: 2.54 s without prumo</title></circle>
+<circle cx="341.0" cy="381.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, pdfLaTeX: 2.51 s without prumo</title></circle>
+<circle cx="352.2" cy="381.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, pdfLaTeX: 2.52 s without prumo</title></circle>
+<circle cx="389.8" cy="381.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, pdfLaTeX: 2.56 s without prumo</title></circle>
+<circle cx="378.3" cy="381.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, pdfLaTeX: 2.55 s with prumo</title></circle>
+<circle cx="407.4" cy="381.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, pdfLaTeX: 2.58 s with prumo</title></circle>
+<circle cx="399.6" cy="381.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, pdfLaTeX: 2.57 s with prumo</title></circle>
+<circle cx="392.5" cy="381.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, pdfLaTeX: 2.56 s with prumo</title></circle>
+<circle cx="666.2" cy="381.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, pdfLaTeX: 2.83 s with prumo</title></circle>
+<line x1="399.6" y1="373.0" x2="399.6" y2="389.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>ACM paper, pdfLaTeX: median with prumo 2.57 s, without 2.52 s</title></line>
+<text x="724.0" y="385.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+47 ms (+1.9%)</text>
+<text x="238.0" y="407.0" font-size="12" fill="#52514e" text-anchor="end">XeLaTeX</text>
+<circle cx="371.9" cy="403.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.04 s without prumo</title></circle>
+<circle cx="364.3" cy="403.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.03 s without prumo</title></circle>
+<circle cx="317.4" cy="403.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 2.98 s without prumo</title></circle>
+<circle cx="352.2" cy="403.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.02 s without prumo</title></circle>
+<circle cx="337.7" cy="403.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.00 s without prumo</title></circle>
+<circle cx="429.9" cy="403.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 3.11 s with prumo</title></circle>
+<circle cx="418.6" cy="403.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 3.10 s with prumo</title></circle>
+<circle cx="385.0" cy="403.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 3.06 s with prumo</title></circle>
+<circle cx="389.0" cy="403.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 3.06 s with prumo</title></circle>
+<circle cx="408.2" cy="403.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 3.08 s with prumo</title></circle>
+<line x1="408.2" y1="395.0" x2="408.2" y2="411.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, XeLaTeX: median with prumo 3.08 s, without 3.02 s</title></line>
+<text x="724.0" y="407.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+66 ms (+2.2%)</text>
+<text x="238.0" y="429.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="333.6" cy="425.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 3.72 s without prumo</title></circle>
+<circle cx="352.2" cy="425.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 3.74 s without prumo</title></circle>
+<circle cx="384.1" cy="425.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 3.79 s without prumo</title></circle>
+<circle cx="407.9" cy="425.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 3.83 s without prumo</title></circle>
+<circle cx="337.2" cy="425.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 3.72 s without prumo</title></circle>
+<circle cx="405.7" cy="425.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 3.82 s with prumo</title></circle>
+<circle cx="367.1" cy="425.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 3.77 s with prumo</title></circle>
+<circle cx="441.1" cy="425.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 3.87 s with prumo</title></circle>
+<circle cx="356.3" cy="425.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 3.75 s with prumo</title></circle>
+<circle cx="354.6" cy="425.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 3.75 s with prumo</title></circle>
+<line x1="367.1" y1="417.0" x2="367.1" y2="433.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, LuaLaTeX: median with prumo 3.77 s, without 3.74 s</title></line>
+<text x="724.0" y="429.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+22 ms (+0.6%)</text>
+<line x1="24.0" y1="441.0" x2="242.0" y2="441.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="461.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">ACM paper, biblatex</text>
+<text x="238.0" y="461.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="278.2" cy="457.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, biblatex, pdfLaTeX: 3.20 s without prumo</title></circle>
+<circle cx="303.2" cy="457.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, biblatex, pdfLaTeX: 3.24 s without prumo</title></circle>
+<circle cx="361.4" cy="457.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, biblatex, pdfLaTeX: 3.31 s without prumo</title></circle>
+<circle cx="406.9" cy="457.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, biblatex, pdfLaTeX: 3.37 s without prumo</title></circle>
+<circle cx="352.2" cy="457.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>ACM paper, biblatex, pdfLaTeX: 3.30 s without prumo</title></circle>
+<circle cx="327.3" cy="457.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, biblatex, pdfLaTeX: 3.27 s with prumo</title></circle>
+<circle cx="384.3" cy="457.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, biblatex, pdfLaTeX: 3.34 s with prumo</title></circle>
+<circle cx="412.0" cy="457.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, biblatex, pdfLaTeX: 3.38 s with prumo</title></circle>
+<circle cx="392.5" cy="457.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, biblatex, pdfLaTeX: 3.35 s with prumo</title></circle>
+<circle cx="466.3" cy="457.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>ACM paper, biblatex, pdfLaTeX: 3.45 s with prumo</title></circle>
+<line x1="392.5" y1="449.0" x2="392.5" y2="465.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>ACM paper, biblatex, pdfLaTeX: median with prumo 3.35 s, without 3.30 s</title></line>
+<text x="724.0" y="461.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+52 ms (+1.6%)</text>
+<text x="238.0" y="483.0" font-size="12" fill="#52514e" text-anchor="end">XeLaTeX</text>
+<circle cx="352.2" cy="479.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.96 s without prumo</title></circle>
+<circle cx="339.8" cy="479.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.95 s without prumo</title></circle>
+<circle cx="357.4" cy="479.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.97 s without prumo</title></circle>
+<circle cx="371.6" cy="479.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.99 s without prumo</title></circle>
+<circle cx="346.5" cy="479.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 3.96 s without prumo</title></circle>
+<circle cx="367.0" cy="479.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 3.99 s with prumo</title></circle>
+<circle cx="373.4" cy="479.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 4.00 s with prumo</title></circle>
+<circle cx="407.6" cy="479.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 4.05 s with prumo</title></circle>
+<circle cx="383.5" cy="479.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 4.01 s with prumo</title></circle>
+<circle cx="381.3" cy="479.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 4.01 s with prumo</title></circle>
+<line x1="381.3" y1="471.0" x2="381.3" y2="487.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, XeLaTeX: median with prumo 4.01 s, without 3.96 s</title></line>
+<text x="724.0" y="483.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+45 ms (+1.1%)</text>
+<text x="238.0" y="505.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="426.3" cy="501.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 4.74 s without prumo</title></circle>
+<circle cx="358.7" cy="501.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 4.62 s without prumo</title></circle>
+<circle cx="346.9" cy="501.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 4.59 s without prumo</title></circle>
+<circle cx="343.6" cy="501.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 4.59 s without prumo</title></circle>
+<circle cx="352.2" cy="501.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 4.60 s without prumo</title></circle>
+<circle cx="379.4" cy="501.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 4.65 s with prumo</title></circle>
+<circle cx="415.2" cy="501.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 4.72 s with prumo</title></circle>
+<circle cx="406.4" cy="501.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 4.70 s with prumo</title></circle>
+<circle cx="380.1" cy="501.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 4.65 s with prumo</title></circle>
+<circle cx="396.0" cy="501.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 4.68 s with prumo</title></circle>
+<line x1="396.0" y1="493.0" x2="396.0" y2="509.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, LuaLaTeX: median with prumo 4.68 s, without 4.60 s</title></line>
+<text x="724.0" y="505.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+79 ms (+1.7%)</text>
+<line x1="24.0" y1="517.0" x2="242.0" y2="517.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="537.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">HoTT book</text>
+<text x="238.0" y="537.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="352.2" cy="533.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>HoTT book, pdfLaTeX: 4.12 s without prumo</title></circle>
+<circle cx="350.5" cy="533.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>HoTT book, pdfLaTeX: 4.12 s without prumo</title></circle>
+<circle cx="355.0" cy="533.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>HoTT book, pdfLaTeX: 4.13 s without prumo</title></circle>
+<circle cx="349.7" cy="533.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>HoTT book, pdfLaTeX: 4.12 s without prumo</title></circle>
+<circle cx="375.6" cy="533.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>HoTT book, pdfLaTeX: 4.16 s without prumo</title></circle>
+<circle cx="391.7" cy="533.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>HoTT book, pdfLaTeX: 4.19 s with prumo</title></circle>
+<circle cx="387.0" cy="533.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>HoTT book, pdfLaTeX: 4.18 s with prumo</title></circle>
+<circle cx="391.4" cy="533.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>HoTT book, pdfLaTeX: 4.19 s with prumo</title></circle>
+<circle cx="385.1" cy="533.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>HoTT book, pdfLaTeX: 4.17 s with prumo</title></circle>
+<circle cx="415.5" cy="533.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>HoTT book, pdfLaTeX: 4.22 s with prumo</title></circle>
+<line x1="391.4" y1="525.0" x2="391.4" y2="541.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>HoTT book, pdfLaTeX: median with prumo 4.19 s, without 4.12 s</title></line>
+<text x="724.0" y="537.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+63 ms (+1.5%)</text>
+<line x1="24.0" y1="549.0" x2="242.0" y2="549.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="569.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">generated book</text>
+<text x="238.0" y="569.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="377.0" cy="565.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>generated book, pdfLaTeX: 16.8 s without prumo</title></circle>
+<circle cx="342.3" cy="565.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>generated book, pdfLaTeX: 16.6 s without prumo</title></circle>
+<circle cx="355.8" cy="565.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>generated book, pdfLaTeX: 16.7 s without prumo</title></circle>
+<circle cx="352.2" cy="565.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>generated book, pdfLaTeX: 16.6 s without prumo</title></circle>
+<circle cx="336.8" cy="565.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>generated book, pdfLaTeX: 16.5 s without prumo</title></circle>
+<circle cx="374.8" cy="565.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>generated book, pdfLaTeX: 16.8 s with prumo</title></circle>
+<circle cx="373.1" cy="565.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>generated book, pdfLaTeX: 16.8 s with prumo</title></circle>
+<circle cx="383.4" cy="565.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>generated book, pdfLaTeX: 16.8 s with prumo</title></circle>
+<circle cx="352.6" cy="565.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>generated book, pdfLaTeX: 16.6 s with prumo</title></circle>
+<circle cx="349.4" cy="565.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>generated book, pdfLaTeX: 16.6 s with prumo</title></circle>
+<line x1="373.1" y1="557.0" x2="373.1" y2="573.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>generated book, pdfLaTeX: median with prumo 16.8 s, without 16.6 s</title></line>
+<text x="724.0" y="569.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+136 ms (+0.8%)</text>
+<text x="238.0" y="591.0" font-size="12" fill="#52514e" text-anchor="end">XeLaTeX</text>
+<circle cx="349.6" cy="587.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 19.9 s without prumo</title></circle>
+<circle cx="352.2" cy="587.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 19.9 s without prumo</title></circle>
+<circle cx="354.2" cy="587.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 19.9 s without prumo</title></circle>
+<circle cx="362.5" cy="587.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 20.0 s without prumo</title></circle>
+<circle cx="344.9" cy="587.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 19.9 s without prumo</title></circle>
+<circle cx="367.7" cy="587.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 20.0 s with prumo</title></circle>
+<circle cx="371.6" cy="587.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 20.1 s with prumo</title></circle>
+<circle cx="372.3" cy="587.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 20.1 s with prumo</title></circle>
+<circle cx="363.4" cy="587.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 20.0 s with prumo</title></circle>
+<circle cx="357.8" cy="587.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 20.0 s with prumo</title></circle>
+<line x1="367.7" y1="579.0" x2="367.7" y2="595.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, XeLaTeX: median with prumo 20.0 s, without 19.9 s</title></line>
+<text x="724.0" y="591.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+120 ms (+0.6%)</text>
+<text x="238.0" y="613.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="352.7" cy="609.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 38.7 s without prumo</title></circle>
+<circle cx="352.2" cy="609.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 38.7 s without prumo</title></circle>
+<circle cx="334.1" cy="609.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 38.4 s without prumo</title></circle>
+<circle cx="346.5" cy="609.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 38.6 s without prumo</title></circle>
+<circle cx="469.5" cy="609.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 40.5 s without prumo</title></circle>
+<circle cx="337.1" cy="609.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 38.5 s with prumo</title></circle>
+<circle cx="346.7" cy="609.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 38.6 s with prumo</title></circle>
+<circle cx="352.7" cy="609.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 38.7 s with prumo</title></circle>
+<circle cx="484.5" cy="609.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 40.7 s with prumo</title></circle>
+<circle cx="445.0" cy="609.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 40.1 s with prumo</title></circle>
+<line x1="352.7" y1="601.0" x2="352.7" y2="617.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, LuaLaTeX: median with prumo 38.7 s, without 38.7 s</title></line>
+<text x="724.0" y="613.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+8 ms (+0.0%)</text>
+<line x1="24.0" y1="625.0" x2="242.0" y2="625.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="645.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">Open Logic</text>
+<text x="238.0" y="645.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="404.7" cy="641.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Open Logic, pdfLaTeX: 30.1 s without prumo</title></circle>
+<circle cx="338.7" cy="641.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Open Logic, pdfLaTeX: 29.3 s without prumo</title></circle>
+<circle cx="409.2" cy="641.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Open Logic, pdfLaTeX: 30.2 s without prumo</title></circle>
+<circle cx="352.2" cy="641.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Open Logic, pdfLaTeX: 29.5 s without prumo</title></circle>
+<circle cx="349.7" cy="641.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Open Logic, pdfLaTeX: 29.5 s without prumo</title></circle>
+<circle cx="389.8" cy="641.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Open Logic, pdfLaTeX: 29.9 s with prumo</title></circle>
+<circle cx="356.6" cy="641.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Open Logic, pdfLaTeX: 29.6 s with prumo</title></circle>
+<circle cx="370.3" cy="641.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Open Logic, pdfLaTeX: 29.7 s with prumo</title></circle>
+<circle cx="383.7" cy="641.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Open Logic, pdfLaTeX: 29.9 s with prumo</title></circle>
+<circle cx="400.8" cy="641.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Open Logic, pdfLaTeX: 30.1 s with prumo</title></circle>
+<line x1="383.7" y1="633.0" x2="383.7" y2="649.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>Open Logic, pdfLaTeX: median with prumo 29.9 s, without 29.5 s</title></line>
+<text x="724.0" y="645.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+363 ms (+1.2%)</text>
+<text x="238.0" y="667.0" font-size="12" fill="#52514e" text-anchor="end">XeLaTeX</text>
+<circle cx="536.3" cy="663.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 33.6 s without prumo</title></circle>
+<circle cx="352.1" cy="663.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 31.4 s without prumo</title></circle>
+<circle cx="352.2" cy="663.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 31.4 s without prumo</title></circle>
+<circle cx="354.8" cy="663.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 31.4 s without prumo</title></circle>
+<circle cx="319.5" cy="663.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, XeLaTeX: 31.0 s without prumo</title></circle>
+<circle cx="363.1" cy="663.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 31.5 s with prumo</title></circle>
+<circle cx="360.1" cy="663.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 31.5 s with prumo</title></circle>
+<circle cx="408.5" cy="663.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 32.1 s with prumo</title></circle>
+<circle cx="365.2" cy="663.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 31.5 s with prumo</title></circle>
+<circle cx="334.3" cy="663.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, XeLaTeX: 31.2 s with prumo</title></circle>
+<line x1="363.1" y1="655.0" x2="363.1" y2="671.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, XeLaTeX: median with prumo 31.5 s, without 31.4 s</title></line>
+<text x="724.0" y="667.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+134 ms (+0.4%)</text>
+<text x="238.0" y="689.0" font-size="12" fill="#52514e" text-anchor="end">LuaLaTeX</text>
+<circle cx="353.8" cy="685.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 38.0 s without prumo</title></circle>
+<circle cx="352.2" cy="685.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 38.0 s without prumo</title></circle>
+<circle cx="307.4" cy="685.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 37.3 s without prumo</title></circle>
+<circle cx="346.7" cy="685.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 37.9 s without prumo</title></circle>
+<circle cx="389.7" cy="685.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>, LuaLaTeX: 38.6 s without prumo</title></circle>
+<circle cx="456.8" cy="685.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 39.6 s with prumo</title></circle>
+<circle cx="440.2" cy="685.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 39.3 s with prumo</title></circle>
+<circle cx="344.7" cy="685.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 37.9 s with prumo</title></circle>
+<circle cx="467.9" cy="685.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 39.7 s with prumo</title></circle>
+<circle cx="372.4" cy="685.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>, LuaLaTeX: 38.3 s with prumo</title></circle>
+<line x1="440.2" y1="677.0" x2="440.2" y2="693.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>, LuaLaTeX: median with prumo 39.3 s, without 38.0 s</title></line>
+<text x="724.0" y="689.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+1,308 ms (+3.4%)</text>
+<line x1="24.0" y1="701.0" x2="242.0" y2="701.0" stroke="#e1e0d9" stroke-width="1" stroke-linecap="round"></line>
+<text x="24.0" y="721.0" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="600">Stacks Project</text>
+<text x="238.0" y="721.0" font-size="12" fill="#52514e" text-anchor="end">pdfLaTeX</text>
+<circle cx="352.2" cy="717.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Stacks Project, pdfLaTeX: 44.7 s without prumo</title></circle>
+<circle cx="328.7" cy="717.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Stacks Project, pdfLaTeX: 44.3 s without prumo</title></circle>
+<circle cx="363.6" cy="717.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Stacks Project, pdfLaTeX: 44.9 s without prumo</title></circle>
+<circle cx="351.7" cy="717.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Stacks Project, pdfLaTeX: 44.7 s without prumo</title></circle>
+<circle cx="372.8" cy="717.0" r="3" fill="#fcfcfb" stroke="#52514e" stroke-width="2"><title>Stacks Project, pdfLaTeX: 45.1 s without prumo</title></circle>
+<circle cx="363.3" cy="717.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Stacks Project, pdfLaTeX: 44.9 s with prumo</title></circle>
+<circle cx="382.2" cy="717.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Stacks Project, pdfLaTeX: 45.2 s with prumo</title></circle>
+<circle cx="352.6" cy="717.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Stacks Project, pdfLaTeX: 44.7 s with prumo</title></circle>
+<circle cx="369.8" cy="717.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Stacks Project, pdfLaTeX: 45.0 s with prumo</title></circle>
+<circle cx="373.9" cy="717.0" r="4" fill="#0b0b0b" stroke="#fcfcfb" stroke-width="1.5"><title>Stacks Project, pdfLaTeX: 45.1 s with prumo</title></circle>
+<line x1="369.8" y1="709.0" x2="369.8" y2="725.0" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><title>Stacks Project, pdfLaTeX: median with prumo 45.0 s, without 44.7 s</title></line>
+<text x="724.0" y="721.0" font-size="12" fill="#52514e" text-anchor="start" font-variant-numeric="tabular-nums">+307 ms (+0.7%)</text>
+<text x="724.0" y="102.0" font-size="11" fill="#898781" text-anchor="start">median cost</text>
+<text x="24.0" y="776.0" font-size="11" fill="#898781" text-anchor="start" font-variant-numeric="tabular-nums">i9-13900K, one P-core per container · TeX Live 2026, LaTeX 2026-11-01 · warm runs: 5; generated book and Open Logic 3; Stacks Project 2</text>
+</svg>

@@ -1,0 +1,241 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "0.21",
+   "1.67",
+   "1.76"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "pdflatex": {
+  "report": {
+   "schema": 1,
+   "job": "main",
+   "engine": "pdflatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 133.829,
+    "spread_ms": 4.474,
+    "runs_ms": [
+     134.883,
+     132.773,
+     137.091,
+     132.617,
+     133.829
+    ],
+    "warmup_ms": 133.747
+   },
+   "baseline_pages": 1,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 8.728,
+     "status": "measured",
+     "variant": {
+      "median_ms": 131.363,
+      "spread_ms": 7.325,
+      "runs_ms": [
+       131.363,
+       135.637,
+       136.948,
+       129.76,
+       129.623
+      ],
+      "warmup_ms": 130.763
+     },
+     "saved_ms": 2.466,
+     "saved_pct": 1.8,
+     "within_noise": true,
+     "one_time_ms": 169.481,
+     "output": {
+      "status": "identical"
+     }
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 134.927,
+      "spread_ms": 5.21,
+      "runs_ms": [
+       131.71,
+       134.113,
+       136.92,
+       136.826,
+       134.927
+      ],
+      "warmup_ms": 133.7
+     },
+     "saved_ms": -1.098,
+     "saved_pct": -0.8,
+     "within_noise": true,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 3.1
+ },
+ "xelatex": {
+  "report": {
+   "schema": 1,
+   "job": "main",
+   "engine": "xelatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 271.351,
+    "spread_ms": 16.159,
+    "runs_ms": [
+     271.351,
+     283.717,
+     268.377,
+     267.558,
+     271.979
+    ],
+    "warmup_ms": 270.069
+   },
+   "baseline_pages": 1,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 47.15,
+     "status": "failed",
+     "error": "could not precompile: ! Can't \\dump a format with native fonts or font-mappings."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 167.323,
+      "spread_ms": 13.108,
+      "runs_ms": [
+       167.323,
+       175.91,
+       162.802,
+       163.894,
+       171.835
+      ],
+      "warmup_ms": 163.555
+     },
+     "saved_ms": 104.028,
+     "saved_pct": 38.3,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 3.7
+ },
+ "lualatex": {
+  "report": {
+   "schema": 1,
+   "job": "main",
+   "engine": "lualatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 317.345,
+    "spread_ms": 12.02,
+    "runs_ms": [
+     316.426,
+     313.804,
+     325.824,
+     317.345,
+     320.439
+    ],
+    "warmup_ms": 317.405
+   },
+   "baseline_pages": 1,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 22.202,
+     "status": "failed",
+     "error": "could not precompile: lua-uni-stage-tables.lua:141: attempt to perform arithmetic on a string value (local 'key')."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 312.909,
+      "spread_ms": 16.178,
+      "runs_ms": [
+       317.905,
+       307.74,
+       308.951,
+       312.909,
+       323.918
+      ],
+      "warmup_ms": 318.224
+     },
+     "saved_ms": 4.436,
+     "saved_pct": 1.4,
+     "within_noise": true,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 5.1
+ }
+}

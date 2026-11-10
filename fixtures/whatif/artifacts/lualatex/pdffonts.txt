@@ -1,0 +1,6 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+CHCSTU+LMRoman12-Bold                CID Type 0C       Identity-H       yes yes yes     12  0
+IWFNKH+LMRoman10-Regular             CID Type 0C       Identity-H       yes yes yes     13  0
+HMRTCK+CMR10                         Type 1            Builtin          yes yes yes     14  0
+CUJHND+CMMI10                        Type 1            Builtin          yes yes yes     15  0

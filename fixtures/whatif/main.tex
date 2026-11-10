@@ -1,0 +1,42 @@
+% Fixture: whatif, a heavy preamble and one picture.
+%
+% Known answers on TeX Live 2026 (tests/tex.rs::whatif_fixture_claims; 7 in
+% tests/fixtures.rs::whatif_fixture_bounds):
+%  1. On pdfLaTeX the precompiled preamble (mylatexformat) saves more than a third of the
+%     build, outside the noise, with the same page count and text.
+%  2. On XeLaTeX the format cannot be dumped: the class loads Latin Modern as an OpenType
+%     font, and XeTeX does not dump those. The preamble row says "could not precompile"
+%     with that error, and draft still runs.
+%  3. On LuaLaTeX the format build fails too (a Lua error during the dump) and is reported
+%     the same way.
+%  4. With --shell-escape, externalizing the picture keeps the page count and text on all
+%     three engines, and the first run, which builds the picture, is the slowest.
+%  5. Without --shell-escape, externalize is refused when asked for and not run by default.
+%  6. Draft mode runs on all three engines and its output is not compared (no PDF).
+%  7. The probe's bound for externalize is the one tikzpicture's time, and for preamble the
+%     preamble phase, the longest phase on every engine.
+%  8. The document's directory is unchanged.
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\begin{document}
+\section{A picture}
+The box is \SI{2}{\centi\metre} wide.
+
+\begin{tikzpicture}
+  \node[draw, minimum width=2cm] (a) {box};
+  \node[draw, right=of a] (b) {other};
+  \draw[-Stealth] (a) -- (b);
+\end{tikzpicture}
+
+\begin{tabular}{lr}
+  \toprule
+  a & \num{1.5} \\
+  \bottomrule
+\end{tabular}
+\end{document}

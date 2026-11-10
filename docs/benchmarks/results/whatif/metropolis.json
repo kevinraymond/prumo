@@ -1,0 +1,297 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "7.53",
+   "6.24",
+   "3.95"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "pdflatex": {
+  "report": {
+   "schema": 1,
+   "job": "demo",
+   "engine": "pdflatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 1098.267,
+    "spread_ms": 12.41,
+    "runs_ms": [
+     1098.333,
+     1098.267,
+     1103.42,
+     1094.517,
+     1091.01
+    ],
+    "warmup_ms": 1087.728
+   },
+   "baseline_pages": 33,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 363.77,
+     "status": "measured",
+     "variant": {
+      "median_ms": 820.578,
+      "spread_ms": 14.275,
+      "runs_ms": [
+       831.13,
+       816.855,
+       822.69,
+       818.386,
+       820.578
+      ],
+      "warmup_ms": 816.415
+     },
+     "saved_ms": 277.689,
+     "saved_pct": 25.3,
+     "within_noise": false,
+     "one_time_ms": 553.945,
+     "output": {
+      "status": "identical"
+     }
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1088.821,
+      "spread_ms": 6.837,
+      "runs_ms": [
+       1084.375,
+       1088.821,
+       1086.786,
+       1091.212,
+       1090.068
+      ],
+      "warmup_ms": 1080.508
+     },
+     "saved_ms": 9.446,
+     "saved_pct": 0.9,
+     "within_noise": true,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 228.226,
+     "status": "measured",
+     "variant": {
+      "median_ms": 880.557,
+      "spread_ms": 13.876,
+      "runs_ms": [
+       880.557,
+       882.737,
+       878.633,
+       879.621,
+       892.509
+      ],
+      "warmup_ms": 7508.078
+     },
+     "saved_ms": 217.71,
+     "saved_pct": 19.8,
+     "within_noise": false,
+     "one_time_ms": 7508.078,
+     "output": {
+      "status": "identical"
+     }
+    }
+   ]
+  },
+  "elapsed_s": 32.2
+ },
+ "xelatex": {
+  "report": {
+   "schema": 1,
+   "job": "demo",
+   "engine": "xelatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 1397.933,
+    "spread_ms": 28.579,
+    "runs_ms": [
+     1383.209,
+     1393.396,
+     1397.933,
+     1398.772,
+     1411.788
+    ],
+    "warmup_ms": 1481.745
+   },
+   "baseline_pages": 33,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 514.206,
+     "status": "failed",
+     "error": "could not precompile: ! Can't \\dump a format with native fonts or font-mappings."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1240.025,
+      "spread_ms": 9.71,
+      "runs_ms": [
+       1249.088,
+       1239.378,
+       1239.762,
+       1240.025,
+       1245.51
+      ],
+      "warmup_ms": 1303.416
+     },
+     "saved_ms": 157.908,
+     "saved_pct": 11.3,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 240.479,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1179.3,
+      "spread_ms": 14.87,
+      "runs_ms": [
+       1188.795,
+       1173.925,
+       1180.37,
+       1178.911,
+       1179.3
+      ],
+      "warmup_ms": 10672.76
+     },
+     "saved_ms": 218.633,
+     "saved_pct": 15.6,
+     "within_noise": false,
+     "one_time_ms": 10672.76,
+     "output": {
+      "status": "changed",
+      "evidence": "page 19 looks different (96 of 11011 pixels at 24 dpi; same words)"
+     }
+    }
+   ]
+  },
+  "elapsed_s": 35.5
+ },
+ "lualatex": {
+  "report": {
+   "schema": 1,
+   "job": "demo",
+   "engine": "lualatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 1736.794,
+    "spread_ms": 21.317,
+    "runs_ms": [
+     1736.941,
+     1736.794,
+     1744.003,
+     1725.517,
+     1722.686
+    ],
+    "warmup_ms": 1774.673
+   },
+   "baseline_pages": 33,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 595.291,
+     "status": "failed",
+     "error": "could not precompile: lua-uni-stage-tables.lua:141: attempt to perform arithmetic on a string value (local 'key')."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1667.27,
+      "spread_ms": 21.708,
+      "runs_ms": [
+       1659.003,
+       1667.27,
+       1680.711,
+       1667.152,
+       1679.56
+      ],
+      "warmup_ms": 1676.877
+     },
+     "saved_ms": 69.524,
+     "saved_pct": 4.0,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 269.592,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1472.909,
+      "spread_ms": 39.686,
+      "runs_ms": [
+       1504.15,
+       1472.909,
+       1475.145,
+       1469.483,
+       1464.464
+      ],
+      "warmup_ms": 12536.947
+     },
+     "saved_ms": 263.885,
+     "saved_pct": 15.2,
+     "within_noise": false,
+     "one_time_ms": 12536.947,
+     "output": {
+      "status": "changed",
+      "evidence": "page 19 looks different (96 of 11011 pixels at 24 dpi; same words)"
+     }
+    }
+   ]
+  },
+  "elapsed_s": 43.8
+ }
+}

@@ -1,0 +1,102 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "0.21",
+   "1.67",
+   "1.76"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 2,
+ "pdflatex": {
+  "report": {
+   "schema": 1,
+   "job": "book",
+   "engine": "pdflatex",
+   "runs": 2,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 45605.348,
+    "spread_ms": 929.917,
+    "runs_ms": [
+     46070.306,
+     45140.389
+    ],
+    "warmup_ms": 47725.298
+   },
+   "baseline_pages": 7710,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 116.287,
+     "status": "measured",
+     "variant": {
+      "median_ms": 45516.304,
+      "spread_ms": 845.554,
+      "runs_ms": [
+       45939.081,
+       45093.527
+      ],
+      "warmup_ms": 47953.542
+     },
+     "saved_ms": 89.044,
+     "saved_pct": 0.2,
+     "within_noise": true,
+     "one_time_ms": 291.852,
+     "output": {
+      "status": "identical"
+     }
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 42231.261,
+      "spread_ms": 937.82,
+      "runs_ms": [
+       42700.171,
+       41762.351
+      ],
+      "warmup_ms": 43924.957
+     },
+     "saved_ms": 3374.087,
+     "saved_pct": 7.4,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 602.4
+ }
+}
