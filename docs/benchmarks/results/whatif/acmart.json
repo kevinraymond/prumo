@@ -1,0 +1,223 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "0.21",
+   "1.67",
+   "1.76"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "pdflatex": {
+  "report": {
+   "schema": 1,
+   "job": "sigconf",
+   "engine": "pdflatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 2461.412,
+    "spread_ms": 90.521,
+    "runs_ms": [
+     2542.635,
+     2470.907,
+     2461.412,
+     2457.034,
+     2452.114
+    ],
+    "warmup_ms": 2523.581
+   },
+   "baseline_pages": 7,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 786.087,
+     "status": "failed",
+     "error": "could not precompile: ! LaTeX Error: \\begin{document} ended by \\end{acks}."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 2411.857,
+      "spread_ms": 102.646,
+      "runs_ms": [
+       2491.153,
+       2411.857,
+       2420.345,
+       2395.004,
+       2388.507
+      ],
+      "warmup_ms": 2486.845
+     },
+     "saved_ms": 49.555,
+     "saved_pct": 2.0,
+     "within_noise": true,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 34.6
+ },
+ "xelatex": {
+  "report": {
+   "schema": 1,
+   "job": "sigconf",
+   "engine": "xelatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 3012.119,
+    "spread_ms": 60.856,
+    "runs_ms": [
+     3003.065,
+     3018.416,
+     3047.388,
+     3012.119,
+     2986.532
+    ],
+    "warmup_ms": 3017.884
+   },
+   "baseline_pages": 7,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 1179.535,
+     "status": "failed",
+     "error": "could not precompile: ! LaTeX Error: \\begin{document} ended by \\end{acks}."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 2826.165,
+      "spread_ms": 77.841,
+      "runs_ms": [
+       2874.218,
+       2819.713,
+       2826.165,
+       2796.377,
+       2838.72
+      ],
+      "warmup_ms": 2809.1
+     },
+     "saved_ms": 185.954,
+     "saved_pct": 6.2,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 41.2
+ },
+ "lualatex": {
+  "report": {
+   "schema": 1,
+   "job": "sigconf",
+   "engine": "lualatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 3846.078,
+    "spread_ms": 470.32,
+    "runs_ms": [
+     3878.892,
+     3740.491,
+     4210.811,
+     3759.085,
+     3846.078
+    ],
+    "warmup_ms": 3798.258
+   },
+   "baseline_pages": 6,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 1554.611,
+     "status": "failed",
+     "error": "could not precompile: ! LaTeX Error: \\begin{document} ended by \\end{acks}."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 3676.494,
+      "spread_ms": 209.997,
+      "runs_ms": [
+       3785.77,
+       3676.494,
+       3666.63,
+       3728.45,
+       3575.773
+      ],
+      "warmup_ms": 3815.377
+     },
+     "saved_ms": 169.584,
+     "saved_pct": 4.4,
+     "within_noise": true,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 53.0
+ }
+}

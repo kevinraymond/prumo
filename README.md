@@ -16,9 +16,8 @@ I had no way to see why. Commenting packages out one at a time is not insight. p
 is one instrumented build that shows where the time goes, which package loaded which, and what you can
 drop.
 
-It has been run on my own corpus and on a few public documents (a thesis template, a beamer
-deck, a 76-page arXiv paper; see [the benchmarks](docs/benchmarks/README.md)). Please report
-what breaks!
+It has been run on my own corpus and on public documents from an ACM paper to the 7,710-page
+Stacks Project (see [the benchmarks](docs/benchmarks/README.md)). Please report what breaks!
 
 This project was made with the assistance of AI (Claude).
 
@@ -63,6 +62,7 @@ prumo prune docs/ --engines pdflatex # corpus-wide keep list and tlmgr remove pl
 prumo prune docs/ --apply --yes      # run the plan; every tlmgr command is logged
 prumo unused main.tex                # which \usepackage lines can go: remove the line, rebuild, compare
 prumo unused obra.cls --corpus 'docs/**/*.tex'   # a class judged against every document that uses it
+prumo whatif main.tex --shell-escape # measured speed-ups: precompiled preamble, draft mode, externalized tikz pictures
 prumo time main.tex --env tblr,minted  # which environments to time (default: tikzpicture, axis, tcolorbox, tblr, longtable, tabularx, minted, lstlisting, forest)
 prumo time output.prumo              # records from a build prumo did not run (Overleaf: docs/overleaf.md)
 prumo doctor --check-log main.tex    # files that bypassed the hooks; log vs records
@@ -147,6 +147,54 @@ row. `prumo compare main.tex --runs 4` on the same paper:
   hint: pdflatex is fastest for this document; lualatex takes 486 ms more (1.6×).
   note: xelatex's first run took 4050 ms (font cache build); the reported run is warm.
 ```
+
+## What `whatif` measures
+
+`prumo whatif` rebuilds the document with one change at a time and times it against the
+plain build. Here it is on the whatif fixture:
+
+```
+$ prumo whatif fixtures/whatif/main.tex --shell-escape
+== prumo whatif: main (pdflatex, median of 5 runs after a warm-up, 1 page, -shell-escape)
+  experiment     baseline   variant  saved             bound  one-time  output
+  preamble         247 ms     90 ms  157 ms 64%       207 ms    319 ms  identical
+  draft            247 ms    244 ms  within noise          -         -  n/a (no PDF)
+  externalize*     247 ms    245 ms  within noise       3 ms    503 ms  identical
+```
+
+The three experiments:
+
+- `preamble` precompiles everything before `\begin{document}` into a format with
+  mylatexformat and builds on that format. The one-time column is the format build. Only
+  pdfTeX can do it at all. XeTeX cannot write a format once the class has loaded its
+  OpenType font, and on LuaTeX either the format build or the build on it fails. Even on
+  pdfTeX it fails on preambles that open files or play with catcodes, as it did on three of
+  the six pdfLaTeX documents in the [benchmarks](docs/benchmarks/README.md). The row says
+  which step failed, with the error.
+- `draft` builds without writing a PDF (`-draftmode`, or `-no-pdf` on XeTeX). What it saves
+  is what writing the PDF and including images cost. There is no PDF to compare.
+- `externalize` is experimental. It turns on tikz's external library from the command line,
+  so each picture is built once into its own PDF and included from then on. It needs
+  `--shell-escape`, because tikz builds each picture with a shell command. The one-time
+  column is the first run, which builds every picture. The external library breaks
+  `remember picture`, overlays and references between pictures, so look at the PDF too.
+
+Every build runs once to warm up, then five times (`--runs`), one build at a time and without
+the probe. The baseline and the variants take turns, so drift hits them all alike. The table
+compares medians. A difference no larger than the spread, the slowest run minus the fastest,
+is "within noise". The output column compares the page count, the words on each page
+(`pdftotext`) and a coarse render of each page with the baseline's. When they differ, the
+report says the saving is not a clean one.
+
+The bound column is a cross-check from one probed build: the preamble phase for `preamble`,
+and the time inside `tikzpicture` environments for `externalize`. The fixture's one picture
+takes 3 ms, so externalizing it saves nothing. The [benchmarks](docs/benchmarks/README.md)
+run all three experiments on ten documents and three engines. Watch the one-time cost.
+Externalizing Open Logic's pictures saves 4 s of a 31 s build, after a first run of 93
+minutes.
+
+Each experiment runs in its own copy of your directory, and the formats and picture files
+stay there. Under the table, `whatif` says how to make each change yourself.
 
 ## Running from Docker, nothing installed
 
@@ -327,6 +375,7 @@ know which of its macros, that is texprof's question.
   `--out` says), nothing next to your document. `prune --apply` is the one destructive command, it
   re-prints its plan first and needs `--yes`.
 - Fetch anything. It reads the local `texlive.tlpdb`; no network, ever.
+- Make a speed-up for you. `whatif` measures a change on a copy and says how to make it.
 - Prove a package unused. "No observable effect" means this document, this build, these
   comparisons; a package can matter for input the document does not exercise, and the report
   says so every time.

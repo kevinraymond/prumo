@@ -1,0 +1,111 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "6.31",
+   "6.49",
+   "4.92"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "pdflatex": {
+  "report": {
+   "schema": 1,
+   "job": "hott-online",
+   "engine": "pdflatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 4146.906,
+    "spread_ms": 100.505,
+    "runs_ms": [
+     4149.102,
+     4146.906,
+     4165.116,
+     4064.611,
+     4075.87
+    ],
+    "warmup_ms": 4163.073
+   },
+   "baseline_pages": 492,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 293.381,
+     "status": "failed",
+     "error": "the build on the precompiled preamble failed: ! File ended while scanning use of ^^M."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 3103.694,
+      "spread_ms": 68.078,
+      "runs_ms": [
+       3101.583,
+       3148.7,
+       3153.161,
+       3085.083,
+       3103.694
+      ],
+      "warmup_ms": 3155.963
+     },
+     "saved_ms": 1043.212,
+     "saved_pct": 25.2,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 135.208,
+     "status": "measured",
+     "variant": {
+      "median_ms": 3975.756,
+      "spread_ms": 76.918,
+      "runs_ms": [
+       4035.532,
+       4028.366,
+       3958.614,
+       3969.183,
+       3975.756
+      ],
+      "warmup_ms": 25513.405
+     },
+     "saved_ms": 171.15,
+     "saved_pct": 4.1,
+     "within_noise": false,
+     "one_time_ms": 25513.405,
+     "output": {
+      "status": "identical"
+     }
+    }
+   ]
+  },
+  "elapsed_s": 99.2
+ }
+}

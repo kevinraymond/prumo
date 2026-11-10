@@ -1,22 +1,35 @@
 #!/usr/bin/env python3
-"""Benchmarks: prumo's phase table for four documents on three engines.
+"""Benchmarks: prumo's phase table, and `prumo whatif`, for the documents in corpus.toml.
 
 Runs inside a TeX Live image with prumo on PATH and the documents under /bench/docs (run.sh
-sets that up). For each document and engine:
+lays them out with fetch.py). For each document and engine:
 
-  1. Copy the document to a scratch directory and build it there with latexmk, so the .aux,
-     .toc and .bbl exist. prumo copies the directory it is given, so every timed run is a
-     rerun with those files present, the way an editor rebuilds.
+  1. Copy the document to a scratch directory, run its `prepare` commands, and build it
+     there with latexmk, so the .aux, .toc and .bbl exist. prumo copies the directory it is
+     given, so every timed run is a rerun with those files present, the way an editor
+     rebuilds.
   2. One cold run: a fresh HOME, so no luaotfload font name database and no fontconfig
      cache. The operating system's file cache is not dropped (that needs root on the host).
-  3. --runs warm runs with that HOME.
+  3. The document's `runs` warm runs (--runs by default) with that HOME.
 
 Every timed run is `prumo time --rebuild --json`. The phases come from prumo, the wall time
 is prumo's own measure of the engine process. Writes results.json (every run, plus the
 medians) and results.md (the tables) to --out.
 
-Usage: bench.py [--runs 5] [--docs minimal,standard,florilegium,large]
-                [--engines pdflatex,xelatex,lualatex] [--out results]
+With --overhead, step 1 is followed by --runs rounds of two builds in turns, after a
+warm-up of each: the plain engine command, and the same with what prumo adds (-recorder,
+-jobname and the probe, from /probe). Both are timed here the same way, spawn to exit, so the
+difference is the probe's cost. Each probed run's records are read with `prumo time --json
+<job>.prumo` for the per-package times. Results go to overhead/<document>.json.
+
+With --whatif, step 1 is followed by `prumo whatif --json --shell-escape` with the same
+number of runs, in the HOME latexmk warmed. Each document's reports go to
+whatif/<document>.json under --out, so several containers can run at once on different
+documents, and whatif.md is written from every file there. --report rewrites the two
+markdown files from the JSON without building anything.
+
+Usage: bench.py [--runs 5] [--docs minimal,standard,...] [--engines pdflatex,xelatex,lualatex]
+                [--whatif | --overhead | --report] [--out results]
 """
 import argparse
 import json
@@ -26,21 +39,23 @@ import shutil
 import statistics
 import subprocess
 import time
+import tomllib
 from pathlib import Path
 
-DOCS = {
-    # name: (directory under /bench/docs, main file, engines it supports, warm runs or None)
-    "minimal": ("minimal", "main.tex", None, None),
-    "standard": ("standard", "main.tex", None, None),
-    "florilegium": ("florilegium", "florilegium-doc.tex", ["lualatex"], None),
-    "large": ("large", "main.tex", None, 3),
-}
+DOCS = tomllib.loads((Path(__file__).resolve().parent / "corpus.toml").read_text())
+ENGINES = ["pdflatex", "xelatex", "lualatex"]
+
+
+def title(doc):
+    """What the tables call a document: its title in corpus.toml."""
+    return DOCS[doc].get("title", doc)
 PHASES = ["startup", "preamble", "begin_document", "typesetting", "shipout", "end_document", "finalization"]
 LATEXMK_FLAG = {"pdflatex": "-pdf", "xelatex": "-xelatex", "lualatex": "-lualatex"}
 
 
 def sh(cmd, **kw):
-    return subprocess.run(cmd, capture_output=True, text=True, **kw)
+    # TeX output is not always UTF-8 (a log quotes the bytes a file had).
+    return subprocess.run(cmd, capture_output=True, text=True, errors="replace", **kw)
 
 
 def version_line(cmd):
@@ -63,21 +78,33 @@ def machine():
         "xetex": version_line(["xetex", "--version"]),
         "luahbtex": version_line(["luahbtex", "--version"]),
         "prumo": version_line(["prumo", "--version"]),
-        "florilegium_commit": os.environ.get("FLORILEGIUM_COMMIT", "?"),
+        "commits": {n: d["commit"] for n, d in DOCS.items() if "commit" in d},
     }
 
 
+def doc_dir(doc, scratch):
+    """The document's own directory inside its scratch copy."""
+    return scratch / DOCS[doc].get("dir", ".")
+
+
 def prepare(doc, engine, scratch):
-    """Copy the document and build it once with latexmk so the aux files exist."""
-    src = Path("/bench/docs") / DOCS[doc][0]
+    """Copy the document, run its prepare commands, build it once with latexmk so the aux
+    files exist. Returns (ok, log tail, HOME used)."""
+    src = Path("/bench/docs") / doc
     if scratch.exists():
         shutil.rmtree(scratch)
     shutil.copytree(src, scratch)
-    env = dict(os.environ, HOME=str(scratch.parent / f"home-prep-{doc}-{engine}"))
-    main = DOCS[doc][1]
-    r = sh(["latexmk", LATEXMK_FLAG[engine], "-interaction=nonstopmode", main], cwd=scratch, env=env)
-    pdf = scratch / main.replace(".tex", ".pdf")
-    return r.returncode == 0 and pdf.is_file(), r.stdout[-2000:] + r.stderr[-2000:]
+    home = scratch.parent / f"home-prep-{doc}-{engine}"
+    env = dict(os.environ, HOME=str(home))
+    if DOCS[doc].get("prepare"):
+        r = sh(["bash", "-ec", DOCS[doc]["prepare"]], cwd=scratch, env=env)
+        if r.returncode != 0:
+            return False, "prepare: " + r.stdout[-1000:] + r.stderr[-1000:], home
+    main = DOCS[doc]["main"]
+    d = doc_dir(doc, scratch)
+    r = sh(["latexmk", LATEXMK_FLAG[engine], "-interaction=nonstopmode", main], cwd=d, env=env)
+    pdf = d / main.replace(".tex", ".pdf")
+    return r.returncode == 0 and pdf.is_file(), r.stdout[-2000:] + r.stderr[-2000:], home
 
 
 def timed_run(scratch, main, engine, home, out):
@@ -164,69 +191,282 @@ def table(results, doc, engines):
     return "\n".join(lines) + "\n"
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--runs", type=int, default=5)
-    ap.add_argument("--docs", default="minimal,standard,florilegium,large")
-    ap.add_argument("--engines", default="pdflatex,xelatex,lualatex")
-    ap.add_argument("--out", default="results")
-    a = ap.parse_args()
-    out = Path(a.out)
-    out.mkdir(parents=True, exist_ok=True)
-    engines = a.engines.split(",")
-    work = Path("/tmp/bench")
+def phases_md(results):
+    m = results["machine"]
+    md = [f"Machine: {m['cpu']}, pinned to {m['cpus_allowed']} CPU; {m['pdftex']}; image {m['image']}. "
+          f"Warm medians of {results['runs']} runs unless the heading says otherwise; the cold run has a fresh HOME.\n"]
+    for doc in (d for d in DOCS if d in results):
+        engines = [e for e in ENGINES if e in results[doc]]
+        runs = DOCS[doc].get("runs")
+        md.append(f"\n### {title(doc)}{f' ({runs} warm runs)' if runs else ''}\n\n" + table(results, doc, engines))
+        for e in engines:
+            entry = results[doc][e]
+            if "failed" in entry:
+                md.append(f"\n{e}: the latexmk build failed, so nothing was timed.\n")
+            sc = entry.get("scale")
+            if sc:
+                md.append(
+                    f"\n{e}: {sc['record_lines']:,} records, {sc['record_bytes'] / 1024:,.0f} KiB. "
+                    f"`prumo time --json` reads the cached run in {sc['analyze_cached_ms']:,.0f} ms, and "
+                    f"`--html` writes {sc['html_bytes'] / 1024:,.0f} KiB in {sc['html_ms']:,.0f} ms.\n"
+                )
+    return "".join(md)
+
+
+def run_phases(a, out, work):
     results = {"machine": machine(), "runs": a.runs}
     for doc in a.docs.split(","):
-        _, main_file, supported, runs_override = DOCS[doc]
-        runs = runs_override or a.runs
+        runs = DOCS[doc].get("runs") or a.runs
         results[doc] = {}
-        for engine in engines:
-            if supported and engine not in supported:
-                results[doc][engine] = {"skipped": f"the document needs {', '.join(supported)}"}
+        for engine in a.engines.split(","):
+            if engine not in DOCS[doc].get("engines", ENGINES):
                 continue
             print(f"== {doc} on {engine}", flush=True)
             scratch = work / f"{doc}-{engine}"
-            ok, log = prepare(doc, engine, scratch)
+            ok, log, _ = prepare(doc, engine, scratch)
             if not ok:
                 results[doc][engine] = {"failed": "latexmk", "log": log}
                 print(f"   latexmk failed:\n{log[-800:]}", flush=True)
                 continue
+            d = doc_dir(doc, scratch)
+            main_file = DOCS[doc]["main"]
             home = work / f"home-{doc}-{engine}"
             cache = work / f"cache-{doc}-{engine}"
-            for d in (home, cache):
-                shutil.rmtree(d, ignore_errors=True)
-                d.mkdir(parents=True)
-            cold = summary(*timed_run(scratch, main_file, engine, home, cache))
+            for p in (home, cache):
+                shutil.rmtree(p, ignore_errors=True)
+                p.mkdir(parents=True)
+            cold = summary(*timed_run(d, main_file, engine, home, cache))
             print(f"   cold  {cold['wall_ms']:9.1f} ms wall, {cold['pages']} pages", flush=True)
             warm = []
             for i in range(runs):
-                s = summary(*timed_run(scratch, main_file, engine, home, cache))
+                s = summary(*timed_run(d, main_file, engine, home, cache))
                 warm.append(s)
                 print(f"   warm {i + 1} {s['wall_ms']:9.1f} ms wall", flush=True)
             entry = {"cold": cold, "warm": warm, "median": median_of(warm)}
             if doc == "large":
-                entry["scale"] = scale(scratch, main_file, engine, home, cache)
+                entry["scale"] = scale(d, main_file, engine, home, cache)
                 if (cache / f"{engine}.html").is_file():
                     shutil.move(str(cache / f"{engine}.html"), str(out / f"large-{engine}.html"))
             results[doc][engine] = entry
             (out / "results.json").write_text(json.dumps(results, indent=1))
-    md = [f"Machine: {results['machine']['cpu']}, pinned to {results['machine']['cpus_allowed']} CPU; "
-          f"{results['machine']['pdftex']}; image {results['machine']['image']}. "
-          f"Warm medians of {a.runs} runs (3 for the large document); the cold run has a fresh HOME.\n"]
-    for doc in a.docs.split(","):
-        md.append(f"\n### {doc}\n\n" + table(results, doc, engines))
-        if doc == "large":
-            for e in engines:
-                sc = results[doc].get(e, {}).get("scale")
-                if sc:
-                    md.append(
-                        f"\n{e}: {sc['record_lines']:,} records ({sc['record_bytes'] / 1024:,.0f} KiB); "
-                        f"`prumo time --json` on the cached run {sc['analyze_cached_ms']:,.0f} ms; "
-                        f"`--html` {sc['html_ms']:,.0f} ms, {sc['html_bytes'] / 1024:,.0f} KiB.\n"
-                    )
-    (out / "results.md").write_text("".join(md))
     (out / "results.json").write_text(json.dumps(results, indent=1))
-    print("".join(md))
+    (out / "results.md").write_text(phases_md(results))
+    print(phases_md(results))
+
+
+def run_whatif(a, out, work):
+    """`prumo whatif` on each document and engine; one JSON file per document."""
+    (out / "whatif").mkdir(exist_ok=True)
+    for doc in a.docs.split(","):
+        runs = DOCS[doc].get("runs") or a.runs
+        entry = {"machine": machine(), "runs": runs}
+        for engine in a.engines.split(","):
+            if engine not in DOCS[doc].get("engines", ENGINES):
+                continue
+            print(f"== whatif {doc} on {engine}", flush=True)
+            scratch = work / f"{doc}-{engine}"
+            ok, log, home = prepare(doc, engine, scratch)
+            if not ok:
+                entry[engine] = {"failed": "latexmk", "log": log}
+                print(f"   latexmk failed:\n{log[-800:]}", flush=True)
+                continue
+            cache = work / f"cache-whatif-{doc}-{engine}"
+            shutil.rmtree(cache, ignore_errors=True)
+            env = dict(os.environ, HOME=str(home), PRUMO_CACHE=str(cache))
+            main = doc_dir(doc, scratch) / DOCS[doc]["main"]
+            cmd = ["prumo", "whatif", "--json", "--shell-escape", "--engine", engine, "--runs", str(runs), str(main)]
+            t0 = time.monotonic()
+            r = sh(cmd, env=env)
+            elapsed = round(time.monotonic() - t0, 1)
+            if r.returncode != 0:
+                entry[engine] = {"failed": "prumo whatif", "log": r.stderr[-2000:]}
+                print(f"   prumo whatif failed:\n{r.stderr[-800:]}", flush=True)
+            else:
+                entry[engine] = {"report": json.loads(r.stdout), "elapsed_s": elapsed}
+                for row in entry[engine]["report"]["experiments"]:
+                    print(f"   {row['experiment']:<12} {cell(row)}", flush=True)
+            (out / "whatif" / f"{doc}.json").write_text(json.dumps(entry, indent=1))
+    (out / "whatif.md").write_text(whatif_md(out))
+
+
+# The environments prumo watches by default (run::DEFAULT_ENVIRONMENTS), as it loads the probe.
+PROBE_ENVS = "tikzpicture,axis,tcolorbox,tblr,longtable,tabularx,minted,lstlisting,forest"
+
+
+def run_overhead(a, out, work):
+    """Plain and probed builds in turns, timed alike: what prumo's probe costs."""
+    (out / "overhead").mkdir(exist_ok=True)
+    for doc in a.docs.split(","):
+        # --runs for every document: the cost is a few percent, and a long document's two or
+        # three runs cannot tell that from one slow run.
+        runs = a.runs
+        entry = {"machine": machine(), "runs": runs}
+        for engine in a.engines.split(","):
+            if engine not in DOCS[doc].get("engines", ENGINES):
+                continue
+            print(f"== overhead {doc} on {engine}", flush=True)
+            scratch = work / f"{doc}-{engine}"
+            ok, log, home = prepare(doc, engine, scratch)
+            if not ok:
+                entry[engine] = {"failed": "latexmk", "log": log}
+                print(f"   latexmk failed:\n{log[-800:]}", flush=True)
+                continue
+            d = doc_dir(doc, scratch)
+            main = DOCS[doc]["main"]
+            job = main.removesuffix(".tex")
+            plain = [engine, "-interaction=nonstopmode", main]
+            probed = [engine, "-interaction=nonstopmode", "-recorder", f"-jobname={job}",
+                      f"\\RequirePackage{{prumo}}\\PrumoEnvironments{{{PROBE_ENVS}}}\\input{{{job}}}"]
+            env = dict(os.environ, HOME=str(home))
+            env_probed = dict(env, TEXINPUTS="/probe:")
+
+            def timed(cmd, e):
+                t0 = time.monotonic()
+                r = subprocess.run(cmd, cwd=d, env=e, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                return round((time.monotonic() - t0) * 1000, 3), r.returncode
+
+            timed(plain, env)
+            timed(probed, env_probed)
+            res = {"plain_ms": [], "probed_ms": [], "units": {}, "exit_codes": []}
+            for i in range(runs):
+                p, pc = timed(plain, env)
+                q, qc = timed(probed, env_probed)
+                res["plain_ms"].append(p)
+                res["probed_ms"].append(q)
+                res["exit_codes"].append([pc, qc])
+                r = sh(["prumo", "time", "--json", str(d / f"{job}.prumo")], env=env)
+                if r.returncode == 0:
+                    j = json.loads(r.stdout)
+                    res["pages"] = len(j["pages"])
+                    for u in j["units"]:
+                        res["units"].setdefault(f"{u['kind']} {u['name']}", []).append(u["exclusive_ms"])
+                print(f"   run {i + 1}: plain {p:9.1f} ms, probed {q:9.1f} ms", flush=True)
+            res["records"] = sum(1 for _ in open(d / f"{job}.prumo"))
+            entry[engine] = res
+            (out / "overhead" / f"{doc}.json").write_text(json.dumps(entry, indent=1))
+    (out / "overhead.md").write_text(overhead_md(out))
+
+
+def overhead_md(out):
+    """The probe's cost per document and engine."""
+    md = ["| document | engine | records | plain (ms) | with prumo (ms) | cost |", "|---|---|---:|---:|---:|---:|"]
+    for doc in DOCS:
+        f = out / "overhead" / f"{doc}.json"
+        if not f.is_file():
+            continue
+        entry = json.loads(f.read_text())
+        for e in ENGINES:
+            r = entry.get(e)
+            if not r or "plain_ms" not in r:
+                continue
+            p, q = statistics.median(r["plain_ms"]), statistics.median(r["probed_ms"])
+            sp = max(r["plain_ms"]) - min(r["plain_ms"])
+            sq = max(r["probed_ms"]) - min(r["probed_ms"])
+            md.append(f"| {title(doc)} | {e} | {r['records']:,} | {p:,.1f} ± {sp:,.1f} | {q:,.1f} ± {sq:,.1f} | "
+                      f"{q - p:+,.1f} ms ({(q - p) / p * 100:+.1f}%) |")
+    return "\n".join(md) + "\n"
+
+
+def cell(row):
+    """One experiment in the summary table."""
+    st = row["status"]
+    if st == "not-run":
+        return "–"
+    if st == "failed":
+        return "fails"
+    if row["within_noise"]:
+        text = "noise"
+    elif row["saved_ms"] >= 0:
+        text = f"{row['saved_ms']:,.0f} ms ({row['saved_pct']:.0f}%)"
+    else:
+        text = f"{-row['saved_ms']:,.0f} ms slower"
+    if row["output"]["status"] == "changed":
+        text += ", output changed"
+    return text
+
+
+def whatif_md(out):
+    """The summary table, the notes it needs, and every row in full."""
+    reports = {}
+    for doc in DOCS:
+        f = out / "whatif" / f"{doc}.json"
+        if f.is_file():
+            reports[doc] = json.loads(f.read_text())
+    if not reports:
+        return ""
+    exps = ["preamble", "draft", "externalize"]
+    md = ["| document | engine | pages | baseline | " + " | ".join(exps) + " |",
+          "|---|---|---:|---:|" + "---|" * len(exps)]
+    notes, full = [], []
+    for doc, entry in reports.items():
+        for e in ENGINES:
+            if e not in entry:
+                continue
+            if "report" not in entry[e]:
+                md.append(f"| {title(doc)} | {e} | | | {entry[e]['failed']} failed | | |")
+                continue
+            r = entry[e]["report"]
+            rows = {x["experiment"]: x for x in r["experiments"]}
+            md.append(
+                f"| {title(doc)} | {e} | {r['baseline_pages']:,} | {r['baseline']['median_ms']:,.0f} ms | "
+                + " | ".join(cell(rows[x]) if x in rows else "" for x in exps) + " |"
+            )
+            for x in exps:
+                row = rows.get(x)
+                if not row:
+                    continue
+                if row["status"] == "failed":
+                    notes.append(f"- {title(doc)}, {e}, {x}: {row['error']}")
+                elif row["status"] == "measured" and row["output"]["status"] == "changed":
+                    notes.append(f"- {title(doc)}, {e}, {x}: output changed, {row['output']['evidence']}")
+                bound = "" if row.get("bound_ms") is None else f"{row['bound_ms']:,.0f}"
+                if row["status"] == "measured":
+                    v = row["variant"]
+                    one = "" if row["one_time_ms"] is None else f"{row['one_time_ms']:,.0f}"
+                    full.append(
+                        f"| {title(doc)} | {e} | {x} | {r['baseline']['median_ms']:,.1f} ± {r['baseline']['spread_ms']:,.1f} | "
+                        f"{v['median_ms']:,.1f} ± {v['spread_ms']:,.1f} | {row['saved_ms']:,.1f} | {bound} | {one} | "
+                        f"{row['output']['status']} |"
+                    )
+                else:
+                    why = row.get("reason") or row.get("error", "")
+                    full.append(f"| {title(doc)} | {e} | {x} | | | {row['status']}: {why.replace('|', '/')} | {bound} | | |")
+    md.append("")
+    if notes:
+        md += ["Failures and changed output:", ""] + notes + [""]
+    md += ["Every row (ms; ± is the spread, slowest run minus fastest):", "",
+           "| document | engine | experiment | baseline | variant | saved | bound | one-time | output |",
+           "|---|---|---|---:|---:|---:|---:|---:|---|"] + full
+    return "\n".join(md) + "\n"
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--runs", type=int, default=5)
+    ap.add_argument("--docs", default=",".join(DOCS))
+    ap.add_argument("--engines", default=",".join(ENGINES))
+    ap.add_argument("--whatif", action="store_true")
+    ap.add_argument("--overhead", action="store_true")
+    ap.add_argument("--report", action="store_true")
+    ap.add_argument("--out", default="results")
+    a = ap.parse_args()
+    unknown = [d for d in a.docs.split(",") if d not in DOCS]
+    if unknown:
+        raise SystemExit(f"not in corpus.toml: {', '.join(unknown)}")
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    work = Path("/tmp/bench")
+    if a.report:
+        if (out / "results.json").is_file():
+            (out / "results.md").write_text(phases_md(json.loads((out / "results.json").read_text())))
+        (out / "whatif.md").write_text(whatif_md(out))
+        (out / "overhead.md").write_text(overhead_md(out))
+    elif a.overhead:
+        run_overhead(a, out, work)
+    elif a.whatif:
+        run_whatif(a, out, work)
+    else:
+        run_phases(a, out, work)
 
 
 if __name__ == "__main__":

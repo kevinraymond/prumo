@@ -1,0 +1,4200 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "7.38",
+   "6.51",
+   "4.23"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "pdflatex": {
+  "plain_ms": [
+   1103.741,
+   1098.523,
+   1090.577,
+   1091.748,
+   1131.907
+  ],
+  "probed_ms": [
+   1144.734,
+   1141.912,
+   1142.033,
+   1144.229,
+   1178.538
+  ],
+  "units": {
+   "file demo.tex": [
+    679.688,
+    677.505,
+    677.414,
+    677.948,
+    701.569
+   ],
+   "pkg pgfplots": [
+    72.357,
+    72.342,
+    72.464,
+    72.571,
+    75.546
+   ],
+   "pkg beamerbaserequires": [
+    12.177,
+    12.161,
+    12.192,
+    12.253,
+    12.665
+   ],
+   "pkg hyperref": [
+    11.108,
+    11.23,
+    11.322,
+    11.276,
+    11.551
+   ],
+   "file tikz.code.tex": [
+    8.499,
+    8.255,
+    8.24,
+    8.209,
+    8.774
+   ],
+   "pkg xcolor": [
+    8.27,
+    8.392,
+    8.331,
+    8.27,
+    8.453
+   ],
+   "cls beamer": [
+    7.324,
+    7.431,
+    7.416,
+    7.446,
+    7.69
+   ],
+   "file demo.bbl": [
+    6.653,
+    6.668,
+    6.546,
+    6.577,
+    6.912
+   ],
+   "file pgfcore.code.tex": [
+    5.966,
+    6.073,
+    6.119,
+    6.088,
+    6.271
+   ],
+   "pkg beamerinnerthemedefault": [
+    5.692,
+    5.676,
+    5.661,
+    5.722,
+    5.89
+   ],
+   "file puenc.def": [
+    5.569,
+    5.569,
+    5.6,
+    5.569,
+    5.859
+   ],
+   "pkg beamerbaseauxtemplates": [
+    5.569,
+    5.554,
+    5.554,
+    5.63,
+    5.768
+   ],
+   "pkg amsmath": [
+    5.264,
+    5.31,
+    5.325,
+    5.417,
+    5.402
+   ],
+   "pkg beamerthememetropolis": [
+    4.669,
+    4.654,
+    4.654,
+    4.639,
+    4.776
+   ],
+   "file pgfmath.code.tex": [
+    4.639,
+    4.639,
+    4.684,
+    4.73,
+    4.791
+   ],
+   "pkg beamerfontthememetropolis": [
+    4.379,
+    4.379,
+    4.364,
+    4.425,
+    4.486
+   ],
+   "pkg nameref": [
+    4.074,
+    4.166,
+    4.15,
+    4.12,
+    4.242
+   ],
+   "pkg scrlfile-hook": [
+    3.83,
+    3.83,
+    3.845,
+    3.815,
+    3.998
+   ],
+   "file translator-basic-dictionary-English.dict": [
+    3.708,
+    3.601,
+    3.647,
+    3.632,
+    3.784
+   ],
+   "pkg pgfplotsthemetol": [
+    3.54,
+    3.479,
+    3.54,
+    3.525,
+    3.601
+   ],
+   "pkg beamerthemedefault": [
+    3.387,
+    3.433,
+    3.448,
+    3.433,
+    3.54
+   ],
+   "pkg beamerbasecompatibility": [
+    3.174,
+    3.159,
+    3.189,
+    3.189,
+    3.235
+   ],
+   "pkg beamerbasecolor": [
+    3.159,
+    3.159,
+    3.235,
+    3.174,
+    3.22
+   ],
+   "file translator-theorem-dictionary-English.dict": [
+    3.128,
+    3.098,
+    3.128,
+    3.143,
+    3.235
+   ],
+   "pkg pgf": [
+    2.93,
+    2.914,
+    2.93,
+    2.93,
+    3.021
+   ],
+   "pkg beamerinnerthememetropolis": [
+    2.884,
+    2.93,
+    2.93,
+    3.189,
+    2.975
+   ],
+   "pkg beamerbasefont": [
+    2.792,
+    3.098,
+    2.792,
+    2.808,
+    2.869
+   ],
+   "pkg beamerbaseoverlay": [
+    2.731,
+    2.731,
+    2.747,
+    2.747,
+    2.808
+   ],
+   "file pgfcorearrows.code.tex": [
+    2.563,
+    2.502,
+    2.533,
+    2.533,
+    2.64
+   ],
+   "file pgfmathfloat.code.tex": [
+    2.533,
+    2.533,
+    2.533,
+    2.548,
+    2.655
+   ],
+   "pkg beamerbaselocalstructure": [
+    2.457,
+    2.487,
+    2.457,
+    2.487,
+    2.533
+   ],
+   "pkg geometry": [
+    2.441,
+    2.396,
+    2.426,
+    2.457,
+    2.502
+   ],
+   "pkg rerunfilecheck": [
+    2.38,
+    2.38,
+    2.396,
+    2.396,
+    2.472
+   ],
+   "pkg pgfcore": [
+    2.365,
+    2.365,
+    2.426,
+    2.396,
+    2.441
+   ],
+   "file beamerbasenavigationsymbols.tex": [
+    2.319,
+    2.335,
+    2.35,
+    2.38,
+    2.396
+   ],
+   "pkg beamerouterthememetropolis": [
+    2.304,
+    2.319,
+    2.594,
+    2.319,
+    2.365
+   ],
+   "pkg beamerbasetheorems": [
+    2.274,
+    2.304,
+    2.35,
+    2.304,
+    2.396
+   ],
+   "pkg amssymb": [
+    2.151,
+    2.121,
+    2.136,
+    2.136,
+    2.243
+   ],
+   "pkg beamerouterthemedefault": [
+    2.121,
+    2.106,
+    2.106,
+    2.121,
+    2.182
+   ],
+   "pkg graphics": [
+    2.09,
+    2.106,
+    2.09,
+    2.411,
+    2.182
+   ],
+   "pkg pgfcomp-version-0-65": [
+    2.06,
+    2.106,
+    2.045,
+    2.06,
+    2.106
+   ],
+   "pkg hycolor": [
+    2.029,
+    2.09,
+    2.35,
+    2.045,
+    2.106
+   ],
+   "file translator-numbers-dictionary-English.dict": [
+    2.014,
+    2.014,
+    2.014,
+    1.999,
+    2.075
+   ],
+   "file demo.vrb": [
+    1.999,
+    1.938,
+    1.953,
+    1.984,
+    2.014
+   ],
+   "pkg beamerbasemisc": [
+    1.984,
+    1.984,
+    1.984,
+    1.984,
+    2.045
+   ],
+   "pkg beamerbasenavigation": [
+    1.907,
+    1.938,
+    1.923,
+    1.968,
+    1.968
+   ],
+   "pkg beamerbasemodes": [
+    1.877,
+    1.846,
+    1.877,
+    1.877,
+    1.968
+   ],
+   "file pgfmathfunctions.trigonometric.code.tex": [
+    1.831,
+    1.801,
+    1.801,
+    1.785,
+    1.953
+   ],
+   "pkg tikz": [
+    1.831,
+    1.846,
+    1.862,
+    1.862,
+    1.892
+   ],
+   "pkg etoolbox": [
+    1.816,
+    1.785,
+    1.77,
+    1.801,
+    1.831
+   ],
+   "pkg translator": [
+    1.816,
+    1.831,
+    1.816,
+    1.846,
+    1.862
+   ],
+   "pkg pgfmath": [
+    1.755,
+    1.74,
+    1.755,
+    1.77,
+    1.846
+   ],
+   "pkg beamercolorthememetropolis": [
+    1.74,
+    1.77,
+    1.755,
+    1.77,
+    1.816
+   ],
+   "pkg pdfescape": [
+    1.709,
+    1.77,
+    1.709,
+    1.709,
+    1.801
+   ],
+   "pkg bitset": [
+    1.694,
+    1.678,
+    1.724,
+    1.694,
+    1.74
+   ],
+   "pkg sansmathaccent": [
+    1.694,
+    1.724,
+    1.709,
+    1.724,
+    1.785
+   ],
+   "pkg epstopdf-base": [
+    1.678,
+    1.663,
+    1.709,
+    1.694,
+    1.755
+   ],
+   "pkg pgfsys": [
+    1.633,
+    1.678,
+    1.663,
+    1.709,
+    1.694
+   ],
+   "file pgfkeys.code.tex": [
+    1.617,
+    1.633,
+    1.633,
+    1.648,
+    1.709
+   ],
+   "pkg pdftexcmds": [
+    1.602,
+    1.648,
+    1.587,
+    1.602,
+    1.663
+   ],
+   "pkg beamerbasesection": [
+    1.602,
+    1.602,
+    1.602,
+    1.633,
+    1.648
+   ],
+   "pkg beamerbasetemplates": [
+    1.602,
+    1.602,
+    1.617,
+    1.617,
+    1.663
+   ],
+   "file translator-months-dictionary-English.dict": [
+    1.602,
+    1.602,
+    1.617,
+    1.617,
+    1.633
+   ],
+   "pkg beamerbaseframe": [
+    1.587,
+    1.556,
+    1.572,
+    1.587,
+    1.633
+   ],
+   "pkg gettitlestring": [
+    1.572,
+    1.587,
+    1.556,
+    1.572,
+    1.602
+   ],
+   "pkg beamercolorthemedefault": [
+    1.526,
+    1.587,
+    1.541,
+    1.541,
+    1.602
+   ],
+   "pkg ccicons": [
+    1.526,
+    1.526,
+    1.495,
+    1.511,
+    1.556
+   ],
+   "pkg pgfrcs": [
+    1.465,
+    1.434,
+    1.434,
+    1.465,
+    1.495
+   ],
+   "pkg pgffor": [
+    1.465,
+    1.45,
+    1.465,
+    1.45,
+    1.495
+   ],
+   "pkg pgfcalendar": [
+    1.465,
+    1.434,
+    1.434,
+    1.45,
+    1.465
+   ],
+   "file pgfmoduledecorations.code.tex": [
+    1.45,
+    1.45,
+    1.465,
+    1.45,
+    1.526
+   ],
+   "pkg scrlfile": [
+    1.404,
+    1.419,
+    1.419,
+    1.419,
+    1.45
+   ],
+   "pkg beamerbasetitle": [
+    1.404,
+    1.389,
+    1.419,
+    1.404,
+    1.45
+   ],
+   "pkg kvoptions": [
+    1.389,
+    1.419,
+    1.419,
+    1.419,
+    1.45
+   ],
+   "pkg xxcolor": [
+    1.373,
+    1.404,
+    1.373,
+    1.373,
+    1.434
+   ],
+   "pkg beamerbasetranslator": [
+    1.373,
+    1.373,
+    1.358,
+    1.373,
+    1.434
+   ],
+   "pkg beamerbaseframecomponents": [
+    1.373,
+    1.404,
+    1.373,
+    1.419,
+    1.419
+   ],
+   "pkg graphicx": [
+    1.358,
+    1.343,
+    1.358,
+    1.404,
+    1.389
+   ],
+   "pkg stringenc": [
+    1.358,
+    1.373,
+    1.389,
+    1.358,
+    1.389
+   ],
+   "pkg calc": [
+    1.358,
+    1.389,
+    1.373,
+    1.389,
+    1.419
+   ],
+   "pkg xkeyval": [
+    1.343,
+    1.343,
+    1.358,
+    1.373,
+    1.373
+   ],
+   "file pgfsys.code.tex": [
+    1.297,
+    1.297,
+    1.297,
+    1.312,
+    1.312
+   ],
+   "pkg beamerfontthemedefault": [
+    1.266,
+    1.251,
+    1.266,
+    1.251,
+    1.312
+   ],
+   "file hpdftex.def": [
+    1.251,
+    1.251,
+    1.251,
+    1.251,
+    1.282
+   ],
+   "file pgflibraryfpu.code.tex": [
+    1.205,
+    1.221,
+    1.205,
+    1.205,
+    1.221
+   ],
+   "pkg beamerbaseoptions": [
+    1.19,
+    1.175,
+    1.19,
+    1.205,
+    1.236
+   ],
+   "pkg amsthm": [
+    1.19,
+    1.221,
+    1.19,
+    1.221,
+    1.221
+   ],
+   "pkg bigintcalc": [
+    1.175,
+    1.16,
+    1.175,
+    1.175,
+    1.19
+   ],
+   "pkg amstext": [
+    1.175,
+    1.19,
+    1.19,
+    1.175,
+    1.236
+   ],
+   "pkg uniquecounter": [
+    1.144,
+    1.144,
+    1.16,
+    1.175,
+    1.19
+   ],
+   "pkg refcount": [
+    1.099,
+    1.114,
+    1.099,
+    1.099,
+    1.144
+   ],
+   "pkg booktabs": [
+    1.083,
+    1.099,
+    1.083,
+    1.099,
+    1.114
+   ],
+   "pkg beamerbaseframesize": [
+    1.068,
+    1.068,
+    1.068,
+    1.083,
+    1.114
+   ],
+   "pkg pgfopts": [
+    1.068,
+    1.068,
+    1.068,
+    1.068,
+    1.083
+   ],
+   "pkg pgfcomp-version-1-18": [
+    1.053,
+    1.038,
+    1.038,
+    1.022,
+    1.068
+   ],
+   "pkg beamerbasenotes": [
+    1.038,
+    1.038,
+    1.038,
+    1.053,
+    1.083
+   ],
+   "pkg amsfonts": [
+    1.022,
+    1.022,
+    1.038,
+    1.022,
+    1.068
+   ],
+   "pkg appendixnumberbeamer": [
+    1.022,
+    1.038,
+    1.022,
+    1.053,
+    1.053
+   ],
+   "file pd1enc.def": [
+    1.007,
+    1.053,
+    1.053,
+    1.022,
+    1.053
+   ],
+   "pkg beamerbaseverbatim": [
+    0.992,
+    1.022,
+    1.007,
+    1.022,
+    1.038
+   ],
+   "pkg beamerbasetoc": [
+    0.992,
+    1.007,
+    0.992,
+    1.007,
+    1.038
+   ],
+   "pkg amsopn": [
+    0.992,
+    0.992,
+    1.007,
+    0.992,
+    1.022
+   ],
+   "pkg beamerbaseboxes": [
+    0.977,
+    0.977,
+    0.977,
+    1.007,
+    1.022
+   ],
+   "pkg beamerbasethemes": [
+    0.977,
+    0.992,
+    0.977,
+    0.992,
+    0.992
+   ],
+   "pkg beamerbasetwoscreens": [
+    0.946,
+    0.946,
+    0.961,
+    0.961,
+    0.992
+   ],
+   "pkg amsbsy": [
+    0.916,
+    0.9,
+    0.9,
+    0.931,
+    0.931
+   ],
+   "file pgfmoduleshapes.code.tex": [
+    0.916,
+    0.946,
+    0.931,
+    0.916,
+    0.977
+   ],
+   "pkg ifluatex": [
+    0.9,
+    0.916,
+    0.9,
+    0.916,
+    0.931
+   ],
+   "pkg pgfkeys": [
+    0.885,
+    0.87,
+    0.854,
+    0.9,
+    0.931
+   ],
+   "pkg ifxetex": [
+    0.885,
+    0.9,
+    0.9,
+    0.885,
+    0.9
+   ],
+   "file tikzlibrarydecorations.code.tex": [
+    0.87,
+    0.885,
+    0.916,
+    0.885,
+    0.916
+   ],
+   "file translator-bibliography-dictionary-English.dict": [
+    0.87,
+    0.87,
+    0.87,
+    0.87,
+    0.9
+   ],
+   "file pgfkeyslibraryfiltered.code.tex": [
+    0.839,
+    0.809,
+    0.839,
+    0.839,
+    0.87
+   ],
+   "file pgfcalendar.code.tex": [
+    0.839,
+    0.824,
+    0.839,
+    0.809,
+    0.854
+   ],
+   "pkg beamerbasedecode": [
+    0.824,
+    0.809,
+    0.809,
+    0.809,
+    0.839
+   ],
+   "pkg ltxcmds": [
+    0.824,
+    0.87,
+    0.839,
+    0.839,
+    0.854
+   ],
+   "pkg enumerate": [
+    0.824,
+    0.839,
+    0.824,
+    0.854,
+    0.839
+   ],
+   "pkg xspace": [
+    0.824,
+    0.839,
+    0.824,
+    0.839,
+    0.839
+   ],
+   "pkg kvsetkeys": [
+    0.809,
+    0.809,
+    0.809,
+    0.793,
+    0.809
+   ],
+   "pkg atbegshi-ltx": [
+    0.793,
+    0.824,
+    0.778,
+    0.793,
+    0.824
+   ],
+   "pkg amsgen": [
+    0.793,
+    0.793,
+    0.793,
+    0.809,
+    0.809
+   ],
+   "file pgfmoduleplot.code.tex": [
+    0.793,
+    0.793,
+    0.793,
+    0.793,
+    0.809
+   ],
+   "file pgfcorepoints.code.tex": [
+    0.778,
+    0.793,
+    0.778,
+    0.763,
+    0.778
+   ],
+   "pkg url": [
+    0.778,
+    0.778,
+    0.778,
+    0.809,
+    0.809
+   ],
+   "pkg scrlogo": [
+    0.763,
+    0.763,
+    0.748,
+    0.778,
+    0.809
+   ],
+   "file tikzlibrarydecorations.pathreplacing.code.tex": [
+    0.763,
+    0.763,
+    0.778,
+    0.793,
+    0.824
+   ],
+   "pkg ifvtex": [
+    0.748,
+    0.748,
+    0.748,
+    0.763,
+    0.763
+   ],
+   "pkg kvdefinekeys": [
+    0.748,
+    0.763,
+    0.732,
+    0.732,
+    0.809
+   ],
+   "pkg intcalc": [
+    0.748,
+    0.763,
+    0.748,
+    0.748,
+    0.748
+   ],
+   "file pgfcoreshade.code.tex": [
+    0.732,
+    0.458,
+    0.458,
+    0.443,
+    0.458
+   ],
+   "file pgfcoreexternal.code.tex": [
+    0.717,
+    0.763,
+    0.717,
+    0.717,
+    0.717
+   ],
+   "pkg infwarerr": [
+    0.717,
+    0.763,
+    0.717,
+    0.732,
+    0.763
+   ],
+   "file pgffor.code.tex": [
+    0.717,
+    0.717,
+    0.702,
+    0.717,
+    0.732
+   ],
+   "file tikzlibrarydecorations.pathmorphing.code.tex": [
+    0.717,
+    0.687,
+    0.687,
+    0.702,
+    0.717
+   ],
+   "pkg iftex": [
+    0.702,
+    0.702,
+    0.702,
+    0.702,
+    0.732
+   ],
+   "file pgflibraryplothandlers.code.tex": [
+    0.687,
+    0.687,
+    0.687,
+    0.687,
+    0.687
+   ],
+   "file tikzlibraryplotmarks.code.tex": [
+    0.687,
+    0.671,
+    0.702,
+    0.702,
+    0.702
+   ],
+   "pkg keyval": [
+    0.671,
+    0.687,
+    0.687,
+    0.656,
+    0.702
+   ],
+   "file pgfmathparser.code.tex": [
+    0.671,
+    0.671,
+    0.641,
+    0.641,
+    0.671
+   ],
+   "file pgfmathfunctions.basic.code.tex": [
+    0.671,
+    0.656,
+    0.671,
+    0.671,
+    0.687
+   ],
+   "file tikzlibrarytopaths.code.tex": [
+    0.671,
+    0.656,
+    0.671,
+    0.656,
+    0.671
+   ],
+   "file supp-pdf.mkii": [
+    0.671,
+    0.671,
+    0.671,
+    0.671,
+    0.702
+   ],
+   "pkg trig": [
+    0.641,
+    0.641,
+    0.641,
+    0.641,
+    0.671
+   ],
+   "file pdftex.def": [
+    0.626,
+    0.626,
+    0.641,
+    0.626,
+    0.641
+   ],
+   "file pgfcorepathusage.code.tex": [
+    0.61,
+    0.61,
+    0.626,
+    0.61,
+    0.885
+   ],
+   "file pgfcorescopes.code.tex": [
+    0.61,
+    0.58,
+    0.58,
+    0.595,
+    0.626
+   ],
+   "file pgfsys-pdftex.def": [
+    0.58,
+    0.58,
+    0.58,
+    0.58,
+    0.58
+   ],
+   "file pgflibraryplotmarks.code.tex": [
+    0.58,
+    0.549,
+    0.565,
+    0.58,
+    0.58
+   ],
+   "file pgfcorepathconstruct.code.tex": [
+    0.565,
+    0.58,
+    0.58,
+    0.565,
+    0.58
+   ],
+   "file l3backend-pdftex.def": [
+    0.565,
+    0.565,
+    0.58,
+    0.58,
+    0.565
+   ],
+   "file pgfrcs.code.tex": [
+    0.519,
+    0.534,
+    0.534,
+    0.534,
+    0.565
+   ],
+   "file pgfmathfunctions.comparison.code.tex": [
+    0.458,
+    0.427,
+    0.443,
+    0.443,
+    0.473
+   ],
+   "file pgfcoreimage.code.tex": [
+    0.458,
+    0.427,
+    0.427,
+    0.427,
+    0.443
+   ],
+   "file pgflibrarydecorations.pathmorphing.code.tex": [
+    0.458,
+    0.443,
+    0.443,
+    0.443,
+    0.458
+   ],
+   "file pgflibrarydecorations.pathreplacing.code.tex": [
+    0.458,
+    0.458,
+    0.458,
+    0.443,
+    0.458
+   ],
+   "file pgfmathfunctions.code.tex": [
+    0.443,
+    0.427,
+    0.427,
+    0.443,
+    0.443
+   ],
+   "file translator-environment-dictionary-English.dict": [
+    0.443,
+    0.427,
+    0.443,
+    0.427,
+    0.443
+   ],
+   "file pgfutil-common.tex": [
+    0.427,
+    0.427,
+    0.412,
+    0.427,
+    0.427
+   ],
+   "file pgfmathfunctions.misc.code.tex": [
+    0.427,
+    0.443,
+    0.443,
+    0.443,
+    0.443
+   ],
+   "file pgfmodulematrix.code.tex": [
+    0.427,
+    0.427,
+    0.412,
+    0.427,
+    0.427
+   ],
+   "file size10.clo": [
+    0.397,
+    0.381,
+    0.397,
+    0.412,
+    0.397
+   ],
+   "file pgfcoretransparency.code.tex": [
+    0.397,
+    0.427,
+    0.412,
+    0.412,
+    0.412
+   ],
+   "file mathcolor.ltx": [
+    0.366,
+    0.366,
+    0.366,
+    0.366,
+    0.366
+   ],
+   "file pgfcoretransformations.code.tex": [
+    0.351,
+    0.366,
+    0.351,
+    0.351,
+    0.366
+   ],
+   "file pgfutil-latex.def": [
+    0.336,
+    0.351,
+    0.351,
+    0.351,
+    0.366
+   ],
+   "file pgfmathfunctions.base.code.tex": [
+    0.32,
+    0.305,
+    0.32,
+    0.32,
+    0.336
+   ],
+   "file pgfcorepathprocessing.code.tex": [
+    0.305,
+    0.305,
+    0.29,
+    0.305,
+    0.305
+   ],
+   "file pgfmathutil.code.tex": [
+    0.29,
+    0.29,
+    0.29,
+    0.29,
+    0.32
+   ],
+   "file pgfmathfunctions.random.code.tex": [
+    0.259,
+    0.259,
+    0.259,
+    0.259,
+    0.259
+   ],
+   "file pgfmathfunctions.round.code.tex": [
+    0.259,
+    0.259,
+    0.244,
+    0.244,
+    0.244
+   ],
+   "file pgfmathcalc.code.tex": [
+    0.259,
+    0.29,
+    0.259,
+    0.259,
+    0.275
+   ],
+   "file pgfmathfunctions.integerarithmetics.code.tex": [
+    0.244,
+    0.259,
+    0.244,
+    0.244,
+    0.259
+   ],
+   "file pgfsyssoftpath.code.tex": [
+    0.244,
+    0.229,
+    0.229,
+    0.244,
+    0.244
+   ],
+   "file pgfcoregraphicstate.code.tex": [
+    0.244,
+    0.229,
+    0.229,
+    0.244,
+    0.244
+   ],
+   "file pgfcorepatterns.code.tex": [
+    0.244,
+    0.259,
+    0.229,
+    0.244,
+    0.244
+   ],
+   "file pgfcorelayers.code.tex": [
+    0.229,
+    0.229,
+    0.214,
+    0.214,
+    0.229
+   ],
+   "file epstopdf-sys.cfg": [
+    0.229,
+    0.214,
+    0.229,
+    0.229,
+    0.229
+   ],
+   "file pgfcorerdf.code.tex": [
+    0.214,
+    0.229,
+    0.214,
+    0.214,
+    0.214
+   ],
+   "file pgfsys-common-pdf.def": [
+    0.198,
+    0.198,
+    0.214,
+    0.198,
+    0.214
+   ],
+   "file color.cfg": [
+    0.198,
+    0.198,
+    0.214,
+    0.198,
+    0.214
+   ],
+   "file pgfcorequick.code.tex": [
+    0.198,
+    0.183,
+    0.183,
+    0.183,
+    0.183
+   ],
+   "file ot1mathkerncmss.fd": [
+    0.198,
+    0.183,
+    0.183,
+    0.198,
+    0.183
+   ],
+   "file pgfsysprotocol.code.tex": [
+    0.183,
+    0.168,
+    0.183,
+    0.168,
+    0.183
+   ],
+   "file pgfint.code.tex": [
+    0.183,
+    0.183,
+    0.183,
+    0.183,
+    0.198
+   ],
+   "file pgf.revision.tex": [
+    0.168,
+    0.153,
+    0.153,
+    0.153,
+    0.153
+   ],
+   "file graphics.cfg": [
+    0.168,
+    0.168,
+    0.168,
+    0.153,
+    0.168
+   ],
+   "file pgf.cfg": [
+    0.168,
+    0.153,
+    0.183,
+    0.153,
+    0.168
+   ],
+   "file pgfcoreobjects.code.tex": [
+    0.168,
+    0.183,
+    0.168,
+    0.168,
+    0.168
+   ],
+   "file demo.out": [
+    0.153,
+    0.153,
+    0.153,
+    0.153,
+    0.153
+   ],
+   "file umsa.fd": [
+    0.122,
+    0.107,
+    0.122,
+    0.122,
+    0.122
+   ],
+   "file umsb.fd": [
+    0.092,
+    0.076,
+    0.076,
+    0.092,
+    0.092
+   ]
+  },
+  "exit_codes": [
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "pages": 33,
+  "records": 795
+ },
+ "xelatex": {
+  "plain_ms": [
+   1437.065,
+   1428.179,
+   1419.921,
+   1413.113,
+   1430.755
+  ],
+  "probed_ms": [
+   1487.055,
+   1479.583,
+   1461.867,
+   1499.903,
+   1476.964
+  ],
+  "units": {
+   "file demo.tex": [
+    802.719,
+    793.381,
+    778.534,
+    813.477,
+    790.497
+   ],
+   "pkg pgfplots": [
+    75.424,
+    74.753,
+    74.997,
+    75.195,
+    75.775
+   ],
+   "pkg fontspec-xetex": [
+    62.805,
+    62.027,
+    61.996,
+    62.622,
+    62.256
+   ],
+   "pkg beamerfontthememetropolis": [
+    50.797,
+    50.339,
+    50.003,
+    51.254,
+    50.476
+   ],
+   "file size10.clo": [
+    38.132,
+    38.269,
+    37.918,
+    37.659,
+    38.422
+   ],
+   "pkg beamerbaserequires": [
+    12.054,
+    12.039,
+    12.115,
+    11.948,
+    12.085
+   ],
+   "file demo.bbl": [
+    11.719,
+    11.292,
+    11.124,
+    11.337,
+    11.307
+   ],
+   "pkg hyperref": [
+    10.818,
+    11.353,
+    10.925,
+    10.91,
+    10.925
+   ],
+   "file tikz.code.tex": [
+    8.423,
+    8.27,
+    8.392,
+    8.53,
+    8.24
+   ],
+   "pkg xcolor": [
+    8.24,
+    8.804,
+    8.423,
+    8.56,
+    8.759
+   ],
+   "cls beamer": [
+    7.599,
+    7.751,
+    7.629,
+    7.553,
+    7.721
+   ],
+   "file pgfcore.code.tex": [
+    6.058,
+    6.088,
+    6.027,
+    6.18,
+    6.027
+   ],
+   "pkg beamerbaseauxtemplates": [
+    5.981,
+    5.753,
+    5.783,
+    5.692,
+    5.722
+   ],
+   "file puenc.def": [
+    5.646,
+    5.707,
+    5.6,
+    5.905,
+    5.646
+   ],
+   "pkg amsmath": [
+    5.264,
+    5.219,
+    5.432,
+    5.188,
+    5.249
+   ],
+   "pkg beamerinnerthemedefault": [
+    4.791,
+    4.807,
+    4.852,
+    4.791,
+    4.837
+   ],
+   "file pgfmath.code.tex": [
+    4.73,
+    4.73,
+    4.7,
+    4.593,
+    4.73
+   ],
+   "pkg beamerthememetropolis": [
+    4.7,
+    4.654,
+    4.654,
+    4.654,
+    4.684
+   ],
+   "pkg nameref": [
+    4.135,
+    4.166,
+    4.135,
+    4.135,
+    4.074
+   ],
+   "pkg scrlfile-hook": [
+    3.967,
+    3.891,
+    3.952,
+    3.891,
+    3.922
+   ],
+   "file translator-basic-dictionary-English.dict": [
+    3.845,
+    3.891,
+    3.86,
+    3.876,
+    3.845
+   ],
+   "pkg pgfplotsthemetol": [
+    3.632,
+    3.784,
+    3.601,
+    3.647,
+    3.632
+   ],
+   "file demo.vrb": [
+    3.494,
+    7.599,
+    7.507,
+    3.708,
+    7.675
+   ],
+   "pkg beamerthemedefault": [
+    3.403,
+    3.357,
+    3.433,
+    3.326,
+    3.403
+   ],
+   "file translator-theorem-dictionary-English.dict": [
+    3.326,
+    3.281,
+    3.296,
+    3.281,
+    3.281
+   ],
+   "pkg beamerbasecolor": [
+    3.22,
+    3.189,
+    3.22,
+    3.174,
+    3.25
+   ],
+   "pkg beamerbasecompatibility": [
+    3.204,
+    3.235,
+    3.235,
+    3.204,
+    3.204
+   ],
+   "pkg beamerinnerthememetropolis": [
+    2.991,
+    2.899,
+    2.93,
+    2.991,
+    2.899
+   ],
+   "pkg pgf": [
+    2.899,
+    2.899,
+    2.93,
+    2.899,
+    2.899
+   ],
+   "pkg beamerbasefont": [
+    2.838,
+    2.823,
+    2.823,
+    2.792,
+    3.113
+   ],
+   "pkg beamerbaseoverlay": [
+    2.808,
+    2.731,
+    2.762,
+    2.686,
+    2.808
+   ],
+   "file pgfcorearrows.code.tex": [
+    2.609,
+    2.64,
+    2.67,
+    2.64,
+    2.625
+   ],
+   "file pgfmathfloat.code.tex": [
+    2.563,
+    2.594,
+    2.579,
+    2.548,
+    2.563
+   ],
+   "pkg beamerbaselocalstructure": [
+    2.518,
+    2.487,
+    2.563,
+    2.472,
+    2.487
+   ],
+   "pkg pgfcore": [
+    2.457,
+    2.533,
+    2.472,
+    2.64,
+    2.518
+   ],
+   "file beamerbasenavigationsymbols.tex": [
+    2.457,
+    2.457,
+    2.533,
+    2.426,
+    2.457
+   ],
+   "pkg geometry": [
+    2.426,
+    2.411,
+    2.411,
+    2.396,
+    2.441
+   ],
+   "pkg rerunfilecheck": [
+    2.38,
+    2.396,
+    2.396,
+    2.38,
+    2.411
+   ],
+   "pkg beamerbasetheorems": [
+    2.38,
+    2.365,
+    2.487,
+    2.35,
+    2.38
+   ],
+   "pkg beamerouterthememetropolis": [
+    2.38,
+    2.289,
+    2.319,
+    2.365,
+    2.335
+   ],
+   "pkg fontspec": [
+    2.289,
+    2.274,
+    2.274,
+    2.304,
+    2.335
+   ],
+   "pkg amssymb": [
+    2.228,
+    2.167,
+    2.182,
+    2.121,
+    2.182
+   ],
+   "pkg beamerouterthemedefault": [
+    2.182,
+    2.167,
+    2.182,
+    2.182,
+    2.182
+   ],
+   "file pgfmathfunctions.trigonometric.code.tex": [
+    2.151,
+    1.862,
+    1.831,
+    1.816,
+    1.846
+   ],
+   "file translator-numbers-dictionary-English.dict": [
+    2.151,
+    2.151,
+    2.136,
+    2.121,
+    2.136
+   ],
+   "pkg hycolor": [
+    2.075,
+    2.106,
+    2.06,
+    2.029,
+    2.075
+   ],
+   "pkg pgfcomp-version-0-65": [
+    2.045,
+    2.075,
+    2.09,
+    2.045,
+    2.06
+   ],
+   "pkg graphics": [
+    2.029,
+    2.014,
+    2.06,
+    1.984,
+    2.014
+   ],
+   "pkg beamerbasemisc": [
+    2.029,
+    1.999,
+    1.999,
+    1.999,
+    2.06
+   ],
+   "pkg beamerbasenavigation": [
+    1.984,
+    1.968,
+    2.075,
+    1.953,
+    1.953
+   ],
+   "pkg beamerbasemodes": [
+    1.923,
+    1.923,
+    1.907,
+    1.877,
+    1.877
+   ],
+   "pkg tikz": [
+    1.923,
+    1.877,
+    1.892,
+    1.877,
+    1.892
+   ],
+   "pkg translator": [
+    1.877,
+    1.846,
+    1.862,
+    1.846,
+    1.892
+   ],
+   "pkg beamercolorthememetropolis": [
+    1.846,
+    1.785,
+    1.816,
+    1.831,
+    1.831
+   ],
+   "pkg pgfmath": [
+    1.816,
+    1.816,
+    1.77,
+    1.77,
+    1.801
+   ],
+   "pkg etoolbox": [
+    1.785,
+    1.801,
+    1.77,
+    1.801,
+    1.816
+   ],
+   "pkg sansmathaccent": [
+    1.77,
+    1.755,
+    1.755,
+    1.74,
+    1.785
+   ],
+   "pkg pdfescape": [
+    1.74,
+    1.816,
+    1.755,
+    1.724,
+    1.77
+   ],
+   "pkg pgfsys": [
+    1.724,
+    1.678,
+    1.709,
+    1.709,
+    1.678
+   ],
+   "file translator-months-dictionary-English.dict": [
+    1.724,
+    1.709,
+    1.694,
+    1.678,
+    1.678
+   ],
+   "pkg beamerbasesection": [
+    1.678,
+    1.663,
+    1.633,
+    1.648,
+    1.694
+   ],
+   "file pgfkeys.code.tex": [
+    1.663,
+    1.678,
+    1.663,
+    1.617,
+    1.663
+   ],
+   "pkg bitset": [
+    1.633,
+    1.648,
+    1.648,
+    1.663,
+    1.648
+   ],
+   "pkg beamerbasetemplates": [
+    1.633,
+    1.617,
+    1.648,
+    1.617,
+    1.617
+   ],
+   "pkg beamerbaseframe": [
+    1.617,
+    1.587,
+    1.602,
+    1.572,
+    1.617
+   ],
+   "pkg beamercolorthemedefault": [
+    1.617,
+    1.617,
+    1.663,
+    1.602,
+    1.663
+   ],
+   "pkg pdftexcmds": [
+    1.602,
+    1.633,
+    1.617,
+    1.617,
+    1.602
+   ],
+   "pkg ccicons": [
+    1.602,
+    1.556,
+    1.556,
+    1.556,
+    1.572
+   ],
+   "pkg gettitlestring": [
+    1.587,
+    1.602,
+    1.572,
+    1.556,
+    1.587
+   ],
+   "pkg pgfrcs": [
+    1.48,
+    1.48,
+    1.495,
+    1.465,
+    1.48
+   ],
+   "pkg pgffor": [
+    1.48,
+    1.465,
+    1.48,
+    1.45,
+    1.465
+   ],
+   "file pgfmoduledecorations.code.tex": [
+    1.48,
+    1.465,
+    1.526,
+    1.495,
+    1.526
+   ],
+   "pkg pgfcalendar": [
+    1.48,
+    1.511,
+    1.511,
+    1.465,
+    1.48
+   ],
+   "pkg xkeyval": [
+    1.45,
+    1.45,
+    1.404,
+    1.511,
+    1.465
+   ],
+   "pkg scrlfile": [
+    1.434,
+    1.45,
+    1.434,
+    1.419,
+    1.419
+   ],
+   "pkg beamerbasetranslator": [
+    1.434,
+    1.404,
+    1.404,
+    1.389,
+    1.434
+   ],
+   "pkg graphicx": [
+    1.419,
+    1.404,
+    1.831,
+    1.389,
+    1.419
+   ],
+   "pkg beamerbasetitle": [
+    1.419,
+    1.419,
+    1.419,
+    1.404,
+    1.465
+   ],
+   "pkg beamerbaseframecomponents": [
+    1.419,
+    1.404,
+    1.404,
+    1.373,
+    1.419
+   ],
+   "pkg calc": [
+    1.419,
+    1.389,
+    1.434,
+    1.373,
+    1.404
+   ],
+   "pkg xxcolor": [
+    1.373,
+    1.419,
+    1.389,
+    1.404,
+    1.373
+   ],
+   "pkg kvoptions": [
+    1.373,
+    1.404,
+    1.358,
+    1.373,
+    1.373
+   ],
+   "file pgfsys.code.tex": [
+    1.328,
+    1.328,
+    1.358,
+    1.312,
+    1.358
+   ],
+   "pkg stringenc": [
+    1.328,
+    1.328,
+    1.328,
+    1.328,
+    1.343
+   ],
+   "pkg beamerfontthemedefault": [
+    1.328,
+    1.328,
+    1.373,
+    1.297,
+    1.343
+   ],
+   "pkg beamerbaseoptions": [
+    1.236,
+    1.236,
+    1.205,
+    1.205,
+    1.221
+   ],
+   "pkg amstext": [
+    1.221,
+    1.221,
+    1.266,
+    1.205,
+    1.221
+   ],
+   "pkg amsthm": [
+    1.205,
+    1.221,
+    1.266,
+    1.205,
+    1.221
+   ],
+   "pkg booktabs": [
+    1.205,
+    1.19,
+    1.16,
+    1.16,
+    1.19
+   ],
+   "file pgflibraryfpu.code.tex": [
+    1.205,
+    1.205,
+    1.19,
+    1.175,
+    1.221
+   ],
+   "pkg appendixnumberbeamer": [
+    1.175,
+    1.144,
+    1.114,
+    1.129,
+    1.144
+   ],
+   "pkg bigintcalc": [
+    1.16,
+    1.144,
+    1.129,
+    1.129,
+    1.144
+   ],
+   "file hxetex.def": [
+    1.16,
+    1.175,
+    1.175,
+    1.16,
+    1.175
+   ],
+   "pkg uniquecounter": [
+    1.16,
+    1.175,
+    1.16,
+    1.144,
+    1.16
+   ],
+   "pkg beamerbaseframesize": [
+    1.114,
+    1.114,
+    1.129,
+    1.099,
+    1.114
+   ],
+   "pkg refcount": [
+    1.083,
+    1.114,
+    1.083,
+    1.083,
+    1.083
+   ],
+   "pkg beamerbasenotes": [
+    1.083,
+    1.083,
+    1.083,
+    1.099,
+    1.099
+   ],
+   "pkg pgfopts": [
+    1.083,
+    1.068,
+    1.099,
+    1.068,
+    1.099
+   ],
+   "pkg amsfonts": [
+    1.068,
+    1.053,
+    1.083,
+    1.038,
+    1.083
+   ],
+   "pkg beamerbaseverbatim": [
+    1.053,
+    1.053,
+    1.022,
+    1.038,
+    1.053
+   ],
+   "pkg beamerbasetoc": [
+    1.053,
+    1.022,
+    1.053,
+    1.007,
+    1.038
+   ],
+   "pkg pgfcomp-version-1-18": [
+    1.053,
+    1.083,
+    1.053,
+    1.038,
+    1.053
+   ],
+   "pkg beamerbasetwoscreens": [
+    1.022,
+    0.992,
+    0.992,
+    0.992,
+    1.022
+   ],
+   "pkg beamerbasethemes": [
+    1.022,
+    1.007,
+    1.038,
+    1.022,
+    1.038
+   ],
+   "pkg amsopn": [
+    1.007,
+    1.007,
+    1.022,
+    1.007,
+    1.007
+   ],
+   "pkg beamerbaseboxes": [
+    0.992,
+    1.007,
+    1.022,
+    1.007,
+    1.007
+   ],
+   "pkg fontenc": [
+    0.977,
+    0.931,
+    0.931,
+    0.977,
+    0.977
+   ],
+   "file pgfmoduleshapes.code.tex": [
+    0.961,
+    0.946,
+    0.977,
+    0.946,
+    0.961
+   ],
+   "pkg ifxetex": [
+    0.946,
+    0.931,
+    0.931,
+    0.961,
+    0.977
+   ],
+   "pkg ifluatex": [
+    0.946,
+    0.916,
+    0.916,
+    0.931,
+    0.946
+   ],
+   "file tikzlibrarydecorations.code.tex": [
+    0.931,
+    0.916,
+    0.931,
+    0.931,
+    0.977
+   ],
+   "file translator-bibliography-dictionary-English.dict": [
+    0.931,
+    0.946,
+    0.931,
+    0.931,
+    0.946
+   ],
+   "file pd1enc.def": [
+    0.9,
+    0.931,
+    0.9,
+    0.9,
+    0.916
+   ],
+   "pkg enumerate": [
+    0.9,
+    0.87,
+    0.9,
+    0.885,
+    0.885
+   ],
+   "pkg amsbsy": [
+    0.9,
+    0.931,
+    0.961,
+    0.916,
+    0.946
+   ],
+   "file pgfcalendar.code.tex": [
+    0.9,
+    0.885,
+    0.916,
+    0.916,
+    0.916
+   ],
+   "pkg pgfkeys": [
+    0.87,
+    0.9,
+    0.87,
+    0.87,
+    0.87
+   ],
+   "pkg xspace": [
+    0.87,
+    0.87,
+    0.854,
+    0.87,
+    0.885
+   ],
+   "file pgfkeyslibraryfiltered.code.tex": [
+    0.854,
+    0.885,
+    0.854,
+    0.854,
+    0.854
+   ],
+   "pkg ltxcmds": [
+    0.839,
+    0.87,
+    0.824,
+    0.809,
+    0.824
+   ],
+   "file pgfmoduleplot.code.tex": [
+    0.839,
+    0.839,
+    0.854,
+    0.839,
+    0.839
+   ],
+   "file tikzlibrarydecorations.pathreplacing.code.tex": [
+    0.824,
+    0.809,
+    0.793,
+    0.824,
+    0.839
+   ],
+   "pkg beamerbasedecode": [
+    0.809,
+    0.839,
+    0.809,
+    0.824,
+    0.839
+   ],
+   "file pgfcorepoints.code.tex": [
+    0.809,
+    0.793,
+    0.824,
+    0.809,
+    0.809
+   ],
+   "pkg atbegshi-ltx": [
+    0.809,
+    0.839,
+    0.809,
+    0.839,
+    0.809
+   ],
+   "pkg kvsetkeys": [
+    0.809,
+    0.824,
+    0.824,
+    0.809,
+    0.778
+   ],
+   "pkg scrlogo": [
+    0.809,
+    0.793,
+    0.793,
+    0.824,
+    0.824
+   ],
+   "pkg amsgen": [
+    0.809,
+    0.809,
+    0.839,
+    0.824,
+    0.793
+   ],
+   "pkg url": [
+    0.778,
+    0.778,
+    1.068,
+    0.793,
+    0.778
+   ],
+   "pkg ifvtex": [
+    0.763,
+    0.763,
+    0.748,
+    0.748,
+    0.748
+   ],
+   "file tikzlibrarydecorations.pathmorphing.code.tex": [
+    0.763,
+    0.732,
+    0.748,
+    0.748,
+    0.763
+   ],
+   "pkg kvdefinekeys": [
+    0.748,
+    0.793,
+    0.778,
+    0.763,
+    0.763
+   ],
+   "pkg infwarerr": [
+    0.748,
+    0.748,
+    0.732,
+    0.732,
+    0.732
+   ],
+   "pkg intcalc": [
+    0.748,
+    0.778,
+    0.748,
+    0.763,
+    0.763
+   ],
+   "file tikzlibrarytopaths.code.tex": [
+    0.748,
+    0.687,
+    0.702,
+    0.717,
+    0.717
+   ],
+   "file pgffor.code.tex": [
+    0.732,
+    0.732,
+    0.748,
+    0.748,
+    0.748
+   ],
+   "file l3backend-xetex.def": [
+    0.732,
+    0.748,
+    0.717,
+    0.702,
+    0.717
+   ],
+   "pkg iftex": [
+    0.717,
+    0.717,
+    0.732,
+    0.717,
+    0.717
+   ],
+   "file pgfcoreexternal.code.tex": [
+    0.717,
+    0.717,
+    0.717,
+    0.732,
+    0.702
+   ],
+   "file tikzlibraryplotmarks.code.tex": [
+    0.717,
+    0.732,
+    0.732,
+    0.748,
+    0.748
+   ],
+   "pkg keyval": [
+    0.702,
+    0.717,
+    0.717,
+    0.702,
+    0.702
+   ],
+   "file pgflibraryplothandlers.code.tex": [
+    0.702,
+    0.702,
+    0.687,
+    0.687,
+    0.687
+   ],
+   "pkg trig": [
+    0.687,
+    0.671,
+    0.671,
+    0.656,
+    0.671
+   ],
+   "file pgfmathfunctions.basic.code.tex": [
+    0.671,
+    0.687,
+    0.656,
+    0.641,
+    0.671
+   ],
+   "file pgfsyssoftpath.code.tex": [
+    0.671,
+    0.29,
+    0.259,
+    0.275,
+    0.259
+   ],
+   "file pgfmathparser.code.tex": [
+    0.656,
+    0.656,
+    0.656,
+    0.626,
+    0.946
+   ],
+   "file pgfsys-dvipdfmx.def": [
+    0.641,
+    0.626,
+    0.656,
+    0.656,
+    0.656
+   ],
+   "file pgfcorepathusage.code.tex": [
+    0.641,
+    0.656,
+    0.641,
+    0.656,
+    0.641
+   ],
+   "file pgfcorescopes.code.tex": [
+    0.61,
+    0.641,
+    0.641,
+    0.9,
+    0.641
+   ],
+   "file pgflibraryplotmarks.code.tex": [
+    0.595,
+    0.595,
+    0.595,
+    0.61,
+    0.58
+   ],
+   "file pgfrcs.code.tex": [
+    0.58,
+    0.565,
+    0.565,
+    0.519,
+    0.549
+   ],
+   "file pgfcorepathconstruct.code.tex": [
+    0.565,
+    0.58,
+    0.565,
+    0.565,
+    0.58
+   ],
+   "file pgfsys-xetex.def": [
+    0.504,
+    0.504,
+    0.504,
+    0.488,
+    0.504
+   ],
+   "file pgfmathfunctions.code.tex": [
+    0.488,
+    0.504,
+    0.473,
+    0.473,
+    0.488
+   ],
+   "file pgflibrarydecorations.pathmorphing.code.tex": [
+    0.488,
+    0.473,
+    0.473,
+    0.488,
+    0.534
+   ],
+   "file pgflibrarydecorations.pathreplacing.code.tex": [
+    0.488,
+    0.504,
+    0.488,
+    0.488,
+    0.488
+   ],
+   "file pgfmathfunctions.comparison.code.tex": [
+    0.473,
+    0.458,
+    0.458,
+    0.458,
+    0.473
+   ],
+   "file translator-environment-dictionary-English.dict": [
+    0.473,
+    0.488,
+    0.458,
+    0.473,
+    0.473
+   ],
+   "file pgfcoreimage.code.tex": [
+    0.458,
+    0.458,
+    0.458,
+    0.443,
+    0.443
+   ],
+   "file pgfmodulematrix.code.tex": [
+    0.458,
+    0.443,
+    0.458,
+    0.458,
+    0.458
+   ],
+   "file pgfutil-common.tex": [
+    0.443,
+    0.443,
+    0.427,
+    0.427,
+    0.443
+   ],
+   "file pgfcoreshade.code.tex": [
+    0.443,
+    0.458,
+    0.443,
+    0.443,
+    0.443
+   ],
+   "file pgfmathfunctions.misc.code.tex": [
+    0.427,
+    0.458,
+    0.458,
+    0.443,
+    0.443
+   ],
+   "file pgfcoretransparency.code.tex": [
+    0.427,
+    0.412,
+    0.443,
+    0.412,
+    0.427
+   ],
+   "file xetex.def": [
+    0.397,
+    0.412,
+    0.397,
+    0.397,
+    0.412
+   ],
+   "file mathcolor.ltx": [
+    0.397,
+    0.397,
+    0.412,
+    0.397,
+    0.397
+   ],
+   "file fontspec.cfg": [
+    0.397,
+    0.412,
+    0.381,
+    0.397,
+    0.397
+   ],
+   "file pgfcoregraphicstate.code.tex": [
+    0.381,
+    0.259,
+    0.259,
+    0.29,
+    0.259
+   ],
+   "file pgfmathfunctions.base.code.tex": [
+    0.366,
+    0.366,
+    0.336,
+    0.336,
+    0.351
+   ],
+   "file pgfcoretransformations.code.tex": [
+    0.366,
+    0.366,
+    0.366,
+    0.366,
+    0.366
+   ],
+   "file pgfutil-latex.def": [
+    0.351,
+    0.381,
+    0.366,
+    0.351,
+    0.351
+   ],
+   "file pgfmathutil.code.tex": [
+    0.32,
+    0.336,
+    0.32,
+    0.336,
+    0.32
+   ],
+   "file pgfmathfunctions.random.code.tex": [
+    0.305,
+    0.29,
+    0.29,
+    0.259,
+    0.275
+   ],
+   "file pgfcorepathprocessing.code.tex": [
+    0.305,
+    0.351,
+    0.32,
+    0.32,
+    0.32
+   ],
+   "file pgfmathfunctions.round.code.tex": [
+    0.275,
+    0.275,
+    0.275,
+    0.275,
+    0.275
+   ],
+   "file pgfmathfunctions.integerarithmetics.code.tex": [
+    0.275,
+    0.275,
+    0.275,
+    0.275,
+    0.275
+   ],
+   "file pgfmathcalc.code.tex": [
+    0.275,
+    0.29,
+    0.275,
+    0.275,
+    0.275
+   ],
+   "file pgfcorepatterns.code.tex": [
+    0.275,
+    0.259,
+    0.259,
+    0.275,
+    0.259
+   ],
+   "file pgfcorerdf.code.tex": [
+    0.259,
+    0.259,
+    0.244,
+    0.244,
+    0.244
+   ],
+   "file pgfcorelayers.code.tex": [
+    0.244,
+    0.259,
+    0.244,
+    0.229,
+    0.229
+   ],
+   "file pgfsys-common-pdf.def": [
+    0.229,
+    0.244,
+    0.229,
+    0.214,
+    0.229
+   ],
+   "file pgfsysprotocol.code.tex": [
+    0.214,
+    0.198,
+    0.183,
+    0.198,
+    0.214
+   ],
+   "file pgfint.code.tex": [
+    0.214,
+    0.198,
+    0.214,
+    0.214,
+    0.214
+   ],
+   "file pgfcorequick.code.tex": [
+    0.214,
+    0.214,
+    0.229,
+    0.214,
+    0.214
+   ],
+   "file graphics.cfg": [
+    0.198,
+    0.183,
+    0.183,
+    0.198,
+    0.183
+   ],
+   "file color.cfg": [
+    0.198,
+    0.229,
+    0.229,
+    0.214,
+    0.229
+   ],
+   "file pgfcoreobjects.code.tex": [
+    0.198,
+    0.198,
+    0.183,
+    0.198,
+    0.198
+   ],
+   "file pgf.revision.tex": [
+    0.183,
+    0.183,
+    0.183,
+    0.183,
+    0.168
+   ],
+   "file pgf.cfg": [
+    0.183,
+    0.183,
+    0.183,
+    0.183,
+    0.183
+   ],
+   "file demo.out": [
+    0.183,
+    0.168,
+    0.183,
+    0.183,
+    0.183
+   ],
+   "file umsa.fd": [
+    0.183,
+    0.153,
+    0.153,
+    0.183,
+    0.198
+   ],
+   "file umsb.fd": [
+    0.137,
+    0.107,
+    0.107,
+    0.107,
+    0.122
+   ]
+  },
+  "exit_codes": [
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "pages": 33,
+  "records": 803
+ },
+ "lualatex": {
+  "plain_ms": [
+   1738.67,
+   1739.459,
+   1740.753,
+   1708.369,
+   1740.97
+  ],
+  "probed_ms": [
+   1794.346,
+   1802.645,
+   1793.137,
+   1789.914,
+   1798.079
+  ],
+  "units": {
+   "file demo.tex": [
+    860.168,
+    868.271,
+    861.404,
+    860.077,
+    863.678
+   ],
+   "pkg beamerfontthememetropolis": [
+    104.507,
+    107.712,
+    107.788,
+    105.652,
+    108.994
+   ],
+   "pkg pgfplots": [
+    81.94,
+    82.108,
+    81.696,
+    82.657,
+    82.245
+   ],
+   "pkg fontspec-luatex": [
+    67.245,
+    67.001,
+    66.544,
+    67.459,
+    66.849
+   ],
+   "file size10.clo": [
+    15.564,
+    15.06,
+    10.056,
+    15.656,
+    10.117
+   ],
+   "file demo.vrb": [
+    13.016,
+    13.367,
+    12.924,
+    12.955,
+    13.062
+   ],
+   "pkg beamerbaserequires": [
+    12.97,
+    12.985,
+    12.909,
+    13.199,
+    12.955
+   ],
+   "pkg hyperref": [
+    12.39,
+    12.314,
+    12.131,
+    11.963,
+    12.253
+   ],
+   "cls beamer": [
+    10.544,
+    10.254,
+    9.979,
+    10.132,
+    10.01
+   ],
+   "file demo.bbl": [
+    10.498,
+    10.651,
+    10.513,
+    10.635,
+    10.666
+   ],
+   "file tikz.code.tex": [
+    9.537,
+    9.43,
+    9.354,
+    9.552,
+    9.491
+   ],
+   "pkg xcolor": [
+    9.186,
+    9.033,
+    9.033,
+    8.759,
+    9.125
+   ],
+   "file puenc.def": [
+    6.531,
+    6.516,
+    6.302,
+    6.302,
+    6.378
+   ],
+   "file pgfcore.code.tex": [
+    6.363,
+    6.348,
+    6.271,
+    6.073,
+    6.302
+   ],
+   "pkg beamerbaseauxtemplates": [
+    6.058,
+    6.027,
+    6.027,
+    6.012,
+    6.027
+   ],
+   "pkg amsmath": [
+    5.63,
+    5.615,
+    5.539,
+    5.615,
+    5.6
+   ],
+   "pkg beamerinnerthemedefault": [
+    5.447,
+    5.432,
+    5.386,
+    5.447,
+    5.478
+   ],
+   "pkg beamerthememetropolis": [
+    5.02,
+    4.99,
+    4.974,
+    5.005,
+    5.035
+   ],
+   "file pgfmath.code.tex": [
+    4.883,
+    4.868,
+    4.837,
+    4.669,
+    4.898
+   ],
+   "pkg nameref": [
+    4.288,
+    4.242,
+    4.257,
+    4.105,
+    4.288
+   ],
+   "file translator-basic-dictionary-English.dict": [
+    4.013,
+    4.044,
+    4.028,
+    4.044,
+    4.059
+   ],
+   "pkg scrlfile-hook": [
+    3.998,
+    3.937,
+    3.983,
+    4.135,
+    3.998
+   ],
+   "pkg pgfplotsthemetol": [
+    3.708,
+    3.738,
+    3.723,
+    3.769,
+    3.723
+   ],
+   "pkg beamerthemedefault": [
+    3.632,
+    3.632,
+    3.616,
+    3.647,
+    3.662
+   ],
+   "file translator-theorem-dictionary-English.dict": [
+    3.464,
+    3.494,
+    3.494,
+    3.51,
+    3.51
+   ],
+   "pkg beamerbasecolor": [
+    3.372,
+    3.296,
+    3.326,
+    3.342,
+    3.342
+   ],
+   "pkg beamerbasecompatibility": [
+    3.296,
+    3.281,
+    3.265,
+    3.357,
+    3.296
+   ],
+   "pkg beamerinnerthememetropolis": [
+    3.082,
+    3.006,
+    3.082,
+    3.067,
+    3.098
+   ],
+   "pkg pgf": [
+    3.067,
+    3.067,
+    3.036,
+    3.036,
+    3.082
+   ],
+   "pkg beamerbasefont": [
+    2.945,
+    2.93,
+    2.914,
+    3.021,
+    2.914
+   ],
+   "pkg beamerbaseoverlay": [
+    2.884,
+    2.869,
+    2.853,
+    2.96,
+    2.884
+   ],
+   "file pgfmathfloat.code.tex": [
+    2.792,
+    2.777,
+    2.762,
+    2.67,
+    2.777
+   ],
+   "file pgfcorearrows.code.tex": [
+    2.777,
+    2.762,
+    2.716,
+    2.609,
+    2.762
+   ],
+   "pkg fontspec": [
+    2.716,
+    2.67,
+    2.686,
+    2.731,
+    2.731
+   ],
+   "pkg beamerbaselocalstructure": [
+    2.64,
+    2.609,
+    2.594,
+    2.594,
+    2.625
+   ],
+   "pkg geometry": [
+    2.594,
+    2.579,
+    2.533,
+    2.441,
+    2.563
+   ],
+   "pkg pgfcore": [
+    2.579,
+    2.548,
+    2.548,
+    2.441,
+    2.579
+   ],
+   "pkg rerunfilecheck": [
+    2.472,
+    2.487,
+    2.472,
+    2.457,
+    2.487
+   ],
+   "file beamerbasenavigationsymbols.tex": [
+    2.457,
+    2.457,
+    2.457,
+    2.472,
+    2.487
+   ],
+   "pkg beamerbasetheorems": [
+    2.457,
+    2.441,
+    2.441,
+    2.457,
+    2.457
+   ],
+   "pkg beamerouterthememetropolis": [
+    2.441,
+    2.441,
+    2.426,
+    2.441,
+    2.426
+   ],
+   "pkg amssymb": [
+    2.35,
+    2.319,
+    2.289,
+    2.396,
+    2.319
+   ],
+   "file pgfmathfunctions.trigonometric.code.tex": [
+    2.335,
+    2.35,
+    2.136,
+    2.121,
+    2.136
+   ],
+   "pkg beamerouterthemedefault": [
+    2.274,
+    2.228,
+    2.274,
+    2.274,
+    2.274
+   ],
+   "pkg graphics": [
+    2.243,
+    2.228,
+    2.197,
+    2.151,
+    2.258
+   ],
+   "file translator-numbers-dictionary-English.dict": [
+    2.213,
+    2.228,
+    2.213,
+    2.228,
+    2.243
+   ],
+   "pkg pgfcomp-version-0-65": [
+    2.182,
+    2.121,
+    2.121,
+    2.167,
+    2.136
+   ],
+   "pkg hycolor": [
+    2.106,
+    2.106,
+    2.121,
+    2.045,
+    2.09
+   ],
+   "pkg beamerbasemisc": [
+    2.09,
+    2.06,
+    2.045,
+    2.136,
+    2.075
+   ],
+   "pkg pdftexcmds": [
+    2.045,
+    2.014,
+    2.014,
+    1.953,
+    2.014
+   ],
+   "pkg beamerbasenavigation": [
+    2.045,
+    2.045,
+    2.014,
+    2.06,
+    2.029
+   ],
+   "pkg beamerbasemodes": [
+    1.984,
+    1.968,
+    1.923,
+    1.862,
+    1.953
+   ],
+   "pkg tikz": [
+    1.968,
+    1.953,
+    1.953,
+    1.984,
+    1.953
+   ],
+   "pkg etoolbox": [
+    1.938,
+    1.923,
+    1.907,
+    1.862,
+    1.938
+   ],
+   "pkg translator": [
+    1.907,
+    1.892,
+    1.907,
+    1.953,
+    1.907
+   ],
+   "pkg pgfmath": [
+    1.877,
+    1.846,
+    1.831,
+    1.755,
+    1.862
+   ],
+   "pkg beamercolorthememetropolis": [
+    1.877,
+    1.862,
+    1.877,
+    1.907,
+    1.892
+   ],
+   "pkg bitset": [
+    1.831,
+    1.801,
+    1.785,
+    1.724,
+    1.831
+   ],
+   "pkg pdfescape": [
+    1.816,
+    1.785,
+    1.816,
+    1.74,
+    1.801
+   ],
+   "pkg sansmathaccent": [
+    1.785,
+    1.785,
+    1.77,
+    1.862,
+    1.801
+   ],
+   "pkg epstopdf-base": [
+    1.785,
+    1.77,
+    1.77,
+    1.801,
+    1.785
+   ],
+   "file translator-months-dictionary-English.dict": [
+    1.785,
+    1.801,
+    1.785,
+    1.755,
+    1.785
+   ],
+   "pkg pgfsys": [
+    1.77,
+    1.755,
+    1.724,
+    1.694,
+    1.755
+   ],
+   "file pgfkeys.code.tex": [
+    1.755,
+    1.74,
+    1.74,
+    1.663,
+    1.74
+   ],
+   "pkg beamercolorthemedefault": [
+    1.709,
+    1.663,
+    1.648,
+    1.694,
+    1.663
+   ],
+   "pkg beamerbasesection": [
+    1.694,
+    1.663,
+    1.678,
+    1.709,
+    1.678
+   ],
+   "pkg beamerbasetemplates": [
+    1.694,
+    1.709,
+    1.663,
+    1.709,
+    1.724
+   ],
+   "pkg beamerbaseframe": [
+    1.678,
+    1.663,
+    1.633,
+    1.709,
+    1.663
+   ],
+   "pkg gettitlestring": [
+    1.617,
+    1.617,
+    1.617,
+    1.541,
+    1.633
+   ],
+   "pkg ccicons": [
+    1.617,
+    1.633,
+    1.633,
+    1.648,
+    1.617
+   ],
+   "pkg pgffor": [
+    1.556,
+    1.526,
+    1.526,
+    1.526,
+    1.556
+   ],
+   "pkg pgfrcs": [
+    1.526,
+    1.526,
+    1.511,
+    1.434,
+    1.511
+   ],
+   "file pgfmoduledecorations.code.tex": [
+    1.526,
+    1.526,
+    1.556,
+    1.556,
+    1.541
+   ],
+   "pkg beamerbaseframecomponents": [
+    1.495,
+    1.48,
+    1.48,
+    1.48,
+    1.45
+   ],
+   "pkg pgfcalendar": [
+    1.495,
+    1.48,
+    1.48,
+    1.511,
+    1.48
+   ],
+   "pkg scrlfile": [
+    1.465,
+    1.45,
+    1.45,
+    1.495,
+    1.45
+   ],
+   "pkg calc": [
+    1.465,
+    1.434,
+    1.434,
+    1.434,
+    1.434
+   ],
+   "pkg graphicx": [
+    1.45,
+    1.419,
+    1.404,
+    1.373,
+    1.465
+   ],
+   "pkg xxcolor": [
+    1.45,
+    1.434,
+    1.45,
+    1.373,
+    1.434
+   ],
+   "pkg beamerbasetranslator": [
+    1.45,
+    1.434,
+    1.419,
+    1.465,
+    1.434
+   ],
+   "pkg beamerbasetitle": [
+    1.45,
+    1.434,
+    1.434,
+    1.511,
+    1.434
+   ],
+   "pkg kvoptions": [
+    1.434,
+    1.434,
+    1.434,
+    1.404,
+    1.434
+   ],
+   "pkg stringenc": [
+    1.434,
+    1.404,
+    1.404,
+    1.358,
+    1.419
+   ],
+   "file pgfsys.code.tex": [
+    1.419,
+    1.389,
+    1.404,
+    1.373,
+    1.389
+   ],
+   "pkg xkeyval": [
+    1.419,
+    1.404,
+    1.404,
+    1.404,
+    1.404
+   ],
+   "file pgflibraryfpu.code.tex": [
+    1.389,
+    1.373,
+    1.373,
+    1.373,
+    1.373
+   ],
+   "file hluatex.def": [
+    1.358,
+    1.343,
+    1.358,
+    1.373,
+    1.373
+   ],
+   "pkg beamerfontthemedefault": [
+    1.358,
+    1.328,
+    1.358,
+    1.373,
+    1.358
+   ],
+   "file tikzlibrarydecorations.pathmorphing.code.tex": [
+    1.297,
+    1.328,
+    1.343,
+    1.373,
+    1.373
+   ],
+   "pkg amstext": [
+    1.266,
+    1.282,
+    1.266,
+    1.266,
+    1.266
+   ],
+   "pkg amsthm": [
+    1.251,
+    1.221,
+    1.236,
+    1.266,
+    1.251
+   ],
+   "pkg booktabs": [
+    1.251,
+    1.221,
+    1.221,
+    1.251,
+    1.221
+   ],
+   "pkg beamerbaseoptions": [
+    1.236,
+    1.221,
+    1.236,
+    1.221,
+    1.251
+   ],
+   "pkg bigintcalc": [
+    1.221,
+    1.236,
+    1.236,
+    1.19,
+    1.236
+   ],
+   "pkg uniquecounter": [
+    1.19,
+    1.175,
+    1.16,
+    1.205,
+    1.19
+   ],
+   "pkg appendixnumberbeamer": [
+    1.16,
+    1.19,
+    1.175,
+    1.19,
+    1.19
+   ],
+   "pkg refcount": [
+    1.144,
+    1.144,
+    1.129,
+    1.099,
+    1.144
+   ],
+   "pkg beamerbaseframesize": [
+    1.144,
+    1.129,
+    1.144,
+    1.144,
+    1.129
+   ],
+   "pkg beamerbasenotes": [
+    1.114,
+    1.099,
+    1.068,
+    1.099,
+    1.083
+   ],
+   "pkg pgfopts": [
+    1.114,
+    1.114,
+    1.114,
+    1.114,
+    1.144
+   ],
+   "pkg pgfcomp-version-1-18": [
+    1.068,
+    1.083,
+    1.083,
+    1.083,
+    1.083
+   ],
+   "pkg amsfonts": [
+    1.053,
+    1.068,
+    1.053,
+    1.114,
+    1.038
+   ],
+   "pkg beamerbaseverbatim": [
+    1.053,
+    1.038,
+    1.053,
+    1.083,
+    1.038
+   ],
+   "pkg amsopn": [
+    1.053,
+    1.022,
+    1.022,
+    1.022,
+    1.038
+   ],
+   "pkg beamerbasetoc": [
+    1.038,
+    1.053,
+    1.053,
+    1.038,
+    1.053
+   ],
+   "pkg beamerbaseboxes": [
+    1.022,
+    1.038,
+    1.022,
+    1.038,
+    1.022
+   ],
+   "pkg beamerbasethemes": [
+    1.022,
+    1.022,
+    1.007,
+    1.022,
+    1.022
+   ],
+   "file pd1enc.def": [
+    0.992,
+    0.992,
+    0.961,
+    0.977,
+    0.977
+   ],
+   "pkg beamerbasetwoscreens": [
+    0.992,
+    1.007,
+    0.977,
+    1.022,
+    0.992
+   ],
+   "file translator-bibliography-dictionary-English.dict": [
+    0.992,
+    0.977,
+    0.977,
+    0.977,
+    0.977
+   ],
+   "file pgfmoduleshapes.code.tex": [
+    0.977,
+    0.946,
+    0.946,
+    0.977,
+    0.946
+   ],
+   "pkg ifluatex": [
+    0.961,
+    0.946,
+    0.946,
+    0.961,
+    0.946
+   ],
+   "pkg pgfkeys": [
+    0.946,
+    0.931,
+    0.916,
+    0.854,
+    0.931
+   ],
+   "pkg amsbsy": [
+    0.946,
+    0.961,
+    0.946,
+    0.946,
+    0.946
+   ],
+   "pkg ifxetex": [
+    0.946,
+    0.946,
+    0.931,
+    0.946,
+    0.946
+   ],
+   "pkg fontenc": [
+    0.946,
+    0.961,
+    0.961,
+    0.977,
+    0.961
+   ],
+   "file tikzlibrarydecorations.code.tex": [
+    0.916,
+    0.916,
+    0.9,
+    0.9,
+    0.916
+   ],
+   "file pgfkeyslibraryfiltered.code.tex": [
+    0.885,
+    0.885,
+    0.854,
+    0.824,
+    0.87
+   ],
+   "pkg ltxcmds": [
+    0.885,
+    0.854,
+    0.854,
+    0.824,
+    0.87
+   ],
+   "pkg xspace": [
+    0.885,
+    0.885,
+    0.885,
+    0.885,
+    0.87
+   ],
+   "pkg beamerbasedecode": [
+    0.854,
+    0.854,
+    0.839,
+    0.824,
+    0.824
+   ],
+   "file pgflibraryluamath.code.tex": [
+    0.854,
+    0.854,
+    0.839,
+    0.854,
+    0.854
+   ],
+   "pkg kvsetkeys": [
+    0.839,
+    0.839,
+    0.824,
+    0.809,
+    0.824
+   ],
+   "pkg enumerate": [
+    0.839,
+    0.854,
+    0.87,
+    0.854,
+    0.839
+   ],
+   "pkg amsgen": [
+    0.839,
+    0.839,
+    0.793,
+    0.824,
+    0.809
+   ],
+   "file pgfmoduleplot.code.tex": [
+    0.839,
+    0.824,
+    0.809,
+    0.824,
+    0.824
+   ],
+   "file pgfcalendar.code.tex": [
+    0.839,
+    0.824,
+    0.839,
+    0.854,
+    0.824
+   ],
+   "file pgfcorepoints.code.tex": [
+    0.824,
+    0.824,
+    0.824,
+    0.793,
+    0.824
+   ],
+   "pkg url": [
+    0.824,
+    0.809,
+    0.793,
+    0.778,
+    0.809
+   ],
+   "pkg atbegshi-ltx": [
+    0.809,
+    0.809,
+    0.824,
+    0.793,
+    0.824
+   ],
+   "pkg intcalc": [
+    0.809,
+    0.778,
+    0.763,
+    0.763,
+    0.778
+   ],
+   "pkg scrlogo": [
+    0.809,
+    0.809,
+    0.809,
+    0.839,
+    0.809
+   ],
+   "pkg ifvtex": [
+    0.793,
+    0.793,
+    0.778,
+    0.778,
+    0.793
+   ],
+   "file tikzlibrarydecorations.pathreplacing.code.tex": [
+    0.793,
+    0.809,
+    0.809,
+    0.793,
+    0.809
+   ],
+   "file l3backend-luatex.def": [
+    0.793,
+    0.839,
+    0.824,
+    0.839,
+    0.824
+   ],
+   "pkg iftex": [
+    0.778,
+    0.793,
+    0.763,
+    0.763,
+    0.778
+   ],
+   "pkg kvdefinekeys": [
+    0.778,
+    0.763,
+    0.778,
+    0.732,
+    0.763
+   ],
+   "pkg infwarerr": [
+    0.778,
+    0.748,
+    0.748,
+    0.717,
+    0.763
+   ],
+   "file pgfmathparser.code.tex": [
+    0.763,
+    0.732,
+    0.717,
+    0.687,
+    0.717
+   ],
+   "file supp-pdf.mkii": [
+    0.763,
+    0.793,
+    0.778,
+    0.809,
+    0.793
+   ],
+   "file pgfcoreexternal.code.tex": [
+    0.732,
+    0.732,
+    0.732,
+    0.702,
+    0.717
+   ],
+   "file pgffor.code.tex": [
+    0.732,
+    0.732,
+    0.732,
+    0.732,
+    0.717
+   ],
+   "file pgfmathfunctions.basic.code.tex": [
+    0.717,
+    0.702,
+    0.687,
+    0.671,
+    0.717
+   ],
+   "pkg keyval": [
+    0.702,
+    0.687,
+    0.702,
+    0.656,
+    0.702
+   ],
+   "pkg trig": [
+    0.702,
+    0.671,
+    0.656,
+    0.641,
+    0.671
+   ],
+   "file pgflibraryplothandlers.code.tex": [
+    0.702,
+    0.687,
+    0.687,
+    0.702,
+    0.687
+   ],
+   "file tikzlibraryplotmarks.code.tex": [
+    0.702,
+    0.717,
+    0.717,
+    0.748,
+    0.702
+   ],
+   "file luatex.def": [
+    0.687,
+    0.671,
+    0.656,
+    0.671,
+    0.671
+   ],
+   "file tikzlibrarytopaths.code.tex": [
+    0.687,
+    0.687,
+    0.671,
+    0.687,
+    0.687
+   ],
+   "file pgfcorepathusage.code.tex": [
+    0.656,
+    0.641,
+    0.626,
+    0.626,
+    0.656
+   ],
+   "file pgfsys-luatex.def": [
+    0.626,
+    0.61,
+    0.61,
+    0.61,
+    0.61
+   ],
+   "file pgfcorepathconstruct.code.tex": [
+    0.626,
+    0.61,
+    0.595,
+    0.595,
+    0.595
+   ],
+   "file pgfcorescopes.code.tex": [
+    0.626,
+    0.641,
+    0.626,
+    0.595,
+    0.626
+   ],
+   "file pgflibraryplotmarks.code.tex": [
+    0.565,
+    0.549,
+    0.565,
+    0.565,
+    0.534
+   ],
+   "file pgfrcs.code.tex": [
+    0.549,
+    0.534,
+    0.519,
+    0.534,
+    0.565
+   ],
+   "file pgfcoreshade.code.tex": [
+    0.488,
+    0.473,
+    0.458,
+    0.473,
+    0.473
+   ],
+   "file pgfmathfunctions.comparison.code.tex": [
+    0.473,
+    0.443,
+    0.458,
+    0.443,
+    0.443
+   ],
+   "file pgflibrarydecorations.pathmorphing.code.tex": [
+    0.473,
+    0.473,
+    0.473,
+    0.473,
+    0.473
+   ],
+   "file translator-environment-dictionary-English.dict": [
+    0.473,
+    0.488,
+    0.473,
+    0.488,
+    0.488
+   ],
+   "file pgfutil-common.tex": [
+    0.458,
+    0.443,
+    0.443,
+    0.427,
+    0.443
+   ],
+   "file pgfmathfunctions.code.tex": [
+    0.458,
+    0.443,
+    0.458,
+    0.458,
+    0.443
+   ],
+   "file pgflibrarydecorations.pathreplacing.code.tex": [
+    0.458,
+    0.458,
+    0.458,
+    0.473,
+    0.458
+   ],
+   "file pgfmathfunctions.misc.code.tex": [
+    0.443,
+    0.443,
+    0.443,
+    0.427,
+    0.443
+   ],
+   "file pgfcoreimage.code.tex": [
+    0.427,
+    0.443,
+    0.427,
+    0.412,
+    0.427
+   ],
+   "file pgfmodulematrix.code.tex": [
+    0.427,
+    0.427,
+    0.427,
+    0.443,
+    0.427
+   ],
+   "file fontspec.cfg": [
+    0.427,
+    0.412,
+    0.427,
+    0.458,
+    0.443
+   ],
+   "file pgfcoretransparency.code.tex": [
+    0.397,
+    0.381,
+    0.381,
+    0.381,
+    0.397
+   ],
+   "file mathcolor.ltx": [
+    0.381,
+    0.366,
+    0.366,
+    0.366,
+    0.381
+   ],
+   "file pgfutil-latex.def": [
+    0.366,
+    0.351,
+    0.351,
+    0.351,
+    0.351
+   ],
+   "file pgfcoretransformations.code.tex": [
+    0.366,
+    0.351,
+    0.366,
+    0.351,
+    0.366
+   ],
+   "file pgfmathfunctions.base.code.tex": [
+    0.336,
+    0.336,
+    0.305,
+    0.336,
+    0.32
+   ],
+   "file pgfmathutil.code.tex": [
+    0.32,
+    0.305,
+    0.305,
+    0.29,
+    0.29
+   ],
+   "file pgfcorepathprocessing.code.tex": [
+    0.305,
+    0.305,
+    0.305,
+    0.305,
+    0.305
+   ],
+   "file pgfmathfunctions.random.code.tex": [
+    0.275,
+    0.275,
+    0.259,
+    0.259,
+    0.275
+   ],
+   "file demo.out": [
+    0.275,
+    0.29,
+    0.275,
+    0.29,
+    0.29
+   ],
+   "file pgfmathfunctions.round.code.tex": [
+    0.259,
+    0.244,
+    0.244,
+    0.229,
+    0.259
+   ],
+   "file pgfmathfunctions.integerarithmetics.code.tex": [
+    0.259,
+    0.244,
+    0.244,
+    0.244,
+    0.244
+   ],
+   "file pgfmathcalc.code.tex": [
+    0.259,
+    0.244,
+    0.244,
+    0.244,
+    0.244
+   ],
+   "file pgfcoregraphicstate.code.tex": [
+    0.229,
+    0.229,
+    0.214,
+    0.229,
+    0.229
+   ],
+   "file pgfcorepatterns.code.tex": [
+    0.229,
+    0.244,
+    0.244,
+    0.244,
+    0.244
+   ],
+   "file pgfsys-common-pdf.def": [
+    0.214,
+    0.214,
+    0.214,
+    0.198,
+    0.229
+   ],
+   "file pgfsyssoftpath.code.tex": [
+    0.214,
+    0.214,
+    0.214,
+    0.214,
+    0.229
+   ],
+   "file color.cfg": [
+    0.214,
+    0.198,
+    0.214,
+    0.214,
+    0.214
+   ],
+   "file pgfcorelayers.code.tex": [
+    0.214,
+    0.198,
+    0.198,
+    0.198,
+    0.198
+   ],
+   "file pgf.cfg": [
+    0.183,
+    0.183,
+    0.168,
+    0.168,
+    0.183
+   ],
+   "file pgfcorequick.code.tex": [
+    0.183,
+    0.168,
+    0.168,
+    0.168,
+    0.183
+   ],
+   "file pgfcorerdf.code.tex": [
+    0.183,
+    0.198,
+    0.183,
+    0.183,
+    0.198
+   ],
+   "file epstopdf-sys.cfg": [
+    0.183,
+    0.198,
+    0.198,
+    0.198,
+    0.183
+   ],
+   "file graphics.cfg": [
+    0.168,
+    0.168,
+    0.183,
+    0.168,
+    0.168
+   ],
+   "file pgfsysprotocol.code.tex": [
+    0.168,
+    0.168,
+    0.168,
+    0.153,
+    0.168
+   ],
+   "file pgfint.code.tex": [
+    0.168,
+    0.168,
+    0.183,
+    0.168,
+    0.168
+   ],
+   "file pgfcoreobjects.code.tex": [
+    0.153,
+    0.153,
+    0.153,
+    0.153,
+    0.153
+   ],
+   "file umsa.fd": [
+    0.153,
+    0.168,
+    0.168,
+    0.168,
+    0.168
+   ],
+   "file pgf.revision.tex": [
+    0.137,
+    0.137,
+    0.137,
+    0.122,
+    0.137
+   ],
+   "file umsb.fd": [
+    0.137,
+    0.137,
+    0.137,
+    0.137,
+    0.137
+   ]
+  },
+  "exit_codes": [
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "pages": 33,
+  "records": 812
+ }
+}

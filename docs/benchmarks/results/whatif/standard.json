@@ -1,0 +1,295 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "2.54",
+   "2.12",
+   "1.91"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "pdflatex": {
+  "report": {
+   "schema": 1,
+   "job": "main",
+   "engine": "pdflatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 819.968,
+    "spread_ms": 9.415,
+    "runs_ms": [
+     822.571,
+     819.968,
+     819.514,
+     813.156,
+     820.808
+    ],
+    "warmup_ms": 820.737
+   },
+   "baseline_pages": 5,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 502.64,
+     "status": "measured",
+     "variant": {
+      "median_ms": 414.707,
+      "spread_ms": 14.034,
+      "runs_ms": [
+       414.707,
+       417.886,
+       409.424,
+       410.44,
+       423.458
+      ],
+      "warmup_ms": 419.097
+     },
+     "saved_ms": 405.261,
+     "saved_pct": 49.4,
+     "within_noise": false,
+     "one_time_ms": 739.367,
+     "output": {
+      "status": "identical"
+     }
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 807.925,
+      "spread_ms": 10.818,
+      "runs_ms": [
+       808.341,
+       803.097,
+       809.224,
+       807.925,
+       798.406
+      ],
+      "warmup_ms": 811.262
+     },
+     "saved_ms": 12.043,
+     "saved_pct": 1.5,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 58.395,
+     "status": "measured",
+     "variant": {
+      "median_ms": 763.766,
+      "spread_ms": 7.629,
+      "runs_ms": [
+       770.287,
+       762.658,
+       762.764,
+       763.766,
+       766.008
+      ],
+      "warmup_ms": 2191.433
+     },
+     "saved_ms": 56.202,
+     "saved_pct": 6.9,
+     "within_noise": false,
+     "one_time_ms": 2191.433,
+     "output": {
+      "status": "identical"
+     }
+    }
+   ]
+  },
+  "elapsed_s": 20.4
+ },
+ "xelatex": {
+  "report": {
+   "schema": 1,
+   "job": "main",
+   "engine": "xelatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 1176.581,
+    "spread_ms": 19.635,
+    "runs_ms": [
+     1176.581,
+     1181.523,
+     1161.888,
+     1177.685,
+     1172.996
+    ],
+    "warmup_ms": 1167.694
+   },
+   "baseline_pages": 5,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 722.977,
+     "status": "failed",
+     "error": "could not precompile: ! Can't \\dump a format with native fonts or font-mappings."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1026.431,
+      "spread_ms": 13.871,
+      "runs_ms": [
+       1021.965,
+       1024.104,
+       1028.983,
+       1035.836,
+       1026.431
+      ],
+      "warmup_ms": 1030.04
+     },
+     "saved_ms": 150.15,
+     "saved_pct": 12.8,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 124.268,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1117.976,
+      "spread_ms": 31.667,
+      "runs_ms": [
+       1116.975,
+       1103.131,
+       1117.976,
+       1134.798,
+       1130.077
+      ],
+      "warmup_ms": 3251.102
+     },
+     "saved_ms": 58.605,
+     "saved_pct": 5.0,
+     "within_noise": false,
+     "one_time_ms": 3251.102,
+     "output": {
+      "status": "identical"
+     }
+    }
+   ]
+  },
+  "elapsed_s": 24.9
+ },
+ "lualatex": {
+  "report": {
+   "schema": 1,
+   "job": "main",
+   "engine": "lualatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 1332.787,
+    "spread_ms": 8.651,
+    "runs_ms": [
+     1339.942,
+     1332.787,
+     1333.101,
+     1331.291,
+     1332.471
+    ],
+    "warmup_ms": 1332.382
+   },
+   "baseline_pages": 5,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 740.372,
+     "status": "failed",
+     "error": "could not precompile: lua-uni-stage-tables.lua:141: attempt to perform arithmetic on a string value (local 'key')."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1280.676,
+      "spread_ms": 25.602,
+      "runs_ms": [
+       1281.985,
+       1280.676,
+       1289.493,
+       1272.268,
+       1263.891
+      ],
+      "warmup_ms": 1271.246
+     },
+     "saved_ms": 52.111,
+     "saved_pct": 3.9,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 54.977,
+     "status": "measured",
+     "variant": {
+      "median_ms": 1287.312,
+      "spread_ms": 10.466,
+      "runs_ms": [
+       1284.169,
+       1284.135,
+       1287.312,
+       1294.601,
+       1293.507
+      ],
+      "warmup_ms": 3659.878
+     },
+     "saved_ms": 45.475,
+     "saved_pct": 3.4,
+     "within_noise": false,
+     "one_time_ms": 3659.878,
+     "output": {
+      "status": "identical"
+     }
+    }
+   ]
+  },
+  "elapsed_s": 28.9
+ }
+}

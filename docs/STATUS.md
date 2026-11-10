@@ -44,17 +44,26 @@ can check it.
 
 ### Benchmarks (`docs/benchmarks/`)
 
-- `run.sh` runs `bench.py` in the full TeX Live 2026 image pinned to one P-core of the
-  13900K: four documents (one line; a five-page paper with biber, pgfplots and siunitx;
-  florilegium's manual; a 3,991-page generated book), three engines, a cold run with fresh
-  font caches and five warm runs (three for the book), medians per phase. Results and
-  method in `docs/benchmarks/README.md`; the widest spread is 4%.
-- On the one-line document LuaLaTeX spends 235 of 315 ms starting up, 22 ms on the preamble
-  and 54 ms writing the PDF. On the paper it is 236, 763 and 135 of 1,392 ms (pdfLaTeX 855
-  ms in all). On the book LuaTeX's shipout is 2.7 ms a page against pdfTeX's 0.7. A cold
-  LuaLaTeX run is 4.4 s instead of 0.3 s.
-- Scale: the book's 8,669 records are read in 3 ms, and `--html` writes 1.3 MB in 8 ms.
-  Plain output now lists the slowest `--top` pages instead of all 3,991.
+- Ten documents now, three engines. Three live here (one line, the five-page paper, the
+  3,991-page generated book). Seven are fetched at a pinned commit and never stored: the
+  ACM sigconf sample with BibTeX and with biblatex, the metropolis demo deck, florilegium's
+  manual, the HoTT book, Open Logic and the 7,710-page Stacks Project. `corpus.toml` has
+  each one's commit, license, engines and prepare step, `fetch.py` lays them out. kaobook
+  was left out, because thmtools' `sibling=` fails on the 2026-11-01 kernel, in five lines
+  too.
+- `bench.py` has three modes: the phases (as before), `--overhead` (builds with and without
+  the probe in turns, plus per-package times from the probed records) and `--whatif`.
+  `charts.py` draws four SVG charts, light and dark, from the JSON. Color means phase in
+  all of them, the palette checked with the dataviz validator, the gray included after you
+  could not tell startup from body.
+- The probe costs 7 ms on the one-line document and under 6% everywhere. On the paper,
+  LuaLaTeX's extra preamble time is biblatex (+151 ms) and fontspec's LuaTeX code (67 ms).
+- On the corpus, the precompiled preamble works on two of the six pdfLaTeX
+  documents (paper 49%, deck 25%). Draft pays on XeLaTeX (13 to 38%). Externalize pays on
+  the deck and florilegium (15 to 32%), but its first run on a long book is a pass per
+  picture: 93 minutes on Open Logic for 4 s a build.
+- The run had seven P-cores busy at once, and its phase numbers came out 0.3 to 5% slower
+  than the quieter run before it. The README says so.
 
 ### Public documents
 
@@ -81,6 +90,36 @@ and a paragraph on texprof. texprof is not a pdfTeX: it is TeX with e-TeX and Pr
 DVI, and could not build a LaTeX format against the 2026-11-01 kernel. `docs/02-prior-art.md`
 is corrected; CLAUDE.md still says "pdfTeX only".
 
+### whatif
+
+- `prumo whatif main.tex [--try preamble,draft,externalize] [--runs 5] [--shell-escape]`,
+  from the brief. Each experiment rebuilds its own copy of the directory with one change.
+  The timed builds run without the probe: a warm-up each, then the baseline and the variants
+  in turns. Medians are compared. A difference no larger than the larger spread (2 ms at
+  least, the polling resolution) is "within noise". The output is compared by page count,
+  the words on each page and a 24 dpi render (finding 63). `--json` has the same fields
+  under schema 1.
+- The builds run one at a time, not on `unused`'s parallel pool, because parallel builds
+  slow each other down. The temp copy, the timeout and the text comparison come from `run`
+  and `unused`.
+- `preamble` works on pdfTeX (the fixture goes from 244 to 91 ms). XeTeX and LuaTeX fail,
+  and the row gives the error (finding 60). `doctor` has a mylatexformat row and the TeX
+  image installs it.
+- `externalize`: the brief's command line made every picture build typeset the whole
+  document (finding 61). The system call now carries the hook and names the engine. The text
+  is identical on all three engines, and ten pictures went from 944 to 138 ms. Without
+  `--shell-escape` it is refused when asked for and not run by default. The table and the
+  README mark it experimental.
+- New fixture `whatif`, eight claims, all tested. `make_artifacts.sh whatif` regenerates one
+  fixture now. The fixture turned up finding 62: `doctor --check-log` now tells an
+  existence check from a read.
+- My choices: `--runs` is at least 2. The comparison uses the last run's PDF. Logs go to
+  `<cache>/<job>/whatif/<experiment>/`. With `--shell-escape` the probed run is
+  `--build "<engine> -shell-escape"`, so `time` rebuilds afterwards. No `--latexmk` or
+  `--build`, since their wall time is several passes.
+- `cargo test`, clippy and fmt pass, and so do the 19 TeX tests in the image. TeX Live 2021
+  runs it too (on a copy of the fixture without siunitx, which that image lacks).
+
 ### Only if cheap
 
 - `prumo time output.prumo` and `prumo graph output.prumo` read records from a build prumo
@@ -89,9 +128,9 @@ is corrected; CLAUDE.md still says "pdfTeX only".
 - LuaLaTeX font definitions per page: the `luaotfload.patch_font` hypothesis is wrong for
   `\addfontfeature`, so nothing shipped (finding 57).
 
-**Blocked:** nothing. **Needs me:** the v0.2.0 tag. **Open questions:** should the
-LuaTeX font count go in after all, through `font.nextid()`? Should `compare` default to three
-runs, so it reports a median?
+**Blocked:** nothing. **Needs me:** review and merge the `whatif` PR, then the v0.2.0 tag.
+**Open questions:** should the LuaTeX font count go in after all, through `font.nextid()`?
+Should `compare` default to three runs, so it reports a median?
 
 ## Earlier milestones, one line each
 

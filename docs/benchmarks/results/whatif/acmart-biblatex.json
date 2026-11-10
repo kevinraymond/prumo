@@ -1,0 +1,223 @@
+{
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cpus_allowed": 1,
+  "kernel": "6.12.113+deb13-amd64",
+  "image": "prumo-dev:tl2026-full",
+  "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
+  "load_average_at_start": [
+   "8.09",
+   "4.75",
+   "2.94"
+  ],
+  "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+  "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "prumo": "prumo 0.2.0",
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
+ },
+ "runs": 5,
+ "pdflatex": {
+  "report": {
+   "schema": 1,
+   "job": "sigconf-biblatex",
+   "engine": "pdflatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 3315.015,
+    "spread_ms": 134.942,
+    "runs_ms": [
+     3351.865,
+     3309.768,
+     3315.015,
+     3216.923,
+     3316.249
+    ],
+    "warmup_ms": 3321.689
+   },
+   "baseline_pages": 8,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 953.613,
+     "status": "failed",
+     "error": "could not precompile: ! Missing number, treated as zero."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 3267.756,
+      "spread_ms": 157.3,
+      "runs_ms": [
+       3299.022,
+       3267.756,
+       3145.727,
+       3266.576,
+       3303.027
+      ],
+      "warmup_ms": 3343.456
+     },
+     "saved_ms": 47.259,
+     "saved_pct": 1.4,
+     "within_noise": true,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 44.6
+ },
+ "xelatex": {
+  "report": {
+   "schema": 1,
+   "job": "sigconf-biblatex",
+   "engine": "xelatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 3955.884,
+    "spread_ms": 76.349,
+    "runs_ms": [
+     3996.813,
+     4016.132,
+     3940.146,
+     3939.783,
+     3955.884
+    ],
+    "warmup_ms": 4101.573
+   },
+   "baseline_pages": 8,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 1528.717,
+     "status": "failed",
+     "error": "could not precompile: ! Missing number, treated as zero."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 3773.164,
+      "spread_ms": 71.639,
+      "runs_ms": [
+       3773.164,
+       3777.106,
+       3757.312,
+       3788.35,
+       3716.711
+      ],
+      "warmup_ms": 3926.105
+     },
+     "saved_ms": 182.72,
+     "saved_pct": 4.6,
+     "within_noise": false,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 53.6
+ },
+ "lualatex": {
+  "report": {
+   "schema": 1,
+   "job": "sigconf-biblatex",
+   "engine": "lualatex",
+   "runs": 5,
+   "shell_escape": true,
+   "baseline": {
+    "median_ms": 4640.808,
+    "spread_ms": 52.757,
+    "runs_ms": [
+     4639.384,
+     4627.608,
+     4680.365,
+     4648.598,
+     4640.808
+    ],
+    "warmup_ms": 4629.245
+   },
+   "baseline_pages": 7,
+   "experiments": [
+    {
+     "experiment": "preamble",
+     "experimental": false,
+     "bound_ms": 1865.494,
+     "status": "failed",
+     "error": "could not precompile: ! Missing number, treated as zero."
+    },
+    {
+     "experiment": "draft",
+     "experimental": false,
+     "bound_ms": null,
+     "status": "measured",
+     "variant": {
+      "median_ms": 4529.353,
+      "spread_ms": 120.369,
+      "runs_ms": [
+       4529.353,
+       4490.595,
+       4610.964,
+       4506.642,
+       4531.737
+      ],
+      "warmup_ms": 4501.341
+     },
+     "saved_ms": 111.455,
+     "saved_pct": 2.4,
+     "within_noise": true,
+     "one_time_ms": null,
+     "output": {
+      "status": "not-compared",
+      "reason": "draft mode writes no PDF"
+     }
+    },
+    {
+     "experiment": "externalize",
+     "experimental": true,
+     "bound_ms": 0.0,
+     "status": "not-run",
+     "reason": "the document does not load tikz"
+    }
+   ]
+  },
+  "elapsed_s": 63.2
+ }
+}

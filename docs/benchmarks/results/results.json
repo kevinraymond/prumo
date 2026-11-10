@@ -6,31 +6,39 @@
   "image": "prumo-dev:tl2026-full",
   "image_id": "sha256:069931cfebc74374f28f5e2b47100bdd52abaccf3a71b2c03e148d743f72ab20",
   "load_average_at_start": [
-   "2.61",
-   "2.36",
-   "1.69"
+   "0.21",
+   "1.67",
+   "1.76"
   ],
   "pdftex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
   "xetex": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
   "luahbtex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
   "prumo": "prumo 0.2.0",
-  "florilegium_commit": "833c4fc"
+  "commits": {
+   "florilegium": "833c4fc9ff776c51d0609fd6c96b4a2868806efa",
+   "acmart-sigconf": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "acmart-sigconf-biblatex": "0537b243395b23ad85c5036929f4b1f28429b3a5",
+   "metropolis": "2fa6084b9d34fec9d2d5470eb9a17d0bf712b6c8",
+   "hott": "578b85cc8d586b1677ec4335148adeb443057d24",
+   "open-logic": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+   "stacks": "a04446e57ec1fbc252a871afcec7752fb2807b14"
+  }
  },
  "runs": 5,
  "minimal": {
   "pdflatex": {
    "cold": {
     "phases_ms": {
-     "startup": 42.053,
-     "preamble": 8.041,
-     "begin_document": 1.663,
+     "startup": 42.358,
+     "preamble": 8.209,
+     "begin_document": 1.755,
      "typesetting": 0.061,
-     "shipout": 44.861,
-     "end_document": 0.534,
-     "finalization": 37.659
+     "shipout": 45.197,
+     "end_document": 0.687,
+     "finalization": 45.929
     },
-    "wall_ms": 134.872,
-    "last_record_ms": 97.214,
+    "wall_ms": 144.196,
+    "last_record_ms": 98.267,
     "pages": 1,
     "environments": [],
     "warnings": [],
@@ -39,21 +47,21 @@
      "source": "\\pdfelapsedtime"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 0.418
+    "prumo_elapsed_s": 0.445
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 42.068,
-      "preamble": 8.011,
-      "begin_document": 1.663,
+      "startup": 42.236,
+      "preamble": 8.179,
+      "begin_document": 1.785,
       "typesetting": 0.061,
-      "shipout": 45.242,
-      "end_document": 0.58,
-      "finalization": 38.376
+      "shipout": 46.555,
+      "end_document": 0.717,
+      "finalization": 42.633
      },
-     "wall_ms": 136.002,
-     "last_record_ms": 97.626,
+     "wall_ms": 142.166,
+     "last_record_ms": 99.533,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -62,20 +70,20 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.406
+     "prumo_elapsed_s": 0.447
     },
     {
      "phases_ms": {
-      "startup": 41.946,
-      "preamble": 7.767,
-      "begin_document": 1.617,
+      "startup": 42.77,
+      "preamble": 8.301,
+      "begin_document": 1.801,
       "typesetting": 0.061,
-      "shipout": 45.685,
-      "end_document": 0.702,
-      "finalization": 38.147
+      "shipout": 45.288,
+      "end_document": 0.687,
+      "finalization": 41.107
      },
-     "wall_ms": 135.925,
-     "last_record_ms": 97.778,
+     "wall_ms": 140.015,
+     "last_record_ms": 98.907,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -84,42 +92,20 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.41
+     "prumo_elapsed_s": 0.457
     },
     {
      "phases_ms": {
-      "startup": 41.58,
-      "preamble": 7.797,
-      "begin_document": 1.633,
-      "typesetting": 0.046,
-      "shipout": 44.968,
-      "end_document": 0.58,
-      "finalization": 37.079
-     },
-     "wall_ms": 133.682,
-     "last_record_ms": 96.603,
-     "pages": 1,
-     "environments": [],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "\\pdfelapsedtime"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.403
-    },
-    {
-     "phases_ms": {
-      "startup": 41.946,
-      "preamble": 7.736,
-      "begin_document": 1.633,
+      "startup": 42.282,
+      "preamble": 8.316,
+      "begin_document": 1.755,
       "typesetting": 0.061,
-      "shipout": 44.998,
-      "end_document": 0.519,
-      "finalization": 38.025
+      "shipout": 44.785,
+      "end_document": 0.671,
+      "finalization": 43.198
      },
-     "wall_ms": 134.918,
-     "last_record_ms": 96.893,
+     "wall_ms": 141.068,
+     "last_record_ms": 97.87,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -128,20 +114,20 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.407
+     "prumo_elapsed_s": 0.458
     },
     {
      "phases_ms": {
-      "startup": 41.916,
-      "preamble": 7.782,
-      "begin_document": 1.602,
-      "typesetting": 0.046,
-      "shipout": 45.135,
-      "end_document": 0.504,
-      "finalization": 36.728
+      "startup": 42.374,
+      "preamble": 8.24,
+      "begin_document": 1.77,
+      "typesetting": 0.061,
+      "shipout": 45.288,
+      "end_document": 0.687,
+      "finalization": 40.649
      },
-     "wall_ms": 133.713,
-     "last_record_ms": 96.985,
+     "wall_ms": 139.069,
+     "last_record_ms": 98.419,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -150,35 +136,57 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.402
+     "prumo_elapsed_s": 0.444
+    },
+    {
+     "phases_ms": {
+      "startup": 42.145,
+      "preamble": 7.889,
+      "begin_document": 1.74,
+      "typesetting": 0.061,
+      "shipout": 45.517,
+      "end_document": 0.656,
+      "finalization": 39.093
+     },
+     "wall_ms": 137.1,
+     "last_record_ms": 98.007,
+     "pages": 1,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 0.44
     }
    ],
    "median": {
-    "startup": 41.9,
-    "preamble": 7.8,
-    "begin_document": 1.6,
+    "startup": 42.3,
+    "preamble": 8.2,
+    "begin_document": 1.8,
     "typesetting": 0.1,
-    "shipout": 45.1,
-    "end_document": 0.6,
-    "finalization": 38.0,
-    "wall": 134.9,
-    "wall_min": 133.7,
-    "wall_max": 136.0
+    "shipout": 45.3,
+    "end_document": 0.7,
+    "finalization": 41.1,
+    "wall": 140.0,
+    "wall_min": 137.1,
+    "wall_max": 142.2
    }
   },
   "xelatex": {
    "cold": {
     "phases_ms": {
-     "startup": 83.145,
-     "preamble": 2968.109,
-     "begin_document": 1.984,
+     "startup": 83.923,
+     "preamble": 3040.482,
+     "begin_document": 2.06,
      "typesetting": 0.122,
-     "shipout": 0.198,
-     "end_document": 0.519,
-     "finalization": 134.445
+     "shipout": 0.229,
+     "end_document": 0.58,
+     "finalization": 146.408
     },
-    "wall_ms": 3188.522,
-    "last_record_ms": 3054.077,
+    "wall_ms": 3273.804,
+    "last_record_ms": 3127.396,
     "pages": 1,
     "environments": [],
     "warnings": [],
@@ -187,21 +195,109 @@
      "source": "\\elapsedtime"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 3.501
+    "prumo_elapsed_s": 3.653
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 82.748,
-      "preamble": 46.341,
+      "startup": 83.328,
+      "preamble": 46.997,
+      "begin_document": 2.518,
+      "typesetting": 0.137,
+      "shipout": 0.458,
+      "end_document": 0.595,
+      "finalization": 140.701
+     },
+     "wall_ms": 274.734,
+     "last_record_ms": 134.033,
+     "pages": 1,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 0.63
+    },
+    {
+     "phases_ms": {
+      "startup": 84.351,
+      "preamble": 46.31,
+      "begin_document": 1.968,
+      "typesetting": 0.122,
+      "shipout": 4.257,
+      "end_document": 0.626,
+      "finalization": 141.312
+     },
+     "wall_ms": 278.946,
+     "last_record_ms": 137.634,
+     "pages": 1,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 0.627
+    },
+    {
+     "phases_ms": {
+      "startup": 84.03,
+      "preamble": 45.959,
+      "begin_document": 2.029,
+      "typesetting": 0.122,
+      "shipout": 0.214,
+      "end_document": 0.565,
+      "finalization": 146.835
+     },
+     "wall_ms": 279.755,
+     "last_record_ms": 132.919,
+     "pages": 1,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 0.635
+    },
+    {
+     "phases_ms": {
+      "startup": 83.725,
+      "preamble": 45.731,
+      "begin_document": 1.984,
+      "typesetting": 0.122,
+      "shipout": 0.214,
+      "end_document": 0.549,
+      "finalization": 146.759
+     },
+     "wall_ms": 279.083,
+     "last_record_ms": 132.324,
+     "pages": 1,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 0.625
+    },
+    {
+     "phases_ms": {
+      "startup": 84.274,
+      "preamble": 45.959,
       "begin_document": 1.938,
       "typesetting": 0.107,
       "shipout": 0.198,
-      "end_document": 0.565,
-      "finalization": 135.468
+      "end_document": 0.549,
+      "finalization": 151.627
      },
-     "wall_ms": 267.365,
-     "last_record_ms": 131.897,
+     "wall_ms": 284.653,
+     "last_record_ms": 133.026,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -210,148 +306,60 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.581
-    },
-    {
-     "phases_ms": {
-      "startup": 82.504,
-      "preamble": 45.868,
-      "begin_document": 1.923,
-      "typesetting": 0.107,
-      "shipout": 0.198,
-      "end_document": 0.534,
-      "finalization": 137.222
-     },
-     "wall_ms": 268.356,
-     "last_record_ms": 131.134,
-     "pages": 1,
-     "environments": [],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "\\elapsedtime"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.582
-    },
-    {
-     "phases_ms": {
-      "startup": 83.527,
-      "preamble": 45.7,
-      "begin_document": 1.877,
-      "typesetting": 0.107,
-      "shipout": 0.198,
-      "end_document": 0.504,
-      "finalization": 133.728
-     },
-     "wall_ms": 265.64,
-     "last_record_ms": 131.912,
-     "pages": 1,
-     "environments": [],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "\\elapsedtime"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.595
-    },
-    {
-     "phases_ms": {
-      "startup": 83.16,
-      "preamble": 45.761,
-      "begin_document": 1.877,
-      "typesetting": 0.107,
-      "shipout": 0.183,
-      "end_document": 0.504,
-      "finalization": 137.421
-     },
-     "wall_ms": 269.012,
-     "last_record_ms": 131.592,
-     "pages": 1,
-     "environments": [],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "\\elapsedtime"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.597
-    },
-    {
-     "phases_ms": {
-      "startup": 82.794,
-      "preamble": 46.005,
-      "begin_document": 2.167,
-      "typesetting": 0.122,
-      "shipout": 0.198,
-      "end_document": 0.519,
-      "finalization": 133.331
-     },
-     "wall_ms": 265.137,
-     "last_record_ms": 131.805,
-     "pages": 1,
-     "environments": [],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "\\elapsedtime"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.579
+     "prumo_elapsed_s": 0.626
     }
    ],
    "median": {
-    "startup": 82.8,
-    "preamble": 45.9,
-    "begin_document": 1.9,
+    "startup": 84.0,
+    "preamble": 46.0,
+    "begin_document": 2.0,
     "typesetting": 0.1,
     "shipout": 0.2,
-    "end_document": 0.5,
-    "finalization": 135.5,
-    "wall": 267.4,
-    "wall_min": 265.1,
-    "wall_max": 269.0
+    "end_document": 0.6,
+    "finalization": 146.8,
+    "wall": 279.1,
+    "wall_min": 274.7,
+    "wall_max": 284.7
    }
   },
   "lualatex": {
    "cold": {
     "phases_ms": {
-     "startup": 237.976,
-     "preamble": 4114.838,
-     "begin_document": 2.304,
-     "typesetting": 0.153,
-     "shipout": 33.966,
-     "end_document": 0.671,
-     "finalization": 26.398
+     "startup": 243.881,
+     "preamble": 4321.259,
+     "begin_document": 2.319,
+     "typesetting": 0.168,
+     "shipout": 34.668,
+     "end_document": 0.687,
+     "finalization": 26.489
     },
-    "wall_ms": 4416.306,
-    "last_record_ms": 4389.908,
+    "wall_ms": 4629.471,
+    "last_record_ms": 4602.982,
     "pages": 1,
     "environments": [],
     "warnings": [
-     "luaotfload built its font name database during this build (cold cache: 3354 font files read); it sits in size10.clo's exclusive column (4107 ms). Build once more for a representative timing."
+     "luaotfload built its font name database during this build (cold cache: 3354 font files read); it sits in size10.clo's exclusive column (4313 ms). Build once more for a representative timing."
     ],
     "timer": {
      "clock": "wall",
      "source": "os.gettimeofday() via l3kernel"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 4.697
+    "prumo_elapsed_s": 4.946
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 240.005,
-      "preamble": 17.09,
-      "begin_document": 2.075,
-      "typesetting": 0.122,
-      "shipout": 34.378,
+      "startup": 255.737,
+      "preamble": 18.158,
+      "begin_document": 2.121,
+      "typesetting": 0.137,
+      "shipout": 34.332,
       "end_document": 0.641,
-      "finalization": 18.478
+      "finalization": 17.548
      },
-     "wall_ms": 312.79,
-     "last_record_ms": 294.312,
+     "wall_ms": 328.674,
+     "last_record_ms": 311.127,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -360,20 +368,20 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.587
+     "prumo_elapsed_s": 0.632
     },
     {
      "phases_ms": {
-      "startup": 234.97,
-      "preamble": 22.751,
-      "begin_document": 2.319,
+      "startup": 242.813,
+      "preamble": 23.575,
+      "begin_document": 2.182,
       "typesetting": 0.122,
-      "shipout": 35.385,
-      "end_document": 0.595,
-      "finalization": 19.012
+      "shipout": 35.904,
+      "end_document": 0.656,
+      "finalization": 19.485
      },
-     "wall_ms": 315.155,
-     "last_record_ms": 296.143,
+     "wall_ms": 324.738,
+     "last_record_ms": 305.252,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -382,20 +390,42 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.585
+     "prumo_elapsed_s": 0.622
     },
     {
      "phases_ms": {
-      "startup": 234.68,
-      "preamble": 21.912,
-      "begin_document": 1.984,
+      "startup": 244.415,
+      "preamble": 23.376,
+      "begin_document": 2.258,
+      "typesetting": 0.137,
+      "shipout": 36.346,
+      "end_document": 0.687,
+      "finalization": 19.165
+     },
+     "wall_ms": 326.385,
+     "last_record_ms": 307.22,
+     "pages": 1,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 0.645
+    },
+    {
+     "phases_ms": {
+      "startup": 242.111,
+      "preamble": 22.766,
+      "begin_document": 2.167,
       "typesetting": 0.122,
-      "shipout": 36.942,
-      "end_document": 0.58,
-      "finalization": 19.989
+      "shipout": 35.568,
+      "end_document": 0.656,
+      "finalization": 19.15
      },
-     "wall_ms": 316.208,
-     "last_record_ms": 296.219,
+     "wall_ms": 322.54,
+     "last_record_ms": 303.391,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -404,20 +434,20 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.588
+     "prumo_elapsed_s": 0.617
     },
     {
      "phases_ms": {
-      "startup": 237.686,
-      "preamble": 16.998,
-      "begin_document": 1.999,
+      "startup": 242.584,
+      "preamble": 22.919,
+      "begin_document": 2.151,
       "typesetting": 0.122,
-      "shipout": 34.515,
-      "end_document": 0.626,
-      "finalization": 18.707
+      "shipout": 36.407,
+      "end_document": 0.656,
+      "finalization": 18.738
      },
-     "wall_ms": 310.654,
-     "last_record_ms": 291.946,
+     "wall_ms": 323.578,
+     "last_record_ms": 304.84,
      "pages": 1,
      "environments": [],
      "warnings": [],
@@ -426,42 +456,20 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.58
-    },
-    {
-     "phases_ms": {
-      "startup": 235.199,
-      "preamble": 22.095,
-      "begin_document": 2.014,
-      "typesetting": 0.107,
-      "shipout": 35.812,
-      "end_document": 0.595,
-      "finalization": 19.073
-     },
-     "wall_ms": 314.896,
-     "last_record_ms": 295.822,
-     "pages": 1,
-     "environments": [],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "os.gettimeofday() via l3kernel"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 0.601
+     "prumo_elapsed_s": 0.62
     }
    ],
    "median": {
-    "startup": 235.2,
-    "preamble": 21.9,
-    "begin_document": 2.0,
+    "startup": 242.8,
+    "preamble": 22.9,
+    "begin_document": 2.2,
     "typesetting": 0.1,
-    "shipout": 35.4,
-    "end_document": 0.6,
-    "finalization": 19.0,
-    "wall": 314.9,
-    "wall_min": 310.7,
-    "wall_max": 316.2
+    "shipout": 35.9,
+    "end_document": 0.7,
+    "finalization": 19.1,
+    "wall": 324.7,
+    "wall_min": 322.5,
+    "wall_max": 328.7
    }
   }
  },
@@ -469,29 +477,29 @@
   "pdflatex": {
    "cold": {
     "phases_ms": {
-     "startup": 42.587,
-     "preamble": 505.035,
-     "begin_document": 49.103,
-     "typesetting": 149.475,
-     "shipout": 59.57,
-     "end_document": 2.228,
-     "finalization": 51.163
+     "startup": 42.984,
+     "preamble": 502.67,
+     "begin_document": 48.935,
+     "typesetting": 151.657,
+     "shipout": 61.02,
+     "end_document": 2.487,
+     "finalization": 53.833
     },
-    "wall_ms": 859.161,
-    "last_record_ms": 807.999,
+    "wall_ms": 863.586,
+    "last_record_ms": 809.753,
     "pages": 5,
     "environments": [
      {
       "name": "tikzpicture",
       "count": 2,
-      "total_ms": 58.975,
-      "max_ms": 44.861
+      "total_ms": 59.723,
+      "max_ms": 45.486
      },
      {
       "name": "axis",
       "count": 1,
-      "total_ms": 44.449,
-      "max_ms": 44.449
+      "total_ms": 45.029,
+      "max_ms": 45.029
      }
     ],
     "warnings": [],
@@ -500,34 +508,34 @@
      "source": "\\pdfelapsedtime"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 1.138
+    "prumo_elapsed_s": 1.169
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 42.297,
-      "preamble": 502.106,
-      "begin_document": 49.026,
-      "typesetting": 148.27,
-      "shipout": 59.601,
-      "end_document": 2.304,
-      "finalization": 51.086
+      "startup": 43.35,
+      "preamble": 507.462,
+      "begin_document": 50.049,
+      "typesetting": 151.077,
+      "shipout": 61.325,
+      "end_document": 2.487,
+      "finalization": 55.45
      },
-     "wall_ms": 854.691,
-     "last_record_ms": 803.604,
+     "wall_ms": 871.201,
+     "last_record_ms": 815.75,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 58.746,
+       "total_ms": 59.143,
+       "max_ms": 45.105
+      },
+      {
+       "name": "axis",
+       "count": 1,
+       "total_ms": 44.662,
        "max_ms": 44.662
-      },
-      {
-       "name": "axis",
-       "count": 1,
-       "total_ms": 44.235,
-       "max_ms": 44.235
       }
      ],
      "warnings": [],
@@ -536,33 +544,33 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.135
+     "prumo_elapsed_s": 1.172
     },
     {
      "phases_ms": {
-      "startup": 42.007,
-      "preamble": 501.923,
-      "begin_document": 48.553,
-      "typesetting": 147.568,
-      "shipout": 59.769,
+      "startup": 42.953,
+      "preamble": 499.756,
+      "begin_document": 49.011,
+      "typesetting": 148.56,
+      "shipout": 59.692,
       "end_document": 2.304,
-      "finalization": 51.605
+      "finalization": 52.887
      },
-     "wall_ms": 853.729,
-     "last_record_ms": 802.124,
+     "wall_ms": 855.164,
+     "last_record_ms": 802.277,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 58.64,
-       "max_ms": 44.556
+       "total_ms": 58.594,
+       "max_ms": 44.693
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 44.113,
-       "max_ms": 44.113
+       "total_ms": 44.266,
+       "max_ms": 44.266
       }
      ],
      "warnings": [],
@@ -571,33 +579,33 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.129
+     "prumo_elapsed_s": 1.16
     },
     {
      "phases_ms": {
-      "startup": 42.252,
-      "preamble": 500.122,
-      "begin_document": 48.584,
-      "typesetting": 148.041,
-      "shipout": 59.555,
-      "end_document": 2.319,
-      "finalization": 51.346
+      "startup": 42.984,
+      "preamble": 499.542,
+      "begin_document": 49.53,
+      "typesetting": 148.972,
+      "shipout": 60.013,
+      "end_document": 2.38,
+      "finalization": 54.077
      },
-     "wall_ms": 852.219,
-     "last_record_ms": 800.873,
+     "wall_ms": 857.498,
+     "last_record_ms": 803.421,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 58.517,
-       "max_ms": 44.479
+       "total_ms": 58.548,
+       "max_ms": 44.617
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 44.067,
-       "max_ms": 44.067
+       "total_ms": 44.159,
+       "max_ms": 44.159
       }
      ],
      "warnings": [],
@@ -606,68 +614,33 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.13
+     "prumo_elapsed_s": 1.162
     },
     {
      "phases_ms": {
-      "startup": 42.358,
-      "preamble": 500.198,
-      "begin_document": 49.026,
-      "typesetting": 151.932,
-      "shipout": 60.257,
-      "end_document": 2.335,
-      "finalization": 52.475
+      "startup": 42.633,
+      "preamble": 498.779,
+      "begin_document": 49.683,
+      "typesetting": 150.635,
+      "shipout": 60.562,
+      "end_document": 2.472,
+      "finalization": 54.825
      },
-     "wall_ms": 858.582,
-     "last_record_ms": 806.107,
+     "wall_ms": 859.589,
+     "last_record_ms": 804.764,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 59.448,
-       "max_ms": 45.349
-      },
-      {
-       "name": "axis",
-       "count": 1,
-       "total_ms": 44.876,
-       "max_ms": 44.876
-      }
-     ],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "\\pdfelapsedtime"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.156
-    },
-    {
-     "phases_ms": {
-      "startup": 42.816,
-      "preamble": 506.699,
-      "begin_document": 49.225,
-      "typesetting": 149.231,
-      "shipout": 59.601,
-      "end_document": 2.304,
-      "finalization": 53.802
-     },
-     "wall_ms": 863.678,
-     "last_record_ms": 809.875,
-     "pages": 5,
-     "environments": [
-      {
-       "name": "tikzpicture",
-       "count": 2,
-       "total_ms": 59.219,
+       "total_ms": 58.975,
        "max_ms": 45.074
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 44.647,
-       "max_ms": 44.647
+       "total_ms": 44.586,
+       "max_ms": 44.586
       }
      ],
      "warnings": [],
@@ -676,48 +649,83 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.143
+     "prumo_elapsed_s": 1.163
+    },
+    {
+     "phases_ms": {
+      "startup": 42.877,
+      "preamble": 502.93,
+      "begin_document": 50.018,
+      "typesetting": 150.818,
+      "shipout": 60.532,
+      "end_document": 2.38,
+      "finalization": 54.337
+     },
+     "wall_ms": 863.892,
+     "last_record_ms": 809.555,
+     "pages": 5,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 2,
+       "total_ms": 58.853,
+       "max_ms": 44.815
+      },
+      {
+       "name": "axis",
+       "count": 1,
+       "total_ms": 44.357,
+       "max_ms": 44.357
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.162
     }
    ],
    "median": {
-    "startup": 42.3,
-    "preamble": 501.9,
-    "begin_document": 49.0,
-    "typesetting": 148.3,
-    "shipout": 59.6,
-    "end_document": 2.3,
-    "finalization": 51.6,
-    "wall": 854.7,
-    "wall_min": 852.2,
-    "wall_max": 863.7
+    "startup": 43.0,
+    "preamble": 499.8,
+    "begin_document": 49.7,
+    "typesetting": 150.6,
+    "shipout": 60.5,
+    "end_document": 2.4,
+    "finalization": 54.3,
+    "wall": 859.6,
+    "wall_min": 855.2,
+    "wall_max": 871.2
    }
   },
   "xelatex": {
    "cold": {
     "phases_ms": {
-     "startup": 83.221,
-     "preamble": 3647.385,
-     "begin_document": 46.28,
-     "typesetting": 268.204,
-     "shipout": 17.487,
-     "end_document": 2.777,
-     "finalization": 56.931
+     "startup": 83.908,
+     "preamble": 3703.354,
+     "begin_document": 48.218,
+     "typesetting": 267.014,
+     "shipout": 30.884,
+     "end_document": 3.998,
+     "finalization": 56.305
     },
-    "wall_ms": 4122.284,
-    "last_record_ms": 4065.353,
+    "wall_ms": 4193.68,
+    "last_record_ms": 4137.375,
     "pages": 5,
     "environments": [
      {
       "name": "tikzpicture",
       "count": 2,
-      "total_ms": 129.807,
-      "max_ms": 99.335
+      "total_ms": 126.678,
+      "max_ms": 96.008
      },
      {
       "name": "axis",
       "count": 1,
-      "total_ms": 98.831,
-      "max_ms": 98.831
+      "total_ms": 93.353,
+      "max_ms": 93.353
      }
     ],
     "warnings": [],
@@ -726,34 +734,34 @@
      "source": "\\elapsedtime"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 4.428
+    "prumo_elapsed_s": 4.515
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 82.092,
-      "preamble": 717.972,
-      "begin_document": 46.829,
-      "typesetting": 267.578,
-      "shipout": 18.692,
-      "end_document": 2.655,
-      "finalization": 55.176
+      "startup": 83.527,
+      "preamble": 717.926,
+      "begin_document": 47.638,
+      "typesetting": 267.99,
+      "shipout": 26.245,
+      "end_document": 3.738,
+      "finalization": 58.06
      },
-     "wall_ms": 1190.994,
-     "last_record_ms": 1135.818,
+     "wall_ms": 1205.124,
+     "last_record_ms": 1147.064,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 131.073,
-       "max_ms": 99.213
+       "total_ms": 126.862,
+       "max_ms": 97.107
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 97.626,
-       "max_ms": 97.626
+       "total_ms": 94.421,
+       "max_ms": 94.421
       }
      ],
      "warnings": [],
@@ -762,33 +770,33 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.494
+     "prumo_elapsed_s": 1.53
     },
     {
      "phases_ms": {
-      "startup": 81.451,
-      "preamble": 715.195,
-      "begin_document": 46.219,
-      "typesetting": 262.909,
-      "shipout": 17.578,
-      "end_document": 3.708,
-      "finalization": 56.427
+      "startup": 83.664,
+      "preamble": 717.331,
+      "begin_document": 47.15,
+      "typesetting": 264.465,
+      "shipout": 31.113,
+      "end_document": 3.952,
+      "finalization": 57.19
      },
-     "wall_ms": 1183.487,
-     "last_record_ms": 1127.06,
+     "wall_ms": 1204.865,
+     "last_record_ms": 1147.675,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 126.984,
-       "max_ms": 97.244
+       "total_ms": 124.069,
+       "max_ms": 94.62
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 96.695,
-       "max_ms": 96.695
+       "total_ms": 94.086,
+       "max_ms": 94.086
       }
      ],
      "warnings": [],
@@ -797,33 +805,33 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.486
+     "prumo_elapsed_s": 1.548
     },
     {
      "phases_ms": {
-      "startup": 81.726,
-      "preamble": 719.101,
-      "begin_document": 48.126,
-      "typesetting": 271.484,
-      "shipout": 27.603,
-      "end_document": 3.51,
-      "finalization": 57.663
+      "startup": 85.373,
+      "preamble": 719.864,
+      "begin_document": 48.157,
+      "typesetting": 271.469,
+      "shipout": 38.361,
+      "end_document": 3.174,
+      "finalization": 65.445
      },
-     "wall_ms": 1209.213,
-     "last_record_ms": 1151.55,
+     "wall_ms": 1231.842,
+     "last_record_ms": 1166.397,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 126.633,
-       "max_ms": 96.985
+       "total_ms": 126.663,
+       "max_ms": 96.924
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 95.352,
-       "max_ms": 95.352
+       "total_ms": 95.322,
+       "max_ms": 95.322
       }
      ],
      "warnings": [],
@@ -832,33 +840,33 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.595
+     "prumo_elapsed_s": 1.585
     },
     {
      "phases_ms": {
-      "startup": 82.779,
-      "preamble": 710.663,
-      "begin_document": 46.997,
-      "typesetting": 266.19,
-      "shipout": 21.683,
-      "end_document": 3.616,
-      "finalization": 62.042
+      "startup": 84.137,
+      "preamble": 721.146,
+      "begin_document": 48.874,
+      "typesetting": 270.523,
+      "shipout": 32.806,
+      "end_document": 3.83,
+      "finalization": 58.06
      },
-     "wall_ms": 1193.97,
-     "last_record_ms": 1131.927,
+     "wall_ms": 1219.376,
+     "last_record_ms": 1161.316,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 127.625,
-       "max_ms": 96.848
+       "total_ms": 125.641,
+       "max_ms": 95.215
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 95.23,
-       "max_ms": 95.23
+       "total_ms": 94.635,
+       "max_ms": 94.635
       }
      ],
      "warnings": [],
@@ -867,33 +875,33 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.497
+     "prumo_elapsed_s": 1.571
     },
     {
      "phases_ms": {
-      "startup": 81.604,
-      "preamble": 698.73,
-      "begin_document": 45.639,
-      "typesetting": 258.682,
-      "shipout": 19.15,
-      "end_document": 3.372,
-      "finalization": 54.352
+      "startup": 83.847,
+      "preamble": 721.176,
+      "begin_document": 49.133,
+      "typesetting": 270.599,
+      "shipout": 31.036,
+      "end_document": 3.937,
+      "finalization": 59.891
      },
-     "wall_ms": 1161.53,
-     "last_record_ms": 1107.178,
+     "wall_ms": 1219.62,
+     "last_record_ms": 1159.729,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 123.154,
-       "max_ms": 93.796
+       "total_ms": 126.663,
+       "max_ms": 97.153
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 93.307,
-       "max_ms": 93.307
+       "total_ms": 96.588,
+       "max_ms": 96.588
       }
      ],
      "warnings": [],
@@ -902,86 +910,86 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.47
+     "prumo_elapsed_s": 1.585
     }
    ],
    "median": {
-    "startup": 81.7,
-    "preamble": 715.2,
-    "begin_document": 46.8,
-    "typesetting": 266.2,
-    "shipout": 19.1,
-    "end_document": 3.5,
-    "finalization": 56.4,
-    "wall": 1191.0,
-    "wall_min": 1161.5,
-    "wall_max": 1209.2
+    "startup": 83.8,
+    "preamble": 719.9,
+    "begin_document": 48.2,
+    "typesetting": 270.5,
+    "shipout": 31.1,
+    "end_document": 3.8,
+    "finalization": 58.1,
+    "wall": 1219.4,
+    "wall_min": 1204.9,
+    "wall_max": 1231.8
    }
   },
   "lualatex": {
    "cold": {
     "phases_ms": {
-     "startup": 243.042,
-     "preamble": 4867.966,
-     "begin_document": 53.329,
-     "typesetting": 428.314,
-     "shipout": 65.521,
-     "end_document": 3.601,
-     "finalization": 83.16
+     "startup": 244.705,
+     "preamble": 5078.781,
+     "begin_document": 56.168,
+     "typesetting": 442.291,
+     "shipout": 67.566,
+     "end_document": 3.54,
+     "finalization": 84.259
     },
-    "wall_ms": 5744.934,
-    "last_record_ms": 5661.774,
+    "wall_ms": 5977.31,
+    "last_record_ms": 5893.051,
     "pages": 5,
     "environments": [
      {
       "name": "tikzpicture",
       "count": 2,
-      "total_ms": 59.113,
-      "max_ms": 43.274
+      "total_ms": 56.976,
+      "max_ms": 40.985
      },
      {
       "name": "axis",
       "count": 1,
-      "total_ms": 42.77,
-      "max_ms": 42.77
+      "total_ms": 40.39,
+      "max_ms": 40.39
      }
     ],
     "warnings": [
-     "luaotfload built its font name database during this build (cold cache: 3362 font files read); it sits in size11.clo's exclusive column (4098 ms). Build once more for a representative timing."
+     "luaotfload built its font name database during this build (cold cache: 3362 font files read); it sits in size11.clo's exclusive column (4283 ms). Build once more for a representative timing."
     ],
     "timer": {
      "clock": "wall",
      "source": "os.gettimeofday() via l3kernel"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 6.029
+    "prumo_elapsed_s": 6.305
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 235.336,
-      "preamble": 760.391,
-      "begin_document": 51.392,
-      "typesetting": 202.103,
-      "shipout": 63.019,
-      "end_document": 3.387,
-      "finalization": 71.243
+      "startup": 247.91,
+      "preamble": 780.457,
+      "begin_document": 54.871,
+      "typesetting": 215.378,
+      "shipout": 65.094,
+      "end_document": 3.677,
+      "finalization": 71.609
      },
-     "wall_ms": 1386.871,
-     "last_record_ms": 1315.628,
+     "wall_ms": 1438.995,
+     "last_record_ms": 1367.386,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 54.657,
-       "max_ms": 39.047
+       "total_ms": 57.205,
+       "max_ms": 41.077
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 38.544,
-       "max_ms": 38.544
+       "total_ms": 40.497,
+       "max_ms": 40.497
       }
      ],
      "warnings": [],
@@ -990,33 +998,33 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.659
+     "prumo_elapsed_s": 1.74
     },
     {
      "phases_ms": {
-      "startup": 234.451,
-      "preamble": 763.657,
-      "begin_document": 52.338,
-      "typesetting": 202.82,
-      "shipout": 63.583,
-      "end_document": 3.281,
-      "finalization": 71.365
+      "startup": 242.783,
+      "preamble": 782.974,
+      "begin_document": 54.779,
+      "typesetting": 211.823,
+      "shipout": 64.926,
+      "end_document": 3.647,
+      "finalization": 70.587
      },
-     "wall_ms": 1391.495,
-     "last_record_ms": 1320.129,
+     "wall_ms": 1431.519,
+     "last_record_ms": 1360.931,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 55.161,
-       "max_ms": 39.383
+       "total_ms": 56.503,
+       "max_ms": 40.375
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 38.879,
-       "max_ms": 38.879
+       "total_ms": 39.81,
+       "max_ms": 39.81
       }
      ],
      "warnings": [],
@@ -1025,33 +1033,68 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.667
+     "prumo_elapsed_s": 1.733
     },
     {
      "phases_ms": {
-      "startup": 236.984,
-      "preamble": 777.573,
-      "begin_document": 56.259,
-      "typesetting": 208.832,
+      "startup": 243.942,
+      "preamble": 784.958,
+      "begin_document": 54.352,
+      "typesetting": 211.029,
+      "shipout": 64.331,
+      "end_document": 3.54,
+      "finalization": 71.304
+     },
+     "wall_ms": 1433.456,
+     "last_record_ms": 1362.152,
+     "pages": 5,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 2,
+       "total_ms": 56.473,
+       "max_ms": 40.421
+      },
+      {
+       "name": "axis",
+       "count": 1,
+       "total_ms": 39.841,
+       "max_ms": 39.841
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.743
+    },
+    {
+     "phases_ms": {
+      "startup": 255.768,
+      "preamble": 773.849,
+      "begin_document": 53.589,
+      "typesetting": 209.732,
       "shipout": 63.614,
-      "end_document": 3.372,
-      "finalization": 71.121
+      "end_document": 3.54,
+      "finalization": 69.321
      },
-     "wall_ms": 1417.755,
-     "last_record_ms": 1346.634,
+     "wall_ms": 1429.413,
+     "last_record_ms": 1360.092,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 56.046,
-       "max_ms": 40.131
+       "total_ms": 56.61,
+       "max_ms": 40.665
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 39.597,
-       "max_ms": 39.597
+       "total_ms": 40.085,
+       "max_ms": 40.085
       }
      ],
      "warnings": [],
@@ -1060,33 +1103,33 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.693
+     "prumo_elapsed_s": 1.753
     },
     {
      "phases_ms": {
-      "startup": 236.13,
-      "preamble": 762.833,
-      "begin_document": 52.933,
-      "typesetting": 203.979,
-      "shipout": 63.477,
-      "end_document": 3.342,
-      "finalization": 70.663
+      "startup": 248.032,
+      "preamble": 741.959,
+      "begin_document": 52.612,
+      "typesetting": 206.787,
+      "shipout": 64.117,
+      "end_document": 3.494,
+      "finalization": 71.32
      },
-     "wall_ms": 1393.356,
-     "last_record_ms": 1322.693,
+     "wall_ms": 1388.321,
+     "last_record_ms": 1317.001,
      "pages": 5,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 2,
-       "total_ms": 55.115,
-       "max_ms": 39.444
+       "total_ms": 55.054,
+       "max_ms": 39.581
       },
       {
        "name": "axis",
        "count": 1,
-       "total_ms": 38.956,
-       "max_ms": 38.956
+       "total_ms": 39.001,
+       "max_ms": 39.001
       }
      ],
      "warnings": [],
@@ -1095,291 +1138,20 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.665
-    },
-    {
-     "phases_ms": {
-      "startup": 238.159,
-      "preamble": 748.871,
-      "begin_document": 51.743,
-      "typesetting": 200.363,
-      "shipout": 62.729,
-      "end_document": 3.265,
-      "finalization": 69.244
-     },
-     "wall_ms": 1374.374,
-     "last_record_ms": 1305.13,
-     "pages": 5,
-     "environments": [
-      {
-       "name": "tikzpicture",
-       "count": 2,
-       "total_ms": 54.657,
-       "max_ms": 39.047
-      },
-      {
-       "name": "axis",
-       "count": 1,
-       "total_ms": 38.513,
-       "max_ms": 38.513
-      }
-     ],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "os.gettimeofday() via l3kernel"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.648
+     "prumo_elapsed_s": 1.715
     }
    ],
    "median": {
-    "startup": 236.1,
-    "preamble": 762.8,
-    "begin_document": 52.3,
-    "typesetting": 202.8,
-    "shipout": 63.5,
-    "end_document": 3.3,
-    "finalization": 71.1,
-    "wall": 1391.5,
-    "wall_min": 1374.4,
-    "wall_max": 1417.8
-   }
-  }
- },
- "florilegium": {
-  "pdflatex": {
-   "skipped": "the document needs lualatex"
-  },
-  "xelatex": {
-   "skipped": "the document needs lualatex"
-  },
-  "lualatex": {
-   "cold": {
-    "phases_ms": {
-     "startup": 256.714,
-     "preamble": 4356.11,
-     "begin_document": 12.177,
-     "typesetting": 807.053,
-     "shipout": 470.49,
-     "end_document": 2.106,
-     "finalization": 110.565
-    },
-    "wall_ms": 6015.213,
-    "last_record_ms": 5904.648,
-    "pages": 35,
-    "environments": [
-     {
-      "name": "tikzpicture",
-      "count": 1,
-      "total_ms": 170.975,
-      "max_ms": 170.975
-     },
-     {
-      "name": "longtable",
-      "count": 9,
-      "total_ms": 54.092,
-      "max_ms": 14.175
-     }
-    ],
-    "warnings": [
-     "luaotfload built its font name database during this build (cold cache: 3358 font files read); it sits in size11.clo's exclusive column (4062 ms). Build once more for a representative timing."
-    ],
-    "timer": {
-     "clock": "wall",
-     "source": "os.gettimeofday() via l3kernel"
-    },
-    "format_date": "2026-11-01",
-    "prumo_elapsed_s": 6.312
-   },
-   "warm": [
-    {
-     "phases_ms": {
-      "startup": 240.814,
-      "preamble": 274.231,
-      "begin_document": 12.039,
-      "typesetting": 505.89,
-      "shipout": 471.1,
-      "end_document": 2.075,
-      "finalization": 91.263
-     },
-     "wall_ms": 1597.412,
-     "last_record_ms": 1506.149,
-     "pages": 35,
-     "environments": [
-      {
-       "name": "tikzpicture",
-       "count": 1,
-       "total_ms": 161.896,
-       "max_ms": 161.896
-      },
-      {
-       "name": "longtable",
-       "count": 9,
-       "total_ms": 53.375,
-       "max_ms": 14.145
-      }
-     ],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "os.gettimeofday() via l3kernel"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.881
-    },
-    {
-     "phases_ms": {
-      "startup": 235.825,
-      "preamble": 282.639,
-      "begin_document": 12.299,
-      "typesetting": 502.09,
-      "shipout": 468.979,
-      "end_document": 2.121,
-      "finalization": 91.644
-     },
-     "wall_ms": 1595.596,
-     "last_record_ms": 1503.952,
-     "pages": 35,
-     "environments": [
-      {
-       "name": "tikzpicture",
-       "count": 1,
-       "total_ms": 164.673,
-       "max_ms": 164.673
-      },
-      {
-       "name": "longtable",
-       "count": 9,
-       "total_ms": 53.894,
-       "max_ms": 14.267
-      }
-     ],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "os.gettimeofday() via l3kernel"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.882
-    },
-    {
-     "phases_ms": {
-      "startup": 238.51,
-      "preamble": 272.079,
-      "begin_document": 12.054,
-      "typesetting": 508.652,
-      "shipout": 470.932,
-      "end_document": 2.121,
-      "finalization": 90.744
-     },
-     "wall_ms": 1595.093,
-     "last_record_ms": 1504.349,
-     "pages": 35,
-     "environments": [
-      {
-       "name": "tikzpicture",
-       "count": 1,
-       "total_ms": 161.148,
-       "max_ms": 161.148
-      },
-      {
-       "name": "longtable",
-       "count": 9,
-       "total_ms": 53.391,
-       "max_ms": 14.084
-      }
-     ],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "os.gettimeofday() via l3kernel"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.881
-    },
-    {
-     "phases_ms": {
-      "startup": 237.656,
-      "preamble": 272.141,
-      "begin_document": 11.917,
-      "typesetting": 512.375,
-      "shipout": 471.039,
-      "end_document": 2.274,
-      "finalization": 91.522
-     },
-     "wall_ms": 1598.923,
-     "last_record_ms": 1507.401,
-     "pages": 35,
-     "environments": [
-      {
-       "name": "tikzpicture",
-       "count": 1,
-       "total_ms": 163.483,
-       "max_ms": 163.483
-      },
-      {
-       "name": "longtable",
-       "count": 9,
-       "total_ms": 53.726,
-       "max_ms": 14.069
-      }
-     ],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "os.gettimeofday() via l3kernel"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.885
-    },
-    {
-     "phases_ms": {
-      "startup": 239.365,
-      "preamble": 275.696,
-      "begin_document": 12.054,
-      "typesetting": 510.483,
-      "shipout": 470.871,
-      "end_document": 2.151,
-      "finalization": 91.095
-     },
-     "wall_ms": 1601.715,
-     "last_record_ms": 1510.62,
-     "pages": 35,
-     "environments": [
-      {
-       "name": "tikzpicture",
-       "count": 1,
-       "total_ms": 161.819,
-       "max_ms": 161.819
-      },
-      {
-       "name": "longtable",
-       "count": 9,
-       "total_ms": 53.864,
-       "max_ms": 14.13
-      }
-     ],
-     "warnings": [],
-     "timer": {
-      "clock": "wall",
-      "source": "os.gettimeofday() via l3kernel"
-     },
-     "format_date": "2026-11-01",
-     "prumo_elapsed_s": 1.885
-    }
-   ],
-   "median": {
-    "startup": 238.5,
-    "preamble": 274.2,
-    "begin_document": 12.1,
-    "typesetting": 508.7,
-    "shipout": 470.9,
-    "end_document": 2.1,
-    "finalization": 91.3,
-    "wall": 1597.4,
-    "wall_min": 1595.1,
-    "wall_max": 1601.7
+    "startup": 247.9,
+    "preamble": 780.5,
+    "begin_document": 54.4,
+    "typesetting": 211.0,
+    "shipout": 64.3,
+    "end_document": 3.5,
+    "finalization": 71.3,
+    "wall": 1431.5,
+    "wall_min": 1388.3,
+    "wall_max": 1439.0
    }
   }
  },
@@ -1387,23 +1159,23 @@
   "pdflatex": {
    "cold": {
     "phases_ms": {
-     "startup": 42.526,
-     "preamble": 177.933,
-     "begin_document": 54.398,
-     "typesetting": 13218.246,
-     "shipout": 2768.311,
-     "end_document": 22.064,
-     "finalization": 111.679
+     "startup": 43.503,
+     "preamble": 188.858,
+     "begin_document": 59.143,
+     "typesetting": 14092.194,
+     "shipout": 2879.578,
+     "end_document": 22.705,
+     "finalization": 119.736
     },
-    "wall_ms": 16395.157,
-    "last_record_ms": 16283.478,
+    "wall_ms": 17405.716,
+    "last_record_ms": 17285.98,
     "pages": 3991,
     "environments": [
      {
       "name": "tikzpicture",
       "count": 140,
-      "total_ms": 509.766,
-      "max_ms": 4.99
+      "total_ms": 554.855,
+      "max_ms": 5.692
      }
     ],
     "warnings": [],
@@ -1412,28 +1184,28 @@
      "source": "\\pdfelapsedtime"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 20.811
+    "prumo_elapsed_s": 22.018
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 42.297,
-      "preamble": 183.624,
-      "begin_document": 56.549,
-      "typesetting": 13604.599,
-      "shipout": 2779.877,
-      "end_document": 23.117,
-      "finalization": 110.855
+      "startup": 45.578,
+      "preamble": 192.612,
+      "begin_document": 57.541,
+      "typesetting": 14322.098,
+      "shipout": 2872.528,
+      "end_document": 24.994,
+      "finalization": 128.143
      },
-     "wall_ms": 16800.919,
-     "last_record_ms": 16690.063,
+     "wall_ms": 17643.494,
+     "last_record_ms": 17515.35,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 525.375,
-       "max_ms": 5.066
+       "total_ms": 564.24,
+       "max_ms": 5.463
       }
      ],
      "warnings": [],
@@ -1442,27 +1214,27 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 21.231
+     "prumo_elapsed_s": 22.145
     },
     {
      "phases_ms": {
-      "startup": 41.916,
-      "preamble": 183.701,
-      "begin_document": 57.205,
-      "typesetting": 13558.06,
-      "shipout": 2781.464,
-      "end_document": 22.98,
-      "finalization": 111.786
+      "startup": 44.296,
+      "preamble": 192.261,
+      "begin_document": 61.432,
+      "typesetting": 14404.068,
+      "shipout": 2873.459,
+      "end_document": 25.467,
+      "finalization": 115.463
      },
-     "wall_ms": 16757.111,
-     "last_record_ms": 16645.325,
+     "wall_ms": 17716.446,
+     "last_record_ms": 17600.983,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 524.384,
-       "max_ms": 5.081
+       "total_ms": 567.017,
+       "max_ms": 5.569
       }
      ],
      "warnings": [],
@@ -1471,27 +1243,27 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 21.178
+     "prumo_elapsed_s": 22.218
     },
     {
      "phases_ms": {
-      "startup": 42.282,
-      "preamble": 183.472,
-      "begin_document": 56.702,
-      "typesetting": 13594.223,
-      "shipout": 2782.867,
-      "end_document": 22.858,
-      "finalization": 111.053
+      "startup": 43.533,
+      "preamble": 188.4,
+      "begin_document": 58.594,
+      "typesetting": 13831.024,
+      "shipout": 2812.927,
+      "end_document": 23.819,
+      "finalization": 119.598
      },
-     "wall_ms": 16793.457,
-     "last_record_ms": 16682.404,
+     "wall_ms": 17077.896,
+     "last_record_ms": 16958.298,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 525.803,
-       "max_ms": 5.157
+       "total_ms": 546.844,
+       "max_ms": 5.341
       }
      ],
      "warnings": [],
@@ -1500,49 +1272,49 @@
       "source": "\\pdfelapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 21.219
+     "prumo_elapsed_s": 21.576
     }
    ],
    "median": {
-    "startup": 42.3,
-    "preamble": 183.6,
-    "begin_document": 56.7,
-    "typesetting": 13594.2,
-    "shipout": 2781.5,
-    "end_document": 23.0,
-    "finalization": 111.1,
-    "wall": 16793.5,
-    "wall_min": 16757.1,
-    "wall_max": 16800.9
+    "startup": 44.3,
+    "preamble": 192.3,
+    "begin_document": 58.6,
+    "typesetting": 14322.1,
+    "shipout": 2872.5,
+    "end_document": 25.0,
+    "finalization": 119.6,
+    "wall": 17643.5,
+    "wall_min": 17077.9,
+    "wall_max": 17716.4
    },
    "scale": {
     "record_lines": 8669,
-    "record_bytes": 167473,
-    "analyze_cached_ms": 3.3,
-    "html_ms": 7.5,
-    "html_bytes": 1310025
+    "record_bytes": 167614,
+    "analyze_cached_ms": 3.2,
+    "html_ms": 7.8,
+    "html_bytes": 1310159
    }
   },
   "xelatex": {
    "cold": {
     "phases_ms": {
-     "startup": 82.092,
-     "preamble": 3202.209,
-     "begin_document": 47.318,
-     "typesetting": 15733.856,
-     "shipout": 3757.889,
-     "end_document": 21.21,
-     "finalization": 223.572
+     "startup": 107.681,
+     "preamble": 3234.94,
+     "begin_document": 47.501,
+     "typesetting": 15810.41,
+     "shipout": 3829.544,
+     "end_document": 22.507,
+     "finalization": 239.532
     },
-    "wall_ms": 23068.146,
-    "last_record_ms": 22844.574,
+    "wall_ms": 23292.114,
+    "last_record_ms": 23052.582,
     "pages": 3991,
     "environments": [
      {
       "name": "tikzpicture",
       "count": 140,
-      "total_ms": 539.52,
-      "max_ms": 5.249
+      "total_ms": 544.342,
+      "max_ms": 5.219
      }
     ],
     "warnings": [],
@@ -1551,28 +1323,28 @@
      "source": "\\elapsedtime"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 24.307
+    "prumo_elapsed_s": 24.565
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 81.635,
-      "preamble": 279.953,
-      "begin_document": 46.967,
-      "typesetting": 15669.769,
-      "shipout": 3813.4,
-      "end_document": 21.423,
-      "finalization": 229.248
+      "startup": 83.389,
+      "preamble": 279.907,
+      "begin_document": 47.287,
+      "typesetting": 15930.13,
+      "shipout": 3818.573,
+      "end_document": 22.4,
+      "finalization": 230.698
      },
-     "wall_ms": 20142.395,
-     "last_record_ms": 19913.147,
+     "wall_ms": 20412.384,
+     "last_record_ms": 20181.686,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 532.898,
-       "max_ms": 5.173
+       "total_ms": 549.393,
+       "max_ms": 5.386
       }
      ],
      "warnings": [],
@@ -1581,27 +1353,27 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 21.377
+     "prumo_elapsed_s": 21.676
     },
     {
      "phases_ms": {
       "startup": 82.626,
-      "preamble": 279.739,
-      "begin_document": 47.012,
-      "typesetting": 15694.153,
-      "shipout": 3778.381,
-      "end_document": 21.362,
-      "finalization": 226.181
+      "preamble": 283.844,
+      "begin_document": 48.965,
+      "typesetting": 15935.471,
+      "shipout": 3831.238,
+      "end_document": 21.881,
+      "finalization": 229.309
      },
-     "wall_ms": 20129.456,
-     "last_record_ms": 19903.275,
+     "wall_ms": 20433.334,
+     "last_record_ms": 20204.025,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 530.899,
-       "max_ms": 5.112
+       "total_ms": 550.919,
+       "max_ms": 5.325
       }
      ],
      "warnings": [],
@@ -1610,27 +1382,27 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 21.362
+     "prumo_elapsed_s": 21.694
     },
     {
      "phases_ms": {
-      "startup": 82.458,
-      "preamble": 279.144,
-      "begin_document": 47.379,
-      "typesetting": 15728.699,
-      "shipout": 3749.924,
-      "end_document": 21.179,
-      "finalization": 227.356
+      "startup": 107.452,
+      "preamble": 288.467,
+      "begin_document": 49.271,
+      "typesetting": 16111.115,
+      "shipout": 3873.642,
+      "end_document": 23.041,
+      "finalization": 235.046
      },
-     "wall_ms": 20136.139,
-     "last_record_ms": 19908.783,
+     "wall_ms": 20688.034,
+     "last_record_ms": 20452.988,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 532.547,
-       "max_ms": 5.142
+       "total_ms": 559.311,
+       "max_ms": 5.402
       }
      ],
      "warnings": [],
@@ -1639,81 +1411,81 @@
       "source": "\\elapsedtime"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 21.372
+     "prumo_elapsed_s": 21.953
     }
    ],
    "median": {
-    "startup": 82.5,
-    "preamble": 279.7,
-    "begin_document": 47.0,
-    "typesetting": 15694.2,
-    "shipout": 3778.4,
-    "end_document": 21.4,
-    "finalization": 227.4,
-    "wall": 20136.1,
-    "wall_min": 20129.5,
-    "wall_max": 20142.4
+    "startup": 83.4,
+    "preamble": 283.8,
+    "begin_document": 49.0,
+    "typesetting": 15935.5,
+    "shipout": 3831.2,
+    "end_document": 22.4,
+    "finalization": 230.7,
+    "wall": 20433.3,
+    "wall_min": 20412.4,
+    "wall_max": 20688.0
    },
    "scale": {
     "record_lines": 8661,
-    "record_bytes": 168980,
+    "record_bytes": 169191,
     "analyze_cached_ms": 3.2,
-    "html_ms": 7.3,
-    "html_bytes": 1307655
+    "html_ms": 7.5,
+    "html_bytes": 1307691
    }
   },
   "lualatex": {
    "cold": {
     "phases_ms": {
-     "startup": 241.058,
-     "preamble": 4390.793,
-     "begin_document": 75.134,
-     "typesetting": 27473.709,
-     "shipout": 10976.334,
-     "end_document": 24.643,
-     "finalization": 169.174
+     "startup": 254.913,
+     "preamble": 4507.599,
+     "begin_document": 77.316,
+     "typesetting": 28024.246,
+     "shipout": 11122.04,
+     "end_document": 24.918,
+     "finalization": 172.15
     },
-    "wall_ms": 43350.845,
-    "last_record_ms": 43181.671,
+    "wall_ms": 44183.182,
+    "last_record_ms": 44011.032,
     "pages": 3991,
     "environments": [
      {
       "name": "tikzpicture",
       "count": 140,
-      "total_ms": 570.541,
-      "max_ms": 5.6
+      "total_ms": 575.928,
+      "max_ms": 5.524
      }
     ],
     "warnings": [
-     "luaotfload built its font name database during this build (cold cache: 3360 font files read); it sits in main.tex's exclusive column (38515 ms). Build once more for a representative timing."
+     "luaotfload built its font name database during this build (cold cache: 3360 font files read); it sits in bk10.clo's exclusive column (4212 ms). Build once more for a representative timing."
     ],
     "timer": {
      "clock": "wall",
      "source": "os.gettimeofday() via l3kernel"
     },
     "format_date": "2026-11-01",
-    "prumo_elapsed_s": 45.564
+    "prumo_elapsed_s": 46.42
    },
    "warm": [
     {
      "phases_ms": {
-      "startup": 239.639,
-      "preamble": 268.631,
-      "begin_document": 76.004,
-      "typesetting": 27220.871,
-      "shipout": 10927.75,
-      "end_document": 24.658,
-      "finalization": 157.364
+      "startup": 241.318,
+      "preamble": 281.464,
+      "begin_document": 77.271,
+      "typesetting": 27304.977,
+      "shipout": 10949.295,
+      "end_document": 24.902,
+      "finalization": 158.157
      },
-     "wall_ms": 38914.917,
-     "last_record_ms": 38757.553,
+     "wall_ms": 39037.384,
+     "last_record_ms": 38879.227,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 568.283,
-       "max_ms": 5.432
+       "total_ms": 571.03,
+       "max_ms": 5.463
       }
      ],
      "warnings": [],
@@ -1722,27 +1494,27 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 41.119
+     "prumo_elapsed_s": 41.263
     },
     {
      "phases_ms": {
-      "startup": 236.252,
-      "preamble": 276.733,
-      "begin_document": 76.477,
-      "typesetting": 27236.969,
-      "shipout": 10933.487,
-      "end_document": 24.475,
-      "finalization": 159.134
+      "startup": 243.683,
+      "preamble": 273.727,
+      "begin_document": 78.537,
+      "typesetting": 27283.218,
+      "shipout": 10942.352,
+      "end_document": 25.055,
+      "finalization": 157.654
      },
-     "wall_ms": 38943.527,
-     "last_record_ms": 38784.393,
+     "wall_ms": 39004.227,
+     "last_record_ms": 38846.573,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 570.358,
-       "max_ms": 5.447
+       "total_ms": 571.457,
+       "max_ms": 5.508
       }
      ],
      "warnings": [],
@@ -1751,27 +1523,27 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 41.15
+     "prumo_elapsed_s": 41.237
     },
     {
      "phases_ms": {
-      "startup": 235.321,
-      "preamble": 277.054,
-      "begin_document": 76.859,
-      "typesetting": 27193.192,
-      "shipout": 10934.158,
-      "end_document": 24.673,
-      "finalization": 157.715
+      "startup": 242.538,
+      "preamble": 270.584,
+      "begin_document": 76.141,
+      "typesetting": 27982.834,
+      "shipout": 11148.132,
+      "end_document": 24.902,
+      "finalization": 156.998
      },
-     "wall_ms": 38898.972,
-     "last_record_ms": 38741.257,
+     "wall_ms": 39902.13,
+     "last_record_ms": 39745.132,
      "pages": 3991,
      "environments": [
       {
        "name": "tikzpicture",
        "count": 140,
-       "total_ms": 570.694,
-       "max_ms": 5.447
+       "total_ms": 580.093,
+       "max_ms": 5.6
       }
      ],
      "warnings": [],
@@ -1780,27 +1552,2511 @@
       "source": "os.gettimeofday() via l3kernel"
      },
      "format_date": "2026-11-01",
-     "prumo_elapsed_s": 41.102
+     "prumo_elapsed_s": 42.158
     }
    ],
    "median": {
-    "startup": 236.3,
-    "preamble": 276.7,
-    "begin_document": 76.5,
-    "typesetting": 27220.9,
-    "shipout": 10933.5,
-    "end_document": 24.7,
+    "startup": 242.5,
+    "preamble": 273.7,
+    "begin_document": 77.3,
+    "typesetting": 27305.0,
+    "shipout": 10949.3,
+    "end_document": 24.9,
     "finalization": 157.7,
-    "wall": 38914.9,
-    "wall_min": 38899.0,
-    "wall_max": 38943.5
+    "wall": 39037.4,
+    "wall_min": 39004.2,
+    "wall_max": 39902.1
    },
    "scale": {
     "record_lines": 8668,
-    "record_bytes": 172619,
-    "analyze_cached_ms": 3.1,
-    "html_ms": 7.3,
-    "html_bytes": 1310194
+    "record_bytes": 172737,
+    "analyze_cached_ms": 3.2,
+    "html_ms": 7.5,
+    "html_bytes": 1310701
+   }
+  }
+ },
+ "florilegium": {
+  "lualatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 243.576,
+     "preamble": 4475.54,
+     "begin_document": 12.634,
+     "typesetting": 840.042,
+     "shipout": 476.318,
+     "end_document": 2.213,
+     "finalization": 113.037
+    },
+    "wall_ms": 6163.361,
+    "last_record_ms": 6050.323,
+    "pages": 35,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 1,
+      "total_ms": 181.747,
+      "max_ms": 181.747
+     },
+     {
+      "name": "longtable",
+      "count": 9,
+      "total_ms": 56.412,
+      "max_ms": 14.664
+     }
+    ],
+    "warnings": [
+     "luaotfload built its font name database during this build (cold cache: 3358 font files read); it sits in size11.clo's exclusive column (4165 ms). Build once more for a representative timing."
+    ],
+    "timer": {
+     "clock": "wall",
+     "source": "os.gettimeofday() via l3kernel"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 6.484
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 245.773,
+      "preamble": 295.441,
+      "begin_document": 13.428,
+      "typesetting": 529.449,
+      "shipout": 482.269,
+      "end_document": 2.197,
+      "finalization": 94.07
+     },
+     "wall_ms": 1662.628,
+     "last_record_ms": 1568.558,
+     "pages": 35,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 1,
+       "total_ms": 187.332,
+       "max_ms": 187.332
+      },
+      {
+       "name": "longtable",
+       "count": 9,
+       "total_ms": 55.939,
+       "max_ms": 14.725
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.967
+    },
+    {
+     "phases_ms": {
+      "startup": 246.414,
+      "preamble": 301.27,
+      "begin_document": 12.741,
+      "typesetting": 517.654,
+      "shipout": 473.785,
+      "end_document": 2.197,
+      "finalization": 92.407
+     },
+     "wall_ms": 1646.469,
+     "last_record_ms": 1554.062,
+     "pages": 35,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 1,
+       "total_ms": 165.985,
+       "max_ms": 165.985
+      },
+      {
+       "name": "longtable",
+       "count": 9,
+       "total_ms": 55.054,
+       "max_ms": 14.42
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.945
+    },
+    {
+     "phases_ms": {
+      "startup": 240.219,
+      "preamble": 294.327,
+      "begin_document": 12.619,
+      "typesetting": 503.342,
+      "shipout": 470.52,
+      "end_document": 2.182,
+      "finalization": 91.751
+     },
+     "wall_ms": 1614.96,
+     "last_record_ms": 1523.209,
+     "pages": 35,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 1,
+       "total_ms": 163.879,
+       "max_ms": 163.879
+      },
+      {
+       "name": "longtable",
+       "count": 9,
+       "total_ms": 55.115,
+       "max_ms": 14.511
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.906
+    },
+    {
+     "phases_ms": {
+      "startup": 241.776,
+      "preamble": 288.467,
+      "begin_document": 12.589,
+      "typesetting": 519.15,
+      "shipout": 472.015,
+      "end_document": 2.213,
+      "finalization": 93.46
+     },
+     "wall_ms": 1629.669,
+     "last_record_ms": 1536.209,
+     "pages": 35,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 1,
+       "total_ms": 164.902,
+       "max_ms": 164.902
+      },
+      {
+       "name": "longtable",
+       "count": 9,
+       "total_ms": 55.283,
+       "max_ms": 14.603
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.929
+    },
+    {
+     "phases_ms": {
+      "startup": 245.972,
+      "preamble": 285.248,
+      "begin_document": 12.68,
+      "typesetting": 522.049,
+      "shipout": 473.526,
+      "end_document": 2.289,
+      "finalization": 91.476
+     },
+     "wall_ms": 1633.24,
+     "last_record_ms": 1541.763,
+     "pages": 35,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 1,
+       "total_ms": 164.368,
+       "max_ms": 164.368
+      },
+      {
+       "name": "longtable",
+       "count": 9,
+       "total_ms": 55.313,
+       "max_ms": 14.496
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.978
+    }
+   ],
+   "median": {
+    "startup": 245.8,
+    "preamble": 294.3,
+    "begin_document": 12.7,
+    "typesetting": 519.1,
+    "shipout": 473.5,
+    "end_document": 2.2,
+    "finalization": 92.4,
+    "wall": 1633.2,
+    "wall_min": 1615.0,
+    "wall_max": 1662.6
+   }
+  }
+ },
+ "acmart": {
+  "pdflatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 41.931,
+     "preamble": 766.861,
+     "begin_document": 58.731,
+     "typesetting": 993.53,
+     "shipout": 274.872,
+     "end_document": 256.668,
+     "finalization": 76.904
+    },
+    "wall_ms": 2469.498,
+    "last_record_ms": 2392.593,
+    "pages": 7,
+    "environments": [],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\pdfelapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 2.77
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 41.641,
+      "preamble": 744.858,
+      "begin_document": 57.953,
+      "typesetting": 975.891,
+      "shipout": 271.515,
+      "end_document": 256.607,
+      "finalization": 71.411
+     },
+     "wall_ms": 2419.876,
+     "last_record_ms": 2348.465,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.725
+    },
+    {
+     "phases_ms": {
+      "startup": 41.489,
+      "preamble": 743.134,
+      "begin_document": 57.571,
+      "typesetting": 985.458,
+      "shipout": 273.941,
+      "end_document": 258.682,
+      "finalization": 71.304
+     },
+     "wall_ms": 2431.58,
+     "last_record_ms": 2360.275,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.746
+    },
+    {
+     "phases_ms": {
+      "startup": 41.443,
+      "preamble": 752.228,
+      "begin_document": 59.097,
+      "typesetting": 995.789,
+      "shipout": 274.017,
+      "end_document": 258.057,
+      "finalization": 70.343
+     },
+     "wall_ms": 2450.974,
+     "last_record_ms": 2380.63,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.805
+    },
+    {
+     "phases_ms": {
+      "startup": 41.641,
+      "preamble": 749.527,
+      "begin_document": 58.151,
+      "typesetting": 995.453,
+      "shipout": 279.922,
+      "end_document": 260.376,
+      "finalization": 73.547
+     },
+     "wall_ms": 2458.618,
+     "last_record_ms": 2385.071,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.786
+    },
+    {
+     "phases_ms": {
+      "startup": 42.526,
+      "preamble": 761.169,
+      "begin_document": 60.028,
+      "typesetting": 1045.425,
+      "shipout": 278.61,
+      "end_document": 258.316,
+      "finalization": 72.098
+     },
+     "wall_ms": 2518.173,
+     "last_record_ms": 2446.075,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.831
+    }
+   ],
+   "median": {
+    "startup": 41.6,
+    "preamble": 749.5,
+    "begin_document": 58.2,
+    "typesetting": 995.5,
+    "shipout": 274.0,
+    "end_document": 258.3,
+    "finalization": 71.4,
+    "wall": 2451.0,
+    "wall_min": 2419.9,
+    "wall_max": 2518.2
+   }
+  },
+  "xelatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 84.442,
+     "preamble": 4119.003,
+     "begin_document": 56.961,
+     "typesetting": 1147.858,
+     "shipout": 455.963,
+     "end_document": 7.477,
+     "finalization": 76.813
+    },
+    "wall_ms": 5948.517,
+    "last_record_ms": 5871.704,
+    "pages": 7,
+    "environments": [],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\elapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 6.275
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 82.718,
+      "preamble": 1152.161,
+      "begin_document": 57.343,
+      "typesetting": 1146.683,
+      "shipout": 458.466,
+      "end_document": 7.98,
+      "finalization": 71.091
+     },
+     "wall_ms": 2976.44,
+     "last_record_ms": 2905.35,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.304
+    },
+    {
+     "phases_ms": {
+      "startup": 82.718,
+      "preamble": 1143.784,
+      "begin_document": 57.205,
+      "typesetting": 1132.263,
+      "shipout": 454.758,
+      "end_document": 7.538,
+      "finalization": 69.489
+     },
+     "wall_ms": 2947.754,
+     "last_record_ms": 2878.265,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.269
+    },
+    {
+     "phases_ms": {
+      "startup": 83.191,
+      "preamble": 1145.584,
+      "begin_document": 56.854,
+      "typesetting": 1135.956,
+      "shipout": 453.476,
+      "end_document": 7.278,
+      "finalization": 68.771
+     },
+     "wall_ms": 2951.111,
+     "last_record_ms": 2882.339,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.278
+    },
+    {
+     "phases_ms": {
+      "startup": 82.047,
+      "preamble": 1149.734,
+      "begin_document": 56.58,
+      "typesetting": 1138.626,
+      "shipout": 454.62,
+      "end_document": 7.462,
+      "finalization": 70.023
+     },
+     "wall_ms": 2959.091,
+     "last_record_ms": 2889.069,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.289
+    },
+    {
+     "phases_ms": {
+      "startup": 82.932,
+      "preamble": 1142.09,
+      "begin_document": 56.595,
+      "typesetting": 1128.845,
+      "shipout": 454.697,
+      "end_document": 7.477,
+      "finalization": 70.038
+     },
+     "wall_ms": 2942.673,
+     "last_record_ms": 2872.635,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.299
+    }
+   ],
+   "median": {
+    "startup": 82.7,
+    "preamble": 1145.6,
+    "begin_document": 56.9,
+    "typesetting": 1136.0,
+    "shipout": 454.7,
+    "end_document": 7.5,
+    "finalization": 70.0,
+    "wall": 2951.1,
+    "wall_min": 2942.7,
+    "wall_max": 2976.4
+   }
+  },
+  "lualatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 241.089,
+     "preamble": 7962.173,
+     "begin_document": 103.531,
+     "typesetting": 1336.548,
+     "shipout": 289.78,
+     "end_document": 153.763,
+     "finalization": 180.634
+    },
+    "wall_ms": 10267.517,
+    "last_record_ms": 10086.884,
+    "pages": 6,
+    "environments": [],
+    "warnings": [
+     "luaotfload built its font name database during this build (cold cache: 3354 font files read); it sits in tagpdf's exclusive column (4372 ms). Build once more for a representative timing."
+    ],
+    "timer": {
+     "clock": "wall",
+     "source": "os.gettimeofday() via l3kernel"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 10.582
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 241.287,
+      "preamble": 1520.34,
+      "begin_document": 95.703,
+      "typesetting": 1284.454,
+      "shipout": 309.647,
+      "end_document": 143.661,
+      "finalization": 131.134
+     },
+     "wall_ms": 3726.227,
+     "last_record_ms": 3595.093,
+     "pages": 6,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.011
+    },
+    {
+     "phases_ms": {
+      "startup": 237.946,
+      "preamble": 1515.793,
+      "begin_document": 97.839,
+      "typesetting": 1301.666,
+      "shipout": 308.609,
+      "end_document": 146.652,
+      "finalization": 136.002
+     },
+     "wall_ms": 3744.507,
+     "last_record_ms": 3608.505,
+     "pages": 6,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.037
+    },
+    {
+     "phases_ms": {
+      "startup": 243.82,
+      "preamble": 1509.384,
+      "begin_document": 96.252,
+      "typesetting": 1300.827,
+      "shipout": 278.03,
+      "end_document": 148.697,
+      "finalization": 146.24
+     },
+     "wall_ms": 3723.251,
+     "last_record_ms": 3577.011,
+     "pages": 6,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.018
+    },
+    {
+     "phases_ms": {
+      "startup": 242.218,
+      "preamble": 1512.833,
+      "begin_document": 95.673,
+      "typesetting": 1290.527,
+      "shipout": 281.021,
+      "end_document": 144.18,
+      "finalization": 146.698
+     },
+     "wall_ms": 3713.15,
+     "last_record_ms": 3566.452,
+     "pages": 6,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.005
+    },
+    {
+     "phases_ms": {
+      "startup": 242.874,
+      "preamble": 1576.141,
+      "begin_document": 115.112,
+      "typesetting": 1310.135,
+      "shipout": 283.92,
+      "end_document": 155.182,
+      "finalization": 154.037
+     },
+     "wall_ms": 3837.402,
+     "last_record_ms": 3683.365,
+     "pages": 6,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.153
+    }
+   ],
+   "median": {
+    "startup": 242.2,
+    "preamble": 1515.8,
+    "begin_document": 96.3,
+    "typesetting": 1300.8,
+    "shipout": 283.9,
+    "end_document": 146.7,
+    "finalization": 146.2,
+    "wall": 3726.2,
+    "wall_min": 3713.2,
+    "wall_max": 3837.4
+   }
+  }
+ },
+ "acmart-biblatex": {
+  "pdflatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 42.419,
+     "preamble": 938.4,
+     "begin_document": 120.926,
+     "typesetting": 1449.615,
+     "shipout": 301.071,
+     "end_document": 289.673,
+     "finalization": 73.364
+    },
+    "wall_ms": 3215.469,
+    "last_record_ms": 3142.105,
+    "pages": 8,
+    "environments": [],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\pdfelapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 3.522
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 42.267,
+      "preamble": 936.783,
+      "begin_document": 120.697,
+      "typesetting": 1450.76,
+      "shipout": 302.46,
+      "end_document": 290.176,
+      "finalization": 72.128
+     },
+     "wall_ms": 3215.271,
+     "last_record_ms": 3143.143,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.525
+    },
+    {
+     "phases_ms": {
+      "startup": 42.16,
+      "preamble": 933.487,
+      "begin_document": 120.377,
+      "typesetting": 1457.443,
+      "shipout": 301.804,
+      "end_document": 289.703,
+      "finalization": 74.265
+     },
+     "wall_ms": 3219.238,
+     "last_record_ms": 3144.974,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.529
+    },
+    {
+     "phases_ms": {
+      "startup": 42.206,
+      "preamble": 936.005,
+      "begin_document": 120.148,
+      "typesetting": 1454.193,
+      "shipout": 303.818,
+      "end_document": 289.52,
+      "finalization": 71.945
+     },
+     "wall_ms": 3217.834,
+     "last_record_ms": 3145.889,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.529
+    },
+    {
+     "phases_ms": {
+      "startup": 42.038,
+      "preamble": 938.004,
+      "begin_document": 121.109,
+      "typesetting": 1451.126,
+      "shipout": 301.865,
+      "end_document": 289.078,
+      "finalization": 72.357
+     },
+     "wall_ms": 3215.576,
+     "last_record_ms": 3143.219,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.525
+    },
+    {
+     "phases_ms": {
+      "startup": 42.206,
+      "preamble": 938.019,
+      "begin_document": 119.827,
+      "typesetting": 1474.411,
+      "shipout": 303.024,
+      "end_document": 303.101,
+      "finalization": 72.723
+     },
+     "wall_ms": 3253.311,
+     "last_record_ms": 3180.588,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 3.57
+    }
+   ],
+   "median": {
+    "startup": 42.2,
+    "preamble": 936.8,
+    "begin_document": 120.4,
+    "typesetting": 1454.2,
+    "shipout": 302.5,
+    "end_document": 289.7,
+    "finalization": 72.4,
+    "wall": 3217.8,
+    "wall_min": 3215.3,
+    "wall_max": 3253.3
+   }
+  },
+  "xelatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 82.977,
+     "preamble": 4408.783,
+     "begin_document": 129.15,
+     "typesetting": 1642.365,
+     "shipout": 556.549,
+     "end_document": 15.732,
+     "finalization": 70.267
+    },
+    "wall_ms": 6905.823,
+    "last_record_ms": 6835.556,
+    "pages": 8,
+    "environments": [],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\elapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 7.235
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 83.16,
+      "preamble": 1489.41,
+      "begin_document": 129.456,
+      "typesetting": 1650.894,
+      "shipout": 557.327,
+      "end_document": 16.068,
+      "finalization": 66.62
+     },
+     "wall_ms": 3992.935,
+     "last_record_ms": 3926.315,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.323
+    },
+    {
+     "phases_ms": {
+      "startup": 82.779,
+      "preamble": 1485.519,
+      "begin_document": 127.808,
+      "typesetting": 1644.379,
+      "shipout": 559.814,
+      "end_document": 16.052,
+      "finalization": 67.474
+     },
+     "wall_ms": 3983.826,
+     "last_record_ms": 3916.351,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.313
+    },
+    {
+     "phases_ms": {
+      "startup": 82.535,
+      "preamble": 1490.463,
+      "begin_document": 129.822,
+      "typesetting": 1657.013,
+      "shipout": 559.784,
+      "end_document": 16.357,
+      "finalization": 66.238
+     },
+     "wall_ms": 4002.213,
+     "last_record_ms": 3935.974,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.328
+    },
+    {
+     "phases_ms": {
+      "startup": 82.535,
+      "preamble": 1487.564,
+      "begin_document": 128.815,
+      "typesetting": 1652.313,
+      "shipout": 559.769,
+      "end_document": 16.251,
+      "finalization": 68.451
+     },
+     "wall_ms": 3995.697,
+     "last_record_ms": 3927.246,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.332
+    },
+    {
+     "phases_ms": {
+      "startup": 82.977,
+      "preamble": 1455.719,
+      "begin_document": 123.611,
+      "typesetting": 1613.403,
+      "shipout": 541.031,
+      "end_document": 15.656,
+      "finalization": 68.069
+     },
+     "wall_ms": 3900.467,
+     "last_record_ms": 3832.397,
+     "pages": 8,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.231
+    }
+   ],
+   "median": {
+    "startup": 82.8,
+    "preamble": 1487.6,
+    "begin_document": 128.8,
+    "typesetting": 1650.9,
+    "shipout": 559.8,
+    "end_document": 16.1,
+    "finalization": 67.5,
+    "wall": 3992.9,
+    "wall_min": 3900.5,
+    "wall_max": 4002.2
+   }
+  },
+  "lualatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 241.852,
+     "preamble": 8360.474,
+     "begin_document": 174.438,
+     "typesetting": 1842.255,
+     "shipout": 379.73,
+     "end_document": 178.909,
+     "finalization": 172.226
+    },
+    "wall_ms": 11349.884,
+    "last_record_ms": 11177.658,
+    "pages": 7,
+    "environments": [],
+    "warnings": [
+     "luaotfload built its font name database during this build (cold cache: 3354 font files read); it sits in tagpdf's exclusive column (4368 ms). Build once more for a representative timing."
+    ],
+    "timer": {
+     "clock": "wall",
+     "source": "os.gettimeofday() via l3kernel"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 11.649
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 238.083,
+      "preamble": 1936.05,
+      "begin_document": 171.341,
+      "typesetting": 1849.503,
+      "shipout": 298.004,
+      "end_document": 170.746,
+      "finalization": 139.099
+     },
+     "wall_ms": 4802.826,
+     "last_record_ms": 4663.727,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 5.09
+    },
+    {
+     "phases_ms": {
+      "startup": 237.808,
+      "preamble": 1842.88,
+      "begin_document": 165.604,
+      "typesetting": 1765.259,
+      "shipout": 320.328,
+      "end_document": 163.773,
+      "finalization": 143.021
+     },
+     "wall_ms": 4638.672,
+     "last_record_ms": 4495.651,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.928
+    },
+    {
+     "phases_ms": {
+      "startup": 242.767,
+      "preamble": 1841.232,
+      "begin_document": 166.046,
+      "typesetting": 1750.809,
+      "shipout": 295.7,
+      "end_document": 166.122,
+      "finalization": 152.115
+     },
+     "wall_ms": 4614.792,
+     "last_record_ms": 4462.677,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.905
+    },
+    {
+     "phases_ms": {
+      "startup": 238.678,
+      "preamble": 1845.169,
+      "begin_document": 165.115,
+      "typesetting": 1764.145,
+      "shipout": 307.51,
+      "end_document": 164.276,
+      "finalization": 142.334
+     },
+     "wall_ms": 4627.228,
+     "last_record_ms": 4484.894,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.915
+    },
+    {
+     "phases_ms": {
+      "startup": 238.19,
+      "preamble": 1851.624,
+      "begin_document": 166.138,
+      "typesetting": 1785.568,
+      "shipout": 299.515,
+      "end_document": 163.986,
+      "finalization": 142.578
+     },
+     "wall_ms": 4647.598,
+     "last_record_ms": 4505.02,
+     "pages": 7,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.937
+    }
+   ],
+   "median": {
+    "startup": 238.2,
+    "preamble": 1845.2,
+    "begin_document": 166.0,
+    "typesetting": 1765.3,
+    "shipout": 299.5,
+    "end_document": 164.3,
+    "finalization": 142.6,
+    "wall": 4638.7,
+    "wall_min": 4614.8,
+    "wall_max": 4802.8
+   }
+  }
+ },
+ "metropolis": {
+  "pdflatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 42.007,
+     "preamble": 355.331,
+     "begin_document": 29.694,
+     "typesetting": 593.369,
+     "shipout": 55.161,
+     "end_document": 0.732,
+     "finalization": 47.44
+    },
+    "wall_ms": 1123.734,
+    "last_record_ms": 1076.294,
+    "pages": 33,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 8,
+      "total_ms": 223.465,
+      "max_ms": 105.042
+     },
+     {
+      "name": "axis",
+      "count": 2,
+      "total_ms": 112.091,
+      "max_ms": 69.931
+     }
+    ],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\pdfelapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 1.428
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 42.038,
+      "preamble": 355.194,
+      "begin_document": 29.663,
+      "typesetting": 593.079,
+      "shipout": 55.511,
+      "end_document": 0.824,
+      "finalization": 47.18
+     },
+     "wall_ms": 1123.489,
+     "last_record_ms": 1076.309,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 223.358,
+       "max_ms": 105.026
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 112.045,
+       "max_ms": 69.977
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.427
+    },
+    {
+     "phases_ms": {
+      "startup": 42.068,
+      "preamble": 354.813,
+      "begin_document": 29.602,
+      "typesetting": 591.095,
+      "shipout": 55.206,
+      "end_document": 0.748,
+      "finalization": 46.646
+     },
+     "wall_ms": 1120.178,
+     "last_record_ms": 1073.532,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 222.794,
+       "max_ms": 104.965
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 111.603,
+       "max_ms": 69.626
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.426
+    },
+    {
+     "phases_ms": {
+      "startup": 41.87,
+      "preamble": 355.27,
+      "begin_document": 29.724,
+      "typesetting": 592.346,
+      "shipout": 55.374,
+      "end_document": 0.809,
+      "finalization": 47.073
+     },
+     "wall_ms": 1122.467,
+     "last_record_ms": 1075.394,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 222.992,
+       "max_ms": 104.828
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 111.923,
+       "max_ms": 69.748
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.429
+    },
+    {
+     "phases_ms": {
+      "startup": 42.175,
+      "preamble": 355.56,
+      "begin_document": 29.724,
+      "typesetting": 594.559,
+      "shipout": 55.481,
+      "end_document": 0.748,
+      "finalization": 47.241
+     },
+     "wall_ms": 1125.488,
+     "last_record_ms": 1078.247,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 224.304,
+       "max_ms": 105.469
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 112.534,
+       "max_ms": 70.297
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.428
+    },
+    {
+     "phases_ms": {
+      "startup": 42.206,
+      "preamble": 355.24,
+      "begin_document": 29.724,
+      "typesetting": 592.133,
+      "shipout": 55.435,
+      "end_document": 0.778,
+      "finalization": 46.829
+     },
+     "wall_ms": 1122.345,
+     "last_record_ms": 1075.516,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 223.145,
+       "max_ms": 104.874
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 111.969,
+       "max_ms": 69.809
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.438
+    }
+   ],
+   "median": {
+    "startup": 42.1,
+    "preamble": 355.2,
+    "begin_document": 29.7,
+    "typesetting": 592.3,
+    "shipout": 55.4,
+    "end_document": 0.8,
+    "finalization": 47.1,
+    "wall": 1122.5,
+    "wall_min": 1120.2,
+    "wall_max": 1125.5
+   }
+  },
+  "xelatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 82.428,
+     "preamble": 3402.023,
+     "begin_document": 27.756,
+     "typesetting": 720.901,
+     "shipout": 23.056,
+     "end_document": 0.732,
+     "finalization": 60.272
+    },
+    "wall_ms": 4317.169,
+    "last_record_ms": 4256.897,
+    "pages": 33,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 8,
+      "total_ms": 228.241,
+      "max_ms": 105.286
+     },
+     {
+      "name": "axis",
+      "count": 2,
+      "total_ms": 114.41,
+      "max_ms": 72.006
+     }
+    ],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\elapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 4.639
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 82.642,
+      "preamble": 499.893,
+      "begin_document": 27.817,
+      "typesetting": 727.6,
+      "shipout": 15.869,
+      "end_document": 0.732,
+      "finalization": 60.898
+     },
+     "wall_ms": 1415.451,
+     "last_record_ms": 1354.553,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 228.18,
+       "max_ms": 105.286
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 114.258,
+       "max_ms": 71.838
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.744
+    },
+    {
+     "phases_ms": {
+      "startup": 82.626,
+      "preamble": 499.374,
+      "begin_document": 27.954,
+      "typesetting": 729.141,
+      "shipout": 12.619,
+      "end_document": 0.717,
+      "finalization": 60.379
+     },
+     "wall_ms": 1412.811,
+     "last_record_ms": 1352.432,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 228.928,
+       "max_ms": 105.118
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 113.983,
+       "max_ms": 71.701
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.728
+    },
+    {
+     "phases_ms": {
+      "startup": 82.397,
+      "preamble": 500.397,
+      "begin_document": 27.802,
+      "typesetting": 734.36,
+      "shipout": 13.84,
+      "end_document": 0.732,
+      "finalization": 60.471
+     },
+     "wall_ms": 1419.998,
+     "last_record_ms": 1359.528,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 230.392,
+       "max_ms": 105.957
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 114.807,
+       "max_ms": 72.144
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.738
+    },
+    {
+     "phases_ms": {
+      "startup": 82.184,
+      "preamble": 499.847,
+      "begin_document": 27.725,
+      "typesetting": 729.065,
+      "shipout": 15.747,
+      "end_document": 0.748,
+      "finalization": 61.203
+     },
+     "wall_ms": 1416.519,
+     "last_record_ms": 1355.316,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 229.507,
+       "max_ms": 105.225
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 114.639,
+       "max_ms": 72.235
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.734
+    },
+    {
+     "phases_ms": {
+      "startup": 82.428,
+      "preamble": 499.802,
+      "begin_document": 27.649,
+      "typesetting": 724.884,
+      "shipout": 19.18,
+      "end_document": 0.763,
+      "finalization": 59.967
+     },
+     "wall_ms": 1414.673,
+     "last_record_ms": 1354.706,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 228.943,
+       "max_ms": 104.98
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 114.319,
+       "max_ms": 71.823
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 1.732
+    }
+   ],
+   "median": {
+    "startup": 82.4,
+    "preamble": 499.8,
+    "begin_document": 27.8,
+    "typesetting": 729.1,
+    "shipout": 15.7,
+    "end_document": 0.7,
+    "finalization": 60.5,
+    "wall": 1415.5,
+    "wall_min": 1412.8,
+    "wall_max": 1420.0
+   }
+  },
+  "lualatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 236.328,
+     "preamble": 9701.492,
+     "begin_document": 37.201,
+     "typesetting": 765.625,
+     "shipout": 53.879,
+     "end_document": 0.748,
+     "finalization": 108.444
+    },
+    "wall_ms": 10903.717,
+    "last_record_ms": 10795.273,
+    "pages": 33,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 8,
+      "total_ms": 254.959,
+      "max_ms": 113.953
+     },
+     {
+      "name": "axis",
+      "count": 2,
+      "total_ms": 133.942,
+      "max_ms": 87.433
+     }
+    ],
+    "warnings": [
+     "luaotfload built its font name database during this build (cold cache: 3360 font files read); it sits in beamerfontthememetropolis's exclusive column (5067 ms). Build once more for a representative timing."
+    ],
+    "timer": {
+     "clock": "wall",
+     "source": "os.gettimeofday() via l3kernel"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 11.201
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 238.098,
+      "preamble": 570.145,
+      "begin_document": 37.46,
+      "typesetting": 762.1,
+      "shipout": 58.365,
+      "end_document": 0.732,
+      "finalization": 85.77
+     },
+     "wall_ms": 1752.67,
+     "last_record_ms": 1666.901,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 253.372,
+       "max_ms": 113.663
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 132.706,
+       "max_ms": 86.38
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.044
+    },
+    {
+     "phases_ms": {
+      "startup": 240.311,
+      "preamble": 561.874,
+      "begin_document": 37.186,
+      "typesetting": 758.698,
+      "shipout": 58.212,
+      "end_document": 0.732,
+      "finalization": 86.624
+     },
+     "wall_ms": 1743.637,
+     "last_record_ms": 1657.013,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 252.457,
+       "max_ms": 113.693
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 131.76,
+       "max_ms": 85.541
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.028
+    },
+    {
+     "phases_ms": {
+      "startup": 240.524,
+      "preamble": 560.135,
+      "begin_document": 37.003,
+      "typesetting": 767.807,
+      "shipout": 59.265,
+      "end_document": 0.748,
+      "finalization": 87.967
+     },
+     "wall_ms": 1753.448,
+     "last_record_ms": 1665.482,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 256.836,
+       "max_ms": 115.494
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 134.201,
+       "max_ms": 86.578
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.045
+    },
+    {
+     "phases_ms": {
+      "startup": 242.447,
+      "preamble": 565.292,
+      "begin_document": 37.766,
+      "typesetting": 770.34,
+      "shipout": 59.402,
+      "end_document": 0.763,
+      "finalization": 87.845
+     },
+     "wall_ms": 1763.855,
+     "last_record_ms": 1676.01,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 255.325,
+       "max_ms": 114.502
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 133.56,
+       "max_ms": 86.716
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.067
+    },
+    {
+     "phases_ms": {
+      "startup": 241.669,
+      "preamble": 569.138,
+      "begin_document": 37.521,
+      "typesetting": 765.625,
+      "shipout": 59.601,
+      "end_document": 0.763,
+      "finalization": 88.074
+     },
+     "wall_ms": 1762.39,
+     "last_record_ms": 1674.316,
+     "pages": 33,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 254.456,
+       "max_ms": 114.136
+      },
+      {
+       "name": "axis",
+       "count": 2,
+       "total_ms": 133.194,
+       "max_ms": 86.121
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 2.059
+    }
+   ],
+   "median": {
+    "startup": 240.5,
+    "preamble": 565.3,
+    "begin_document": 37.5,
+    "typesetting": 765.6,
+    "shipout": 59.3,
+    "end_document": 0.7,
+    "finalization": 87.8,
+    "wall": 1753.4,
+    "wall_min": 1743.6,
+    "wall_max": 1763.9
+   }
+  }
+ },
+ "hott": {
+  "pdflatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 44.037,
+     "preamble": 286.56,
+     "begin_document": 30.151,
+     "typesetting": 2350.525,
+     "shipout": 1303.635,
+     "end_document": 32.44,
+     "finalization": 65.033
+    },
+    "wall_ms": 4112.381,
+    "last_record_ms": 4047.348,
+    "pages": 492,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 8,
+      "total_ms": 130.798,
+      "max_ms": 31.83
+     }
+    ],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\pdfelapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 4.978
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 42.648,
+      "preamble": 283.63,
+      "begin_document": 29.694,
+      "typesetting": 2349.701,
+      "shipout": 1303.558,
+      "end_document": 32.303,
+      "finalization": 61.325
+     },
+     "wall_ms": 4102.859,
+     "last_record_ms": 4041.534,
+     "pages": 492,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 130.508,
+       "max_ms": 31.738
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.982
+    },
+    {
+     "phases_ms": {
+      "startup": 42.969,
+      "preamble": 286.438,
+      "begin_document": 29.77,
+      "typesetting": 2350.937,
+      "shipout": 1303.589,
+      "end_document": 32.349,
+      "finalization": 62.088
+     },
+     "wall_ms": 4108.139,
+     "last_record_ms": 4046.051,
+     "pages": 492,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 130.569,
+       "max_ms": 31.754
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.978
+    },
+    {
+     "phases_ms": {
+      "startup": 42.862,
+      "preamble": 283.539,
+      "begin_document": 30.06,
+      "typesetting": 2357.605,
+      "shipout": 1304.077,
+      "end_document": 32.394,
+      "finalization": 61.417
+     },
+     "wall_ms": 4111.954,
+     "last_record_ms": 4050.537,
+     "pages": 492,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 130.905,
+       "max_ms": 31.738
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.985
+    },
+    {
+     "phases_ms": {
+      "startup": 42.999,
+      "preamble": 285.294,
+      "begin_document": 29.77,
+      "typesetting": 2356.14,
+      "shipout": 1303.97,
+      "end_document": 32.608,
+      "finalization": 61.691
+     },
+     "wall_ms": 4112.473,
+     "last_record_ms": 4050.781,
+     "pages": 492,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 130.844,
+       "max_ms": 31.769
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.982
+    },
+    {
+     "phases_ms": {
+      "startup": 42.587,
+      "preamble": 284.088,
+      "begin_document": 29.831,
+      "typesetting": 2355.164,
+      "shipout": 1304.886,
+      "end_document": 32.471,
+      "finalization": 61.035
+     },
+     "wall_ms": 4110.062,
+     "last_record_ms": 4049.026,
+     "pages": 492,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 8,
+       "total_ms": 130.676,
+       "max_ms": 31.769
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 4.981
+    }
+   ],
+   "median": {
+    "startup": 42.9,
+    "preamble": 284.1,
+    "begin_document": 29.8,
+    "typesetting": 2355.2,
+    "shipout": 1304.0,
+    "end_document": 32.4,
+    "finalization": 61.4,
+    "wall": 4110.1,
+    "wall_min": 4102.9,
+    "wall_max": 4112.5
+   }
+  }
+ },
+ "open-logic": {
+  "pdflatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 42.923,
+     "preamble": 461.258,
+     "begin_document": 49.973,
+     "typesetting": 28993.805,
+     "shipout": 796.799,
+     "end_document": 39.902,
+     "finalization": 81.665
+    },
+    "wall_ms": 30466.324,
+    "last_record_ms": 30384.659,
+    "pages": 1013,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 3154,
+      "total_ms": 8814.514,
+      "max_ms": 592.27
+     }
+    ],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\pdfelapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 32.074
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 43.625,
+      "preamble": 479.218,
+      "begin_document": 52.322,
+      "typesetting": 29050.858,
+      "shipout": 781.265,
+      "end_document": 39.566,
+      "finalization": 83.466
+     },
+     "wall_ms": 30530.319,
+     "last_record_ms": 30446.854,
+     "pages": 1013,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 8821.32,
+       "max_ms": 591.843
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 32.132
+    },
+    {
+     "phases_ms": {
+      "startup": 42.908,
+      "preamble": 460.541,
+      "begin_document": 49.927,
+      "typesetting": 28727.554,
+      "shipout": 777.466,
+      "end_document": 39.261,
+      "finalization": 81.711
+     },
+     "wall_ms": 30179.367,
+     "last_record_ms": 30097.656,
+     "pages": 1013,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 8727.966,
+       "max_ms": 588.501
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 31.784
+    },
+    {
+     "phases_ms": {
+      "startup": 42.923,
+      "preamble": 479.614,
+      "begin_document": 52.216,
+      "typesetting": 29188.293,
+      "shipout": 787.003,
+      "end_document": 39.505,
+      "finalization": 82.748
+     },
+     "wall_ms": 30672.302,
+     "last_record_ms": 30589.554,
+     "pages": 1013,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 8874.817,
+       "max_ms": 598.618
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 32.272
+    }
+   ],
+   "median": {
+    "startup": 42.9,
+    "preamble": 479.2,
+    "begin_document": 52.2,
+    "typesetting": 29050.9,
+    "shipout": 781.3,
+    "end_document": 39.5,
+    "finalization": 82.7,
+    "wall": 30530.3,
+    "wall_min": 30179.4,
+    "wall_max": 30672.3
+   }
+  },
+  "xelatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 84.03,
+     "preamble": 3439.972,
+     "begin_document": 41.733,
+     "typesetting": 29602.753,
+     "shipout": 1031.311,
+     "end_document": 38.437,
+     "finalization": 156.86
+    },
+    "wall_ms": 34395.096,
+    "last_record_ms": 34238.235,
+    "pages": 1011,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 3154,
+      "total_ms": 8906.494,
+      "max_ms": 604.98
+     }
+    ],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\elapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 35.291
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 82.397,
+      "preamble": 511.993,
+      "begin_document": 41.519,
+      "typesetting": 29652.573,
+      "shipout": 1007.462,
+      "end_document": 37.689,
+      "finalization": 159.241
+     },
+     "wall_ms": 31492.874,
+     "last_record_ms": 31333.633,
+     "pages": 1011,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 8925.949,
+       "max_ms": 611.908
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 32.393
+    },
+    {
+     "phases_ms": {
+      "startup": 83.374,
+      "preamble": 512.726,
+      "begin_document": 42.038,
+      "typesetting": 29584.396,
+      "shipout": 1030.579,
+      "end_document": 38.04,
+      "finalization": 158.478
+     },
+     "wall_ms": 31449.631,
+     "last_record_ms": 31291.153,
+     "pages": 1011,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 8893.616,
+       "max_ms": 603.745
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 32.345
+    },
+    {
+     "phases_ms": {
+      "startup": 83.679,
+      "preamble": 511.536,
+      "begin_document": 41.672,
+      "typesetting": 29592.484,
+      "shipout": 1028.122,
+      "end_document": 37.628,
+      "finalization": 159.195
+     },
+     "wall_ms": 31454.315,
+     "last_record_ms": 31295.12,
+     "pages": 1011,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 8901.733,
+       "max_ms": 604.37
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\elapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 32.352
+    }
+   ],
+   "median": {
+    "startup": 83.4,
+    "preamble": 512.0,
+    "begin_document": 41.7,
+    "typesetting": 29592.5,
+    "shipout": 1028.1,
+    "end_document": 37.7,
+    "finalization": 159.2,
+    "wall": 31454.3,
+    "wall_min": 31449.6,
+    "wall_max": 31492.9
+   }
+  },
+  "lualatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 242.584,
+     "preamble": 4656.952,
+     "begin_document": 59.006,
+     "typesetting": 34342.316,
+     "shipout": 3554.733,
+     "end_document": 39.932,
+     "finalization": 172.089
+    },
+    "wall_ms": 43067.612,
+    "last_record_ms": 42895.523,
+    "pages": 1011,
+    "environments": [
+     {
+      "name": "tikzpicture",
+      "count": 3154,
+      "total_ms": 9583.221,
+      "max_ms": 606.369
+     }
+    ],
+    "warnings": [
+     "luaotfload built its font name database during this build (cold cache: 3376 font files read); it sits in mem10.clo's exclusive column (4077 ms). Build once more for a representative timing."
+    ],
+    "timer": {
+     "clock": "wall",
+     "source": "os.gettimeofday() via l3kernel"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 44.328
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 241.745,
+      "preamble": 513.55,
+      "begin_document": 56.808,
+      "typesetting": 34840.652,
+      "shipout": 3577.103,
+      "end_document": 42.007,
+      "finalization": 159.744
+     },
+     "wall_ms": 39431.61,
+     "last_record_ms": 39271.866,
+     "pages": 1011,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 9811.31,
+       "max_ms": 637.115
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 40.685
+    },
+    {
+     "phases_ms": {
+      "startup": 243.5,
+      "preamble": 534.744,
+      "begin_document": 59.036,
+      "typesetting": 34432.358,
+      "shipout": 3583.13,
+      "end_document": 42.099,
+      "finalization": 162.369
+     },
+     "wall_ms": 39057.236,
+     "last_record_ms": 38894.867,
+     "pages": 1011,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 9790.741,
+       "max_ms": 634.872
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 40.312
+    },
+    {
+     "phases_ms": {
+      "startup": 239.685,
+      "preamble": 546.371,
+      "begin_document": 59.708,
+      "typesetting": 35295.715,
+      "shipout": 3574.387,
+      "end_document": 41.946,
+      "finalization": 162.506
+     },
+     "wall_ms": 39920.319,
+     "last_record_ms": 39757.813,
+     "pages": 1011,
+     "environments": [
+      {
+       "name": "tikzpicture",
+       "count": 3154,
+       "total_ms": 9938.66,
+       "max_ms": 636.81
+      }
+     ],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "os.gettimeofday() via l3kernel"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 41.179
+    }
+   ],
+   "median": {
+    "startup": 241.7,
+    "preamble": 534.7,
+    "begin_document": 59.0,
+    "typesetting": 34840.7,
+    "shipout": 3577.1,
+    "end_document": 42.0,
+    "finalization": 162.4,
+    "wall": 39431.6,
+    "wall_min": 39057.2,
+    "wall_max": 39920.3
+   }
+  }
+ },
+ "stacks": {
+  "pdflatex": {
+   "cold": {
+    "phases_ms": {
+     "startup": 42.953,
+     "preamble": 109.1,
+     "begin_document": 176.132,
+     "typesetting": 38269.714,
+     "shipout": 5352.997,
+     "end_document": 43.808,
+     "finalization": 1058.395
+    },
+    "wall_ms": 45053.101,
+    "last_record_ms": 43994.705,
+    "pages": 7710,
+    "environments": [],
+    "warnings": [],
+    "timer": {
+     "clock": "wall",
+     "source": "\\pdfelapsedtime"
+    },
+    "format_date": "2026-11-01",
+    "prumo_elapsed_s": 66.946
+   },
+   "warm": [
+    {
+     "phases_ms": {
+      "startup": 41.702,
+      "preamble": 111.71,
+      "begin_document": 180.466,
+      "typesetting": 38202.301,
+      "shipout": 5326.096,
+      "end_document": 43.274,
+      "finalization": 1055.817
+     },
+     "wall_ms": 44961.365,
+     "last_record_ms": 43905.548,
+     "pages": 7710,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 66.844
+    },
+    {
+     "phases_ms": {
+      "startup": 41.824,
+      "preamble": 110.764,
+      "begin_document": 179.733,
+      "typesetting": 38235.245,
+      "shipout": 5334.198,
+      "end_document": 43.259,
+      "finalization": 1058.167
+     },
+     "wall_ms": 45003.189,
+     "last_record_ms": 43945.023,
+     "pages": 7710,
+     "environments": [],
+     "warnings": [],
+     "timer": {
+      "clock": "wall",
+      "source": "\\pdfelapsedtime"
+     },
+     "format_date": "2026-11-01",
+     "prumo_elapsed_s": 66.93
+    }
+   ],
+   "median": {
+    "startup": 41.8,
+    "preamble": 111.2,
+    "begin_document": 180.1,
+    "typesetting": 38218.8,
+    "shipout": 5330.1,
+    "end_document": 43.3,
+    "finalization": 1057.0,
+    "wall": 44982.3,
+    "wall_min": 44961.4,
+    "wall_max": 45003.2
    }
   }
  }
