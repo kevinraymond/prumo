@@ -70,11 +70,12 @@ prumo where main.tex                 # where this document's artifacts are
 prumo clean [--stale] [--yes]        # what the cache holds; delete it (all, or only gone documents)
 ```
 
-Here is `prumo time main.tex --html` on florilegium's manual (LuaLaTeX, 37 pages). The top
-chart is the whole build with the preamble folded into one row. Click that row and the
-preamble opens on its own axis, one row per nesting depth.
+Here is `prumo time main.tex --html` on florilegium's manual (LuaLaTeX, 35 pages), the same
+build as in the [benchmarks](docs/benchmarks/README.md). The page opens with the phases.
+Under them is the whole build over time, with the preamble folded into one row. Click that
+row and the preamble opens on its own axis, one row per nesting depth.
 
-![prumo time --html: the build over time with the preamble folded into one row, then the preamble expanded on its own axis](docs/img/time-html.png)
+![prumo time --html: the phases, the build over time with the preamble folded into one row, then the preamble on its own axis](docs/img/time-html.png)
 
 Everything the instrumented build leaves behind goes to your cache directory: `~/.cache/prumo`
 on Linux, `~/Library/Caches/prumo` on macOS, `%LOCALAPPDATA%\prumo` on Windows. `PRUMO_CACHE`
