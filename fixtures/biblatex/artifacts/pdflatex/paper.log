@@ -1,10 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.8)  9 NOV 2026 00:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.8)  1 JAN 1970 00:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\RequirePackage{prumo}\input{paper.tex}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{paper.tex}
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count276
 \g__prumo_page_int=\count277
 )
@@ -378,13 +379,13 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 9377 strings out of 468449
- 183138 string characters out of 5440369
- 1026129 words of memory out of 5000000
- 38601 multiletter control sequences out of 15000+600000
+ 9507 strings out of 468449
+ 187540 string characters out of 5440369
+ 1027902 words of memory out of 5000000
+ 38731 multiletter control sequences out of 15000+600000
  629440 words of font info for 43 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 69i,5n,71p,724b,1161s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 69i,5n,71p,819b,1161s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
 /usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>

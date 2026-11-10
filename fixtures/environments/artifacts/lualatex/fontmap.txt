@@ -1,0 +1,34 @@
+cmex10 CMEX10 <cmex10.pfb
+cmmi10 CMMI10 <cmmi10.pfb
+cmmi5 CMMI5 <cmmi5.pfb
+cmmi7 CMMI7 <cmmi7.pfb
+cmr10 CMR10 <cmr10.pfb
+cmr5 CMR5 <cmr5.pfb
+cmr7 CMR7 <cmr7.pfb
+cmsy10 CMSY10 <cmsy10.pfb
+cmsy5 CMSY5 <cmsy5.pfb
+cmsy7 CMSY7 <cmsy7.pfb
+cs-lmbx12 LMRoman12-Bold " enclmcs ReEncodeFont " <lm-cs.enc <lmbx12.pfb
+cs-lmr10 LMRoman10-Regular " enclmcs ReEncodeFont " <lm-cs.enc <lmr10.pfb
+cs-lmtt10 LMMono10-Regular " enclmcstt ReEncodeFont " <lm-cstt.enc <lmtt10.pfb
+ec-lmbx12 LMRoman12-Bold " enclmec ReEncodeFont " <lm-ec.enc <lmbx12.pfb
+ec-lmr10 LMRoman10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmr10.pfb
+ec-lmtt10 LMMono10-Regular " enclmec ReEncodeFont " <lm-ec.enc <lmtt10.pfb
+l7x-lmbx12 LMRoman12-Bold " enclml7x ReEncodeFont " <lm-l7x.enc <lmbx12.pfb
+l7x-lmr10 LMRoman10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmr10.pfb
+l7x-lmtt10 LMMono10-Regular " enclml7x ReEncodeFont " <lm-l7x.enc <lmtt10.pfb
+qx-lmbx12 LMRoman12-Bold " enclmqx ReEncodeFont " <lm-qx.enc <lmbx12.pfb
+qx-lmr10 LMRoman10-Regular " enclmqx ReEncodeFont " <lm-qx.enc <lmr10.pfb
+qx-lmtt10 LMMono10-Regular " enclmqxtt ReEncodeFont " <lm-qxtt.enc <lmtt10.pfb
+rm-lmbx12 LMRoman12-Bold " enclmrm ReEncodeFont " <lm-rm.enc <lmbx12.pfb
+rm-lmr10 LMRoman10-Regular " enclmrm ReEncodeFont " <lm-rm.enc <lmr10.pfb
+rm-lmtt10 LMMono10-Regular " enclmrmtt ReEncodeFont " <lm-rmtt.enc <lmtt10.pfb
+t5-lmbx12 LMRoman12-Bold " enclmt5 ReEncodeFont " <lm-t5.enc <lmbx12.pfb
+t5-lmr10 LMRoman10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmr10.pfb
+t5-lmtt10 LMMono10-Regular " enclmt5 ReEncodeFont " <lm-t5.enc <lmtt10.pfb
+texnansi-lmbx12 LMRoman12-Bold " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmbx12.pfb
+texnansi-lmr10 LMRoman10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmr10.pfb
+texnansi-lmtt10 LMMono10-Regular " enclmtexnansi ReEncodeFont " <lm-texnansi.enc <lmtt10.pfb
+ts1-lmbx12 LMRoman12-Bold " enclmts1 ReEncodeFont " <lm-ts1.enc <lmbx12.pfb
+ts1-lmr10 LMRoman10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmr10.pfb
+ts1-lmtt10 LMMono10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmtt10.pfb

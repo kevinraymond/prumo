@@ -11,12 +11,13 @@ use std::sync::Once;
 const ENGINES: [EngineCmd; 3] = [EngineCmd::Pdflatex, EngineCmd::Xelatex, EngineCmd::Lualatex];
 /// Fixture, job, engines it builds on (fontspec pins XeTeX with a magic comment; biblatex
 /// has a single-pass set here, its latexmk claims are in `biblatex_through_latexmk`).
-const FIXTURES: [(&str, &str, &[EngineCmd]); 6] = [
+const FIXTURES: [(&str, &str, &[EngineCmd]); 7] = [
     ("basic", "main", &ENGINES),
     ("custom-class", "main", &ENGINES),
     ("corpus-b", "notes", &ENGINES),
     ("beamer", "deck", &ENGINES),
     ("biblatex", "paper", &ENGINES),
+    ("environments", "main", &ENGINES),
     ("fontspec", "glyphs", &[EngineCmd::Xelatex]),
 ];
 
@@ -69,6 +70,7 @@ fn run_every_fixture_on_every_engine() {
                 pretex: None,
                 edits: vec![],
                 timeout: None,
+                environments: run::default_environments(),
             };
             let out = run::run(&ro).unwrap_or_else(|e| panic!("{label}: {e}"));
             assert_eq!(out.info.exit_code, Some(0), "{label}: see {}", out.dir.join("build.out").display());
@@ -153,6 +155,7 @@ fn cache_is_keyed_by_document_not_just_job_name() {
         pretex: None,
         edits: vec![],
         timeout: None,
+        environments: run::default_environments(),
     })
     .unwrap();
     assert!(run::cached(&a_main, Some(out.path())).unwrap().is_some());
@@ -176,23 +179,31 @@ fn probe_leaves_the_pdf_byte_identical() {
                     }
                 }
             };
-            let (_, code) =
-                run::build_once(dir.path(), job, &run::BuildCmd::standard(engine, false), None, &env, None).unwrap();
+            let code = run::build_once(dir.path(), job, &run::BuildCmd::standard(engine, false), None, &env, None)
+                .unwrap()
+                .exit_code;
             assert_eq!(code, Some(0), "{label}: plain build failed");
             let plain = std::fs::read(dir.path().join(format!("{job}.pdf"))).unwrap();
             clean(dir.path());
             let probe = tempfile::tempdir().unwrap();
             std::fs::write(probe.path().join("prumo.sty"), run::PROBE).unwrap();
-            let (_, code) = run::build_once(
+            // The probe as prumo loads it, with the default environments watched.
+            let environments = run::default_environments();
+            let built = run::build_once(
                 dir.path(),
                 job,
                 &run::BuildCmd::standard(engine, false),
-                Some(probe.path()),
+                Some(run::Probe { dir: probe.path(), environments: &environments }),
                 &env,
                 None,
             )
             .unwrap();
-            assert_eq!(code, Some(0), "{label}: probed build failed");
+            assert_eq!(built.exit_code, Some(0), "{label}: probed build failed");
+            assert!(
+                built.argv.last().unwrap().contains("\\PrumoEnvironments{tikzpicture,"),
+                "{label}: {:?}",
+                built.argv
+            );
             let probed = std::fs::read(dir.path().join(format!("{job}.pdf"))).unwrap();
             assert!(dir.path().join(format!("{job}.prumo")).is_file(), "{label}: no record file");
             assert!(plain == probed, "{label}: PDF differs with the probe ({} vs {} bytes)", plain.len(), probed.len());
@@ -216,6 +227,7 @@ fn latexmk_route_records_too() {
         pretex: None,
         edits: vec![],
         timeout: None,
+        environments: run::default_environments(),
     })
     .unwrap();
     assert_eq!(out.info.exit_code, Some(0), "see {}", out.dir.join("build.out").display());
@@ -224,6 +236,43 @@ fn latexmk_route_records_too() {
     let m = BuildModel::from_records(&recs, "latexmk").unwrap();
     assert_eq!(m.pages.len(), 2);
     assert!(m.main_file().unwrap().find("hyperref").is_some());
+    assert_eq!(out.info.wall_ns, None, "latexmk is several passes: no single process to time");
+    // The environment list survives latexmk's -usepretex quoting.
+    let dir = fixture_copy("environments");
+    let out =
+        run::run(&RunOptions { latexmk: true, ..RunOptions::new(dir.path().join("main.tex"), EngineCmd::Lualatex) })
+            .unwrap();
+    assert_eq!(out.info.exit_code, Some(0), "see {}", out.dir.join("build.out").display());
+    let m = run::model_of(&out).unwrap();
+    assert_eq!(m.env_table().iter().find(|r| r.name == "tikzpicture").map(|r| r.count), Some(4));
+    assert_eq!(m.discarded_ships, [2]);
+    assert!(m.run_phases().finalization.is_none());
+}
+
+/// A single engine process is timed: finalization is the wall time after the last record,
+/// and the seven phases add up to it.
+#[test]
+fn finalization_is_timed_around_the_engine() {
+    let env = setup();
+    for engine in ENGINES {
+        let dir = fixture_copy("environments");
+        let out =
+            run::run(&RunOptions { env: env.clone(), ..RunOptions::new(dir.path().join("main.tex"), engine) }).unwrap();
+        assert_eq!(out.info.exit_code, Some(0));
+        assert_eq!(out.info.environments, run::default_environments());
+        let m = run::model_of(&out).unwrap();
+        let p = m.run_phases();
+        let (wall, fin) = (p.wall.expect("wall time"), p.finalization.expect("finalization"));
+        assert!(wall > p.last_record, "{}: wall {wall} vs last record {}", engine.command(), p.last_record);
+        assert_eq!(p.last_record + fin, wall);
+        // The timer starts at about process start: startup is most of the time before the
+        // first record, so it cannot exceed the wall time either.
+        assert!(p.startup > 0 && p.startup < wall);
+        // A cached run that watched other environments is stale; the same list is not.
+        let ro = RunOptions { env: env.clone(), ..RunOptions::new(dir.path().join("main.tex"), engine) };
+        assert!(!run::is_stale(&out, &ro));
+        assert!(run::is_stale(&out, &RunOptions { environments: vec!["tikzpicture".into()], ..ro }));
+    }
 }
 
 /// M3 acceptance: the basic fixture reports `pcrr8t` loaded-not-embedded on every engine;
@@ -254,6 +303,7 @@ fn fonts_report_courier_and_type3() {
             pretex: None,
             edits: vec![],
             timeout: None,
+            environments: run::default_environments(),
         })
         .unwrap();
         assert_eq!(out.info.exit_code, Some(0), "{label}");
@@ -333,6 +383,7 @@ fn compare_runs_every_engine() {
             runs: 2,
             out: None,
             env,
+            environments: run::default_environments(),
         },
         |m| seen.push(m.to_string()),
     )
@@ -490,6 +541,7 @@ fn build_command_with_output_directories() {
             pretex: None,
             edits: vec![],
             timeout: None,
+            environments: run::default_environments(),
         };
         let out = run::run(&ro).unwrap_or_else(|e| panic!("{cmd}: {e}"));
         assert_eq!(out.info.exit_code, Some(0), "{cmd}: see {}", out.dir.join("build.out").display());
@@ -534,6 +586,7 @@ fn build_command_with_output_directories() {
         pretex: None,
         edits: vec![],
         timeout: None,
+        environments: run::default_environments(),
     })
     .unwrap_err();
     assert!(matches!(e, run::RunError::BadBuild { .. }), "{e}");
@@ -611,6 +664,7 @@ fn biblatex_through_latexmk() {
         pretex: None,
         edits: vec![],
         timeout: None,
+        environments: run::default_environments(),
     };
     let out = run::run(&ro).unwrap();
     assert_eq!(out.info.exit_code, Some(0), "see {}", out.dir.join("build.out").display());
@@ -686,6 +740,7 @@ fn fontspec_on_xetex() {
         pretex: None,
         edits: vec![],
         timeout: None,
+        environments: run::default_environments(),
     })
     .unwrap();
     assert_eq!(out.info.exit_code, Some(0), "see {}", out.dir.join("build.out").display());
@@ -890,8 +945,44 @@ fn timeout_kills_the_build() {
         pretex: None,
         edits: vec![],
         timeout: Some(std::time::Duration::from_millis(1)),
+        environments: run::default_environments(),
     })
     .unwrap_err();
     assert!(matches!(e, run::RunError::TimedOut { .. }), "{e}");
     assert!(t0.elapsed().as_secs() < 5, "killed promptly, latexmk's engine child included: {:?}", t0.elapsed());
+}
+
+/// Overleaf: `prumo.sty` uploaded next to the document, `\\RequirePackage{prumo}` on the
+/// first line of the main file, latexmk with `-jobname=output`. The records start at the
+/// class, have no frame for the main file, and `run::from_records` reads them with no
+/// build.
+#[test]
+fn probe_loaded_from_the_first_line() {
+    let _ = setup();
+    let dir = fixture_copy("environments");
+    let main = dir.path().join("main.tex");
+    let text = std::fs::read_to_string(&main).unwrap();
+    let envs = run::default_environments().join(",");
+    std::fs::write(&main, format!("\\RequirePackage{{prumo}}\\PrumoEnvironments{{{envs}}}\n{text}")).unwrap();
+    std::fs::write(dir.path().join("prumo.sty"), run::PROBE).unwrap();
+    let st = std::process::Command::new("latexmk")
+        .args(["-cd", "-jobname=output", "-pdf", "-interaction=batchmode", "-f", "main.tex"])
+        .current_dir(dir.path())
+        .output()
+        .unwrap();
+    assert!(st.status.success(), "{}", String::from_utf8_lossy(&st.stdout));
+    let out = run::from_records(&dir.path().join("output.prumo")).unwrap();
+    assert_eq!(out.job, "output");
+    assert_eq!(out.info.engine, EngineCmd::Pdflatex);
+    let recs = prumo::records::parse_file(&out.records).unwrap();
+    assert!(matches!(recs[1].event, prumo::records::Event::Open { kind: prumo::records::UnitKind::Cls, .. }));
+    assert!(
+        !recs.iter().any(|r| matches!(&r.event, prumo::records::Event::Close { name, .. } if name == "prumo")),
+        "the probe's own package/after is not recorded"
+    );
+    let m = run::model_of(&out).unwrap();
+    assert!(m.main_file().is_none());
+    assert_eq!(m.env_table().iter().find(|r| r.name == "tikzpicture").map(|r| r.count), Some(4));
+    assert_eq!(m.pages.len(), 3);
+    assert!(m.run_phases().finalization.is_none());
 }

@@ -61,8 +61,8 @@ fn artifact_sets() -> Vec<ArtifactSet> {
     out.sort_by(|a, b| a.dir.cmp(&b.dir));
     assert_eq!(
         out.len(),
-        25,
-        "3 fixtures × 2 artifact sets × 3 engines, beamer × 3, biblatex × 3, fontspec on xelatex: {:?}",
+        28,
+        "3 fixtures × 2 artifact sets × 3 engines, beamer, biblatex and environments × 3, fontspec on xelatex: {:?}",
         out.iter().map(|s| &s.dir).collect::<Vec<_>>()
     );
     out
@@ -198,6 +198,12 @@ fn tlpdb_excerpt_resolves_the_fixtures_main_packages() {
             "fontspec" => {
                 assert_eq!(pkg_of("fontspec.sty"), Some("fontspec"), "{label}");
                 assert_eq!(pkg_of("metalogo.sty"), Some("metalogo"), "{label}");
+            }
+            "environments" => {
+                assert_eq!(pkg_of("tikz.sty"), Some("pgf"), "{label}");
+                assert_eq!(pkg_of("tabularx.sty"), Some("tools"), "{label}");
+                assert_eq!(pkg_of("longtable.sty"), Some("tools"), "{label}");
+                assert_eq!(pkg_of("listings.sty"), Some("listings"), "{label}");
             }
             other => panic!("unknown fixture {other}"),
         }
@@ -442,6 +448,11 @@ fn packages_resolve_with_attribution() {
                     "{label}: XeTeX records no .otf, so no lm file is read; prune's Q7 match adds lm"
                 );
             }
+            "environments" => {
+                for n in ["pgf", "tools", "listings"] {
+                    assert_eq!(via(n), "main.tex", "{label}: {n}");
+                }
+            }
             _ => unreachable!(),
         }
         let used = r.packages.iter().filter(|p| matches!(p.reason, Reason::Used { .. })).count();
@@ -587,7 +598,7 @@ fn fonts_match_the_oracle() {
         assert!(t.contains("-- loaded --") && t.contains("-- in the PDF --"), "{t}");
         checked += 1;
     }
-    assert_eq!(checked, 16, "every TL2026 set has a fontmap.txt");
+    assert_eq!(checked, 19, "every TL2026 set has a fontmap.txt");
 }
 
 /// `prune::plan` on the excerpt with the three fixtures' TL2026 runs: nothing a document
@@ -626,7 +637,7 @@ fn prune_plan_on_the_excerpt() {
                 .collect(),
         });
     }
-    assert_eq!(runs.len(), 7, "5 pdflatex + basic/xelatex + fontspec/xelatex");
+    assert_eq!(runs.len(), 8, "6 pdflatex + basic/xelatex + fontspec/xelatex");
     let biblatex = runs.iter().find(|r| r.main.ends_with("paper.tex")).unwrap();
     assert_eq!(biblatex.tools, ["biber"], "a .bcf was written");
     assert!(runs.iter().filter(|r| !r.main.ends_with("paper.tex")).all(|r| r.tools.is_empty()));
@@ -640,8 +651,8 @@ fn prune_plan_on_the_excerpt() {
         env: vec![],
     };
     let p = prune::plan(&db, &runs, &opts);
-    assert_eq!(p.documents.len(), 7);
-    assert_eq!(p.installed, 127, "129 stanzas minus the two 00texlive.* ones");
+    assert_eq!(p.documents.len(), 8);
+    assert_eq!(p.installed, 128, "130 stanzas minus the two 00texlive.* ones");
     // Everything any document read stays; the acceptance list from docs/07-phases.md.
     for n in [
         "hyperref",
@@ -827,4 +838,162 @@ fn html_page_for_every_set() {
         }
         assert!(html.len() < 2_000_000, "{label}: {} bytes", html.len());
     }
+}
+
+/// The oracle's phases, environment table and discarded shipouts, on every set whose golden
+/// has them (the TeX Live 2026 sets, made with probe v0.2).
+#[test]
+fn phases_and_environments_match_the_oracle() {
+    #[derive(serde::Deserialize)]
+    struct G {
+        phases: Option<GP>,
+        #[serde(default)]
+        environments: Vec<GE>,
+        #[serde(default)]
+        discarded_shipouts: Vec<u32>,
+    }
+    #[derive(serde::Deserialize)]
+    struct GP {
+        startup_s: f64,
+        preamble_s: Option<f64>,
+        begin_document_s: Option<f64>,
+        typesetting_s: Option<f64>,
+        shipout_s: f64,
+        end_document_s: Option<f64>,
+        after_last_page_s: Option<f64>,
+        end_s: f64,
+    }
+    #[derive(serde::Deserialize)]
+    struct GE {
+        name: String,
+        count: u32,
+        total_s: f64,
+        max_s: f64,
+    }
+    let close = |a: f64, b: f64| (a - b).abs() < 1e-9;
+    let secs = |x: Option<prumo::Scaled>| x.map(prumo::scaled_to_secs);
+    let mut checked = 0;
+    for s in artifact_sets() {
+        let label = format!("{}/{}", s.fixture, s.engine_dir);
+        let g: G = serde_json::from_str(&read(&s.dir, "golden.json")).unwrap();
+        let Some(gp) = g.phases else {
+            assert!(s.dir.to_string_lossy().contains("debian"), "{label}: golden without phases");
+            continue;
+        };
+        checked += 1;
+        let recs = records::parse_file(&s.dir.join(format!("{}.prumo", s.job))).unwrap();
+        let m = prumo::model::BuildModel::from_records(&recs, &label).unwrap();
+        assert!(m.phases.docstart.is_some() && m.phases.lastpage.is_some(), "{label}: probe v0.2 records");
+        let p = m.run_phases();
+        assert!(close(prumo::scaled_to_secs(p.startup), gp.startup_s), "{label}: startup");
+        for (what, ours, theirs) in [
+            ("preamble", secs(p.preamble), gp.preamble_s),
+            ("begin-document", secs(p.begin_document), gp.begin_document_s),
+            ("typesetting", secs(p.typesetting), gp.typesetting_s),
+            ("end-document", secs(p.end_document), gp.end_document_s),
+            ("after last page", secs(p.after_last_page), gp.after_last_page_s),
+        ] {
+            match (ours, theirs) {
+                (Some(a), Some(b)) => assert!(close(a, b), "{label}: {what} {a} vs oracle {b}"),
+                (a, b) => panic!("{label}: {what} {a:?} vs oracle {b:?}"),
+            }
+        }
+        assert!(close(prumo::scaled_to_secs(p.shipout), gp.shipout_s), "{label}: shipout");
+        assert!(close(prumo::scaled_to_secs(p.last_record), gp.end_s), "{label}: last record");
+        let sum = p.startup
+            + p.preamble.unwrap()
+            + p.begin_document.unwrap()
+            + p.typesetting.unwrap()
+            + p.shipout
+            + p.end_document.unwrap();
+        assert_eq!(sum, p.last_record, "{label}: the phases add up to the last record");
+        let envs = m.env_table();
+        assert_eq!(envs.len(), g.environments.len(), "{label}: environments");
+        for (r, ge) in envs.iter().zip(&g.environments) {
+            assert_eq!((r.name.as_str(), r.count), (ge.name.as_str(), ge.count), "{label}");
+            assert!(close(prumo::scaled_to_secs(r.total), ge.total_s), "{label}: {} total", r.name);
+            assert!(close(prumo::scaled_to_secs(r.max), ge.max_s), "{label}: {} max", r.name);
+        }
+        assert_eq!(m.discarded_ships, g.discarded_shipouts, "{label}: discarded shipouts");
+        let j = serde_json::to_value(prumo::report::time_json(&m, &s.job)).unwrap();
+        assert_eq!(j["timer"]["clock"], "wall", "{label}");
+        assert!(j["phases"]["finalization_ms"].is_null(), "{label}: no wall time without a run");
+        assert!(j["phases"]["startup_ms"].as_f64().unwrap() > 0.0, "{label}");
+    }
+    assert_eq!(checked, 19, "every TeX Live 2026 set");
+}
+
+/// fixtures/environments/main.tex: every claim in its header, on all three engines.
+#[test]
+fn environments_fixture_claims() {
+    let sets: Vec<ArtifactSet> = artifact_sets().into_iter().filter(|s| s.fixture == "environments").collect();
+    assert_eq!(sets.len(), 3);
+    for s in sets {
+        let label = s.engine_dir.clone();
+        let recs = records::parse_file(&s.dir.join(format!("{}.prumo", s.job))).unwrap();
+        let m = prumo::model::BuildModel::from_records(&recs, &label).unwrap();
+        // 1. tikzpicture 4 times (1 + 3 tabularx passes), the others once.
+        let envs = m.env_table();
+        let count = |n: &str| envs.iter().find(|r| r.name == n).map(|r| r.count);
+        assert_eq!(count("tikzpicture"), Some(4), "{label}: {envs:?}");
+        for n in ["tabularx", "longtable", "lstlisting"] {
+            assert_eq!(count(n), Some(1), "{label}: {n}");
+        }
+        // 2. Only those four names; the inline \tikz forms leave nothing.
+        assert_eq!(envs.len(), 4, "{label}: {envs:?}");
+        let in_tabularx = m.envs.iter().filter(|e| e.name == "tikzpicture").count();
+        assert_eq!(in_tabularx, 4);
+        let tabularx = m.envs.iter().find(|e| e.name == "tabularx").unwrap();
+        let inside =
+            m.envs.iter().filter(|e| e.name == "tikzpicture" && e.start >= tabularx.start && e.end <= tabularx.end);
+        assert_eq!(inside.count(), 3, "{label}: three passes inside tabularx");
+        // 3. 3 pages, 4 shipouts started, the second discarded.
+        assert_eq!(m.pages.len(), 3, "{label}");
+        let ships = recs.iter().filter(|r| matches!(r.event, Event::Ship(_))).count();
+        assert_eq!(ships, 4, "{label}");
+        assert_eq!(m.discarded_ships, [2], "{label}");
+        // 4. Page 2 ships inside the longtable, and the longtable's time leaves it out.
+        let lt = m.envs.iter().find(|e| e.name == "longtable").unwrap();
+        let p2 = m.pages.iter().find(|p| p.number == 2).unwrap();
+        assert!(lt.start < p2.ship_start.unwrap() && p2.time < lt.end, "{label}: page 2 inside longtable");
+        let lt_row = envs.iter().find(|r| r.name == "longtable").unwrap();
+        assert_eq!(lt_row.total, (lt.end - lt.start) - (p2.time - p2.ship_start.unwrap()), "{label}");
+        // 5. \AtBeginDocument between predoc and docstart; page 1 counts from docstart.
+        let (predoc, docstart) = (m.phases.predoc.unwrap(), m.phases.docstart.unwrap());
+        assert!(predoc < docstart && m.phases.begindoc.unwrap() <= docstart, "{label}");
+        assert_eq!(m.page_times()[0].time, m.pages[0].time - docstart, "{label}");
+        // 6. Page 3 after enddoc, before lastpage.
+        let p3 = m.pages.iter().find(|p| p.number == 3).unwrap();
+        assert!(m.phases.enddoc.unwrap() < p3.ship_start.unwrap(), "{label}");
+        assert!(p3.time <= m.phases.lastpage.unwrap(), "{label}");
+        // 7 is tests/tex.rs::probe_leaves_the_pdf_byte_identical.
+    }
+}
+
+/// `scripts/make_artifacts.sh` loads the probe the way prumo does.
+#[test]
+fn make_artifacts_watches_the_default_environments() {
+    let script =
+        std::fs::read_to_string(Path::new(env!("CARGO_MANIFEST_DIR")).join("scripts/make_artifacts.sh")).unwrap();
+    let line = script.lines().find(|l| l.starts_with("envs=")).expect("envs= line");
+    assert_eq!(line.trim_start_matches("envs="), prumo::run::DEFAULT_ENVIRONMENTS.join(","));
+}
+
+/// `prumo time output.prumo`: a record file on its own (Overleaf hides the `.fls`) is read
+/// with no build and nothing written next to it.
+#[test]
+fn records_alone_are_read_without_a_build() {
+    let src = Path::new(env!("CARGO_MANIFEST_DIR")).join("fixtures/environments/artifacts/lualatex/main.prumo");
+    let dir = tempfile::tempdir().unwrap();
+    let records = dir.path().join("output.prumo");
+    std::fs::copy(&src, &records).unwrap();
+    let out = prumo::run::from_records(&records).unwrap();
+    assert_eq!((out.job.as_str(), out.info.engine), ("output", prumo::run::EngineCmd::Lualatex));
+    assert!(out.pdf.is_none() && !out.fls.exists());
+    let m = prumo::run::model_of(&out).unwrap();
+    assert_eq!(m.pages.len(), 3);
+    assert!(m.run_phases().wall.is_none());
+    let names: Vec<_> = std::fs::read_dir(dir.path()).unwrap().flatten().map(|e| e.file_name()).collect();
+    assert_eq!(names, ["output.prumo"], "nothing written next to the records");
+    assert!(prumo::run::from_records(&dir.path().join("nope.prumo")).is_err());
 }

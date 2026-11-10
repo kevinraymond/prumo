@@ -1,67 +1,78 @@
-== prumo report: deck  (total 489 ms, preamble 293 ms, 5 pages, 260 files read)
+== prumo report: deck  (total 695 ms, preamble 404 ms, 5 pages, 260 files read)
 
 -- slowest units (exclusive) --
-    202.0 ms    488.7 ms incl  file deck.tex
-     40.6 ms    257.5 ms incl  cls  beamer
-     13.0 ms     74.3 ms incl  pkg  beamerbaserequires
-     12.5 ms     49.4 ms incl  pkg  hyperref
-      9.3 ms     11.0 ms incl  file tikz.code.tex
-      9.1 ms      9.8 ms incl  pkg  xcolor
-      6.6 ms      6.6 ms incl  file puenc.def
-      6.3 ms     16.2 ms incl  file pgfcore.code.tex
-      6.0 ms      7.0 ms incl  pkg  beamerbaseauxtemplates
-      5.6 ms      9.3 ms incl  pkg  amsmath
-      5.4 ms      5.4 ms incl  pkg  beamerinnerthemedefault
-      4.9 ms     14.6 ms incl  file pgfmath.code.tex
+    301.2 ms    694.8 ms incl  file deck.tex
+     51.9 ms    351.3 ms incl  cls  beamer
+     17.8 ms    101.7 ms incl  pkg  beamerbaserequires
+     16.6 ms     66.6 ms incl  pkg  hyperref
+     12.6 ms     15.1 ms incl  file tikz.code.tex
+     12.6 ms     13.5 ms incl  pkg  xcolor
+      9.0 ms      9.0 ms incl  pkg  beamerinnerthemedefault
+      8.9 ms      8.9 ms incl  file puenc.def
+      8.8 ms     22.9 ms incl  file pgfcore.code.tex
+      8.6 ms      9.8 ms incl  pkg  beamerbaseauxtemplates
+      7.5 ms     12.5 ms incl  pkg  amsmath
+      6.8 ms     20.2 ms incl  file pgfmath.code.tex
+
+-- phases --
+  startup            290.0 ms
+  preamble           401.0 ms
+  begin-document      65.8 ms
+  typesetting        219.2 ms
+  shipout              7.8 ms
+  end-document         1.1 ms
+
+-- environments --
+      0.8 ms     1x  max    0.8 ms  tikzpicture
 
 -- pages --
-  page 1: 89.6 ms
-  page 2: 72.4 ms
-  page 3: 10.3 ms
-  page 4: 11.5 ms
-  page 5: 10.6 ms
+  page 1: 65.1 ms
+  page 2: 117.1 ms
+  page 3: 14.3 ms
+  page 4: 15.8 ms
+  page 5: 14.6 ms
 
 -- load tree --
-  deck.tex  (488.7 ms incl, 202.0 ms excl)
-    beamer  (257.5 ms incl, 40.6 ms excl)
-      beamerbasemodes  (4.8 ms incl, 2.0 ms excl)
-        etoolbox  (2.0 ms incl, 2.0 ms excl)
-        beamerbasedecode  (0.8 ms incl, 0.8 ms excl)
-      iftex  (0.8 ms incl, 0.8 ms excl)
-      beamerbaseoptions  (1.9 ms incl, 1.2 ms excl)
-        keyval  (0.7 ms incl, 0.7 ms excl)
-      geometry  (3.4 ms incl, 2.6 ms excl)
-        ifvtex  (0.8 ms incl, 0.8 ms excl)
-      pgfmath  (23.2 ms incl, 1.8 ms excl)
-        pgfrcs  (3.1 ms incl, 1.6 ms excl)
-          pgfutil-common.tex  (0.5 ms incl, 0.5 ms excl)
-          pgfutil-latex.def  (0.4 ms incl, 0.4 ms excl)
-          pgfrcs.code.tex  (0.7 ms incl, 0.5 ms excl)
+  deck.tex  (694.8 ms incl, 301.2 ms excl)
+    beamer  (351.3 ms incl, 51.9 ms excl)
+      beamerbasemodes  (6.5 ms incl, 2.7 ms excl)
+        etoolbox  (2.7 ms incl, 2.7 ms excl)
+        beamerbasedecode  (1.2 ms incl, 1.2 ms excl)
+      iftex  (1.1 ms incl, 1.1 ms excl)
+      beamerbaseoptions  (2.6 ms incl, 1.7 ms excl)
+        keyval  (0.9 ms incl, 0.9 ms excl)
+      geometry  (4.5 ms incl, 3.5 ms excl)
+        ifvtex  (1.1 ms incl, 1.1 ms excl)
+      pgfmath  (32.1 ms incl, 2.5 ms excl)
+        pgfrcs  (4.3 ms incl, 2.1 ms excl)
+          pgfutil-common.tex  (0.7 ms incl, 0.7 ms excl)
+          pgfutil-latex.def  (0.5 ms incl, 0.5 ms excl)
+          pgfrcs.code.tex  (1.0 ms incl, 0.8 ms excl)
             pgf.revision.tex  (0.2 ms incl, 0.2 ms excl)
-        pgfkeys  (3.7 ms incl, 0.9 ms excl)
-          pgfkeys.code.tex  (2.7 ms incl, 1.8 ms excl)
-            pgfkeyslibraryfiltered.code.tex  (1.0 ms incl, 1.0 ms excl)
-        pgfmath.code.tex  (14.6 ms incl, 4.9 ms excl)
-          pgfmathutil.code.tex  (0.3 ms incl, 0.3 ms excl)
-          pgfmathparser.code.tex  (0.7 ms incl, 0.7 ms excl)
-          pgfmathfunctions.code.tex  (0.5 ms incl, 0.5 ms excl)
-          pgfmathfunctions.basic.code.tex  (0.7 ms incl, 0.7 ms excl)
-          pgfmathfunctions.trigonometric.code.tex  (2.3 ms incl, 2.3 ms excl)
-          pgfmathfunctions.random.code.tex  (0.3 ms incl, 0.3 ms excl)
-          pgfmathfunctions.comparison.code.tex  (0.5 ms incl, 0.5 ms excl)
-          pgfmathfunctions.base.code.tex  (0.4 ms incl, 0.4 ms excl)
-          pgfmathfunctions.round.code.tex  (0.3 ms incl, 0.3 ms excl)
-          pgfmathfunctions.misc.code.tex  (0.5 ms incl, 0.5 ms excl)
-          pgfmathfunctions.integerarithmetics.code.tex  (0.3 ms incl, 0.3 ms excl)
-          pgfmathcalc.code.tex  (0.3 ms incl, 0.3 ms excl)
-          pgfmathfloat.code.tex  (2.8 ms incl, 2.8 ms excl)
-      size11.clo  (4.3 ms incl, 4.3 ms excl)
-      pgfcore  (38.3 ms incl, 2.4 ms excl)
-        graphicx  (5.2 ms incl, 1.4 ms excl)
-          graphics  (3.7 ms incl, 2.2 ms excl)
-            trig  (0.7 ms incl, 0.7 ms excl)
-            graphics.cfg  (0.2 ms incl, 0.2 ms excl)
-            luatex.def  (0.7 ms incl, 0.7 ms excl)
+        pgfkeys  (5.0 ms incl, 1.3 ms excl)
+          pgfkeys.code.tex  (3.7 ms incl, 2.4 ms excl)
+            pgfkeyslibraryfiltered.code.tex  (1.3 ms incl, 1.3 ms excl)
+        pgfmath.code.tex  (20.2 ms incl, 6.8 ms excl)
+          pgfmathutil.code.tex  (0.5 ms incl, 0.5 ms excl)
+          pgfmathparser.code.tex  (1.1 ms incl, 1.1 ms excl)
+          pgfmathfunctions.code.tex  (0.7 ms incl, 0.7 ms excl)
+          pgfmathfunctions.basic.code.tex  (1.0 ms incl, 1.0 ms excl)
+          pgfmathfunctions.trigonometric.code.tex  (2.9 ms incl, 2.9 ms excl)
+          pgfmathfunctions.random.code.tex  (0.4 ms incl, 0.4 ms excl)
+          pgfmathfunctions.comparison.code.tex  (0.7 ms incl, 0.7 ms excl)
+          pgfmathfunctions.base.code.tex  (0.5 ms incl, 0.5 ms excl)
+          pgfmathfunctions.round.code.tex  (0.4 ms incl, 0.4 ms excl)
+          pgfmathfunctions.misc.code.tex  (0.7 ms incl, 0.7 ms excl)
+          pgfmathfunctions.integerarithmetics.code.tex  (0.4 ms incl, 0.4 ms excl)
+          pgfmathcalc.code.tex  (0.4 ms incl, 0.4 ms excl)
+          pgfmathfloat.code.tex  (3.9 ms incl, 3.9 ms excl)
+      size11.clo  (5.0 ms incl, 5.0 ms excl)
+      pgfcore  (54.6 ms incl, 3.4 ms excl)
+        graphicx  (7.1 ms incl, 1.9 ms excl)
+          graphics  (5.2 ms incl, 3.0 ms excl)
+            trig  (0.9 ms incl, 0.9 ms excl)
+            graphics.cfg  (0.3 ms incl, 0.3 ms excl)
+            luatex.def  (1.0 ms incl, 1.0 ms excl)
 
 -- fonts --
   TFMs loaded: 15, embedded in PDF: 5, Type 3: 0, bitmap .pk read: 0

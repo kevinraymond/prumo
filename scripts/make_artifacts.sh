@@ -11,6 +11,10 @@ build=${PRUMO_BUILD_DIR:-/tmp/prumo-build}
 # XeTeX's first run builds the fontconfig cache (finding 26) and would charge it to size10.clo.
 ( t=$(mktemp -d); cd "$t" && lualatex -interaction=batchmode '\documentclass{article}\begin{document}x\end{document}' >/dev/null 2>&1 \
     && xelatex -interaction=batchmode '\documentclass{article}\usepackage{fontspec}\begin{document}x\end{document}' >/dev/null 2>&1; rm -rf "$t" )
+# The probe as prumo loads it: the environments are run::DEFAULT_ENVIRONMENTS
+# (tests/fixtures.rs checks the two lists agree).
+envs=tikzpicture,axis,tcolorbox,tblr,longtable,tabularx,minted,lstlisting,forest
+pretex="\\RequirePackage{prumo}\\PrumoEnvironments{$envs}"
 for dir in "$root"/fixtures/*/; do
   fx=$(basename "$dir")
   main=$(grep -l '\\documentclass' "$dir"/*.tex 2>/dev/null | head -1) || true
@@ -25,13 +29,13 @@ for dir in "$root"/fixtures/*/; do
     out="$dir/artifacts/$eng"; mkdir -p "$out"
     case $eng in pdflatex) mkflag=-pdf;; xelatex) mkflag=-xelatex;; lualatex) mkflag=-lualatex;; esac
     if [ $mk = 1 ]; then
-      ( cd "$tmp" && TEXINPUTS="$root/tex:" SOURCE_DATE_EPOCH=0 \
+      ( cd "$tmp" && TEXINPUTS="$root/tex:" SOURCE_DATE_EPOCH=0 FORCE_SOURCE_DATE=1 \
           latexmk $mkflag -interaction=nonstopmode -halt-on-error -recorder -jobname="$job" \
-          "-usepretex=\\RequirePackage{prumo}" "$job.tex" > build.out 2>&1 ) || { echo "FAIL $fx $eng (latexmk)"; tail -20 "$tmp/build.out"; exit 1; }
+          "-usepretex=$pretex" "$job.tex" > build.out 2>&1 ) || { echo "FAIL $fx $eng (latexmk)"; tail -20 "$tmp/build.out"; exit 1; }
     else
-      ( cd "$tmp" && TEXINPUTS="$root/tex:" SOURCE_DATE_EPOCH=0 \
+      ( cd "$tmp" && TEXINPUTS="$root/tex:" SOURCE_DATE_EPOCH=0 FORCE_SOURCE_DATE=1 \
           $eng -interaction=nonstopmode -halt-on-error -recorder -jobname="$job" \
-          "\\RequirePackage{prumo}\\input{$job}" > build.out 2>&1 ) || { echo "FAIL $fx $eng"; tail -20 "$tmp/build.out"; exit 1; }
+          "$pretex\\input{$job}" > build.out 2>&1 ) || { echo "FAIL $fx $eng"; tail -20 "$tmp/build.out"; exit 1; }
     fi
     cp "$tmp/$job.prumo" "$tmp/$job.fls" "$out/"
     cp "$tmp/$job.log" "$out/$job.log"

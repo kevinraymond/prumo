@@ -1,6 +1,7 @@
 This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.11.8)  1 JAN 1970 00:00
  restricted system commands enabled.
-**\RequirePackage{prumo}\input{deck}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{deck}
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
 Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
 Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended collection.
@@ -33,7 +34,7 @@ Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'.
 Inserting `tracingstacklevels' in `input_level_string'.
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count274
 \g__prumo_page_int=\count275
 )
@@ -1019,16 +1020,16 @@ Package rerunfilecheck Info: Checksums for `deck.out':
 )
 
 Here is how much of LuaTeX's memory you used:
- 25008 strings out of 475522
+ 25138 strings out of 475522
  100000,1144653 words of node,token memory allocated
  1258 words of node memory still in use:
    19 hlist, 9 vlist, 4 rule, 3 local_par, 34 glue, 4 kern, 10 penalty, 11 glyph
 , 41 attribute, 61 glue_spec, 41 attribute_list, 4 write, 10 pdf_colorstack node
 s
    avail lists: 2:502,3:311,4:201,5:126,6:36,7:438,8:6,9:426,10:7,11:8
- 47291 multiletter control sequences out of 65536+600000
+ 47421 multiletter control sequences out of 65536+600000
  41 fonts using 2894447 bytes
- 113i,14n,104p,425b,627s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,14n,104p,520b,627s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.otf
 ></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmsans10-oblique.o
 tf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmsans10-regular

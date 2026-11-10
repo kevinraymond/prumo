@@ -10,7 +10,10 @@
 //!    record close at that timestamp.
 //! 4. `opts` directly after `pkg+` attaches to that frame.
 //! 5. `page N` events are leaves of the job; page time = time since the previous page, or
-//!    since `begindoc` for the first.
+//!    since `docstart` (`begindoc` in older records) for the first.
+//!
+//! On top of the tree: the run's phases (`run_phases`), the watched environments
+//! (`env+`/`env-`, paired by name) and shipouts a package discarded (`ship` with no `page`).
 
 use crate::Scaled;
 use crate::records::{Engine, Event, Record, UnitKind};
@@ -107,7 +110,64 @@ pub struct Phases {
     /// `begindocument/before`: the end of the preamble proper (None for old records).
     pub predoc: Option<Scaled>,
     pub begindoc: Option<Scaled>,
+    /// `begindocument/end`: `\begin{document}` is done (probe v0.2 and later).
+    pub docstart: Option<Scaled>,
     pub enddoc: Option<Scaled>,
+    /// `enddocument/afterlastpage` (probe v0.2 and later).
+    pub lastpage: Option<Scaled>,
+}
+
+/// One `\begin{name}` .. `\end{name}` of a watched environment.
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize)]
+pub struct EnvInstance {
+    pub name: String,
+    pub start: Scaled,
+    pub end: Scaled,
+    /// Inside another instance of the same name (its time is already in the outer one).
+    pub nested: bool,
+}
+
+/// The run cut into consecutive phases. Each phase leaves out the shipouts inside it, and
+/// `shipout` holds them all, so the six engine phases add up to the timer at the last
+/// record. `None` where the records lack a boundary (an older probe, a failed build).
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub struct RunPhases {
+    /// Timer zero (about process start) to the first record: format loading, engine setup.
+    pub startup: Scaled,
+    /// First record to `predoc`.
+    pub preamble: Option<Scaled>,
+    /// `predoc` to `docstart`: `begindocument/before` loads, the `.aux`, `\AtBeginDocument`.
+    pub begin_document: Option<Scaled>,
+    /// `docstart` to `enddoc`, less shipouts.
+    pub typesetting: Option<Scaled>,
+    /// Every `ship`..`page`, wherever it happened.
+    pub shipout: Scaled,
+    /// `enddoc` to the last record, less shipouts: `\AtEndDocument`, the last pages, the
+    /// second `.aux` read.
+    pub end_document: Option<Scaled>,
+    /// The part of `end_document` after the last page (`lastpage` to the last record).
+    pub after_last_page: Option<Scaled>,
+    /// After the last record until the process exits: the engine closes the PDF (fonts,
+    /// xdvipdfmx on XeTeX). Process wall time minus the last record; only when the CLI
+    /// timed a single engine process.
+    pub finalization: Option<Scaled>,
+    /// The timer at the last record: the sum of the six engine phases.
+    pub last_record: Scaled,
+    /// Process wall time, when measured.
+    pub wall: Option<Scaled>,
+}
+
+/// One row of the environment table.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct EnvRow {
+    pub name: String,
+    /// Instances, nested ones and repeated passes (tabularx typesets its body several
+    /// times) included.
+    pub count: u32,
+    /// Outermost instances of this name only, less the shipouts inside them.
+    pub total: Scaled,
+    /// The slowest single instance.
+    pub max: Scaled,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Serialize)]
@@ -132,6 +192,14 @@ pub struct BuildModel {
     /// The job: its children are the main file (and anything loaded before it).
     pub root: Frame,
     pub pages: Vec<Page>,
+    /// Watched environments, in the order they closed.
+    pub envs: Vec<EnvInstance>,
+    /// Page numbers of shipouts that started (`ship`) and never shipped (`page`): a package
+    /// discarded the box.
+    pub discarded_ships: Vec<u32>,
+    /// Process wall time of the engine run, when the CLI measured one (not set from the
+    /// records; `run.json` carries it).
+    pub wall: Option<Scaled>,
     /// Oddities seen while building: not errors, but worth a line in the report.
     pub warnings: Vec<String>,
 }
@@ -206,6 +274,9 @@ impl BuildModel {
         let mut phases = Phases::default();
         let mut pages = Vec::new();
         let mut pending_ship: Option<(u32, Scaled)> = None;
+        let mut discarded_ships = Vec::new();
+        let mut envs: Vec<EnvInstance> = Vec::new();
+        let mut env_stack: Vec<(String, Scaled)> = Vec::new();
         let mut warnings = Vec::new();
         let mut last = start;
         for r in records {
@@ -244,11 +315,34 @@ impl BuildModel {
                 },
                 Event::PreDoc => phases.predoc = Some(r.time),
                 Event::BeginDoc => phases.begindoc = Some(r.time),
+                Event::DocStart => phases.docstart = Some(r.time),
                 Event::EndDoc => phases.enddoc = Some(r.time),
-                Event::Ship(n) => pending_ship = Some((*n, r.time)),
+                Event::LastPage => phases.lastpage = Some(r.time),
+                Event::Ship(n) => {
+                    // A second `ship` before any `page`: the first box was discarded.
+                    if let Some((m, _)) = pending_ship.replace((*n, r.time)) {
+                        discarded_ships.push(m);
+                    }
+                }
                 Event::Page(n) => {
-                    let ship_start = pending_ship.take().filter(|(m, _)| m == n).map(|(_, t)| t);
+                    let ship_start = match pending_ship.take() {
+                        Some((m, t)) if m == *n => Some(t),
+                        Some((m, _)) => {
+                            discarded_ships.push(m);
+                            None
+                        }
+                        None => None,
+                    };
                     pages.push(Page { number: *n, time: r.time, ship_start });
+                }
+                Event::EnvOpen(name) => env_stack.push((name.clone(), r.time)),
+                Event::EnvClose(name) => {
+                    // The innermost open instance of this name; an unmatched close is ignored.
+                    if let Some(i) = env_stack.iter().rposition(|(n, _)| n == name) {
+                        let (name, start) = env_stack.remove(i);
+                        let nested = env_stack.iter().any(|(n, _)| *n == name);
+                        envs.push(EnvInstance { name, start, end: r.time, nested });
+                    }
                 }
                 Event::End => {}
             }
@@ -262,6 +356,14 @@ impl BuildModel {
             stack.last_mut().map(|p| &mut p.children).unwrap_or(&mut root.children).push(fr);
         }
         root.end = last;
+        if let Some((m, _)) = pending_ship {
+            discarded_ships.push(m);
+        }
+        // Environments still open at the last record (a build that stopped) close there.
+        for (i, (name, t)) in env_stack.iter().enumerate() {
+            let nested = env_stack[..i].iter().any(|(n, _)| n == name);
+            envs.push(EnvInstance { name: name.clone(), start: *t, end: last, nested });
+        }
         collapse_unit_files(&mut root);
         Ok(BuildModel {
             engine: *engine,
@@ -272,8 +374,76 @@ impl BuildModel {
             phases,
             root,
             pages,
+            envs,
+            discarded_ships,
+            wall: None,
             warnings,
         })
+    }
+
+    /// Where the body starts: `docstart`, else `begindoc` (older records).
+    pub fn body_start(&self) -> Option<Scaled> {
+        self.phases.docstart.or(self.phases.begindoc)
+    }
+
+    /// Completed shipouts as `(ship, page)` timer pairs.
+    pub fn shipouts(&self) -> impl Iterator<Item = (Scaled, Scaled)> + '_ {
+        self.pages.iter().filter_map(|p| p.ship_start.map(|s| (s, p.time)))
+    }
+
+    /// Shipout time inside `[a, b]`.
+    fn ship_in(&self, a: Scaled, b: Scaled) -> Scaled {
+        self.shipouts().map(|(s, e)| e.min(b).saturating_sub(s.max(a))).sum()
+    }
+
+    /// `[a, b]` less the shipouts inside it; `None` when a boundary is missing.
+    fn span(&self, a: Option<Scaled>, b: Option<Scaled>) -> Option<Scaled> {
+        let (a, b) = (a?, b?);
+        Some(b.saturating_sub(a).saturating_sub(self.ship_in(a, b)))
+    }
+
+    /// The run's phases (the oracle's `run_phases`), plus finalization when `wall` is set.
+    pub fn run_phases(&self) -> RunPhases {
+        let predoc = self.phases.predoc.or(self.phases.begindoc);
+        let docstart = self.body_start();
+        let enddoc = self.phases.enddoc;
+        // A build that stopped in the body: typesetting runs to the last record.
+        let body_end = enddoc.or(docstart.map(|_| self.end));
+        RunPhases {
+            startup: self.start,
+            preamble: self.span(Some(self.start), predoc),
+            begin_document: self.span(predoc, docstart),
+            typesetting: self.span(docstart, body_end),
+            shipout: self.shipouts().map(|(s, e)| e.saturating_sub(s)).sum(),
+            end_document: self.span(enddoc, Some(self.end)),
+            after_last_page: self.span(self.phases.lastpage, Some(self.end)),
+            finalization: self.wall.map(|w| w.saturating_sub(self.end)),
+            last_record: self.end,
+            wall: self.wall,
+        }
+    }
+
+    /// Per environment name: instances, time, slowest instance; by time, descending.
+    pub fn env_table(&self) -> Vec<EnvRow> {
+        let mut rows: Vec<EnvRow> = Vec::new();
+        for e in &self.envs {
+            let dt = e.end.saturating_sub(e.start).saturating_sub(self.ship_in(e.start, e.end));
+            let i = match rows.iter().position(|r| r.name == e.name) {
+                Some(i) => i,
+                None => {
+                    rows.push(EnvRow { name: e.name.clone(), count: 0, total: 0, max: 0 });
+                    rows.len() - 1
+                }
+            };
+            let r = &mut rows[i];
+            r.count += 1;
+            if !e.nested {
+                r.total += dt;
+            }
+            r.max = r.max.max(dt);
+        }
+        rows.sort_by(|a, b| b.total.cmp(&a.total).then_with(|| a.name.cmp(&b.name)));
+        rows
     }
 
     pub fn total(&self) -> Scaled {
@@ -298,10 +468,10 @@ impl BuildModel {
         n
     }
 
-    /// Rule 5: per-page time. The first page counts from `begindoc` (0 if there was none,
-    /// as in the oracle).
+    /// Rule 5: per-page time. The first page counts from `docstart`, else `begindoc` (0 if
+    /// there was neither, as in the oracle).
     pub fn page_times(&self) -> Vec<PageTime> {
-        let mut prev = self.phases.begindoc;
+        let mut prev = self.body_start();
         self.pages
             .iter()
             .map(|p| {
@@ -338,7 +508,7 @@ impl BuildModel {
 
     /// Per page, the time split at the shipout: typesetting first, then the shipout hooks.
     pub fn page_split(&self) -> Vec<PageSplit> {
-        let mut prev = self.phases.begindoc;
+        let mut prev = self.body_start();
         self.pages
             .iter()
             .map(|p| {
@@ -356,9 +526,10 @@ impl BuildModel {
             .collect()
     }
 
-    /// The main file frame: the first `.tex` child of the job.
+    /// The main file frame: the first `.tex` child of the job. None when the probe was
+    /// loaded from inside the main file (Overleaf), which then has no frame of its own.
     pub fn main_file(&self) -> Option<&Frame> {
-        self.root.children.iter().find(|f| f.kind == FrameKind::File)
+        self.root.children.iter().find(|f| f.kind == FrameKind::File && f.name.ends_with(".tex"))
     }
 }
 
@@ -492,6 +663,107 @@ end 470 1
         assert_eq!(e.to_string(), "t:4: pkg- a closes file+ a.sty opened at line 3");
         let e = BuildModel::from_records(&parse_str("file+ 0 0 x\n", "t").unwrap(), "t").unwrap_err();
         assert_eq!(e.to_string(), "t:1: first event is not `start`");
+    }
+
+    #[test]
+    fn phases_environments_and_discarded_shipouts() {
+        let m = model(
+            "start 100 0 luatex 2026-11-01
+file+ 100 0 main.tex
+pkg+ 110 1 tikz
+file+ 111 1 tikz.sty
+file- 150 1 tikz.sty
+pkg- 151 1 tikz
+predoc 200 1
+begindoc 210 1
+docstart 230 1
+env+ 240 1 tikzpicture
+env+ 245 1 tikzpicture
+env- 250 1 tikzpicture
+env- 260 1 tikzpicture
+env+ 270 1 longtable
+ship 280 1 1
+page 290 1 1
+env- 300 1 longtable
+ship 310 1 2
+ship 320 1 2
+page 325 1 2
+enddoc 330 1
+ship 340 1 3
+page 350 1 3
+lastpage 352 1
+env+ 353 1 unclosed
+end 360 1
+",
+        );
+        let p = m.run_phases();
+        assert_eq!(p.startup, 100);
+        assert_eq!(p.preamble, Some(100));
+        assert_eq!(p.begin_document, Some(30), "predoc to docstart");
+        assert_eq!(p.shipout, 10 + 5 + 10, "the discarded ship at 310 is not a shipout");
+        assert_eq!(p.typesetting, Some(100 - 15), "docstart..enddoc less two shipouts");
+        assert_eq!(p.end_document, Some(30 - 10));
+        assert_eq!(p.after_last_page, Some(8));
+        assert_eq!(p.finalization, None, "no wall time from records alone");
+        let sum = p.startup
+            + p.preamble.unwrap()
+            + p.begin_document.unwrap()
+            + p.typesetting.unwrap()
+            + p.shipout
+            + p.end_document.unwrap();
+        assert_eq!(sum, p.last_record, "the six engine phases add up to the last record");
+        assert_eq!(m.discarded_ships, [2]);
+        assert_eq!(m.page_times()[0], PageTime { page: 1, time: 60 }, "page 1 counts from docstart");
+        let envs = m.env_table();
+        let get = |n: &str| envs.iter().find(|r| r.name == n).unwrap().clone();
+        assert_eq!((get("tikzpicture").count, get("tikzpicture").total), (2, 20), "nested counted, not timed twice");
+        assert_eq!(get("longtable").total, 30 - 10, "the shipout inside is left out");
+        assert_eq!(get("unclosed").total, 7, "closed at the last record");
+        let mut w = m.clone();
+        w.wall = Some(400);
+        assert_eq!(w.run_phases().finalization, Some(40));
+    }
+
+    #[test]
+    fn old_records_fall_back_to_begindoc() {
+        let m = model(
+            "start 0 0 pdftex\nfile+ 0 0 main.tex\nbegindoc 10 1 \nship 15 1 1\npage 20 1 1\nenddoc 25 1 \nend 30 1 \n",
+        );
+        let p = m.run_phases();
+        assert_eq!(
+            (p.preamble, p.begin_document, p.typesetting, p.end_document),
+            (Some(10), Some(0), Some(10), Some(5))
+        );
+        assert_eq!(p.after_last_page, None);
+        assert_eq!(m.page_times()[0].time, 10);
+        assert!(m.envs.is_empty() && m.discarded_ships.is_empty());
+    }
+
+    /// The probe on the first line of the main file (Overleaf): no frame for the main file,
+    /// the class is the first unit.
+    #[test]
+    fn records_without_a_main_file_frame() {
+        let m = model(
+            "start 100 0 pdftex 2026-11-01\ncls+ 101 0 article\nfile+ 102 0 article.cls\nfile- 120 0 article.cls\ncls- 121 0 article\npredoc 150 0 \nbegindoc 151 0 \ndocstart 160 0 \nship 170 0 1\npage 180 0 1\nenddoc 190 0 \nlastpage 191 0 \nend 200 0 \n",
+        );
+        assert!(m.main_file().is_none());
+        assert_eq!(m.root.children[0].name, "article");
+        let p = m.run_phases();
+        assert_eq!((p.preamble, p.begin_document, p.typesetting), (Some(50), Some(10), Some(20)));
+        let text = crate::report::time_text(
+            &m,
+            "output",
+            crate::report::TextOptions {
+                files_read: None,
+                by: crate::report::TimeBy::Unit,
+                top: 12,
+                depth: 3,
+                look: None,
+                no_wall: crate::report::NoWall::Records,
+            },
+        );
+        assert!(text.contains("hint: article is"), "{text}");
+        assert!(text.contains("prumo did not run this build"), "{text}");
     }
 
     #[test]

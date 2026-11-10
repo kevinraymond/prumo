@@ -235,7 +235,7 @@ fn pages_strip(m: &BuildModel, cells: usize, total: Scaled, col: &dyn Fn(Scaled)
             *slot += (hi - lo).max(0.0) * per_cell;
         }
     };
-    let mut prev = m.phases.begindoc;
+    let mut prev = m.body_start();
     for p in &m.pages {
         if let Some(t0) = prev {
             match p.ship_start {

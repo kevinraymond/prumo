@@ -1,130 +1,132 @@
-start 5732 0 xetex 2026-11-01
-file+ 5732 0 main.tex
-cls+ 5758 1 obra
-file+ 5776 1 obra.cls
-cls+ 5806 2 article
-file+ 5825 2 article.cls
-file+ 5858 3 size11.clo
-file- 6306 3 size11.clo
-file- 6365 2 article.cls
-cls- 6379 2 article
-pkg+ 6412 2 geometry
-opts 6413 2 a4paper,margin=25mm
-file+ 6433 2 geometry.sty
-pkg+ 6464 3 keyval
-opts 6464 3 
-file+ 6483 3 keyval.sty
-file- 6497 3 keyval.sty
-pkg- 6509 3 keyval
-pkg+ 6537 3 ifvtex
-opts 6538 3 
-file+ 6556 3 ifvtex.sty
-pkg+ 6585 4 iftex
-opts 6585 4 
-file+ 6603 4 iftex.sty
-file- 6619 4 iftex.sty
-pkg- 6630 4 iftex
-file- 6638 3 ifvtex.sty
-pkg- 6650 3 ifvtex
-file- 6738 2 geometry.sty
-pkg- 6750 2 geometry
-pkg+ 6779 2 booktabs
-opts 6779 2 
-file+ 6798 2 booktabs.sty
-file- 6819 2 booktabs.sty
-pkg- 6831 2 booktabs
-pkg+ 6859 2 siunitx
-opts 6859 2 
-file+ 6878 2 siunitx.sty
-pkg+ 7419 3 translations
-opts 7419 3 
-file+ 7440 3 translations.sty
-pkg+ 7475 4 etoolbox
-opts 7475 4 
-file+ 7495 4 etoolbox.sty
-file- 7576 4 etoolbox.sty
-pkg- 7589 4 etoolbox
-pkg+ 7620 4 pdftexcmds
-opts 7621 4 
-file+ 7640 4 pdftexcmds.sty
-pkg+ 7678 5 infwarerr
-opts 7678 5 
-file+ 7698 5 infwarerr.sty
-file- 7712 5 infwarerr.sty
-pkg- 7725 5 infwarerr
-pkg+ 7761 5 ltxcmds
-opts 7762 5 
-file+ 7781 5 ltxcmds.sty
-file- 7801 5 ltxcmds.sty
-pkg- 7814 5 ltxcmds
-file- 7828 4 pdftexcmds.sty
-pkg- 7841 4 pdftexcmds
-file- 8260 3 translations.sty
-pkg- 8273 3 translations
-pkg+ 8323 3 amstext
-opts 8323 3 
-file+ 8342 3 amstext.sty
-pkg+ 8372 4 amsgen
-opts 8372 4 
-file+ 8390 4 amsgen.sty
-file- 8402 4 amsgen.sty
-pkg- 8414 4 amsgen
-file- 8423 3 amstext.sty
-pkg- 8435 3 amstext
-pkg+ 9578 3 array
-opts 9579 3 
-file+ 9597 3 array.sty
-file- 9632 3 array.sty
-pkg- 9644 3 array
-file- 9939 2 siunitx.sty
-pkg- 9952 2 siunitx
-pkg+ 9981 2 fancyhdr
-opts 9982 2 
-file+ 10000 2 fancyhdr.sty
-file- 10151 2 fancyhdr.sty
-pkg- 10164 2 fancyhdr
-pkg+ 10192 2 enumitem
-opts 10193 2 
-file+ 10212 2 enumitem.sty
-file- 10276 2 enumitem.sty
-pkg- 10289 2 enumitem
-file- 10302 1 obra.cls
-cls- 10313 1 obra
-pkg+ 10342 1 graphicx
-opts 10342 1 
-file+ 10362 1 graphicx.sty
-pkg+ 10402 2 graphics
-opts 10402 2 
-file+ 10422 2 graphics.sty
-pkg+ 10451 3 trig
-opts 10451 3 
-file+ 10469 3 trig.sty
-file- 10480 3 trig.sty
-pkg- 10492 3 trig
-file+ 10517 3 graphics.cfg
-file- 10529 3 graphics.cfg
-file+ 10553 3 xetex.def
-file- 10580 3 xetex.def
-file- 10595 2 graphics.sty
-pkg- 10607 2 graphics
-file- 10622 1 graphicx.sty
-pkg- 10635 1 graphicx
-predoc 10972 1 
-pkg+ 10995 1 color
-opts 10995 1 
-file+ 11008 1 color.sty
-file+ 11029 2 color.cfg
-file- 11035 2 color.cfg
-file+ 11128 2 mathcolor.ltx
-file- 11146 2 mathcolor.ltx
-file- 11150 1 color.sty
-pkg- 11156 1 color
-file+ 11197 1 l3backend-xetex.def
-file- 11236 1 l3backend-xetex.def
-begindoc 11257 1 
-file+ 11568 1 translations-basic-dictionary-english.trsl
-file- 11692 1 translations-basic-dictionary-english.trsl
-enddoc 11949 1 
-ship 12029 1 1
-page 12060 1 1
-end 12079 1 
+start 6986 0 xetex 2026-11-01
+file+ 6986 0 main.tex
+cls+ 7027 1 obra
+file+ 7052 1 obra.cls
+cls+ 7099 2 article
+file+ 7125 2 article.cls
+file+ 7179 3 size11.clo
+file- 7932 3 size11.clo
+file- 8025 2 article.cls
+cls- 8045 2 article
+pkg+ 8095 2 geometry
+opts 8096 2 a4paper,margin=25mm
+file+ 8125 2 geometry.sty
+pkg+ 8172 3 keyval
+opts 8172 3 
+file+ 8199 3 keyval.sty
+file- 8221 3 keyval.sty
+pkg- 8239 3 keyval
+pkg+ 8280 3 ifvtex
+opts 8280 3 
+file+ 8307 3 ifvtex.sty
+pkg+ 8351 4 iftex
+opts 8352 4 
+file+ 8377 4 iftex.sty
+file- 8423 4 iftex.sty
+pkg- 8441 4 iftex
+file- 8453 3 ifvtex.sty
+pkg- 8471 3 ifvtex
+file- 8620 2 geometry.sty
+pkg- 8639 2 geometry
+pkg+ 8683 2 booktabs
+opts 8684 2 
+file+ 8713 2 booktabs.sty
+file- 8744 2 booktabs.sty
+pkg- 8764 2 booktabs
+pkg+ 8806 2 siunitx
+opts 8807 2 
+file+ 8835 2 siunitx.sty
+pkg+ 9658 3 translations
+opts 9659 3 
+file+ 9690 3 translations.sty
+pkg+ 9742 4 etoolbox
+opts 9742 4 
+file+ 9770 4 etoolbox.sty
+file- 9899 4 etoolbox.sty
+pkg- 9918 4 etoolbox
+pkg+ 9964 4 pdftexcmds
+opts 9964 4 
+file+ 9993 4 pdftexcmds.sty
+pkg+ 10052 5 infwarerr
+opts 10052 5 
+file+ 10080 5 infwarerr.sty
+file- 10102 5 infwarerr.sty
+pkg- 10120 5 infwarerr
+pkg+ 10174 5 ltxcmds
+opts 10174 5 
+file+ 10201 5 ltxcmds.sty
+file- 10233 5 ltxcmds.sty
+pkg- 10251 5 ltxcmds
+file- 10274 4 pdftexcmds.sty
+pkg- 10293 4 pdftexcmds
+file- 10917 3 translations.sty
+pkg- 10937 3 translations
+pkg+ 11013 3 amstext
+opts 11013 3 
+file+ 11041 3 amstext.sty
+pkg+ 11086 4 amsgen
+opts 11087 4 
+file+ 11114 4 amsgen.sty
+file- 11134 4 amsgen.sty
+pkg- 11153 4 amsgen
+file- 11167 3 amstext.sty
+pkg- 11185 3 amstext
+pkg+ 12922 3 array
+opts 12923 3 
+file+ 12950 3 array.sty
+file- 13006 3 array.sty
+pkg- 13023 3 array
+file- 13465 2 siunitx.sty
+pkg- 13483 2 siunitx
+pkg+ 13529 2 fancyhdr
+opts 13529 2 
+file+ 13558 2 fancyhdr.sty
+file- 13792 2 fancyhdr.sty
+pkg- 13811 2 fancyhdr
+pkg+ 13856 2 enumitem
+opts 13856 2 
+file+ 13885 2 enumitem.sty
+file- 13987 2 enumitem.sty
+pkg- 14006 2 enumitem
+file- 14027 1 obra.cls
+cls- 14045 1 obra
+pkg+ 14090 1 graphicx
+opts 14090 1 
+file+ 14119 1 graphicx.sty
+pkg+ 14182 2 graphics
+opts 14182 2 
+file+ 14211 2 graphics.sty
+pkg+ 14255 3 trig
+opts 14256 3 
+file+ 14281 3 trig.sty
+file- 14300 3 trig.sty
+pkg- 14317 3 trig
+file+ 14357 3 graphics.cfg
+file- 14377 3 graphics.cfg
+file+ 14415 3 xetex.def
+file- 14457 3 xetex.def
+file- 14480 2 graphics.sty
+pkg- 14498 2 graphics
+file- 14520 1 graphicx.sty
+pkg- 14539 1 graphicx
+predoc 15223 1 
+pkg+ 15256 1 color
+opts 15257 1 
+file+ 15275 1 color.sty
+file+ 15312 2 color.cfg
+file- 15324 2 color.cfg
+file+ 15464 2 mathcolor.ltx
+file- 15498 2 mathcolor.ltx
+file- 15504 1 color.sty
+pkg- 15513 1 color
+file+ 15582 1 l3backend-xetex.def
+file- 15649 1 l3backend-xetex.def
+begindoc 15684 1 
+file+ 16202 1 translations-basic-dictionary-english.trsl
+file- 16414 1 translations-basic-dictionary-english.trsl
+docstart 16454 1 
+enddoc 16858 1 
+ship 16994 1 1
+page 17022 1 1
+lastpage 17029 1 
+end 17055 1 

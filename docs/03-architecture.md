@@ -79,7 +79,14 @@ Records are a flat event stream (`04-probe.md`). Rules, all verified against fix
    frame still open at the `end` record closes at that timestamp.
 4. `opts` directly after `pkg+` attaches to that frame.
 5. `page N` events are leaves of the job, not of any frame. Page time = time since the previous
-   page (or since `begindoc` for page 1).
+   page (or since `docstart` for page 1; `begindoc` in records from before probe v0.2).
+6. `env+`/`env-` are not frames: they go on their own stack, paired by name (`04-probe.md`).
+7. Phases (`BuildModel::run_phases`): startup = the first record's timer; preamble, begin-
+   document, typesetting and end-document are the spans between `start`, `predoc`,
+   `docstart`, `enddoc` and the last record, each less the shipouts inside it; shipout is
+   every `ship`..`page`. The six add up to the last record. Finalization is the process wall
+   time (`run.json` `wall_ns`, timed by `run::build_once`) minus the last record; it is not
+   measured under latexmk, whose process is several passes.
 
 ### Cross-check with the log
 
@@ -93,9 +100,10 @@ their position in the tree.
 ## CLI surface
 
 ```
-prumo run      <main.tex> [--engine pdflatex|xelatex|lualatex] [--latexmk] [--build <cmd>] [--out DIR]
-prumo time     <main.tex> [--by package|file|page] [--top N] [--json] [--html [FILE]] [--plain] [--preamble]
-prumo graph    <main.tex> [--dot|--json|--tree] [--depth N]
+prumo run      <main.tex> [--engine pdflatex|xelatex|lualatex] [--latexmk] [--build <cmd>] [--out DIR] [--env NAMES]
+prumo time     <main.tex|job.prumo> [--by package|file|page] [--top N] [--json] [--html [FILE]] [--plain] [--preamble] [--env NAMES]
+prumo graph    <main.tex|job.prumo> [--dot|--json|--tree] [--depth N]
+prumo compare  <main.tex> [--engines LIST] [--runs N] [--latexmk] [--env NAMES] [--json]
 prumo fonts    <main.tex> [--json]
 prumo packages <main.tex> [--tlpdb PATH] [--json]           # tlmgr package set, with the file that caused each
 prumo prune    <paths...> [--tlpdb PATH] [--keep LIST] [--keep-hyphenation all|used] [--apply --yes]
@@ -106,7 +114,10 @@ prumo clean    [<main.tex>] [--stale] [--yes] [--json]       # list the cache (s
 ```
 
 - `run` is implicit: report commands run the build if the cache is missing or stale (source newer
-  than the cached `run.json`).
+  than the cached `run.json`, another engine, build command or environment list).
+- `time` and `graph` also take a record file from a build prumo did not run (`output.prumo`
+  from Overleaf, `docs/overleaf.md`): `run::from_records` reads it and the `.fls`, `.log` and
+  PDF next to it when present, builds nothing and writes nothing.
 - `--engine` defaults to the document's `% !TEX program =` (or `TS-program`) magic comment in
   its first 20 lines, else pdflatex; the build line says which applied. `prune` and
   `unused --corpus` read the same comment per document.

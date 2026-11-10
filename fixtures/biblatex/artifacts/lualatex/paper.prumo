@@ -1,104 +1,106 @@
-start 14378 0 luatex 2026-11-01
-file+ 14378 0 paper.tex
-cls+ 14411 1 article
-file+ 14432 1 article.cls
-file+ 14468 2 size10.clo
-file- 14686 2 size10.clo
-file- 14745 1 article.cls
-cls- 14758 1 article
-pkg+ 14793 1 biblatex
-opts 14793 1 backend=biber,style=numeric
-file+ 14814 1 biblatex.sty
-pkg+ 14853 2 pdftexcmds
-opts 14853 2 
-file+ 14874 2 pdftexcmds.sty
-pkg+ 14913 3 infwarerr
-opts 14914 3 
-file+ 14934 3 infwarerr.sty
-file- 14950 3 infwarerr.sty
-pkg- 14963 3 infwarerr
-pkg+ 14992 3 iftex
-opts 14993 3 
-file+ 15011 3 iftex.sty
-file- 15031 3 iftex.sty
-pkg- 15044 3 iftex
-pkg+ 15075 3 ltxcmds
-opts 15075 3 
-file+ 15097 3 ltxcmds.sty
-file- 15122 3 ltxcmds.sty
-pkg- 15135 3 ltxcmds
-file- 15172 2 pdftexcmds.sty
-pkg- 15186 2 pdftexcmds
-pkg+ 15217 2 etoolbox
-opts 15218 2 
-file+ 15238 2 etoolbox.sty
-file- 15334 2 etoolbox.sty
-pkg- 15347 2 etoolbox
-pkg+ 15377 2 keyval
-opts 15377 2 
-file+ 15399 2 keyval.sty
-file- 15415 2 keyval.sty
-pkg- 15427 2 keyval
-pkg+ 15458 2 kvoptions
-opts 15458 2 
-file+ 15479 2 kvoptions.sty
-pkg+ 15526 3 kvsetkeys
-opts 15526 3 
-file+ 15549 3 kvsetkeys.sty
-file- 15570 3 kvsetkeys.sty
-pkg- 15584 3 kvsetkeys
-file- 15617 2 kvoptions.sty
-pkg- 15631 2 kvoptions
-pkg+ 15661 2 logreq
-opts 15661 2 
-file+ 15681 2 logreq.sty
-file+ 15735 3 logreq.def
-file- 15759 3 logreq.def
-file- 15765 2 logreq.sty
-pkg- 15778 2 logreq
-pkg+ 15806 2 ifthen
-opts 15806 2 
-file+ 15826 2 ifthen.sty
-file- 15841 2 ifthen.sty
-pkg- 15854 2 ifthen
-pkg+ 15880 2 url
-opts 15881 2 
-file+ 15898 2 url.sty
-file- 15920 2 url.sty
-pkg- 15932 2 url
-pkg+ 33600 2 expl3
-opts 33601 2 
-file+ 33621 2 expl3.sty
-file+ 33706 3 l3backend-luatex.def
-file- 33767 3 l3backend-luatex.def
-file- 33777 2 expl3.sty
-pkg- 33789 2 expl3
-pkg+ 33827 2 blx-case-expl3
-opts 33827 2 
-file+ 33850 2 blx-case-expl3.sty
-pkg+ 33892 3 xparse
-opts 33892 3 
-file+ 33912 3 xparse.sty
-file- 33952 3 xparse.sty
-pkg- 33965 3 xparse
-file- 34052 2 blx-case-expl3.sty
-pkg- 34066 2 blx-case-expl3
-file- 34492 1 biblatex.sty
-pkg- 34524 1 biblatex
-pkg+ 34558 1 csquotes
-opts 34558 1 
-file+ 34580 1 csquotes.sty
-file+ 34927 2 csquotes.def
-file- 35018 2 csquotes.def
-file+ 35040 2 csquotes.cfg
-file- 35052 2 csquotes.cfg
-file- 35059 1 csquotes.sty
-pkg- 35073 1 csquotes
-predoc 35453 1 
-begindoc 35599 1 
-file+ 36973 1 paper.bbl
-file- 37006 1 paper.bbl
-enddoc 37887 1 
-ship 37919 1 1
-page 38094 1 1
-end 38121 1 
+start 19449 0 luatex 2026-11-01
+file+ 19450 0 paper.tex
+cls+ 19499 1 article
+file+ 19526 1 article.cls
+file+ 19581 2 size10.clo
+file- 20003 2 size10.clo
+file- 20090 1 article.cls
+cls- 20109 1 article
+pkg+ 20156 1 biblatex
+opts 20157 1 backend=biber,style=numeric
+file+ 20186 1 biblatex.sty
+pkg+ 20242 2 pdftexcmds
+opts 20243 2 
+file+ 20272 2 pdftexcmds.sty
+pkg+ 20332 3 infwarerr
+opts 20333 3 
+file+ 20361 3 infwarerr.sty
+file- 20386 3 infwarerr.sty
+pkg- 20404 3 infwarerr
+pkg+ 20445 3 iftex
+opts 20446 3 
+file+ 20471 3 iftex.sty
+file- 20503 3 iftex.sty
+pkg- 20520 3 iftex
+pkg+ 20563 3 ltxcmds
+opts 20564 3 
+file+ 20591 3 ltxcmds.sty
+file- 20630 3 ltxcmds.sty
+pkg- 20647 3 ltxcmds
+file- 20701 2 pdftexcmds.sty
+pkg- 20720 2 pdftexcmds
+pkg+ 20764 2 etoolbox
+opts 20764 2 
+file+ 20792 2 etoolbox.sty
+file- 20935 2 etoolbox.sty
+pkg- 20953 2 etoolbox
+pkg+ 20995 2 keyval
+opts 20996 2 
+file+ 21022 2 keyval.sty
+file- 21045 2 keyval.sty
+pkg- 21062 2 keyval
+pkg+ 21107 2 kvoptions
+opts 21107 2 
+file+ 21135 2 kvoptions.sty
+pkg+ 21205 3 kvsetkeys
+opts 21205 3 
+file+ 21234 3 kvsetkeys.sty
+file- 21266 3 kvsetkeys.sty
+pkg- 21284 3 kvsetkeys
+file- 21330 2 kvoptions.sty
+pkg- 21347 2 kvoptions
+pkg+ 21389 2 logreq
+opts 21390 2 
+file+ 21416 2 logreq.sty
+file+ 21495 3 logreq.def
+file- 21532 3 logreq.def
+file- 21541 2 logreq.sty
+pkg- 21558 2 logreq
+pkg+ 21599 2 ifthen
+opts 21599 2 
+file+ 21625 2 ifthen.sty
+file- 21649 2 ifthen.sty
+pkg- 21666 2 ifthen
+pkg+ 21704 2 url
+opts 21704 2 
+file+ 21728 2 url.sty
+file- 21762 2 url.sty
+pkg- 21778 2 url
+pkg+ 47021 2 expl3
+opts 47022 2 
+file+ 47050 2 expl3.sty
+file+ 47171 3 l3backend-luatex.def
+file- 47263 3 l3backend-luatex.def
+file- 47277 2 expl3.sty
+pkg- 47295 2 expl3
+pkg+ 47347 2 blx-case-expl3
+opts 47347 2 
+file+ 47379 2 blx-case-expl3.sty
+pkg+ 47440 3 xparse
+opts 47441 3 
+file+ 47468 3 xparse.sty
+file- 47525 3 xparse.sty
+pkg- 47542 3 xparse
+file- 47668 2 blx-case-expl3.sty
+pkg- 47688 2 blx-case-expl3
+file- 48270 1 biblatex.sty
+pkg- 48313 1 biblatex
+pkg+ 48362 1 csquotes
+opts 48362 1 
+file+ 48391 1 csquotes.sty
+file+ 48882 2 csquotes.def
+file- 49016 2 csquotes.def
+file+ 49049 2 csquotes.cfg
+file- 49069 2 csquotes.cfg
+file- 49080 1 csquotes.sty
+pkg- 49098 1 csquotes
+predoc 49808 1 
+begindoc 50013 1 
+file+ 51900 1 paper.bbl
+file- 51942 1 paper.bbl
+docstart 52032 1 
+enddoc 53320 1 
+ship 53365 1 1
+page 53651 1 1
+lastpage 53659 1 
+end 53778 1 

@@ -130,7 +130,7 @@ pub enum UnusedError {
     NoLoader(PathBuf),
     #[error(transparent)]
     Model(#[from] crate::model::ModelError),
-    #[error("the baseline build failed (exit {code:?}); fix the document first:\n{tail}")]
+    #[error("the baseline build failed ({}); fix the document first:\n{tail}", run::exit_text(*.code))]
     BaselineFailed { code: Option<i32>, tail: String },
     #[error("pdftotext is not on PATH (poppler-utils); the unused pass compares page text")]
     NoPdftotext,
@@ -626,7 +626,11 @@ fn base_run(opts: &UnusedOptions, progress: &mut impl FnMut(&str)) -> Result<Bas
         None => run::run(&base_opts)?,
     };
     if run.info.exit_code != Some(0) {
-        let tail = std::fs::read_to_string(&run.log).map(|t| run::tail_lines(&t, 10)).unwrap_or_default();
+        // The first `!` error says why; a log tail usually ends in memory statistics.
+        let tail = match crate::texlog::parse_file(&run.log).ok().and_then(|l| l.errors.into_iter().next()) {
+            Some(e) => format!("! {e}"),
+            None => std::fs::read_to_string(&run.log).map(|t| run::tail_lines(&t, 10)).unwrap_or_default(),
+        };
         return Err(UnusedError::BaselineFailed { code: run.info.exit_code, tail });
     }
     let model = run::model_of(&run)?;
@@ -708,7 +712,11 @@ fn try_without(opts: &UnusedOptions, b: &BaseRun, base: &Baseline, r: &Request, 
         },
         Err(run::RunError::TimedOut { .. }) => Verdict::TimedOut,
         Err(run::RunError::NoRecords { code, tail, .. }) => Verdict::Required {
-            evidence: format!("build produced no records (exit {code:?}): {}", tail.lines().last().unwrap_or("")),
+            evidence: format!(
+                "build produced no records ({}): {}",
+                run::exit_text(code),
+                tail.lines().last().unwrap_or("")
+            ),
         },
         Err(e) => Verdict::Required { evidence: e.to_string() },
     }

@@ -1,10 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  9 NOV 2026 00:16
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  1 JAN 1970 00:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\RequirePackage{prumo}\input{paper.tex}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{paper.tex}
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count273
 \g__prumo_page_int=\count274
 )
@@ -387,12 +388,12 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 9405 strings out of 469155
- 184183 string characters out of 5451604
- 1036862 words of memory out of 5000000
- 38557 multiletter control sequences out of 15000+600000
+ 9535 strings out of 469155
+ 188585 string characters out of 5451604
+ 1038635 words of memory out of 5000000
+ 38687 multiletter control sequences out of 15000+600000
  628521 words of font info for 44 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 69i,5n,71p,724b,4806s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 69i,5n,71p,819b,4806s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on paper.xdv (1 page, 1740 bytes).

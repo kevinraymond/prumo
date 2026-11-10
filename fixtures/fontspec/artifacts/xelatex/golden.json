@@ -1,138 +1,138 @@
 {
-  "total_s": 0.1026763916015625,
-  "preamble_s": 0.09881591796875,
+  "total_s": 0.1558837890625,
+  "preamble_s": 0.1501617431640625,
   "units": [
     {
       "kind": "pkg",
       "name": "fontspec-xetex",
-      "inclusive": 0.062408447265625,
-      "exclusive": 0.0613250732421875,
+      "inclusive": 0.092803955078125,
+      "exclusive": 0.0912628173828125,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "glyphs.tex",
-      "inclusive": 0.1026763916015625,
-      "exclusive": 0.0192413330078125,
+      "inclusive": 0.1558685302734375,
+      "exclusive": 0.0307464599609375,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "size10.clo",
-      "inclusive": 0.0067596435546875,
-      "exclusive": 0.0067596435546875,
+      "inclusive": 0.0110015869140625,
+      "exclusive": 0.0110015869140625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "metalogo",
-      "inclusive": 0.0090789794921875,
-      "exclusive": 0.001983642578125,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "graphics",
-      "inclusive": 0.00311279296875,
-      "exclusive": 0.0019378662109375,
-      "loads": 1
-    },
-    {
-      "kind": "cls",
-      "name": "article",
-      "inclusive": 0.0086822509765625,
-      "exclusive": 0.001922607421875,
+      "inclusive": 0.013671875,
+      "exclusive": 0.0032196044921875,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "fontspec",
-      "inclusive": 0.0643157958984375,
-      "exclusive": 0.0019073486328125,
+      "inclusive": 0.095672607421875,
+      "exclusive": 0.00286865234375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "graphics",
+      "inclusive": 0.0046234130859375,
+      "exclusive": 0.0028533935546875,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.01373291015625,
+      "exclusive": 0.0027313232421875,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "graphicx",
-      "inclusive": 0.005401611328125,
-      "exclusive": 0.0016021728515625,
+      "inclusive": 0.007965087890625,
+      "exclusive": 0.0023651123046875,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "ifxetex",
-      "inclusive": 0.0016937255859375,
-      "exclusive": 0.0009918212890625,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "fontenc",
-      "inclusive": 0.0007781982421875,
-      "exclusive": 0.0007781982421875,
+      "inclusive": 0.0024871826171875,
+      "exclusive": 0.0014801025390625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "url",
-      "inclusive": 0.0007476806640625,
-      "exclusive": 0.0007476806640625,
+      "inclusive": 0.0011138916015625,
+      "exclusive": 0.0011138916015625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fontenc",
+      "inclusive": 0.0010833740234375,
+      "exclusive": 0.0010833740234375,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "iftex",
-      "inclusive": 0.000701904296875,
-      "exclusive": 0.000701904296875,
+      "inclusive": 0.001007080078125,
+      "exclusive": 0.001007080078125,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "keyval",
-      "inclusive": 0.0006866455078125,
-      "exclusive": 0.0006866455078125,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "trig",
-      "inclusive": 0.0006256103515625,
-      "exclusive": 0.0006256103515625,
+      "inclusive": 0.0009765625,
+      "exclusive": 0.0009765625,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "l3backend-xetex.def",
-      "inclusive": 0.0006103515625,
-      "exclusive": 0.0006103515625,
+      "inclusive": 0.0009307861328125,
+      "exclusive": 0.0009307861328125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "trig",
+      "inclusive": 0.00091552734375,
+      "exclusive": 0.00091552734375,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "xetex.def",
-      "inclusive": 0.0003509521484375,
-      "exclusive": 0.0003509521484375,
+      "inclusive": 0.0005340576171875,
+      "exclusive": 0.0005340576171875,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "fontspec.cfg",
-      "inclusive": 0.00030517578125,
-      "exclusive": 0.00030517578125,
+      "inclusive": 0.000457763671875,
+      "exclusive": 0.000457763671875,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "graphics.cfg",
-      "inclusive": 0.0001983642578125,
-      "exclusive": 0.0001983642578125,
+      "inclusive": 0.0003204345703125,
+      "exclusive": 0.0003204345703125,
       "loads": 1
     }
   ],
   "pages": [
     [
       1,
-      0.0035552978515625
+      0.0033721923828125
     ]
   ],
   "fonts": {
@@ -185,5 +185,17 @@
     "unknown_embedded": [],
     "partial": false,
     "map_entries": 5091
-  }
+  },
+  "phases": {
+    "startup_s": 0.1034088134765625,
+    "preamble_s": 0.1478424072265625,
+    "begin_document_s": 0.0042572021484375,
+    "typesetting_s": 0.0025482177734375,
+    "shipout_s": 0.00048828125,
+    "end_document_s": 0.0007476806640625,
+    "after_last_page_s": 0.000335693359375,
+    "end_s": 0.2592926025390625
+  },
+  "environments": [],
+  "discarded_shipouts": []
 }

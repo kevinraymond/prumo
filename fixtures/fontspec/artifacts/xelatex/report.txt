@@ -1,41 +1,49 @@
-== prumo report: glyphs  (total 103 ms, preamble 99 ms, 1 pages, 49 files read)
+== prumo report: glyphs  (total 156 ms, preamble 150 ms, 1 pages, 49 files read)
 
 -- slowest units (exclusive) --
-     61.3 ms     62.4 ms incl  pkg  fontspec-xetex
-     19.2 ms    102.7 ms incl  file glyphs.tex
-      6.8 ms      6.8 ms incl  file size10.clo
-      2.0 ms      9.1 ms incl  pkg  metalogo
-      1.9 ms      3.1 ms incl  pkg  graphics
-      1.9 ms      8.7 ms incl  cls  article
-      1.9 ms     64.3 ms incl  pkg  fontspec
-      1.6 ms      5.4 ms incl  pkg  graphicx
-      1.0 ms      1.7 ms incl  pkg  ifxetex
-      0.8 ms      0.8 ms incl  pkg  fontenc
-      0.7 ms      0.7 ms incl  pkg  url
-      0.7 ms      0.7 ms incl  pkg  iftex
+     91.3 ms     92.8 ms incl  pkg  fontspec-xetex
+     30.7 ms    155.9 ms incl  file glyphs.tex
+     11.0 ms     11.0 ms incl  file size10.clo
+      3.2 ms     13.7 ms incl  pkg  metalogo
+      2.9 ms     95.7 ms incl  pkg  fontspec
+      2.9 ms      4.6 ms incl  pkg  graphics
+      2.7 ms     13.7 ms incl  cls  article
+      2.4 ms      8.0 ms incl  pkg  graphicx
+      1.5 ms      2.5 ms incl  pkg  ifxetex
+      1.1 ms      1.1 ms incl  pkg  url
+      1.1 ms      1.1 ms incl  pkg  fontenc
+      1.0 ms      1.0 ms incl  pkg  iftex
+
+-- phases --
+  startup            103.4 ms
+  preamble           147.8 ms
+  begin-document       4.3 ms
+  typesetting          2.5 ms
+  shipout              0.5 ms
+  end-document         0.7 ms
 
 -- pages --
-  page 1: 3.6 ms
+  page 1: 3.4 ms
 
 -- load tree --
-  glyphs.tex  (102.7 ms incl, 19.2 ms excl)
-    article  (8.7 ms incl, 1.9 ms excl)
-      size10.clo  (6.8 ms incl, 6.8 ms excl)
-    fontspec  (64.3 ms incl, 1.9 ms excl)
-      fontspec-xetex  (62.4 ms incl, 61.3 ms excl)
-        fontenc  (0.8 ms incl, 0.8 ms excl)
-        fontspec.cfg  (0.3 ms incl, 0.3 ms excl)
-    metalogo  (9.1 ms incl, 2.0 ms excl)
-      graphicx  (5.4 ms incl, 1.6 ms excl)
-        keyval  (0.7 ms incl, 0.7 ms excl)
-        graphics  (3.1 ms incl, 1.9 ms excl)
-          trig  (0.6 ms incl, 0.6 ms excl)
-          graphics.cfg  (0.2 ms incl, 0.2 ms excl)
-          xetex.def  (0.4 ms incl, 0.4 ms excl)
-      ifxetex  (1.7 ms incl, 1.0 ms excl)
-        iftex  (0.7 ms incl, 0.7 ms excl)
-    url  (0.7 ms incl, 0.7 ms excl)
-    l3backend-xetex.def  (0.6 ms incl, 0.6 ms excl)
+  glyphs.tex  (155.9 ms incl, 30.7 ms excl)
+    article  (13.7 ms incl, 2.7 ms excl)
+      size10.clo  (11.0 ms incl, 11.0 ms excl)
+    fontspec  (95.7 ms incl, 2.9 ms excl)
+      fontspec-xetex  (92.8 ms incl, 91.3 ms excl)
+        fontenc  (1.1 ms incl, 1.1 ms excl)
+        fontspec.cfg  (0.5 ms incl, 0.5 ms excl)
+    metalogo  (13.7 ms incl, 3.2 ms excl)
+      graphicx  (8.0 ms incl, 2.4 ms excl)
+        keyval  (1.0 ms incl, 1.0 ms excl)
+        graphics  (4.6 ms incl, 2.9 ms excl)
+          trig  (0.9 ms incl, 0.9 ms excl)
+          graphics.cfg  (0.3 ms incl, 0.3 ms excl)
+          xetex.def  (0.5 ms incl, 0.5 ms excl)
+      ifxetex  (2.5 ms incl, 1.5 ms excl)
+        iftex  (1.0 ms incl, 1.0 ms excl)
+    url  (1.1 ms incl, 1.1 ms excl)
+    l3backend-xetex.def  (0.9 ms incl, 0.9 ms excl)
 
 -- fonts --
   TFMs loaded: 0, embedded in PDF: 4, Type 3: 0, bitmap .pk read: 0

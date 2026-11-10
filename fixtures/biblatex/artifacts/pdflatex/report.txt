@@ -1,47 +1,55 @@
-== prumo report: paper  (total 212 ms, preamble 180 ms, 1 pages, 98 files read)
+== prumo report: paper  (total 300 ms, preamble 253 ms, 1 pages, 98 files read)
 
 -- slowest units (exclusive) --
-    141.7 ms    161.1 ms incl  pkg  biblatex
-     41.5 ms    212.5 ms incl  file paper.tex
-      6.0 ms      7.4 ms incl  pkg  csquotes
-      2.5 ms      3.6 ms incl  pkg  blx-case-expl3
-      2.3 ms      4.7 ms incl  pkg  pdftexcmds
-      1.9 ms      2.3 ms incl  cls  article
-      1.9 ms      1.9 ms incl  pkg  etoolbox
-      1.9 ms      2.5 ms incl  pkg  expl3
-      1.7 ms      2.6 ms incl  pkg  kvoptions
-      1.4 ms      1.8 ms incl  pkg  logreq
-      1.2 ms      1.2 ms incl  file csquotes.def
-      1.1 ms      1.1 ms incl  pkg  xparse
+    198.2 ms    224.7 ms incl  pkg  biblatex
+     61.2 ms    299.8 ms incl  file paper.tex
+      8.3 ms     10.3 ms incl  pkg  csquotes
+      3.4 ms      4.9 ms incl  pkg  blx-case-expl3
+      3.1 ms      6.3 ms incl  pkg  pdftexcmds
+      2.7 ms      2.7 ms incl  pkg  etoolbox
+      2.7 ms      3.6 ms incl  pkg  expl3
+      2.6 ms      3.2 ms incl  cls  article
+      2.4 ms      3.5 ms incl  pkg  kvoptions
+      2.0 ms      2.5 ms incl  pkg  logreq
+      1.8 ms      1.8 ms incl  file csquotes.def
+      1.4 ms      1.4 ms incl  pkg  xparse
+
+-- phases --
+  startup             46.6 ms
+  preamble           250.4 ms
+  begin-document      32.8 ms
+  typesetting          8.2 ms
+  shipout              6.1 ms
+  end-document         2.4 ms
 
 -- pages --
-  page 1: 32.0 ms
+  page 1: 14.8 ms
 
 -- load tree --
-  paper.tex  (212.5 ms incl, 41.5 ms excl)
-    article  (2.3 ms incl, 1.9 ms excl)
-      size10.clo  (0.4 ms incl, 0.4 ms excl)
-    biblatex  (161.1 ms incl, 141.7 ms excl)
-      pdftexcmds  (4.7 ms incl, 2.3 ms excl)
-        infwarerr  (0.8 ms incl, 0.8 ms excl)
-        iftex  (0.8 ms incl, 0.8 ms excl)
-        ltxcmds  (0.9 ms incl, 0.9 ms excl)
-      etoolbox  (1.9 ms incl, 1.9 ms excl)
-      keyval  (0.7 ms incl, 0.7 ms excl)
-      kvoptions  (2.6 ms incl, 1.7 ms excl)
-        kvsetkeys  (0.8 ms incl, 0.8 ms excl)
-      logreq  (1.8 ms incl, 1.4 ms excl)
-        logreq.def  (0.4 ms incl, 0.4 ms excl)
-      ifthen  (0.7 ms incl, 0.7 ms excl)
-      url  (0.8 ms incl, 0.8 ms excl)
-      expl3  (2.5 ms incl, 1.9 ms excl)
-        l3backend-pdftex.def  (0.7 ms incl, 0.7 ms excl)
-      blx-case-expl3  (3.6 ms incl, 2.5 ms excl)
-        xparse  (1.1 ms incl, 1.1 ms excl)
-    csquotes  (7.4 ms incl, 6.0 ms excl)
-      csquotes.def  (1.2 ms incl, 1.2 ms excl)
+  paper.tex  (299.8 ms incl, 61.2 ms excl)
+    article  (3.2 ms incl, 2.6 ms excl)
+      size10.clo  (0.6 ms incl, 0.6 ms excl)
+    biblatex  (224.7 ms incl, 198.2 ms excl)
+      pdftexcmds  (6.3 ms incl, 3.1 ms excl)
+        infwarerr  (1.0 ms incl, 1.0 ms excl)
+        iftex  (1.0 ms incl, 1.0 ms excl)
+        ltxcmds  (1.2 ms incl, 1.2 ms excl)
+      etoolbox  (2.7 ms incl, 2.7 ms excl)
+      keyval  (1.0 ms incl, 1.0 ms excl)
+      kvoptions  (3.5 ms incl, 2.4 ms excl)
+        kvsetkeys  (1.1 ms incl, 1.1 ms excl)
+      logreq  (2.5 ms incl, 2.0 ms excl)
+        logreq.def  (0.5 ms incl, 0.5 ms excl)
+      ifthen  (1.0 ms incl, 1.0 ms excl)
+      url  (1.1 ms incl, 1.1 ms excl)
+      expl3  (3.6 ms incl, 2.7 ms excl)
+        l3backend-pdftex.def  (0.9 ms incl, 0.9 ms excl)
+      blx-case-expl3  (4.9 ms incl, 3.4 ms excl)
+        xparse  (1.4 ms incl, 1.4 ms excl)
+    csquotes  (10.3 ms incl, 8.3 ms excl)
+      csquotes.def  (1.8 ms incl, 1.8 ms excl)
       csquotes.cfg  (0.2 ms incl, 0.2 ms excl)
-    paper.bbl  (0.3 ms incl, 0.3 ms excl)
+    paper.bbl  (0.4 ms incl, 0.4 ms excl)
 
 -- fonts --
   TFMs loaded: 3, embedded in PDF: 3, Type 3: 0, bitmap .pk read: 0

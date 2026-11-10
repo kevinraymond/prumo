@@ -1,10 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.8)  9 NOV 2026 00:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.8)  1 JAN 1970 00:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\RequirePackage{prumo}\input{deck}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{deck}
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count276
 \g__prumo_page_int=\count277
 )
@@ -981,18 +982,18 @@ Package rerunfilecheck Info: Checksums for `deck.out':
 (rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 24568 strings out of 468449
- 485363 string characters out of 5440369
- 869652 words of memory out of 5000000
- 53360 multiletter control sequences out of 15000+600000
+ 24698 strings out of 468449
+ 489763 string characters out of 5440369
+ 871462 words of memory out of 5000000
+ 53490 multiletter control sequences out of 15000+600000
  635107 words of font info for 64 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 113i,14n,110p,426b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,14n,110p,521b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb>
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></
 usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb>
-Output written on deck.pdf (5 pages, 44715 bytes).
+Output written on deck.pdf (5 pages, 44574 bytes).
 PDF statistics:
  166 PDF objects out of 1000 (max. 8388607)
  143 compressed objects within 2 object streams

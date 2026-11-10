@@ -1,6 +1,6 @@
 [package]
 name = "prumo"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2024"
 rust-version = "1.88"
 description = "Build analyzer for LaTeX: timing per package, which package loaded which, fonts, and the TeX Live packages a document needs"

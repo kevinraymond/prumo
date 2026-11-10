@@ -186,7 +186,7 @@ click to expand it on its own axis</title>"#,
     // Pages strip: typesetting (light) then shipout (dark) per page.
     if pages {
         let y = rows as f64 * ROW_H + 4.0;
-        let mut prev = m.phases.begindoc.unwrap_or(m.start);
+        let mut prev = m.body_start().unwrap_or(m.start);
         for p in &m.pages {
             let ship = p.ship_start.unwrap_or(p.time);
             let x0 = x_of(prev);
@@ -324,11 +324,66 @@ fn fonts_html(f: &FontReport) -> String {
     s
 }
 
+/// The phase table: one row per phase, a bar for its share, the total.
+fn phases_html(m: &BuildModel) -> String {
+    let p = m.run_phases();
+    let t = crate::report::timer_of(m.engine);
+    let rows = crate::report::phase_rows(&p);
+    let max = rows.iter().filter_map(|r| r.1).max().unwrap_or(1).max(1);
+    let total = p.wall.unwrap_or(p.last_record).max(1);
+    let mut s = String::from(
+        r#"<table class="phases"><tr><th>phase</th><th class="n">ms</th><th class="n">share</th><th></th><th>covers</th></tr>"#,
+    );
+    for (label, v, what) in rows {
+        match v {
+            Some(v) => {
+                let _ = write!(
+                    s,
+                    r#"<tr title="{label}: {:.1} ms"><td>{label}</td><td class="n">{:.1}</td><td class="n">{}%</td><td class="bar"><span style="width:{:.1}%"></span></td><td>{}</td></tr>"#,
+                    ms(v),
+                    ms(v),
+                    v * 100 / total,
+                    v as f64 * 100.0 / max as f64,
+                    esc(what)
+                );
+            }
+            None => {
+                let _ = write!(
+                    s,
+                    r#"<tr><td>{label}</td><td class="n">–</td><td></td><td></td><td>{}</td></tr>"#,
+                    if label == "finalization" { "not measured for this run" } else { "not in these records" }
+                );
+            }
+        }
+    }
+    let (what, v) = match p.wall {
+        Some(w) => ("process wall time, spawn to exit", w),
+        None => ("to the last record", p.last_record),
+    };
+    let _ = write!(
+        s,
+        r#"<tr><td><b>total</b></td><td class="n"><b>{:.1}</b></td><td></td><td></td><td>{what}</td></tr></table>"#,
+        ms(v)
+    );
+    let _ = write!(
+        s,
+        r#"<p class="note">Times are {} clock: {} on {}. Finalization is the process wall time, timed by prumo, minus the last record.</p>"#,
+        t.clock,
+        esc(t.source),
+        esc(&m.engine_name)
+    );
+    s
+}
+
 /// The whole page.
 pub fn page(m: &BuildModel, job: &str, files_read: Option<usize>, fonts: Option<&FontReport>) -> String {
     let mut s = String::with_capacity(64 * 1024);
-    let total = ms(m.total());
     let preamble = ms(m.preamble());
+    let phases = m.run_phases();
+    let total = match phases.wall {
+        Some(w) => format!("{:.1} ms wall", ms(w)),
+        None => format!("{:.1} ms to the last record", ms(phases.last_record)),
+    };
     let _ = write!(
         s,
         r#"<!doctype html>
@@ -362,15 +417,19 @@ td.n {{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;
 ul.tree, ul.tree ul {{ list-style:none; padding-left:18px; margin:0; }} ul.tree li {{ margin:2px 0; }} ul.tree summary {{ cursor:pointer; }} .t {{ color:var(--mute); font-size:12px; }}
 .warn {{ background:var(--warnbg); color:var(--warn); padding:6px 10px; border-radius:4px; }}
 td.unused {{ color:var(--warn); }}
+td.bar {{ width:40%; }} td.bar span {{ display:block; height:10px; background:var(--accent); border-radius:0 4px 4px 0; min-width:2px; }}
+p.note {{ color:var(--mute); font-size:12px; margin:6px 0 0; }}
 code {{ font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; }}
 </style></head><body><main>
 <h1>prumo: {job_esc}</h1>
-<p class="sub">{engine} {format}, total {total:.1} ms, preamble {preamble:.1} ms, {pages} page{pages_s}{files}</p>
+<p class="sub">{engine} {format}, {total}, {pages} page{pages_s}{files}</p>
 <nav class="tabs" role="tablist"><button role="tab" aria-selected="true" data-tab="time">Time</button><button role="tab" aria-selected="false" data-tab="tree">Tree</button><button role="tab" aria-selected="false" data-tab="fonts">Fonts</button></nav>
-<section class="tab active" id="time"><h2>Load tree over time</h2>
+<section class="tab active" id="time"><h2>Phases</h2>
+{phase_table}
+<h2>Load tree over time</h2>
 {flame}
 <p class="legend">x: time since engine start; the preamble is one row (click it to expand); files read in the body at their depth; hover for numbers. <i style="background:var(--cls)"></i>class <i style="background:var(--pkg)"></i>package <i style="background:var(--file)"></i>file <i style="background:var(--typeset)"></i>page typesetting <i style="background:var(--ship)"></i>shipout hooks</p>
-<details class="preamble" id="preamble"><summary>Preamble on its own axis: {units} classes and packages, {preamble:.1} ms to \begin{{document}}</summary>
+<details class="preamble" id="preamble"><summary>Preamble on its own axis: {units} classes and packages, {preamble:.1} ms from the first record to the begindocument hook</summary>
 {preamble_flame}
 <p class="legend">x: time since engine start, to \begin{{document}}; rows: nesting depth; the dashed line is begindocument/before.</p>
 </details>
@@ -385,6 +444,7 @@ code {{ font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12
         flame = flame_svg(m, View::Folded),
         units = m.preamble_units(),
         preamble_flame = flame_svg(m, View::Preamble),
+        phase_table = phases_html(m),
     );
     for r in m.unit_table().into_iter().take(25) {
         let _ = write!(
@@ -399,6 +459,21 @@ code {{ font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12
         );
     }
     s.push_str("</table>");
+    let envs = m.env_table();
+    if !envs.is_empty() {
+        s.push_str(r#"<h2>Environments</h2><table><tr><th>environment</th><th class="n">ms</th><th class="n">instances</th><th class="n">slowest ms</th></tr>"#);
+        for r in envs {
+            let _ = write!(
+                s,
+                r#"<tr><td><code>{}</code></td><td class="n">{:.1}</td><td class="n">{}</td><td class="n">{:.1}</td></tr>"#,
+                esc(&r.name),
+                ms(r.total),
+                r.count,
+                ms(r.max)
+            );
+        }
+        s.push_str(r#"</table><p class="note">\begin to \end, less shipouts inside. A nested environment also counts in its parent, and an environment typeset more than once (inside tabularx) counts each pass.</p>"#);
+    }
     if !m.pages.is_empty() {
         s.push_str(r#"<h2>Pages</h2><table><tr><th class="n">page</th><th class="n">total ms</th><th class="n">typesetting</th><th class="n">shipout</th></tr>"#);
         for p in m.page_split() {
@@ -412,6 +487,15 @@ code {{ font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12
             );
         }
         s.push_str("</table>");
+        if !m.discarded_ships.is_empty() {
+            let _ = write!(
+                s,
+                r#"<p class="note">{} shipout{} discarded by a package (before page {}); that time counts as typesetting.</p>"#,
+                m.discarded_ships.len(),
+                if m.discarded_ships.len() == 1 { "" } else { "s" },
+                m.discarded_ships.iter().map(u32::to_string).collect::<Vec<_>>().join(", ")
+            );
+        }
     }
     for w in &m.warnings {
         let _ = write!(s, r#"<p class="warn">{}</p>"#, esc(w));

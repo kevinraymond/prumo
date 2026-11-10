@@ -1,117 +1,131 @@
 {
-  "total_s": 0.1230926513671875,
-  "preamble_s": 0.104827880859375,
+  "total_s": 0.152099609375,
+  "preamble_s": 0.123260498046875,
   "units": [
     {
       "kind": "pkg",
       "name": "siunitx",
-      "inclusive": 0.0673828125,
-      "exclusive": 0.043853759765625,
+      "inclusive": 0.0731201171875,
+      "exclusive": 0.04876708984375,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "main.tex",
-      "inclusive": 0.1230926513671875,
-      "exclusive": 0.022491455078125,
+      "inclusive": 0.1520843505859375,
+      "exclusive": 0.036376953125,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "translations",
-      "inclusive": 0.0198211669921875,
-      "exclusive": 0.0119171142578125,
+      "inclusive": 0.0201568603515625,
+      "exclusive": 0.01220703125,
       "loads": 1
     },
     {
       "kind": "cls",
       "name": "obra",
-      "inclusive": 0.0887603759765625,
+      "inclusive": 0.0976104736328125,
+      "exclusive": 0.0051422119140625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "fancyhdr",
+      "inclusive": 0.0045013427734375,
       "exclusive": 0.0045013427734375,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "geometry",
-      "inclusive": 0.0077362060546875,
-      "exclusive": 0.0041351318359375,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "fancyhdr",
-      "inclusive": 0.0028533935546875,
-      "exclusive": 0.0028533935546875,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "pdftexcmds",
-      "inclusive": 0.005096435546875,
-      "exclusive": 0.002838134765625,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "etoolbox",
-      "inclusive": 0.0028076171875,
-      "exclusive": 0.0028076171875,
-      "loads": 1
-    },
-    {
-      "kind": "cls",
-      "name": "article",
-      "inclusive": 0.0035552978515625,
-      "exclusive": 0.002716064453125,
+      "inclusive": 0.007720947265625,
+      "exclusive": 0.0041656494140625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "color",
-      "inclusive": 0.002532958984375,
-      "exclusive": 0.002197265625,
+      "inclusive": 0.003875732421875,
+      "exclusive": 0.0033111572265625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "graphics",
-      "inclusive": 0.003814697265625,
-      "exclusive": 0.00213623046875,
+      "inclusive": 0.0055389404296875,
+      "exclusive": 0.003143310546875,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "translations-basic-dictionary-english.trsl",
-      "inclusive": 0.001922607421875,
-      "exclusive": 0.001922607421875,
+      "inclusive": 0.003143310546875,
+      "exclusive": 0.003143310546875,
       "loads": 1
     },
     {
       "kind": "pkg",
-      "name": "amstext",
-      "inclusive": 0.0026397705078125,
-      "exclusive": 0.00164794921875,
+      "name": "pdftexcmds",
+      "inclusive": 0.0051116943359375,
+      "exclusive": 0.00286865234375,
       "loads": 1
     },
     {
       "kind": "pkg",
-      "name": "ifvtex",
-      "inclusive": 0.0026092529296875,
-      "exclusive": 0.0015869140625,
+      "name": "etoolbox",
+      "inclusive": 0.002838134765625,
+      "exclusive": 0.002838134765625,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.0034942626953125,
+      "exclusive": 0.002685546875,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "enumitem",
-      "inclusive": 0.0015411376953125,
-      "exclusive": 0.0015411376953125,
+      "inclusive": 0.00244140625,
+      "exclusive": 0.00244140625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "graphicx",
-      "inclusive": 0.005218505859375,
-      "exclusive": 0.00140380859375,
+      "inclusive": 0.0075225830078125,
+      "exclusive": 0.001983642578125,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "amstext",
+      "inclusive": 0.00262451171875,
+      "exclusive": 0.0016326904296875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "array",
+      "inclusive": 0.0015716552734375,
+      "exclusive": 0.0015716552734375,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "ifvtex",
+      "inclusive": 0.0025634765625,
+      "exclusive": 0.00152587890625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "epstopdf-base",
+      "inclusive": 0.0016937255859375,
+      "exclusive": 0.00152587890625,
       "loads": 1
     },
     {
@@ -129,24 +143,31 @@
       "loads": 1
     },
     {
-      "kind": "pkg",
-      "name": "infwarerr",
-      "inclusive": 0.001068115234375,
-      "exclusive": 0.001068115234375,
+      "kind": "file",
+      "name": "pdftex.def",
+      "inclusive": 0.00115966796875,
+      "exclusive": 0.00115966796875,
       "loads": 1
     },
     {
       "kind": "pkg",
-      "name": "array",
-      "inclusive": 0.001068115234375,
-      "exclusive": 0.001068115234375,
+      "name": "infwarerr",
+      "inclusive": 0.0010528564453125,
+      "exclusive": 0.0010528564453125,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "supp-pdf.mkii",
+      "inclusive": 0.0010528564453125,
+      "exclusive": 0.0010528564453125,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "iftex",
-      "inclusive": 0.0010223388671875,
-      "exclusive": 0.0010223388671875,
+      "inclusive": 0.00103759765625,
+      "exclusive": 0.00103759765625,
       "loads": 1
     },
     {
@@ -165,79 +186,58 @@
     },
     {
       "kind": "pkg",
-      "name": "epstopdf-base",
-      "inclusive": 0.00103759765625,
+      "name": "trig",
+      "inclusive": 0.000946044921875,
       "exclusive": 0.000946044921875,
       "loads": 1
     },
     {
       "kind": "file",
-      "name": "pdftex.def",
-      "inclusive": 0.0008544921875,
-      "exclusive": 0.0008544921875,
-      "loads": 1
-    },
-    {
-      "kind": "file",
       "name": "size11.clo",
-      "inclusive": 0.0008392333984375,
-      "exclusive": 0.0008392333984375,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "trig",
-      "inclusive": 0.0006561279296875,
-      "exclusive": 0.0006561279296875,
-      "loads": 1
-    },
-    {
-      "kind": "file",
-      "name": "supp-pdf.mkii",
-      "inclusive": 0.0006256103515625,
-      "exclusive": 0.0006256103515625,
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "l3backend-pdftex.def",
-      "inclusive": 0.0005035400390625,
-      "exclusive": 0.0005035400390625,
+      "inclusive": 0.0008087158203125,
+      "exclusive": 0.0008087158203125,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "mathcolor.ltx",
-      "inclusive": 0.0002593994140625,
-      "exclusive": 0.0002593994140625,
+      "inclusive": 0.0004119873046875,
+      "exclusive": 0.0004119873046875,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "graphics.cfg",
+      "inclusive": 0.0002899169921875,
+      "exclusive": 0.0002899169921875,
+      "loads": 1
+    },
+    {
+      "kind": "file",
+      "name": "epstopdf-sys.cfg",
       "inclusive": 0.0001678466796875,
       "exclusive": 0.0001678466796875,
       "loads": 1
     },
     {
       "kind": "file",
-      "name": "epstopdf-sys.cfg",
-      "inclusive": 9.1552734375e-05,
-      "exclusive": 9.1552734375e-05,
-      "loads": 1
-    },
-    {
-      "kind": "file",
       "name": "color.cfg",
-      "inclusive": 7.62939453125e-05,
-      "exclusive": 7.62939453125e-05,
+      "inclusive": 0.000152587890625,
+      "exclusive": 0.000152587890625,
       "loads": 1
     }
   ],
   "pages": [
     [
       1,
-      0.0179901123046875
+      0.013092041015625
     ]
   ],
   "fonts": {
@@ -322,5 +322,17 @@
     "unknown_embedded": [],
     "partial": false,
     "map_entries": 5091
-  }
+  },
+  "phases": {
+    "startup_s": 0.048858642578125,
+    "preamble_s": 0.1165008544921875,
+    "begin_document_s": 0.0220794677734375,
+    "typesetting_s": 0.004913330078125,
+    "shipout_s": 0.0065155029296875,
+    "end_document_s": 0.0020904541015625,
+    "after_last_page_s": 0.000335693359375,
+    "end_s": 0.200958251953125
+  },
+  "environments": [],
+  "discarded_shipouts": []
 }

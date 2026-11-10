@@ -330,10 +330,13 @@ fn tlpdb_checks() -> (Vec<Check>, Option<PathBuf>) {
             checks.push(Check {
                 name: "texlive.tlpdb".into(),
                 status: Status::Warn,
-                detail: format!(
-                    "not at {}; packages: file-level only, prune unavailable (Debian/Ubuntu TeX Live?)",
-                    db.display()
-                ),
+                detail: match Installer::detect() {
+                    Installer::MikTex => "MiKTeX has none; packages: file-level only, prune unavailable".to_string(),
+                    _ => format!(
+                        "not at {}; packages: file-level only, prune unavailable (Debian/Ubuntu TeX Live?)",
+                        db.display()
+                    ),
+                },
             });
             (checks, None)
         }
@@ -354,7 +357,7 @@ pub fn run() -> Report {
     checks.push(kernel);
     let (recorder, recorder_ok) = recorder_check();
     checks.push(recorder);
-    for tool in ["pdffonts", "pdftotext", "pdfinfo", "pdftoppm"] {
+    for tool in POPPLER {
         checks.push(tool_check(tool, "-v", "not on PATH (poppler-utils); font and text comparisons degrade"));
     }
     let (tl, tlpdb) = tlpdb_checks();
@@ -363,23 +366,57 @@ pub fn run() -> Report {
     Report { ready: engines > 0 && kernel_ok && recorder_ok, tlpdb, checks }
 }
 
+/// The Poppler tools prumo shells out to.
+const POPPLER: [&str; 4] = ["pdffonts", "pdftotext", "pdfinfo", "pdftoppm"];
+
 impl Report {
+    /// The table, with the four Poppler rows folded into one when any is missing (the JSON
+    /// keeps all four), and what to do next when prumo cannot run.
     pub fn render_text(&self) -> String {
         let mut s = String::new();
+        let missing_poppler: Vec<&str> = self
+            .checks
+            .iter()
+            .filter(|c| POPPLER.contains(&c.name.as_str()) && c.status != Status::Ok)
+            .map(|c| c.name.as_str())
+            .collect();
+        let fold = !missing_poppler.is_empty();
         let w = self.checks.iter().map(|c| c.name.len()).max().unwrap_or(8);
-        for c in &self.checks {
-            let mark = match c.status {
+        let row = |s: &mut String, status: Status, name: &str, detail: &str| {
+            let mark = match status {
                 Status::Ok => "ok  ",
                 Status::Warn => "warn",
                 Status::Missing => "MISSING",
             };
-            s.push_str(&format!("{mark:<8}{:<w$}  {}\n", c.name, c.detail));
+            s.push_str(&format!("{mark:<8}{name:<w$}  {detail}\n"));
+        };
+        let mut folded = false;
+        for c in &self.checks {
+            if fold && POPPLER.contains(&c.name.as_str()) {
+                if !folded {
+                    folded = true;
+                    let detail = format!(
+                        "{} not on PATH: install Poppler (poppler-utils). Without it `fonts` has no PDF side and `unused` cannot run",
+                        missing_poppler.join(", ")
+                    );
+                    row(&mut s, Status::Warn, "poppler", &detail);
+                }
+                continue;
+            }
+            row(&mut s, c.status, &c.name, &c.detail);
         }
-        s.push_str(if self.ready {
-            "\nready: prumo run can instrument a build here\n"
+        let has = |name: &str| self.checks.iter().any(|c| c.name == name && c.status == Status::Ok);
+        if self.ready {
+            s.push_str("\nready: prumo run can instrument a build here\n");
+        } else if !has("LaTeX kernel") && !has("pdflatex") && !has("xelatex") && !has("lualatex") {
+            s.push_str(
+                "\nnot ready: no LaTeX on PATH. Install TeX Live (https://tug.org/texlive/) or MiKTeX\n\
+                 (https://miktex.org/), or run prumo from its Docker image, which has TeX Live and\n\
+                 Poppler: see \"Running from Docker\" in the README.\n",
+            );
         } else {
-            "\nnot ready: see MISSING rows\n"
-        });
+            s.push_str("\nnot ready: see the MISSING rows\n");
+        }
         s
     }
 }
@@ -549,6 +586,32 @@ mod tests {
             mounts_text(win),
             "/C/Users/k/thesis is C:\\Users\\k\\thesis; /C/Users/k/AppData/Local/prumo is C:\\Users\\k\\AppData\\Local\\prumo"
         );
+    }
+
+    #[test]
+    fn missing_tex_and_poppler_say_what_to_do() {
+        let c = |name: &str, status| Check { name: name.into(), status, detail: "d".into() };
+        let mut checks = vec![c("cache", Status::Ok)];
+        for e in ["pdflatex", "xelatex", "lualatex"] {
+            checks.push(c(e, Status::Missing));
+        }
+        for t in POPPLER {
+            checks.push(c(t, Status::Warn));
+        }
+        checks.push(c("LaTeX kernel", Status::Missing));
+        let r = Report { checks: checks.clone(), ready: false, tlpdb: None };
+        let t = r.render_text();
+        assert_eq!(t.matches("poppler").count(), 2, "one folded row: {t}");
+        assert!(t.contains("pdffonts, pdftotext, pdfinfo, pdftoppm not on PATH"), "{t}");
+        assert!(t.contains("no LaTeX on PATH") && t.contains("tug.org/texlive"), "{t}");
+        // TeX present, Poppler partly there: only the missing tools are named.
+        for ch in checks.iter_mut() {
+            if ["pdflatex", "LaTeX kernel", "pdffonts"].contains(&ch.name.as_str()) {
+                ch.status = Status::Ok;
+            }
+        }
+        let t = Report { checks, ready: true, tlpdb: None }.render_text();
+        assert!(t.contains("pdftotext, pdfinfo, pdftoppm not on PATH") && t.contains("ready:"), "{t}");
     }
 
     #[test]
