@@ -268,6 +268,38 @@ enum Cmd {
         #[arg(long)]
         json: bool,
     },
+    /// Measured speed-ups: rebuild with one change (precompiled preamble, draft mode,
+    /// externalized tikz pictures), time it against the plain build, compare the output.
+    /// Runs in a temp copy without the probe, one build at a time.
+    Whatif {
+        /// The document. Its directory is copied; nothing in it is modified.
+        main: PathBuf,
+        /// Engine to run. Default: the document's `% !TEX program =` magic comment, else pdflatex.
+        #[arg(long, value_enum)]
+        engine: Option<EngineCmd>,
+        /// Experiments, comma-separated. Default: all three; externalize runs only with
+        /// --shell-escape.
+        #[arg(long = "try", value_name = "EXPERIMENTS", value_enum, value_delimiter = ',')]
+        tries: Vec<prumo::whatif::Experiment>,
+        /// Timed runs of each build after its warm-up; the median is compared.
+        #[arg(long, default_value_t = 5, value_parser = clap::value_parser!(u32).range(2..))]
+        runs: u32,
+        /// Pass -shell-escape to every build. externalize needs it: tikz builds each
+        /// picture with a shell command.
+        #[arg(long)]
+        shell_escape: bool,
+        /// Per-build timeout in seconds (default: 10× the probed build, at least 30; the
+        /// first externalized run gets that once more per picture).
+        #[arg(long, default_value_t = 0)]
+        timeout: u64,
+        /// Artifact directory for the probed run and the logs (default: the document's
+        /// cache directory, see `prumo where`).
+        #[arg(long)]
+        out: Option<PathBuf>,
+        /// Machine-readable output (schema 1).
+        #[arg(long)]
+        json: bool,
+    },
     /// The TeX Live packages this document needs, with the file and LaTeX unit that
     /// caused each (needs a texlive.tlpdb; file-level only without one).
     Packages {
@@ -674,6 +706,36 @@ fn main() -> anyhow::Result<()> {
                 } else {
                     print!("{}", prumo::unused::corpus_text(&r));
                 }
+            }
+        }
+        Cmd::Whatif { main, .. } if main.extension().is_some_and(|e| e == "prumo") => {
+            anyhow::bail!("{}: whatif rebuilds the document; give its .tex", main.display())
+        }
+        Cmd::Whatif { main, engine, tries, runs, shell_escape, timeout, out, json } => {
+            let engine =
+                engine.or_else(|| prumo::prune::magic_engine(&main)).unwrap_or(prumo::run::EngineCmd::Pdflatex);
+            let explicit = !tries.is_empty();
+            let tries = if explicit { tries } else { prumo::whatif::Experiment::ALL.to_vec() };
+            let opts = prumo::whatif::WhatifOptions {
+                main,
+                engine,
+                tries,
+                explicit,
+                runs,
+                shell_escape,
+                timeout_secs: timeout,
+                out,
+                env: vec![],
+            };
+            let r = prumo::whatif::run(&opts, |m| {
+                if !json {
+                    eprintln!("prumo: {m}");
+                }
+            })?;
+            if json {
+                println!("{}", serde_json::to_string_pretty(&r)?);
+            } else {
+                print!("{}", prumo::whatif::text(&r));
             }
         }
         Cmd::Prune { paths, engines, latexmk, tlpdb, keep, keep_hyphenation, out, apply, yes, json } => {

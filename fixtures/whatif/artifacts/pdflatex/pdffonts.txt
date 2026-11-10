@@ -1,0 +1,5 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+KXHLBK+CMBX12                        Type 1            Builtin          yes yes yes     12  0
+BOTZNO+CMR10                         Type 1            Builtin          yes yes yes     13  0
+CUJHND+CMMI10                        Type 1            Builtin          yes yes yes     14  0

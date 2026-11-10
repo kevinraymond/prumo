@@ -416,13 +416,13 @@ pub(crate) fn blocking_pretex(package: &str, options: &str) -> String {
     )
 }
 
-fn pdftotext(pdf: &Path) -> Option<String> {
+pub(crate) fn pdftotext(pdf: &Path) -> Option<String> {
     let out = Command::new("pdftotext").args(["-layout", pdf.to_str()?, "-"]).output().ok()?;
     out.status.success().then(|| String::from_utf8_lossy(&out.stdout).into_owned())
 }
 
 /// `pdfinfo` without the fields that change on every build.
-fn pdfinfo(pdf: &Path) -> Option<BTreeMap<String, String>> {
+pub(crate) fn pdfinfo(pdf: &Path) -> Option<BTreeMap<String, String>> {
     let out = Command::new("pdfinfo").arg(pdf).output().ok()?;
     let text = String::from_utf8_lossy(&out.stdout);
     Some(
@@ -435,7 +435,7 @@ fn pdfinfo(pdf: &Path) -> Option<BTreeMap<String, String>> {
 }
 
 /// Pages rasterized to gray at `dpi`, as PGM pixel buffers (one per page).
-fn render(pdf: &Path, dpi: u32) -> Option<Vec<Vec<u8>>> {
+pub(crate) fn render(pdf: &Path, dpi: u32) -> Option<Vec<Vec<u8>>> {
     let dir = tempfile::tempdir().ok()?;
     let prefix = dir.path().join("p");
     let ok =
@@ -465,6 +465,19 @@ fn render(pdf: &Path, dpi: u32) -> Option<Vec<Vec<u8>>> {
     Some(pages)
 }
 
+/// The first page (1-based) whose gray pixels differ by more than 32 levels in more than
+/// `per_mille` of the page, with the count and the page size; a page whose size changed
+/// counts too.
+pub(crate) fn render_diff(a: &[Vec<u8>], b: &[Vec<u8>], per_mille: usize) -> Option<(usize, usize, usize)> {
+    for (i, (x, y)) in a.iter().zip(b).enumerate() {
+        let differing = x.iter().zip(y).filter(|(p, q)| p.abs_diff(**q) > 32).count();
+        if x.len() != y.len() || differing * 1000 > x.len().max(1) * per_mille {
+            return Some((i + 1, differing, x.len()));
+        }
+    }
+    None
+}
+
 /// Coarse ink check in `Text` mode, strict comparison in `Render` mode.
 fn raster_dpi(compare: Compare) -> u32 {
     match compare {
@@ -473,7 +486,7 @@ fn raster_dpi(compare: Compare) -> u32 {
     }
 }
 
-fn first_diff_line(a: &str, b: &str) -> String {
+pub(crate) fn first_diff_line(a: &str, b: &str) -> String {
     for (i, (x, y)) in a.lines().zip(b.lines()).enumerate() {
         if x != y {
             return format!("line {}: {:?} vs {:?}", i + 1, x.trim(), y.trim());
@@ -532,20 +545,14 @@ fn judge(base: &Baseline, out: &RunOutput, compare: Compare) -> Verdict {
             Compare::Text => 5,
             Compare::Render => 1,
         };
-        for (i, (x, y)) in a.iter().zip(&b).enumerate() {
-            let differing = x.iter().zip(y).filter(|(p, q)| p.abs_diff(**q) > 32).count();
-            if x.len() != y.len() || differing * 1000 > x.len().max(1) * per_mille {
-                let what = if compare == Compare::Text { "ink differs" } else { "renders differently" };
-                return Verdict::AffectsOutput {
-                    evidence: format!(
-                        "page {} {what} ({} of {} pixels at {} dpi; text identical)",
-                        i + 1,
-                        differing,
-                        x.len(),
-                        raster_dpi(compare)
-                    ),
-                };
-            }
+        if let Some((page, differing, total)) = render_diff(a, &b, per_mille) {
+            let what = if compare == Compare::Text { "ink differs" } else { "renders differently" };
+            return Verdict::AffectsOutput {
+                evidence: format!(
+                    "page {page} {what} ({differing} of {total} pixels at {} dpi; text identical)",
+                    raster_dpi(compare)
+                ),
+            };
         }
     }
     if info != base.info {

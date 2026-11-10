@@ -494,7 +494,7 @@ pub fn cache_dir(main: &Path, out: Option<&Path>) -> Result<PathBuf, RunError> {
 }
 
 /// Copy a project tree, skipping `.prumo`, VCS directories and `target`.
-fn copy_tree(from: &Path, to: &Path) -> Result<(), RunError> {
+pub(crate) fn copy_tree(from: &Path, to: &Path) -> Result<(), RunError> {
     std::fs::create_dir_all(to).map_err(io("create", to))?;
     for entry in std::fs::read_dir(from).map_err(io("read", from))? {
         let entry = entry.map_err(io("read", from))?;
@@ -547,13 +547,6 @@ pub(crate) fn build_once_timed(
     pretex: Option<&str>,
     timeout: Option<std::time::Duration>,
 ) -> Result<Built, RunError> {
-    let tool = build.tool();
-    let has_dir = Path::new(tool).components().count() > 1;
-    let found = if has_dir { Path::new(tool).is_file() } else { crate::doctor::which(tool).is_some() };
-    if !found {
-        return Err(RunError::ToolMissing { tool: tool.into() });
-    }
-    let mut cmd = Command::new(tool);
     let mut argv: Vec<String> = build.argv.clone();
     let pre = match (pretex, probe.map(|p| p.load())) {
         (Some(p), Some(load)) => Some(format!("{p}{load}")),
@@ -581,21 +574,41 @@ pub(crate) fn build_once_timed(
             None => format!("{stem}.tex"),
         });
     }
-    cmd.args(&argv[1..]).current_dir(dir);
+    let mut env = env.to_vec();
     if let Some(p) = probe.map(|p| p.dir) {
         // kpathsea separates search paths with `:`, except on Windows where it is `;`.
         // A trailing separator keeps the default search path.
         const SEP: char = if cfg!(windows) { ';' } else { ':' };
         let existing = std::env::var("TEXINPUTS").unwrap_or_default();
         let tail = if existing.is_empty() || existing.ends_with(SEP) { String::new() } else { SEP.to_string() };
-        cmd.env("TEXINPUTS", format!("{}{SEP}{existing}{tail}", p.display()));
+        env.insert(0, ("TEXINPUTS".into(), format!("{}{SEP}{existing}{tail}", p.display())));
     }
+    spawn_timed(dir, &argv, &env, &dir.join("build.out"), timeout)
+}
+
+/// Run `argv` in `dir` with `env` added, stdout and stderr to `out_path`, and time it from
+/// spawn to exit. The process runs in its own process group, and when `timeout` is up the
+/// whole group is killed (latexmk's engine child and tikz's picture builds included).
+pub(crate) fn spawn_timed(
+    dir: &Path,
+    argv: &[String],
+    env: &[(String, String)],
+    out_path: &Path,
+    timeout: Option<std::time::Duration>,
+) -> Result<Built, RunError> {
+    let tool = argv.first().map(String::as_str).unwrap_or_default();
+    let has_dir = Path::new(tool).components().count() > 1;
+    let found = if has_dir { Path::new(tool).is_file() } else { crate::doctor::which(tool).is_some() };
+    if !found {
+        return Err(RunError::ToolMissing { tool: tool.into() });
+    }
+    let mut cmd = Command::new(tool);
+    cmd.args(&argv[1..]).current_dir(dir);
     for (k, v) in env {
         cmd.env(k, v);
     }
-    let out_path = dir.join("build.out");
-    let file = std::fs::File::create(&out_path).map_err(io("create", &out_path))?;
-    let err = file.try_clone().map_err(io("create", &out_path))?;
+    let file = std::fs::File::create(out_path).map_err(io("create", out_path))?;
+    let err = file.try_clone().map_err(io("create", out_path))?;
     cmd.stdin(std::process::Stdio::null()).stdout(file).stderr(err);
     #[cfg(unix)]
     {
@@ -609,7 +622,7 @@ pub(crate) fn build_once_timed(
         if let Some(status) = child.try_wait().map_err(run_err)? {
             // The wall time is the finalization's other end: poll often enough that it is
             // good to the millisecond.
-            return Ok(Built { argv, exit_code: status.code(), wall: started.elapsed() });
+            return Ok(Built { argv: argv.to_vec(), exit_code: status.code(), wall: started.elapsed() });
         }
         if let Some(t) = timeout
             && started.elapsed() > t

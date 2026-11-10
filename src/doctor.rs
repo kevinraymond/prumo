@@ -117,6 +117,28 @@ fn kpsewhich(args: &[&str]) -> Option<String> {
     (!s.is_empty()).then_some(s)
 }
 
+/// Where the TeX installation keeps `name` (`mylatexformat.ltx`), if it has it.
+pub fn tex_file(name: &str) -> Option<PathBuf> {
+    kpsewhich(&[name]).map(PathBuf::from)
+}
+
+/// mylatexformat, for `whatif preamble`. Only asked when there is a TeX to ask.
+fn mylatexformat_check() -> Option<Check> {
+    which("kpsewhich")?;
+    let name = "mylatexformat".to_string();
+    Some(match tex_file("mylatexformat.ltx") {
+        Some(p) => Check { name, status: Status::Ok, detail: p.display().to_string() },
+        None => Check {
+            name,
+            status: Status::Warn,
+            detail: format!(
+                "not found; whatif cannot precompile the preamble ({})",
+                Installer::detect().install("mylatexformat")
+            ),
+        },
+    })
+}
+
 /// Read `\edef\fmtversion {YYYY-MM-DD}` from `latex.ltx` (the braces may be on the next line).
 pub(crate) fn kernel_date_from_ltx(text: &str) -> Option<String> {
     let i = text.find("\\fmtversion")?;
@@ -353,6 +375,7 @@ pub fn run() -> Report {
         checks.push(c);
     }
     checks.push(tool_check("latexmk", "--version", "not on PATH; --latexmk unavailable"));
+    checks.extend(mylatexformat_check());
     let (kernel, kernel_ok) = kernel_check();
     checks.push(kernel);
     let (recorder, recorder_ok) = recorder_check();
@@ -439,6 +462,11 @@ pub struct Coverage {
     /// Macro-level files from the `.fls` with no `file+` record (fonts, maps, formats and
     /// the probe itself are not counted: they are never `\input`).
     pub outside_hooks: Vec<Outside>,
+    /// Macro-level files from the `.fls` that neither a record nor the log saw opened: the
+    /// file was tested for existence, not read (siunitx's `\RequirePackage{color}` after
+    /// xcolor has claimed `color.sty`). Only with a log; without one they are in
+    /// `outside_hooks`.
+    pub opened_not_read: Vec<Outside>,
     /// Files the log shows opened that no record saw (by base name).
     pub log_only: Vec<String>,
     /// Files a record saw that the log parser did not find: a parser miss, worth a look.
@@ -460,6 +488,8 @@ pub fn hook_coverage(model: &BuildModel, files: &[InputFile], log: Option<&TexLo
         };
     });
     let mut c = Coverage { schema: crate::JSON_SCHEMA, ..Default::default() };
+    let logged: Option<BTreeSet<String>> =
+        log.map(|l| l.files.iter().map(|f| f.path.rsplit('/').next().unwrap_or(&f.path).to_string()).collect());
     for f in files {
         let macro_level = matches!(
             f.kind,
@@ -481,12 +511,17 @@ pub fn hook_coverage(model: &BuildModel, files: &[InputFile], log: Option<&TexLo
             base.strip_suffix(".sty").map(|s| format!("{s}-ltx.sty")).is_some_and(|s| hooked.contains(&s));
         if macro_level && base != "prumo.sty" && !hooked.contains(&base) && !substituted && f.path.extension().is_some()
         {
-            c.outside_hooks.push(Outside { path: f.path.clone(), kind: f.kind });
+            let o = Outside { path: f.path.clone(), kind: f.kind };
+            // The kernel reads .aux-like files with the primitive, and the log shows those.
+            match &logged {
+                Some(l) if !l.contains(&base) && !matches!(f.kind, InputKind::Aux | InputKind::AuxLike) => {
+                    c.opened_not_read.push(o)
+                }
+                _ => c.outside_hooks.push(o),
+            }
         }
     }
-    if let Some(log) = log {
-        let logged: BTreeSet<String> =
-            log.files.iter().map(|f| f.path.rsplit('/').next().unwrap_or(&f.path).to_string()).collect();
+    if let (Some(log), Some(logged)) = (log, logged) {
         c.log_only = logged.iter().filter(|n| !hooked.contains(*n) && n.as_str() != "prumo.sty").cloned().collect();
         // `.sty`/`.cls` keys above are derived from unit names; only bare file frames are checked here.
         c.hooked_not_in_log = hooked
@@ -516,6 +551,12 @@ pub fn coverage_text(job: &str, c: &Coverage, has_log: bool) -> String {
                 _ => "",
             };
             let _ = writeln!(s, "    {}  ({:?}{note})", o.path.display(), o.kind);
+        }
+    }
+    if !c.opened_not_read.is_empty() {
+        let _ = writeln!(s, "  opened but never read (an existence check: no record, and the log shows no read):");
+        for o in &c.opened_not_read {
+            let _ = writeln!(s, "    {}  ({:?})", o.path.display(), o.kind);
         }
     }
     if has_log {

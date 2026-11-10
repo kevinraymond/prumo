@@ -24,8 +24,9 @@
 
 `prumo run` produces the model and caches it under `<out>/<job>/`, where `<out>` defaults to a
 per-document directory in the user's cache (`run::default_out`; `prumo where`). Every report command either
-uses the cache or runs the build. `prune` merges models across a corpus. `unused` is the only
-command that runs more than one build.
+uses the cache or runs the build. `prune` merges models across a corpus. `compare` builds once
+per engine. `unused` and `whatif` rebuild the document with one change at a time; `whatif`'s
+timed builds run without the probe.
 
 ## BuildModel
 
@@ -108,6 +109,7 @@ prumo fonts    <main.tex> [--json]
 prumo packages <main.tex> [--tlpdb PATH] [--json]           # tlmgr package set, with the file that caused each
 prumo prune    <paths...> [--tlpdb PATH] [--keep LIST] [--keep-hyphenation all|used] [--apply --yes]
 prumo unused   <main.tex> [--build <cmd>] [--jobs N] [--compare text|render]   # phase 2
+prumo whatif   <main.tex> [--try preamble,draft,externalize] [--runs N] [--shell-escape] [--engine E] [--json]
 prumo doctor   [--check-log]                                 # engines, kernel date, pdffonts, tlpdb, recorder
 prumo where    [<main.tex>] [--out DIR]                      # the cache root, or a document's artifact directory
 prumo clean    [<main.tex>] [--stale] [--yes] [--json]       # list the cache (sizes, documents); delete with --yes
@@ -163,6 +165,7 @@ prumo/
     report/        text, json, dot renderers
     prune.rs       corpus merge, keep set, plan
     unused.rs      phase 2
+    whatif.rs      measured speed-ups: precompiled preamble, draft mode, externalized pictures
   tex/prumo.sty    embedded via include_str!
   scripts/prumo_report.py   reference, frozen
   fixtures/        documents + checked-in build artifacts for no-TeX tests

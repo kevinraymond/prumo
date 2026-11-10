@@ -22,6 +22,7 @@ pub mod run;
 pub mod texlog;
 pub mod tlpdb;
 pub mod unused;
+pub mod whatif;
 
 /// The `schema` field of every `--json` report. It moves only when a field is renamed or
 /// removed, never when one is added.

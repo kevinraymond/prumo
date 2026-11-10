@@ -11,7 +11,7 @@ use std::sync::Once;
 const ENGINES: [EngineCmd; 3] = [EngineCmd::Pdflatex, EngineCmd::Xelatex, EngineCmd::Lualatex];
 /// Fixture, job, engines it builds on (fontspec pins XeTeX with a magic comment; biblatex
 /// has a single-pass set here, its latexmk claims are in `biblatex_through_latexmk`).
-const FIXTURES: [(&str, &str, &[EngineCmd]); 7] = [
+const FIXTURES: [(&str, &str, &[EngineCmd]); 8] = [
     ("basic", "main", &ENGINES),
     ("custom-class", "main", &ENGINES),
     ("corpus-b", "notes", &ENGINES),
@@ -19,6 +19,7 @@ const FIXTURES: [(&str, &str, &[EngineCmd]); 7] = [
     ("biblatex", "paper", &ENGINES),
     ("environments", "main", &ENGINES),
     ("fontspec", "glyphs", &[EngineCmd::Xelatex]),
+    ("whatif", "main", &ENGINES),
 ];
 
 fn fixtures_root() -> PathBuf {
@@ -985,4 +986,83 @@ fn probe_loaded_from_the_first_line() {
     assert_eq!(m.env_table().iter().find(|r| r.name == "tikzpicture").map(|r| r.count), Some(4));
     assert_eq!(m.pages.len(), 3);
     assert!(m.run_phases().finalization.is_none());
+}
+
+/// fixtures/whatif/main.tex: claims 1 to 6 and 8 of its header (7 is in tests/fixtures.rs).
+#[test]
+fn whatif_fixture_claims() {
+    use prumo::whatif::{self, Experiment, Outcome, Output, WhatifError, WhatifOptions};
+    let env = setup();
+    let dir = fixture_copy("whatif");
+    let before: Vec<_> = std::fs::read_dir(dir.path()).unwrap().flatten().map(|e| e.file_name()).collect();
+    let main = dir.path().join("main.tex");
+    let opts = WhatifOptions {
+        main: main.clone(),
+        engine: EngineCmd::Pdflatex,
+        tries: Experiment::ALL.to_vec(),
+        explicit: false,
+        runs: 2,
+        shell_escape: true,
+        timeout_secs: 0,
+        out: None,
+        env: env.clone(),
+    };
+    for engine in ENGINES {
+        let label = engine.command();
+        let r = whatif::run(&WhatifOptions { engine, ..opts.clone() }, |_| {})
+            .unwrap_or_else(|e| panic!("{label}: a variant's failure is a row, not an error: {e}"));
+        let t = whatif::text(&r);
+        let row = |e: Experiment| &r.experiments.iter().find(|x| x.experiment == e).unwrap().outcome;
+        match (engine, row(Experiment::Preamble)) {
+            // 1. pdfLaTeX: more than a third saved, outside the noise, same output.
+            (
+                EngineCmd::Pdflatex,
+                Outcome::Measured {
+                    saved_pct,
+                    within_noise: false,
+                    output: Output::Identical,
+                    one_time_ms: Some(_),
+                    ..
+                },
+            ) => assert!(*saved_pct > 100.0 / 3.0, "{label}: {t}"),
+            // 2. XeLaTeX cannot dump the class's OpenType font.
+            (EngineCmd::Xelatex, Outcome::Failed { error }) => assert!(
+                error.starts_with("could not precompile: ! Can't \\dump a format with native fonts"),
+                "{label}: {error}"
+            ),
+            // 3. LuaLaTeX's dump fails too.
+            (EngineCmd::Lualatex, Outcome::Failed { error }) => {
+                assert!(error.starts_with("could not precompile: "), "{label}: {error}")
+            }
+            (_, other) => panic!("{label}: preamble {other:?}\n{t}"),
+        }
+        assert!(t.contains("preamble"), "{t}");
+        // 4. Externalized, the output is the same, and the first run builds the picture.
+        match row(Experiment::Externalize) {
+            Outcome::Measured { output: Output::Identical, one_time_ms: Some(first), variant, .. } => {
+                assert!(*first > variant.median_ms, "{label}: first run {first} ms, then {} ms", variant.median_ms)
+            }
+            other => panic!("{label}: externalize {other:?}\n{t}"),
+        }
+        // 6. Draft runs and is not compared.
+        assert!(
+            matches!(row(Experiment::Draft), Outcome::Measured { output: Output::NotCompared { .. }, .. }),
+            "{label}: {t}"
+        );
+        assert_eq!(r.baseline_pages, 1, "{label}");
+    }
+    // 5. Without --shell-escape: refused when asked for, not run by default.
+    let no_se = WhatifOptions { shell_escape: false, tries: vec![Experiment::Externalize], ..opts.clone() };
+    assert!(matches!(
+        whatif::run(&WhatifOptions { explicit: true, ..no_se.clone() }, |_| {}),
+        Err(WhatifError::NeedsShellEscape)
+    ));
+    let r = whatif::run(&no_se, |_| {}).unwrap();
+    match &r.experiments[0].outcome {
+        Outcome::NotRun { reason } => assert!(reason.contains("--shell-escape"), "{reason}"),
+        other => panic!("{other:?}"),
+    }
+    // 8. The document's directory is unchanged.
+    let after: Vec<_> = std::fs::read_dir(dir.path()).unwrap().flatten().map(|e| e.file_name()).collect();
+    assert_eq!(before, after);
 }
