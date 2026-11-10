@@ -187,15 +187,8 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.st
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 OUTPUT main.out
 OUTPUT main.pdf
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf
-INPUT /usr/local/texlive/2026/texmf-dist/tex/luatex/luaotfload/luaotfload-glyphlist.lua
-OUTPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.lua
-INPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.lua
-OUTPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf
-OUTPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.lua
-INPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.lua
-OUTPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.luc
+INPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc
+INPUT /tmp/home/.texlive2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.luc
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr7.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr5.tfm
