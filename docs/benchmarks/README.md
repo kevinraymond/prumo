@@ -139,7 +139,7 @@ lualatex: 8,668 records (169 KiB); `prumo time --json` on the cached run 3 ms; `
 
 ## What they say
 
-- **The question that started this.** On the one-line document, LuaLaTeX spends
+- **Where LuaLaTeX's time goes.** On the one-line document, LuaLaTeX spends
   235 ms of its 315 ms starting up, 22 ms on the preamble and 54 ms writing the PDF
   (shipout plus finalization). On the five-page paper it is 236, 763 and 135 ms of 1,392 ms.
 - **Startup is the engine's fixed cost.** pdfLaTeX starts in 42 ms, XeLaTeX in 83, LuaLaTeX

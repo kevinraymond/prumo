@@ -1,10 +1,10 @@
 # Status
 
-## Launch prep for r/LaTeX (2026-11-09 and 10)
+## Launch prep (2026-11-09 and 10)
 
-The post will lead with one table: where a LaTeX run's time goes, from engine start to the
-closed PDF, per engine. A commenter asked for exactly that, and people from the LaTeX
-Project read the sub, so everything below was measured and the method is in the repo.
+This round adds a table of where a LaTeX run's time goes, from engine start to the closed
+PDF, on each engine. Everything below was measured, and the method is in the repo so anyone
+can check it.
 
 ### Probe v0.2
 
@@ -49,10 +49,10 @@ Project read the sub, so everything below was measured and the method is in the 
   florilegium's manual; a 3,991-page generated book), three engines, a cold run with fresh
   font caches and five warm runs (three for the book), medians per phase. Results and
   method in `docs/benchmarks/README.md`; the widest spread is 4%.
-- The commenter's numbers: on the one-line document LuaLaTeX spends 235 of 315 ms starting
-  up, 22 ms on the preamble and 54 ms writing the PDF. On the paper it is 236, 763 and 135
-  of 1,392 ms (pdfLaTeX 855 ms in all). On the book LuaTeX's shipout is 2.7 ms a page
-  against pdfTeX's 0.7. A cold LuaLaTeX run is 4.4 s instead of 0.3 s.
+- On the one-line document LuaLaTeX spends 235 of 315 ms starting up, 22 ms on the preamble
+  and 54 ms writing the PDF. On the paper it is 236, 763 and 135 of 1,392 ms (pdfLaTeX 855
+  ms in all). On the book LuaTeX's shipout is 2.7 ms a page against pdfTeX's 0.7. A cold
+  LuaLaTeX run is 4.4 s instead of 0.3 s.
 - Scale: the book's 8,669 records are read in 3 ms, and `--html` writes 1.3 MB in 8 ms.
   Plain output now lists the slowest `--top` pages instead of all 3,991.
 
@@ -89,7 +89,7 @@ is corrected; CLAUDE.md still says "pdfTeX only".
 - LuaLaTeX font definitions per page: the `luaotfload.patch_font` hypothesis is wrong for
   `\addfontfeature`, so nothing shipped (finding 57).
 
-**Blocked:** nothing. **Needs me:** the v0.2.0 tag, the post. **Open questions:** should the
+**Blocked:** nothing. **Needs me:** the v0.2.0 tag. **Open questions:** should the
 LuaTeX font count go in after all, through `font.nextid()`? Should `compare` default to three
 runs, so it reports a median?
 
