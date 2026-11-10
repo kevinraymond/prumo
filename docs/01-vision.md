@@ -39,8 +39,8 @@ probe adds no typesetting and no dependencies beyond the LaTeX kernel.
   with 7 GB of TeX Live they never asked for.
 - Package authors who want to know what their package costs.
 
-It is a small audience, but it is the audience that writes TUGboat articles and answers TeX.SE
-questions. One good "a flame chart of my LaTeX build" screenshot does the marketing.
+It is a small audience, but it is the one that writes the TUGboat articles and answers other
+people's questions. One good "a flame chart of my LaTeX build" screenshot does the marketing.
 
 ## Non-goals
 
