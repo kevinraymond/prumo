@@ -1,6 +1,6 @@
 # 04 — The probe: `tex/prumo.sty`
 
-The whole TeX side is one ~90-line package that listens to kernel hooks and writes a record
+The whole TeX side is one ~190-line package that listens to kernel hooks and writes a record
 file. It is in this pack, and it works (TeX Live 2023; pdfTeX, XeTeX, LuaTeX). Read it before
 reading this.
 
@@ -36,12 +36,16 @@ One event per line, space-separated, **name is always the last field and may con
 | `cls+` / `cls-` | class name | `class/before`, `class/after` |
 | `predoc` | (empty) | `begindocument/before` — the end of the preamble proper; packages loaded between `predoc` and `begindoc` come from other packages' hooks (added 2026-11-06) |
 | `begindoc` | (empty) | `begindocument` |
-| `ship` | the page about to be shipped | `shipout/before` — the shipout hooks (eso-pic, florilegium, hyperref links) run between `ship` and `page` (added 2026-11-06) |
+| `docstart` | (empty) | `begindocument/end`: `\begin{document}` is done, every `\AtBeginDocument` hook has run; page 1 counts from here (v0.2, 2026-11-09) |
+| `ship` | the page about to be shipped | `shipout/before` — the shipout hooks (eso-pic, florilegium, hyperref links) run between `ship` and `page` (added 2026-11-06). A `ship` with no `page` is a box a package discarded (`\DiscardShipoutBox`); the next `ship` carries the same number |
 | `page` | shipout counter (1-based, prumo's own) | `shipout/after` |
+| `env+` / `env-` | environment name | `env/<name>/before`, `env/<name>/after`, only for the names given to `\PrumoEnvironments` (v0.2) |
 | `enddoc` | (empty) | `enddocument` |
+| `lastpage` | (empty) | `enddocument/afterlastpage`: the final `\clearpage` is done; what follows is the second `.aux` read and the rerun checks (v0.2) |
 | `end` | (empty) | `enddocument/end`; closes the file |
 
-`timer` is `\sys_timer:` — scaled seconds (1/65536 s) since engine start. `depth` is the file
+`timer` is `\sys_timer:` — scaled seconds (1/65536 s) since engine start. It is wall clock
+on all three engines (see the engine notes). `depth` is the file
 nesting depth at the time of the event (0 = the main file level). The parser does not need
 `depth` (the `+`/`-` pairs are enough); it is there for humans and for a cheap sanity check.
 
@@ -66,6 +70,53 @@ enddoc 18389 1
 page 18442 1 2
 end 18492 1
 ```
+
+## Environments (v0.2)
+
+`\begin{tblr}` can hold most of a body's time, and the file and page records cannot say so.
+The generic hooks `env/<name>/before` and `env/<name>/after` run for every environment
+(`\begin` and `\end` call them, since 2020-10), so the probe can time one by name without
+touching it. It only does so for names it is given:
+
+```
+\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,tblr,minted}\input{main}
+```
+
+- **Why a command and not a package option.** `\RequirePackage[env={a,b}]{prumo}` needs
+  key-value option parsing, and how the kernel hands a package its raw options has changed
+  more than once since the 2021-06 floor. A command defined by the probe is plain expl3 and
+  behaves the same on every kernel prumo supports. It is also what someone who runs the
+  engine by hand types, after `\RequirePackage{prumo}`.
+- `prumo` passes `--env` (default: `tikzpicture, axis, tcolorbox, tblr, longtable,
+  tabularx, minted, lstlisting, forest`; `--env none` for none). `run.json` records the list,
+  and a cached run that watched other names is stale.
+- A name given twice is watched once. The hook code is labelled `prumo`. `env/<name>/before`
+  is a normal hook and `env/<name>/after` a reversed one, so prumo's chunk, declared before
+  any package's, runs first on the way in and last on the way out (checked with
+  `\ShowHook`): the records bracket every other package's environment hook code.
+- Environments are not files: one can open in one file and close in another. The parser
+  keeps them on their own stack and pairs `env-` with the innermost open `env+` of the same
+  name. An unmatched `env-` is ignored; one still open at the last record closes there.
+- An environment typeset more than once is recorded once per pass. `tabularx` typesets its
+  body once per trial width, so a `tikzpicture` inside it shows up three times
+  (`fixtures/environments`). That is real time, and the count says so.
+- Nested instances of the same name count once in the total (the outer one holds the
+  inner). Nested different names (`axis` inside `tikzpicture`) are each timed in full.
+- A shipout inside an environment (a `longtable` across a page break) is left out of its
+  time; the page's shipout holds it.
+- Inline forms that are not environments are not seen: `\tikz ...;`, `\lstinline`,
+  `\mintinline`.
+
+## Order inside a hook
+
+prumo is loaded first, so its chunk is first in every normal hook: `predoc`, `begindoc`,
+`enddoc` and `lastpage` mark the start of their hook, before other packages' code. Two
+records want the end instead. `docstart` closes `\begin{document}`, and 92 files in TeX Live
+2026 add code to `begindocument/end` (amsmath and tagpdf among them). `end` closes the run,
+and packages add to `enddocument/end` too. Both use `\AddToHookNext`: next-invocation code
+runs after every chunk and after document-level code (checked with `\ShowHook` and
+`\typeout` against amsmath and top-level code), and these one-time hooks have a single
+invocation.
 
 ## Traps found while building it (all handled in the shipped `.sty`)
 
@@ -100,10 +151,20 @@ end 18492 1
 
 | | pdfTeX | XeTeX | LuaTeX |
 |---|---|---|---|
-| `\sys_timer:` source | `\pdfelapsedtime` | `\elapsedtime` | Lua `os.clock()` |
+| `\sys_timer:` source | `\pdfelapsedtime` | `\elapsedtime` | l3kernel's `os.gettimeofday()` reading (below) |
 | `.fls` records fonts | `.tfm`, `.pfb`, `.pk`, `.enc`, `.map`, `.fd` | `.tfm`, `.fd`; OpenType via system | `.tfm`, `.pfb`, `.fd`, `.lua`; OpenType via fontloader, **not** recorded |
 | embed oracle | `.pfb`/`.pk` INPUT lines (exact) | `pdffonts` | `pdffonts` |
 | `.fls` size, basic fixture | 134 INPUT lines | 133 | 88 |
+
+All three timers are wall clock. On LuaTeX, l3kernel (since 2020-10, the same code at the
+2021-06-01 and 2023-11-01 tags and in TeX Live 2026) sets `epoch = os.gettimeofday() -
+os.clock()` once, when its Lua code loads, and the timer is `gettimeofday() - epoch`.
+`os.clock()` is CPU time; it only back-dates the zero to about process start. Measured in
+the TeX Live 2026 image: on all three engines the first record's timer is within 5 ms of the
+record file's birth time counted from the spawn (the file timestamps move in 4 ms steps), so the zero is the process start and the
+time before the first record is startup (format loading). prumo times the process from
+outside as well, so the wall time after the last record (finalization: closing the PDF,
+writing fonts, xdvipdfmx on XeTeX) is measured too (finding 52).
 
 Implication for the fonts report: on pdfTeX, "embedded" is read from the `.fls`; on XeTeX and
 LuaTeX it is read from `pdffonts`, and the name match has to tolerate subset prefixes
@@ -123,8 +184,8 @@ M3 does.
   `\the\inputlineno`... no — memory usage is only printed to the log at the end. Parse the log's
   "Here is how much of TeX's memory you used" block in `texlog.rs` instead. Cheap, useful for
   TikZ-heavy documents.
-- `shipout/before` as well as `/after` to separate page-building time from shipout time
-  (hyperref and PDF compression live in shipout). Only if someone asks.
+- `shipout/before` as well as `/after`: done in 2026-11-06 (`ship`).
+- `begindocument/end`, `enddocument/afterlastpage` and environments: done in v0.2.
 
 ## Running it by hand
 

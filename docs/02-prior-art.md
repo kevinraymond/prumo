@@ -1,6 +1,7 @@
 # 02 — Prior art
 
-Survey done 2026-11-06. Verdict first: none of the six areas has a mature, maintained,
+Survey done 2026-11-06; the tools in A, B, C and E were installed and run on TeX Live 2026 on
+2026-11-10 and the rows corrected. Verdict first: none of the six areas has a mature, maintained,
 general-purpose tool. Two have narrow, usable prior art (dependency bundling; install-on-demand).
 The rest have scripts, building blocks, or abandoned projects.
 
@@ -10,8 +11,9 @@ The rest have scripts, building blocks, or abandoned projects.
 
 | Tool | Approach | Gap |
 |---|---|---|
-| LaTeXpkges / latexpkges3 (Python, PyPI) | Remove each top-level `\usepackage`, rebuild, compare PDF hashes (or XDV diff) | Top-level only (by its own README); hash comparison trips on timestamps; ignores packages loaded by a class |
-| latex-dependency-grapher v1.0 (Java, CTAN 2024-01) | Static scan of `\usepackage`/`\RequirePackage`/`\input`; flags declared-but-unused; GraphViz output | Static; no compile data; no release since 1.0 |
+| LaTeXpkges (bazzilic, 2015) / latexpkges3 (TarasKuzyo fork, PyPI 1.0, 2021) | Remove each top-level `\usepackage`, rebuild twice, compare an MD5 of the output (`.pdf`, `.xdv`, `.dvi`) with `/ID` stripped; `--visual` compares Ghostscript JPEGs | Top-level only (by its own README); the date patterns never match (missing commas in its pattern list), so timestamps trip the hash; `--visual` compares against a deleted directory and calls everything removable (checked 2026-11-10); writes trial files and deletes outputs in the document's directory |
+| stygtfo (PyPI 0.1.0, 2022) | Comment out each column-0 `\usepackage` line, rebuild, compare pages with diff-pdf-visually | Tectonic only in practice (its README says so); with ImageMagick 7 identical pages compare as different; overwrites the input without `-o` |
+| latex-dependency-grapher v1.0 (Java, CTAN 2024-01) | Regex scan of `\usepackage`/`\RequirePackage`/`\input`/`\include`, kpsewhich, GraphViz; "unused" = comment the line out, pdflatex still exits 0 | No output comparison; pdflatex only; the regex misses `\usepackage[opts]{x}`; no release since 1.0 |
 | cmdtrack, refcheck, chklref, checkcites | Find unused *commands*, *labels*, *citations* | Not packages |
 | texlab, LaTeX Workshop, TeXstudio, LTeX | Editor diagnostics | No unused-package diagnostic |
 
@@ -23,7 +25,7 @@ from probe data, and compares page text, not bytes. See `06-unused-packages.md`.
 
 | Tool | Approach | Gap |
 |---|---|---|
-| **texprof / texprofile** (Ruckert; TUGboat 45:2, 2024; in TeX Live) | Modified pdfTeX/eTeX engine records time per input line and per macro into `.tprof`; `texprofile` reports by file/line/macro with call-graph data | pdfTeX-only; a different engine binary, not your normal one; not package-oriented |
+| **texprof / texprofile** (Ruckert; TUGboat 45:2, 2024; in TeX Live's `hitex` package) | Its own engine (TeX + e-TeX + Prote, DVI output) records time per input line and per macro into `.tprof`; `texprofile` reports by file/line/macro with call-graph data; `-pdf` only stands in pdfTeX primitives when building a format | Not pdfTeX, XeTeX or LuaTeX; TeX Live 2026 ships no texprof formats, and a LaTeX format does not build against the 2026-11-01 kernel (macro stack overflow in expl3-code.tex); not package-oriented |
 | l3benchmark (`\benchmark:n`, `tic`/`toc`) | expl3 timers you place by hand | Building block |
 | regstats, scrtime | Whole-run time | No breakdown |
 | ConTeXt `mtxrun --script profile` | Lua/TeX profiling | ConTeXt only |
@@ -38,7 +40,8 @@ signal.
 
 | Tool | Approach | Gap |
 |---|---|---|
-| latex-dependency-grapher | Static scan, kpsewhich resolution | Misses conditional/option-driven loads, kernel and class loads |
+| latex-dependency-grapher | Regex scan of the source, kpsewhich resolution | Includes conditional loads that never happen (xcolor → colortbl); misses loads written with options or spaces, and class loads |
+| texfindpkg (Lyu, CTAN 2024A, in TeX Live and MiKTeX) | Which package provides a file, command or environment, its dependencies, and `tlmgr`/`miktex` install, from TeXstudio `.cwl` data and the tlpdb | Names in, not a document; the `.cwl` dependency data differs from what a build reads |
 | snapshot + bundledoc | `\listfiles`-style flat `.dep` list, then archive the files | Flat; no edges |
 | `\listfiles`, adhocfilelist, inputtrc | Flat lists / traces | No graph |
 | `-recorder` `.fls` | Every file read/written | Flat; no nesting |
@@ -64,10 +67,10 @@ the load; prumo can, via the `.fd` file hook context.
 
 | Tool | Approach | Gap |
 |---|---|---|
-| mkjobtexmf (Oberdiek, v0.8, 2011) | Run with `-recorder`/strace, copy used files into a job-local texmf tree | File level, one job, "experimental" by its own docs |
+| mkjobtexmf (Oberdiek, v0.8, 2011) | Run with `-recorder`/strace, symlink (or `--copy`) the used files into a job-local texmf tree | File level, one job, "experimental" by its own docs |
 | snapshot + bundledoc (Pakin) | Archive a document's dependencies | For archiving, not for an install |
 | texliveonfly (2011) | Install missing packages via tlmgr while compiling | Add-only |
-| TinyTeX (Yihui Xie; R) | Small TeX Live + auto-install missing packages from log | Add-only |
+| TinyTeX (Yihui Xie; the installer needs no R, the auto-install is in the R package) | Small TeX Live (about 100 packages by default) + auto-install missing packages from the log | Add-only |
 | tlmgr | `scheme-minimal`, `scheme-infraonly`, `remove`, `search --global --file`, pinning, `--usermode` | No "remove what these documents don't use" |
 | Tectonic bundles | Self-contained bundles; custom bundles from a hand-written spec | No usage-driven subsetting |
 | MiKTeX | Install on the fly | No pruning |
@@ -91,7 +94,9 @@ obsolete").
 - **`-recorder`**: every engine writes `<job>.fls` with `PWD`, `INPUT`, `OUTPUT` lines.
 - **`texlive.tlpdb`**: plain-text package database with `runfiles` lists and `depend` edges.
 - **Timers**: `\sys_timer:` in expl3 maps to `\pdfelapsedtime` (pdfTeX), `\elapsedtime`
-  (XeTeX), `os.clock()` (LuaTeX). Unit: scaled seconds, 1/65536 s.
+  (XeTeX), and on LuaTeX to `os.gettimeofday()` minus an epoch that l3kernel sets to
+  `gettimeofday() - os.clock()` when its Lua code loads (wall clock; finding 52). Unit:
+  scaled seconds, 1/65536 s.
 
 ## Demand signals
 

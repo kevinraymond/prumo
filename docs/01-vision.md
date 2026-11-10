@@ -46,7 +46,7 @@ questions. One good "a flame chart of my LaTeX build" screenshot does the market
 
 - Not a compiler, build system, editor plugin or language server. It wraps `latexmk`; it does not
   compete with `texlab`.
-- Not a per-macro profiler. `texprof` exists for that (pdfTeX). prumo stops at package/file/page.
+- Not a per-macro profiler. `texprof` exists for that (its own TeX-based engine). prumo stops at package/file/page.
 - Not advice. "Which font should I use" and "what options make xyz happen" are questions for a
   human or a model, not for a static tool. prumo reports facts the user can act on.
 - Not MiKTeX, in v1. Different package database. Revisit when someone asks.

@@ -7,7 +7,7 @@ other docs and `prumo.sty`; not a TeX course.
 
 - **Engine** — the binary that typesets: `pdftex`, `xetex`, `luatex` (and `luahbtex`, LuaTeX
   with HarfBuzz). All understand Knuth's TeX plus their own extensions (pdfTeX: `\pdfelapsedtime`;
-  XeTeX: `\elapsedtime`; LuaTeX: Lua).
+  XeTeX: `\elapsedtime`; LuaTeX: Lua, where l3kernel's timer reads `os.gettimeofday()`).
 - **Format** — a preloaded memory image of macros, hyphenation patterns and settings, built
   once by `fmtutil` and loaded at startup: `pdflatex.fmt` is pdfTeX + LaTeX. `pdflatex` the
   command is `pdftex -fmt=pdflatex`. Formats live in `TEXMFVAR`/`TEXMFSYSVAR`, which is why they
@@ -71,6 +71,10 @@ other docs and `prumo.sty`; not a TeX course.
 
 - **Scaled seconds** — 1/65536 s, the unit of `\pdfelapsedtime`, `\elapsedtime` and therefore
   `\sys_timer:`. 65536 = 1 s; 655 ≈ 10 ms.
+- **Phases** — the run cut at the probe's records: startup (to the first record), preamble
+  (to `predoc`), begin-document (to `docstart`), typesetting, shipout, end-document (to the
+  last record), finalization (after it, until the process exits). Each leaves out the
+  shipouts inside it and shipout holds them all, so the seven add up to the wall time.
 - **Inclusive / exclusive** — as in any profiler: inclusive = from `pkg+` to `pkg-` including
   everything it loaded; exclusive = inclusive minus children. siunitx inclusive 82 ms,
   exclusive 54 ms: 28 ms of it was `translations` and friends.
@@ -109,7 +113,8 @@ other docs and `prumo.sty`; not a TeX course.
   raster pages of a PDF. Also `xpdf`'s versions; Debian package `poppler-utils`.
 - **texlogsieve**, **texfot**, **texlogfilter** — log filters; texlogsieve rebuilds nesting from
   the log's parentheses.
-- **texprof** — Ruckert's profiling pdfTeX variant (TeX Live 2025+); per-line and per-macro.
+- **texprof** — Ruckert's profiling engine, TeX + e-TeX + Prote with DVI output (TeX Live,
+  `hitex` package); per-line and per-macro.
 - **TinyTeX** — Yihui Xie's small TeX Live with install-on-demand; the R world's default.
 - **Tectonic** — a Rust reimplementation of XeTeX with self-contained bundles; the other way of
   getting "a small TeX".

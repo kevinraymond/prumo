@@ -207,3 +207,50 @@ Items 1–18 hold, with these corrections and additions:
     there (3,647 files read, 3,358 of them fonts, versus 257 warm; `luaotfload-names.lua.gz`
     appears as an `OUTPUT` in the `.fls`). `time` now warns when that output is present and
     names the unit holding the time. Warm, the same build is 1.5 s.
+52. **All three timers are wall clock.** On LuaTeX, l3kernel's `\sys_timer:` is not
+    `os.clock()`: since 2020-10 (the same code at the 2021-06-01 and 2023-11-01 tags, and in
+    TeX Live 2026's `expl3.lua`) it sets `epoch = os.gettimeofday() - os.clock()` once, when
+    its Lua code loads, and reads `gettimeofday() - epoch`. `os.clock()` only moves the zero
+    back to about process start. In the TeX Live 2026 image the first record's timer is within
+    5 ms of the record file's birth time after the spawn on all three engines (timestamps move
+    in 4 ms steps there), so the time before the first record is startup and the process wall
+    time minus the last record is finalization. prumo now times the engine process (1 ms
+    polling) and reports both.
+53. **`begindocument/end` is crowded.** 92 files in TeX Live 2026 add code to it, amsmath and
+    tagpdf among them, and prumo's chunk runs first. `docstart` uses `\AddToHookNext`, whose
+    code runs after every chunk and after document-level code (checked with `\ShowHook` and
+    `\typeout`). Same for `end` on `enddocument/end`. `env/<name>/after` is a reversed hook, so
+    prumo's chunk runs last there without help.
+54. **Environment records.** `\PrumoEnvironments{...}` adds `env+`/`env-` on the generic env
+    hooks. The PDF stays byte-identical on all three engines, on TeX Live 2026 and on Ubuntu
+    22.04's TeX Live 2021 (kernel 2021-11-15). tabularx typesets its body three times on the
+    fixture, so a `tikzpicture` inside it is recorded three times; a `longtable` across a
+    page break has the shipout inside it. A discarded shipout leaves a `ship` with no `page`.
+55. **`compare` ranked engines by the wrong total.** Its first table and hint used the span
+    from the first record to the last, which leaves out startup and finalization. On the
+    minimal document that span made LuaLaTeX fastest (80 ms) while its wall time was the
+    slowest (475 ms against 202 ms for pdfLaTeX). It now ranks by wall time.
+56. **Loaded from the main file's first line, the probe lost its first event.** The record
+    file opened on the first `file/before`; inside the main file the first event is
+    `class/before`, so `cls+` was dropped and the parser saw a `cls-` with nothing open. Any
+    event opens the file now, nothing reopens it after `end`, and prumo's own
+    `package/after` is skipped like its `file/after`. Overleaf's compile service returns every
+    file the build writes and its editor hides only `output.fls` and `output.fdb_latexmk`
+    (read in overleaf/overleaf, not tried on overleaf.com); `prumo time output.prumo` reads
+    the records with no build.
+57. **`luaotfload.patch_font` does not count `\addfontfeature` fonts.** 200 identical
+    `\addfontfeature{LetterSpace=5}` (or `Numbers=OldStyle`, or `Color=FF0000`) make one new
+    font (`font.nextid()` up by one) and no `patch_font` call; 10 new sizes make 11 font ids
+    and 10 calls. Repeated identical `\addfontfeature` defines its font once.
+58. **Public documents.** ClassicThesis 4.3 (CTAN, 41 pages, biblatex through latexmk), the
+    metropolis demo (32 pages), the Llama 2 paper's arXiv source (33 packages, 76 pages) all
+    run through `time`, `compare`, `fonts`, `packages` and `graph`. kaobook's documentation
+    (master 22225a1) fails on TeX Live 2026 with or without the probe (`Command
+    \c@proposition already defined` in kaotheorems.sty); prumo now prints that first error
+    instead of only the exit code. On the arXiv paper, 18% of the time is shipout, most of it
+    pdfTeX writing images on the pages that carry them, so the shipout hint names page writing
+    as well as hooks.
+59. **pdfTeX reads `pdftex.map` during the first shipout.** The log shows the map file
+    inside page 1's brackets (`[1{.../pdftex.map}]`). On a one-line document the shipout phase
+    is 45 ms of 132 ms on pdfLaTeX, all of it page 1; how much of that is the map was not
+    isolated.
