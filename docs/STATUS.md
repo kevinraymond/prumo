@@ -79,8 +79,9 @@ only hooks (finding 58).
   `install.ps1` on the Windows box, `cargo install prumo` in `rust:1-slim`.
 - `doctor` without LaTeX now says where to get it, folds the four Poppler rows into one that
   says what is lost, and names MiKTeX when there is no tlpdb.
-- The crate is 0.2.0 now. Not tagged: that is mine to do, and the release workflow then
-  publishes the binaries, images and crate.
+- v0.2.0 is released (2026-11-10, after the `whatif` PR). The release has its ten assets,
+  crates.io has 0.2.0, and ghcr has `0.2.0` and `0.2.0-small` for amd64 and arm64. The
+  one-line installer from the README installs 0.2.0 in a clean Debian container.
 
 ### Related tools
 
@@ -128,7 +129,7 @@ is corrected; CLAUDE.md still says "pdfTeX only".
 - LuaLaTeX font definitions per page: the `luaotfload.patch_font` hypothesis is wrong for
   `\addfontfeature`, so nothing shipped (finding 57).
 
-**Blocked:** nothing. **Needs me:** review and merge the `whatif` PR, then the v0.2.0 tag.
+**Blocked:** nothing. **Needs me:** the announcement post, when you want it.
 **Open questions:** should the LuaTeX font count go in after all, through `font.nextid()`?
 Should `compare` default to three runs, so it reports a median?
 
