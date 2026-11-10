@@ -54,8 +54,8 @@ can check it.
 - `bench.py` has three modes: the phases (as before), `--overhead` (builds with and without
   the probe in turns, plus per-package times from the probed records) and `--whatif`.
   `charts.py` draws four SVG charts, light and dark, from the JSON. Color means phase in
-  all of them, the palette checked with the dataviz validator, the gray included after you
-  could not tell startup from body.
+  all of them, and every pair of colors, the gray included, is checked with the dataviz
+  validator.
 - The probe costs 7 ms on the one-line document and under 6% everywhere. On the paper,
   LuaLaTeX's extra preamble time is biblatex (+151 ms) and fontspec's LuaTeX code (67 ms).
 - On the corpus, the precompiled preamble works on two of the six pdfLaTeX
@@ -93,8 +93,8 @@ is corrected; CLAUDE.md still says "pdfTeX only".
 
 ### whatif
 
-- `prumo whatif main.tex [--try preamble,draft,externalize] [--runs 5] [--shell-escape]`,
-  from the brief. Each experiment rebuilds its own copy of the directory with one change.
+- `prumo whatif main.tex [--try preamble,draft,externalize] [--runs 5] [--shell-escape]`.
+  Each experiment rebuilds its own copy of the directory with one change.
   The timed builds run without the probe: a warm-up each, then the baseline and the variants
   in turns. Medians are compared. A difference no larger than the larger spread (2 ms at
   least, the polling resolution) is "within noise". The output is compared by page count,
@@ -106,15 +106,15 @@ is corrected; CLAUDE.md still says "pdfTeX only".
 - `preamble` works on pdfTeX (the fixture goes from 244 to 91 ms). XeTeX and LuaTeX fail,
   and the row gives the error (finding 60). `doctor` has a mylatexformat row and the TeX
   image installs it.
-- `externalize`: the brief's command line made every picture build typeset the whole
-  document (finding 61). The system call now carries the hook and names the engine. The text
+- `externalize`: turned on from the command line alone, the external library made every
+  picture build typeset the whole document (finding 61). The system call now carries the hook and names the engine. The text
   is identical on all three engines, and ten pictures went from 944 to 138 ms. Without
   `--shell-escape` it is refused when asked for and not run by default. The table and the
   README mark it experimental.
 - New fixture `whatif`, eight claims, all tested. `make_artifacts.sh whatif` regenerates one
   fixture now. The fixture turned up finding 62: `doctor --check-log` now tells an
   existence check from a read.
-- My choices: `--runs` is at least 2. The comparison uses the last run's PDF. Logs go to
+- Defaults: `--runs` is at least 2. The comparison uses the last run's PDF. Logs go to
   `<cache>/<job>/whatif/<experiment>/`. With `--shell-escape` the probed run is
   `--build "<engine> -shell-escape"`, so `time` rebuilds afterwards. No `--latexmk` or
   `--build`, since their wall time is several passes.
@@ -129,7 +129,7 @@ is corrected; CLAUDE.md still says "pdfTeX only".
 - LuaLaTeX font definitions per page: the `luaotfload.patch_font` hypothesis is wrong for
   `\addfontfeature`, so nothing shipped (finding 57).
 
-**Blocked:** nothing. **Needs me:** the announcement post, when you want it.
+**Blocked:** nothing.
 **Open questions:** should the LuaTeX font count go in after all, through `font.nextid()`?
 Should `compare` default to three runs, so it reports a median?
 

@@ -1006,8 +1006,13 @@ fn whatif_fixture_bounds() {
         let p = m.run_phases();
         let preamble = p.preamble.unwrap();
         assert_eq!(bound_ms(&m, Experiment::Preamble), Some(prumo::report::ms(preamble)), "{label}");
-        let others = [Some(p.startup), p.begin_document, p.typesetting, Some(p.shipout), p.end_document];
-        assert!(others.iter().all(|o| o.unwrap() < preamble), "{label}: the preamble is the longest phase: {p:?}");
+        // Startup is left out: on LuaLaTeX the engine's start is about as long as this
+        // preamble, and CI regenerates these artifacts on its own runner before testing.
+        let later = [p.begin_document, p.typesetting, Some(p.shipout), p.end_document];
+        assert!(
+            later.iter().all(|o| o.unwrap() < preamble),
+            "{label}: the preamble is longer than every phase after it: {p:?}"
+        );
         assert_eq!(bound_ms(&m, Experiment::Draft), None);
     }
 }

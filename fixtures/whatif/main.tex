@@ -14,7 +14,8 @@
 %  5. Without --shell-escape, externalize is refused when asked for and not run by default.
 %  6. Draft mode runs on all three engines and its output is not compared (no PDF).
 %  7. The probe's bound for externalize is the one tikzpicture's time, and for preamble the
-%     preamble phase, the longest phase on every engine.
+%     preamble phase, longer than every phase after it on every engine. (Not longer than
+%     startup: on LuaLaTeX the engine's startup is about the same size.)
 %  8. The document's directory is unchanged.
 \documentclass{article}
 \usepackage{amsmath}

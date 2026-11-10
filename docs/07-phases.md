@@ -87,7 +87,6 @@ with florilegium as the corpus (real-world gate). **Demo:** the before/after siz
   and `docker/prumo.cmd` run it as a command), then crates.io, GitHub release binaries
   (Linux x86_64/aarch64, macOS, Windows), CTAN upload of `prumo.sty` alone (so people can
   use the probe without the CLI).
-- Blog post + TeX.SE answer on "how do I find which package makes my compile slow".
 
 **Accept:** a stranger installs it from the README and gets a report on their own document in
 under five minutes.
