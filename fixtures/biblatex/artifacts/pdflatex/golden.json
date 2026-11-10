@@ -1,180 +1,180 @@
 {
-  "total_s": 0.2124786376953125,
-  "preamble_s": 0.1800384521484375,
+  "total_s": 0.2998199462890625,
+  "preamble_s": 0.2530364990234375,
   "units": [
     {
       "kind": "pkg",
       "name": "biblatex",
-      "inclusive": 0.1610870361328125,
-      "exclusive": 0.141693115234375,
+      "inclusive": 0.2247161865234375,
+      "exclusive": 0.1981658935546875,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "paper.tex",
-      "inclusive": 0.2124786376953125,
-      "exclusive": 0.0414581298828125,
+      "inclusive": 0.2998199462890625,
+      "exclusive": 0.061187744140625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "csquotes",
-      "inclusive": 0.0073699951171875,
-      "exclusive": 0.0059967041015625,
+      "inclusive": 0.0102996826171875,
+      "exclusive": 0.0082550048828125,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "blx-case-expl3",
-      "inclusive": 0.003631591796875,
-      "exclusive": 0.002532958984375,
+      "inclusive": 0.0048980712890625,
+      "exclusive": 0.003448486328125,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "pdftexcmds",
-      "inclusive": 0.0047454833984375,
-      "exclusive": 0.00225830078125,
-      "loads": 1
-    },
-    {
-      "kind": "cls",
-      "name": "article",
-      "inclusive": 0.00225830078125,
-      "exclusive": 0.0018768310546875,
+      "inclusive": 0.00634765625,
+      "exclusive": 0.0031280517578125,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "etoolbox",
-      "inclusive": 0.0018768310546875,
-      "exclusive": 0.0018768310546875,
+      "inclusive": 0.0027008056640625,
+      "exclusive": 0.0027008056640625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "expl3",
-      "inclusive": 0.002532958984375,
-      "exclusive": 0.0018768310546875,
+      "inclusive": 0.00360107421875,
+      "exclusive": 0.002685546875,
+      "loads": 1
+    },
+    {
+      "kind": "cls",
+      "name": "article",
+      "inclusive": 0.0031890869140625,
+      "exclusive": 0.0026092529296875,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "kvoptions",
-      "inclusive": 0.0025634765625,
-      "exclusive": 0.001739501953125,
+      "inclusive": 0.0035400390625,
+      "exclusive": 0.002410888671875,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "logreq",
-      "inclusive": 0.0017852783203125,
-      "exclusive": 0.001434326171875,
+      "inclusive": 0.0024566650390625,
+      "exclusive": 0.001953125,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "csquotes.def",
-      "inclusive": 0.001220703125,
-      "exclusive": 0.001220703125,
+      "inclusive": 0.001800537109375,
+      "exclusive": 0.001800537109375,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "xparse",
-      "inclusive": 0.0010986328125,
-      "exclusive": 0.0010986328125,
+      "inclusive": 0.0014495849609375,
+      "exclusive": 0.0014495849609375,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "ltxcmds",
-      "inclusive": 0.0008544921875,
-      "exclusive": 0.0008544921875,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "infwarerr",
-      "inclusive": 0.000823974609375,
-      "exclusive": 0.000823974609375,
+      "inclusive": 0.0011749267578125,
+      "exclusive": 0.0011749267578125,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "kvsetkeys",
-      "inclusive": 0.000823974609375,
-      "exclusive": 0.000823974609375,
-      "loads": 1
-    },
-    {
-      "kind": "pkg",
-      "name": "iftex",
-      "inclusive": 0.0008087158203125,
-      "exclusive": 0.0008087158203125,
+      "inclusive": 0.001129150390625,
+      "exclusive": 0.001129150390625,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "url",
-      "inclusive": 0.00079345703125,
-      "exclusive": 0.00079345703125,
+      "inclusive": 0.001068115234375,
+      "exclusive": 0.001068115234375,
       "loads": 1
     },
     {
       "kind": "pkg",
-      "name": "keyval",
-      "inclusive": 0.0007476806640625,
-      "exclusive": 0.0007476806640625,
+      "name": "infwarerr",
+      "inclusive": 0.0010223388671875,
+      "exclusive": 0.0010223388671875,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "iftex",
+      "inclusive": 0.0010223388671875,
+      "exclusive": 0.0010223388671875,
       "loads": 1
     },
     {
       "kind": "pkg",
       "name": "ifthen",
-      "inclusive": 0.0007171630859375,
-      "exclusive": 0.0007171630859375,
+      "inclusive": 0.0009765625,
+      "exclusive": 0.0009765625,
+      "loads": 1
+    },
+    {
+      "kind": "pkg",
+      "name": "keyval",
+      "inclusive": 0.0009613037109375,
+      "exclusive": 0.0009613037109375,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "l3backend-pdftex.def",
-      "inclusive": 0.0006561279296875,
-      "exclusive": 0.0006561279296875,
+      "inclusive": 0.00091552734375,
+      "exclusive": 0.00091552734375,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "size10.clo",
-      "inclusive": 0.0003814697265625,
-      "exclusive": 0.0003814697265625,
+      "inclusive": 0.000579833984375,
+      "exclusive": 0.000579833984375,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "logreq.def",
-      "inclusive": 0.0003509521484375,
-      "exclusive": 0.0003509521484375,
+      "inclusive": 0.0005035400390625,
+      "exclusive": 0.0005035400390625,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "paper.bbl",
-      "inclusive": 0.00030517578125,
-      "exclusive": 0.00030517578125,
+      "inclusive": 0.00042724609375,
+      "exclusive": 0.00042724609375,
       "loads": 1
     },
     {
       "kind": "file",
       "name": "csquotes.cfg",
-      "inclusive": 0.000152587890625,
-      "exclusive": 0.000152587890625,
+      "inclusive": 0.000244140625,
+      "exclusive": 0.000244140625,
       "loads": 1
     }
   ],
   "pages": [
     [
       1,
-      0.031982421875
+      0.0148162841796875
     ]
   ],
   "fonts": {
@@ -223,5 +223,17 @@
     "unknown_embedded": [],
     "partial": false,
     "map_entries": 5091
-  }
+  },
+  "phases": {
+    "startup_s": 0.0466461181640625,
+    "preamble_s": 0.2503509521484375,
+    "begin_document_s": 0.0327911376953125,
+    "typesetting_s": 0.00823974609375,
+    "shipout_s": 0.0060577392578125,
+    "end_document_s": 0.00238037109375,
+    "after_last_page_s": 0.0017852783203125,
+    "end_s": 0.346466064453125
+  },
+  "environments": [],
+  "discarded_shipouts": []
 }

@@ -1,10 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.8)  9 NOV 2026 00:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.8)  1 JAN 1970 00:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\RequirePackage{prumo}\input{notes}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{notes}
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count276
 \g__prumo_page_int=\count277
 )
@@ -401,13 +402,13 @@ L3 programming layer <2026-09-09>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 11942 strings out of 468449
- 253069 string characters out of 5440369
- 631947 words of memory out of 5000000
- 41026 multiletter control sequences out of 15000+600000
+ 12072 strings out of 468449
+ 257471 string characters out of 5440369
+ 633744 words of memory out of 5000000
+ 41156 multiletter control sequences out of 15000+600000
  628489 words of font info for 40 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 114i,5n,110p,430b,359s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 114i,5n,110p,525b,359s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 
 Output written on notes.pdf (1 page, 9242 bytes).

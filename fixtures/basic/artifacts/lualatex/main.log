@@ -1,6 +1,7 @@
 This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.11.8)  1 JAN 1970 00:00
  restricted system commands enabled.
-**\RequirePackage{prumo}\input{main}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{main}
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
 Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
 Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended collection.
@@ -33,7 +34,7 @@ Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'.
 Inserting `tracingstacklevels' in `input_level_string'.
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count274
 \g__prumo_page_int=\count275
 )
@@ -409,15 +410,15 @@ Package rerunfilecheck Info: Checksums for `main.out':
 )
 
 Here is how much of LuaTeX's memory you used:
- 11558 strings out of 475522
+ 11688 strings out of 475522
  125240,794899 words of node,token memory allocated
  560 words of node memory still in use:
    8 hlist, 2 vlist, 2 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_ke
 rn, 3 glyph, 9 attribute, 53 glue_spec, 9 attribute_list, 1 write nodes
    avail lists: 1:1,2:108,3:44,4:22,5:63,6:10,7:291,8:5,9:145,11:6
- 34407 multiletter control sequences out of 65536+600000
+ 34537 multiletter control sequences out of 65536+600000
  33 fonts using 1960671 bytes
- 81i,8n,78p,1026b,357s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 81i,8n,78p,1121b,357s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/tex
 live/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texli
 ve/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/

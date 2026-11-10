@@ -1,0 +1,4 @@
+cmbx12 CMBX12 <cmbx12.pfb
+cmr10 CMR10 <cmr10.pfb
+cmr12 CMR12 <cmr12.pfb
+cmtt10 CMTT10 <cmtt10.pfb

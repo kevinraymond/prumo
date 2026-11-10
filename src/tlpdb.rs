@@ -313,7 +313,7 @@ mod tests {
     #[test]
     fn parses_the_real_excerpt() {
         let db = excerpt();
-        assert_eq!(db.packages.len(), 129);
+        assert_eq!(db.packages.len(), 130);
         let h = &db.packages["hyperref"];
         assert_eq!(h.category, Some(Category::Package));
         assert!(h.depends.iter().any(|d| d == "url"));

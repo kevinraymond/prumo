@@ -1,6 +1,7 @@
 This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.11.8)  1 JAN 1970 00:00
  restricted system commands enabled.
-**\RequirePackage{prumo}\input{main}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{main}
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
 Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
 Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended collection.
@@ -33,7 +34,7 @@ Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'.
 Inserting `tracingstacklevels' in `input_level_string'.
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count274
 \g__prumo_page_int=\count275
 )
@@ -353,15 +354,15 @@ L3 programming layer <2026-09-09>
 )
 
 Here is how much of LuaTeX's memory you used:
- 7568 strings out of 475522
+ 7698 strings out of 475522
  100000,794899 words of node,token memory allocated
  426 words of node memory still in use:
    3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 4 attribute, 52 glue_spec,
  4 attribute_list, 1 write nodes
    avail lists: 2:188,3:20,4:8,5:54,6:16,7:372,8:3,9:142,11:8
- 30489 multiletter control sequences out of 65536+600000
+ 30619 multiletter control sequences out of 65536+600000
  28 fonts using 1739319 bytes
- 100i,11n,92p,303b,644s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 100i,11n,92p,398b,644s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.o
 tf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.o
 tf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmromancaps10-re

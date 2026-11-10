@@ -8,6 +8,7 @@ output PDF (via `pdffonts`) and prints:
   2. per-page typesetting time
   3. who-loaded-whom tree
   4. fonts loaded (TFM) vs fonts embedded (PDF), with Type 3 warnings
+  5. the phases of the run (startup to end-document) and per-environment totals
 
 Usage:  prumo_report.py <jobname> [--json]
 
@@ -37,11 +38,16 @@ def read_records(path):
 
 
 def build_tree(records):
-    """Return (root, frames, pages, phases).
+    """Return (root, frames, pages, phases, events).
 
     Each frame: {kind, name, start, end, children, parent}. pkg/cls frames
     wrap the file frame of the same unit; we attribute time to the pkg/cls
     frame when present and to the file frame otherwise.
+
+    events: {"ships": [(start, end)] for shipouts that completed, "discarded":
+    [page] for a `ship` with no `page` (a package discarded the box), "envs":
+    [(name, start, end, nested)] where nested means inside another of the same
+    name}.
     """
     root = {"kind": "job", "name": "<job>", "start": None, "end": None,
             "children": [], "parent": None}
@@ -49,6 +55,8 @@ def build_tree(records):
     frames = []
     pages = []
     phases = {}
+    ships, discarded, envs, env_stack = [], [], [], []
+    pending_ship = None
     last_t = None
     for ev, t, depth, name in records:
         if root["start"] is None:
@@ -66,10 +74,33 @@ def build_tree(records):
             fr["end"] = t
         elif ev == "opts":
             stack[-1]["options"] = name
+        elif ev == "ship":
+            if pending_ship is not None:
+                discarded.append(pending_ship[0])
+            pending_ship = (int(name), t)
         elif ev == "page":
             pages.append((int(name), t))
-        elif ev in ("begindoc", "enddoc", "end", "start"):
+            if pending_ship is not None and pending_ship[0] == int(name):
+                ships.append((pending_ship[1], t))
+            elif pending_ship is not None:
+                discarded.append(pending_ship[0])
+            pending_ship = None
+        elif ev == "env+":
+            env_stack.append((name, t))
+        elif ev == "env-":
+            # Close the innermost open instance of this name; an unmatched env- is ignored.
+            for i in range(len(env_stack) - 1, -1, -1):
+                if env_stack[i][0] == name:
+                    n, t0 = env_stack.pop(i)
+                    envs.append((n, t0, t, any(e[0] == n for e in env_stack)))
+                    break
+        elif ev in ("predoc", "begindoc", "docstart", "enddoc", "lastpage", "end", "start"):
             phases[ev] = t
+    if pending_ship is not None:
+        discarded.append(pending_ship[0])
+    # Environments still open at the last record (a failed build) close there.
+    for i, (n, t0) in enumerate(env_stack):
+        envs.append((n, t0, last_t, any(e[0] == n for e in env_stack[:i])))
     root["end"] = last_t
     # \end{document} never returns from \input{main}, so main.tex (and the
     # job) have no file- event: close them at the last timestamp.
@@ -78,7 +109,8 @@ def build_tree(records):
             fr["end"] = last_t
     collapse_unit_files(root)
     frames = [fr for fr in frames if not fr.get("collapsed")]
-    return root, frames, pages, phases
+    events = {"ships": ships, "discarded": discarded, "envs": envs}
+    return root, frames, pages, phases, events
 
 
 def collapse_unit_files(fr):
@@ -121,11 +153,66 @@ def unit_table(frames):
 
 
 def page_times(pages, phases):
-    out, prev = [], phases.get("begindoc")
+    """Page 1 counts from docstart (the end of \\begin{document}), else begindoc."""
+    out, prev = [], phases.get("docstart", phases.get("begindoc"))
     for n, t in pages:
         out.append((n, t - prev if prev is not None else 0.0))
         prev = t
     return out
+
+
+def ship_in(ships, a, b):
+    """Shipout time inside [a, b]: the overlap of every completed shipout with the range."""
+    return sum(max(0.0, min(e, b) - max(s, a)) for s, e in ships)
+
+
+def run_phases(root, phases, events):
+    """The run cut into consecutive phases, each without the shipouts inside it, so the six
+    add up to the timer at the last record. A phase whose boundary records are missing (an
+    older probe, a build that stopped) is None. Finalization, after the last record, needs
+    the process wall time and is the CLI's (the Rust side adds it).
+
+      startup         timer zero (about process start) to the first record
+      preamble        first record to predoc (begindocument/before)
+      begin_document  predoc to docstart (begindocument/end): \\AtBeginDocument and the .aux
+      typesetting     docstart to enddoc, less shipouts
+      shipout         every ship..page, wherever it happened
+      end_document    enddoc to the last record, less shipouts
+    """
+    ships = events["ships"]
+    t0, end = root["start"], root["end"]
+    if t0 is None:
+        return None
+    predoc = phases.get("predoc", phases.get("begindoc"))
+    docstart = phases.get("docstart", phases.get("begindoc"))
+    enddoc = phases.get("enddoc")
+
+    def span(a, b):
+        return None if a is None or b is None else (b - a) - ship_in(ships, a, b)
+    return {
+        "startup_s": t0,
+        "preamble_s": span(t0, predoc),
+        "begin_document_s": span(predoc, docstart),
+        "typesetting_s": span(docstart, enddoc if enddoc is not None else (end if docstart is not None else None)),
+        "shipout_s": sum(e - s for s, e in ships),
+        "end_document_s": span(enddoc, end),
+        "after_last_page_s": span(phases.get("lastpage"), end),
+        "end_s": end,
+    }
+
+
+def environment_table(events):
+    """Per environment name: instances, time (outermost instances of the name only, less
+    the shipouts inside them) and the slowest instance. Sorted by time, descending."""
+    rows = {}
+    for name, s, e, nested in events["envs"]:
+        dt = (e - s) - ship_in(events["ships"], s, e)
+        r = rows.setdefault(name, {"name": name, "count": 0, "total_s": 0.0, "max_s": 0.0})
+        r["count"] += 1
+        if not nested:
+            r["total_s"] += dt
+        r["max_s"] = max(r["max_s"], dt)
+    return sorted(rows.values(), key=lambda r: (-r["total_s"], r["name"]))
 
 
 def print_tree(fr, indent=0, out=None):
@@ -256,9 +343,11 @@ def main():
         sys.exit(__doc__)
     job = sys.argv[1]
     as_json = "--json" in sys.argv
-    root, frames, pages, phases = build_tree(read_records(job + ".prumo"))
+    root, frames, pages, phases, events = build_tree(read_records(job + ".prumo"))
     table = unit_table(frames)
     ptimes = page_times(pages, phases)
+    run = run_phases(root, phases, events)
+    envs = environment_table(events)
     fls = read_fls(job + ".fls") if os.path.exists(job + ".fls") else []
     fonts = font_report(fls, job + ".pdf")
     total = (root["end"] or 0) - (root["start"] or 0)
@@ -266,7 +355,9 @@ def main():
 
     if as_json:
         print(json.dumps({"total_s": total, "preamble_s": preamble, "units": table,
-                          "pages": ptimes, "fonts": fonts}, indent=2))
+                          "pages": ptimes, "fonts": fonts, "phases": run,
+                          "environments": envs, "discarded_shipouts": events["discarded"]},
+                         indent=2))
         return
 
     print(f"== prumo report: {job}  (total {total * 1000:.0f} ms, preamble {preamble * 1000:.0f} ms, "
@@ -274,9 +365,20 @@ def main():
     print("\n-- slowest units (exclusive) --")
     for r in table[:12]:
         print(f"  {r['exclusive'] * 1000:7.1f} ms  {r['inclusive'] * 1000:7.1f} ms incl  {r['kind']:4} {r['name']}")
+    if run:
+        print("\n-- phases --")
+        for k in ("startup", "preamble", "begin_document", "typesetting", "shipout", "end_document"):
+            v = run[k + "_s"]
+            print(f"  {k.replace('_', '-'):15} " + (f"{v * 1000:8.1f} ms" if v is not None else "       -"))
+    if envs:
+        print("\n-- environments --")
+        for r in envs:
+            print(f"  {r['total_s'] * 1000:7.1f} ms  {r['count']:4}x  max {r['max_s'] * 1000:6.1f} ms  {r['name']}")
     print("\n-- pages --")
     for n, dt in ptimes:
         print(f"  page {n}: {dt * 1000:.1f} ms")
+    if events["discarded"]:
+        print(f"  discarded shipouts: {len(events['discarded'])} (a package threw the page away)")
     print("\n-- load tree --")
     for line in print_tree(root)[:40]:
         print("  " + line)

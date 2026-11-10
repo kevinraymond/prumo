@@ -14,6 +14,47 @@ use std::time::SystemTime;
 /// The probe, embedded so users never install it.
 pub const PROBE: &str = include_str!("../tex/prumo.sty");
 
+/// Environments a build watches unless `--env` says otherwise: the ones that usually hold
+/// a body's time. Nested ones (`axis` inside `tikzpicture`) are timed inside their parent
+/// too. Inline forms that are not environments (`\tikz ...;`) are not seen.
+pub const DEFAULT_ENVIRONMENTS: [&str; 9] =
+    ["tikzpicture", "axis", "tcolorbox", "tblr", "longtable", "tabularx", "minted", "lstlisting", "forest"];
+
+/// `DEFAULT_ENVIRONMENTS` as owned names.
+pub fn default_environments() -> Vec<String> {
+    DEFAULT_ENVIRONMENTS.iter().map(|s| s.to_string()).collect()
+}
+
+/// The probe for one build: the directory holding `prumo.sty`, and the environments whose
+/// `\begin`..`\end` it records.
+#[derive(Debug, Clone, Copy)]
+pub struct Probe<'a> {
+    pub dir: &'a Path,
+    pub environments: &'a [String],
+}
+
+impl Probe<'_> {
+    /// The TeX code that loads it: `\RequirePackage{prumo}`, then `\PrumoEnvironments{…}`
+    /// when there are environments to watch.
+    pub fn load(&self) -> String {
+        if self.environments.is_empty() {
+            "\\RequirePackage{prumo}".to_string()
+        } else {
+            format!("\\RequirePackage{{prumo}}\\PrumoEnvironments{{{}}}", self.environments.join(","))
+        }
+    }
+}
+
+/// What one engine (or latexmk) process did.
+#[derive(Debug, Clone)]
+pub struct Built {
+    /// The command as run.
+    pub argv: Vec<String>,
+    pub exit_code: Option<i32>,
+    /// Spawn to exit, polled every millisecond.
+    pub wall: std::time::Duration,
+}
+
 /// Which `latex` command to run.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Serialize, serde::Deserialize, clap::ValueEnum)]
 #[serde(rename_all = "lowercase")]
@@ -265,11 +306,14 @@ pub struct RunOptions {
     pub edits: Vec<(PathBuf, String)>,
     /// Kill the build (and its children) after this long; `RunError::TimedOut`.
     pub timeout: Option<std::time::Duration>,
+    /// Environments the probe records (`env+`/`env-`); `DEFAULT_ENVIRONMENTS` by default.
+    pub environments: Vec<String>,
 }
 
 impl RunOptions {
     /// The ordinary probed build of `main` with `engine`: no latexmk, no custom command,
-    /// the default cache directory, no extra environment, no pretex, no edits, no timeout.
+    /// the default cache directory, no extra environment, no pretex, no edits, no timeout,
+    /// the default environments watched.
     pub fn new(main: PathBuf, engine: EngineCmd) -> Self {
         Self {
             main,
@@ -281,6 +325,7 @@ impl RunOptions {
             pretex: None,
             edits: vec![],
             timeout: None,
+            environments: default_environments(),
         }
     }
 }
@@ -305,6 +350,13 @@ pub struct RunInfo {
     /// is not reused in another: they are different TeX Lives.
     #[serde(default)]
     pub image: Option<String>,
+    /// Environments the probe watched. A run that watched others is stale.
+    #[serde(default)]
+    pub environments: Vec<String>,
+    /// Wall time of the engine process in nanoseconds, spawn to exit. Only for a single
+    /// engine process: under latexmk the process is several passes.
+    #[serde(default)]
+    pub wall_ns: Option<u64>,
 }
 
 /// Artifacts of one build, all inside the cache directory.
@@ -334,9 +386,9 @@ pub enum RunError {
         #[source]
         source: std::io::Error,
     },
-    #[error("the build wrote no {job}.prumo: the probe never ran (exit code {code:?}). Log tail:\n{tail}")]
+    #[error("the build wrote no {job}.prumo: the probe never ran ({}). Log tail:\n{tail}", exit_text(*.code))]
     NoRecords { job: String, code: Option<i32>, tail: String },
-    #[error("the build wrote no {job}.fls: -recorder was not honored (exit code {code:?})")]
+    #[error("the build wrote no {job}.fls: -recorder was not honored ({})", exit_text(*.code))]
     NoFls { job: String, code: Option<i32> },
     #[error(transparent)]
     Records(#[from] crate::records::RecordsError),
@@ -356,6 +408,11 @@ pub enum RunError {
         #[source]
         source: serde_json::Error,
     },
+}
+
+/// An exit status for a message: `exit 12`, or `killed by a signal`.
+pub(crate) fn exit_text(code: Option<i32>) -> String {
+    code.map(|c| format!("exit {c}")).unwrap_or_else(|| "killed by a signal".into())
 }
 
 fn io<'a>(what: &'static str, path: &'a Path) -> impl FnOnce(std::io::Error) -> RunError + 'a {
@@ -466,18 +523,17 @@ fn copy_tree(from: &Path, to: &Path) -> Result<(), RunError> {
     Ok(())
 }
 
-/// Run one build command in `dir` on `<stem>.tex`, with or without the probe. Returns the
-/// argv and the exit code. Low-level: `run()` is the entry point; tests use this for the
-/// invariance check.
+/// Run one build command in `dir` on `<stem>.tex`, with or without the probe.
+/// Low-level: `run()` is the entry point; tests use this for the invariance check.
 pub fn build_once(
     dir: &Path,
     stem: &str,
     build: &BuildCmd,
-    probe_dir: Option<&Path>,
+    probe: Option<Probe<'_>>,
     env: &[(String, String)],
     pretex: Option<&str>,
-) -> Result<(Vec<String>, Option<i32>), RunError> {
-    build_once_timed(dir, stem, build, probe_dir, env, pretex, None)
+) -> Result<Built, RunError> {
+    build_once_timed(dir, stem, build, probe, env, pretex, None)
 }
 
 /// `build_once` with a timeout: the build runs in its own process group and the whole
@@ -486,11 +542,11 @@ pub(crate) fn build_once_timed(
     dir: &Path,
     stem: &str,
     build: &BuildCmd,
-    probe_dir: Option<&Path>,
+    probe: Option<Probe<'_>>,
     env: &[(String, String)],
     pretex: Option<&str>,
     timeout: Option<std::time::Duration>,
-) -> Result<(Vec<String>, Option<i32>), RunError> {
+) -> Result<Built, RunError> {
     let tool = build.tool();
     let has_dir = Path::new(tool).components().count() > 1;
     let found = if has_dir { Path::new(tool).is_file() } else { crate::doctor::which(tool).is_some() };
@@ -499,11 +555,11 @@ pub(crate) fn build_once_timed(
     }
     let mut cmd = Command::new(tool);
     let mut argv: Vec<String> = build.argv.clone();
-    let pre = match (pretex, probe_dir.is_some()) {
-        (Some(p), true) => Some(format!("{p}\\RequirePackage{{prumo}}")),
-        (Some(p), false) => Some(p.to_string()),
-        (None, true) => Some("\\RequirePackage{prumo}".to_string()),
-        (None, false) => None,
+    let pre = match (pretex, probe.map(|p| p.load())) {
+        (Some(p), Some(load)) => Some(format!("{p}{load}")),
+        (Some(p), None) => Some(p.to_string()),
+        (None, Some(load)) => Some(load),
+        (None, None) => None,
     };
     if !build.has_flag("interaction") {
         argv.push("-interaction=nonstopmode".into());
@@ -526,7 +582,7 @@ pub(crate) fn build_once_timed(
         });
     }
     cmd.args(&argv[1..]).current_dir(dir);
-    if let Some(p) = probe_dir {
+    if let Some(p) = probe.map(|p| p.dir) {
         // kpathsea separates search paths with `:`, except on Windows where it is `;`.
         // A trailing separator keeps the default search path.
         const SEP: char = if cfg!(windows) { ';' } else { ':' };
@@ -547,11 +603,13 @@ pub(crate) fn build_once_timed(
         cmd.process_group(0);
     }
     let run_err = |e: std::io::Error| RunError::Io { what: "run", path: PathBuf::from(tool), source: e };
-    let mut child = cmd.spawn().map_err(run_err)?;
     let started = std::time::Instant::now();
+    let mut child = cmd.spawn().map_err(run_err)?;
     loop {
         if let Some(status) = child.try_wait().map_err(run_err)? {
-            return Ok((argv, status.code()));
+            // The wall time is the finalization's other end: poll often enough that it is
+            // good to the millisecond.
+            return Ok(Built { argv, exit_code: status.code(), wall: started.elapsed() });
         }
         if let Some(t) = timeout
             && started.elapsed() > t
@@ -562,7 +620,7 @@ pub(crate) fn build_once_timed(
             let _ = child.wait();
             return Err(RunError::TimedOut { secs: started.elapsed().as_secs_f64() });
         }
-        std::thread::sleep(std::time::Duration::from_millis(20));
+        std::thread::sleep(std::time::Duration::from_millis(1));
     }
 }
 
@@ -629,6 +687,36 @@ fn collect(
     Ok(Artifacts { records, fls, log, pdf })
 }
 
+/// A build prumo did not run: `<job>.prumo` from somewhere else (Overleaf, a build by hand
+/// with the probe loaded), with the `.fls`, `.log` and PDF next to it when they are there.
+/// Nothing is built and nothing is written. There is no process wall time, so no
+/// finalization.
+pub fn from_records(records: &Path) -> Result<RunOutput, RunError> {
+    if !records.is_file() {
+        return Err(RunError::NotAFile { path: records.to_path_buf(), hint: "" });
+    }
+    let job = records.file_stem().map(|s| s.to_string_lossy().into_owned()).unwrap_or_default();
+    let dir = records.parent().filter(|d| !d.as_os_str().is_empty()).unwrap_or(Path::new(".")).to_path_buf();
+    let engine = engine_of(records)?;
+    let p = |ext: &str| dir.join(format!("{job}.{ext}"));
+    let pdf = p("pdf").is_file().then(|| p("pdf"));
+    let info = RunInfo {
+        schema: crate::JSON_SCHEMA,
+        main: std::fs::canonicalize(records).unwrap_or_else(|_| records.to_path_buf()),
+        job: job.clone(),
+        engine,
+        latexmk: false,
+        build: None,
+        command: vec![],
+        exit_code: None,
+        started_at_ns: 0,
+        image: None,
+        environments: vec![],
+        wall_ns: None,
+    };
+    Ok(RunOutput { records: records.to_path_buf(), fls: p("fls"), log: p("log"), pdf, dir, job, info })
+}
+
 /// The engine a bare `latexmk` ran, from the start record.
 fn engine_of(records: &Path) -> Result<EngineCmd, RunError> {
     use crate::records::{Engine, Event};
@@ -665,15 +753,10 @@ pub fn run(opts: &RunOptions) -> Result<RunOutput, RunError> {
     let started_at_ns = unix_ns(SystemTime::now());
     let tmp = tempfile::Builder::new().prefix("prumo-").tempdir().map_err(io("create temp dir", Path::new("/tmp")))?;
     let staged = stage(tmp.path(), &project, &opts.edits)?;
-    let (command, exit_code) = build_once_timed(
-        &staged.work,
-        &stem,
-        &build,
-        Some(&staged.probe_dir),
-        &opts.env,
-        opts.pretex.as_deref(),
-        opts.timeout,
-    )?;
+    let probe = Probe { dir: &staged.probe_dir, environments: &opts.environments };
+    let built =
+        build_once_timed(&staged.work, &stem, &build, Some(probe), &opts.env, opts.pretex.as_deref(), opts.timeout)?;
+    let (command, exit_code) = (built.argv, built.exit_code);
 
     // With -output-directory / -outdir the PDF lands there; latexmk's -auxdir takes the
     // .fls, .log and records (verified: the probe's \iow_open follows openout).
@@ -705,6 +788,9 @@ pub fn run(opts: &RunOptions) -> Result<RunOutput, RunError> {
         exit_code,
         started_at_ns,
         image: crate::doctor::image(),
+        environments: opts.environments.clone(),
+        // latexmk is several engine passes and a few tools; its wall time is not one run's.
+        wall_ns: (!build.latexmk).then(|| built.wall.as_nanos().min(u128::from(u64::MAX)) as u64),
     };
     let info_path = cache.join("run.json");
     let text = serde_json::to_string_pretty(&info)
@@ -770,10 +856,18 @@ pub(crate) fn parse_records(out: &RunOutput) -> Result<Vec<crate::records::Recor
     Ok(crate::records::parse_file(&out.records)?)
 }
 
-/// The build model of a run: its records parsed and validated.
+/// The build model of a run: its records parsed and validated, with the process wall time
+/// from `run.json` when there is one.
 pub fn model_of(out: &RunOutput) -> Result<crate::model::BuildModel, RunError> {
     let recs = parse_records(out)?;
-    Ok(crate::model::BuildModel::from_records(&recs, &out.records.display().to_string())?)
+    let mut model = crate::model::BuildModel::from_records(&recs, &out.records.display().to_string())?;
+    model.wall = out.info.wall_ns.map(ns_to_scaled);
+    Ok(model)
+}
+
+/// Nanoseconds to scaled seconds, rounded down.
+pub fn ns_to_scaled(ns: u64) -> crate::Scaled {
+    (u128::from(ns) * u128::from(crate::SCALED_PER_SECOND) / 1_000_000_000) as crate::Scaled
 }
 
 /// The last `n` lines of `text`, for log tails in messages.
@@ -838,6 +932,11 @@ pub fn is_stale(cached: &RunOutput, opts: &RunOptions) -> bool {
         return true;
     }
     if opts.build.is_none() && (info.engine != opts.engine || info.latexmk != opts.latexmk) {
+        return true;
+    }
+    // Runs from before probe v0.2 have no environment list, so they are stale too: their
+    // records lack docstart and lastpage.
+    if info.environments != opts.environments {
         return true;
     }
     let Ok((_, project)) = job_of(main) else { return true };
@@ -996,5 +1095,19 @@ mod tests {
     fn probe_is_embedded() {
         assert!(PROBE.contains("\\ProvidesPackage{prumo}"));
         assert!(PROBE.contains("shipout/after"));
+        assert!(PROBE.contains("\\PrumoEnvironments"));
+    }
+
+    #[test]
+    fn probe_load_line() {
+        let dir = Path::new("/p");
+        assert_eq!(Probe { dir, environments: &[] }.load(), "\\RequirePackage{prumo}");
+        let envs = vec!["tikzpicture".to_string(), "align*".to_string()];
+        assert_eq!(
+            Probe { dir, environments: &envs }.load(),
+            "\\RequirePackage{prumo}\\PrumoEnvironments{tikzpicture,align*}"
+        );
+        assert_eq!(ns_to_scaled(1_000_000_000), crate::SCALED_PER_SECOND);
+        assert_eq!(ns_to_scaled(500_000_000), crate::SCALED_PER_SECOND / 2);
     }
 }

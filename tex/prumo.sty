@@ -8,19 +8,26 @@
 %%
 %%   <event> <timer> <depth> <name>
 %%
-%%   event : start | file+ | file- | pkg+ | pkg- | cls+ | cls- |
-%%           predoc | begindoc | ship | page | enddoc | end
+%%   event : start | file+ | file- | pkg+ | pkg- | cls+ | cls- | opts |
+%%           predoc | begindoc | docstart | ship | page | env+ | env- |
+%%           enddoc | lastpage | end
 %%   timer : \sys_timer: value — scaled seconds (1/65536 s) since engine start
 %%   depth : current file nesting depth (0 = command line / main file)
 %%   name  : file name as read, \CurrentFileUsed (may contain spaces; always the last field)
 %%
 %% Requires LaTeX 2021-06-01 or later (hook system since 2020-10, raw package
 %% options since 2021-06; prumo supports no older kernel).
-%% Works on pdfTeX, XeTeX and LuaTeX. \sys_timer: resolves to
-%% \pdfelapsedtime, \elapsedtime or os.clock() respectively.
+%% Works on pdfTeX, XeTeX and LuaTeX. \sys_timer: resolves to \pdfelapsedtime,
+%% \elapsedtime, or on LuaTeX the kernel's os.gettimeofday() reading. All three are
+%% wall clock with the zero at about the start of the process (l3kernel sets the
+%% LuaTeX zero to gettimeofday() - os.clock() when its Lua code loads).
+%%
+%% Environments are not timed unless named, after loading:
+%%   \RequirePackage{prumo}\PrumoEnvironments{tikzpicture,tblr}\input{main}
+%% Each \begin{<name>} ... \end{<name>} then writes env+ and env- records.
 %%
 \NeedsTeXFormat{LaTeX2e}[2021/06/01]
-\ProvidesPackage{prumo}[2026/11/06 v0.1 build probe: timing, load graph, font records]
+\ProvidesPackage{prumo}[2026/11/09 v0.2 build probe: timing, load graph, font records]
 
 \ExplSyntaxOn
 
@@ -28,19 +35,28 @@
 \int_new:N  \g__prumo_depth_int
 \int_new:N  \g__prumo_page_int
 \bool_new:N \g__prumo_open_bool
+\bool_new:N \g__prumo_closed_bool
 
 % \__prumo_rec:nn {event} {name}
+% Any event opens the record file if it is not open yet, and nothing reopens it after
+% `end` closed it. From the command line the first event is file/before for the main
+% file; loaded on the first line of the main file (Overleaf) it is class/before.
 \cs_new_protected:Npn \__prumo_rec:nn #1#2
   {
-    \bool_if:NT \g__prumo_open_bool
+    \bool_if:NF \g__prumo_closed_bool
       {
-        \iow_now:Nx \g__prumo_iow
-          {
-            #1 \c_space_tl
-            \sys_timer: \c_space_tl
-            \int_use:N \g__prumo_depth_int \c_space_tl
-            #2
-          }
+        \__prumo_open:
+        \__prumo_write:nn {#1} {#2}
+      }
+  }
+\cs_new_protected:Npn \__prumo_write:nn #1#2
+  {
+    \iow_now:Nx \g__prumo_iow
+      {
+        #1 \c_space_tl
+        \sys_timer: \c_space_tl
+        \int_use:N \g__prumo_depth_int \c_space_tl
+        #2
       }
   }
 
@@ -52,7 +68,7 @@
       {
         \iow_open:Nn \g__prumo_iow { \c_sys_jobname_str .prumo }
         \bool_gset_true:N \g__prumo_open_bool
-        \__prumo_rec:nn { start } { \c_sys_engine_str \c_space_tl \fmtversion }
+        \__prumo_write:nn { start } { \c_sys_engine_str \c_space_tl \fmtversion }
       }
   }
 
@@ -79,7 +95,6 @@
 % \@currname, the log and the .fls all say atbegshi-ltx.
 \AddToHook { file/before }
   {
-    \__prumo_open:
     \__prumo_rec:nn { file+ } { \CurrentFileUsed }
     \int_gincr:N \g__prumo_depth_int
   }
@@ -104,8 +119,12 @@
     \cs_if_exist:cT { @raw@opt@ \@currname . \@currext }
       { \__prumo_rec:nn { opts } { \use:c { @raw@opt@ \@currname . \@currext } } }
   }
+% As with file/after: prumo.sty's own package/after fires, its package/before did not.
 \AddToHook { package/after }
-  { \__prumo_rec:nn { pkg- } { \@currname } }
+  {
+    \str_if_eq:eeF { \@currname } { prumo }
+      { \__prumo_rec:nn { pkg- } { \@currname } }
+  }
 \AddToHook { class/before }
   { \__prumo_rec:nn { cls+ } { \@currname } }
 \AddToHook { class/after }
@@ -119,6 +138,12 @@
   { \__prumo_rec:nn { predoc } { } }
 \AddToHook { begindocument }
   { \__prumo_rec:nn { begindoc } { } }
+% docstart is the last thing \begin{document} does: everything \AtBeginDocument ran is
+% before it, so page 1 counts from here. Packages add to begindocument/end too (amsmath,
+% tagpdf, 92 files in TeX Live 2026). Next-invocation code runs after all of them and after
+% document-level code, and this one-time hook has only one invocation.
+\AddToHookNext { begindocument/end }
+  { \__prumo_rec:nn { docstart } { } }
 % ship marks the start of the shipout (shipout/before); page its end. What runs in between
 % is the shipout hooks (eso-pic backgrounds, florilegium's margins, hyperref's links):
 % page time = typesetting (since the previous page) + shipout (ship..page).
@@ -131,10 +156,38 @@
   }
 \AddToHook { enddocument }
   { \__prumo_rec:nn { enddoc } { } }
-\AddToHook { enddocument/end }
+% lastpage follows the final \clearpage of \end{document}; what remains is reading the
+% .aux again and the rerun checks.
+\AddToHook { enddocument/afterlastpage }
+  { \__prumo_rec:nn { lastpage } { } }
+% end is the last record, after other packages' enddocument/end code (next-invocation
+% code, as for docstart); what follows is the engine closing the PDF.
+\AddToHookNext { enddocument/end }
   {
     \__prumo_rec:nn { end } { }
     \iow_close:N \g__prumo_iow
+    \bool_gset_true:N \g__prumo_closed_bool
+  }
+
+% ---- environments, opt-in ----
+% \PrumoEnvironments{<comma list>} adds env+ / env- records on the generic hooks
+% env/<name>/before and env/<name>/after, which \begin and \end run for every
+% environment. A name given twice is watched once. Inline forms that are not
+% environments (\tikz ... ;) are not seen.
+\clist_new:N \g__prumo_env_clist
+\cs_new_protected:Npn \PrumoEnvironments #1
+  {
+    \clist_map_inline:nn {#1}
+      {
+        \clist_if_in:NnF \g__prumo_env_clist {##1}
+          {
+            \clist_gput_right:Nn \g__prumo_env_clist {##1}
+            \AddToHook { env/##1/before } [ prumo ]
+              { \__prumo_rec:nn { env+ } {##1} }
+            \AddToHook { env/##1/after } [ prumo ]
+              { \__prumo_rec:nn { env- } {##1} }
+          }
+      }
   }
 
 \ExplSyntaxOff

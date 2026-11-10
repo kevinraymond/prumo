@@ -18,6 +18,8 @@ struct Cli {
 #[derive(clap::Args, Clone)]
 struct BuildArgs {
     /// The document (`main.tex`). Its directory is copied; nothing in it is modified.
+    /// `time` and `graph` also take a record file (`output.prumo`) from a build prumo did
+    /// not run, and read it without building.
     main: PathBuf,
     /// Engine to run. Default: the document's `% !TEX program =` magic comment, else pdflatex.
     #[arg(long, value_enum)]
@@ -37,6 +39,34 @@ struct BuildArgs {
     /// Rebuild even if the cached run looks fresh.
     #[arg(long)]
     rebuild: bool,
+    /// Environments to time, comma-separated, or `none`. Default: tikzpicture, axis,
+    /// tcolorbox, tblr, longtable, tabularx, minted, lstlisting, forest. Inline forms that
+    /// are not environments (`\tikz ...;`) are not seen.
+    #[arg(long = "env", value_name = "NAMES", value_delimiter = ',')]
+    env: Option<Vec<String>>,
+}
+
+/// `--env`: the names, checked, or the default list. `none` (or an empty list) watches
+/// nothing. A name goes into a hook name and the TeX command line, so it is limited to the
+/// characters environment names use.
+fn environments(arg: Option<&[String]>) -> anyhow::Result<Vec<String>> {
+    let Some(names) = arg else { return Ok(run::default_environments()) };
+    let mut out: Vec<String> = Vec::new();
+    for n in names.iter().map(|n| n.trim()).filter(|n| !n.is_empty()) {
+        if n == "none" {
+            continue;
+        }
+        if n == "document" {
+            anyhow::bail!("--env document: the document environment is the run itself; see the phases");
+        }
+        if !n.chars().all(|c| c.is_ascii_alphanumeric() || "*-_@:.".contains(c)) {
+            anyhow::bail!("--env {n:?}: an environment name is letters, digits and * - _ @ : .");
+        }
+        if !out.iter().any(|o| o == n) {
+            out.push(n.to_string());
+        }
+    }
+    Ok(out)
 }
 
 #[derive(Clone, Copy, ValueEnum)]
@@ -162,6 +192,9 @@ enum Cmd {
         /// Cache directory (default: `compare` under the document's cache directory; `prumo where`).
         #[arg(long)]
         out: Option<PathBuf>,
+        /// Environments to time, comma-separated, or `none` (default as for `time`).
+        #[arg(long = "env", value_name = "NAMES", value_delimiter = ',')]
+        env: Option<Vec<String>>,
         /// Machine-readable output (schema 1).
         #[arg(long)]
         json: bool,
@@ -281,6 +314,7 @@ fn model_of(out: &RunOutput) -> anyhow::Result<BuildModel> {
     let recs =
         prumo::records::parse_file(&out.records).with_context(|| format!("reading {}", out.records.display()))?;
     let mut model = BuildModel::from_records(&recs, &out.records.display().to_string())?;
+    model.wall = out.info.wall_ns.map(run::ns_to_scaled);
     if let Some(code) = out.info.exit_code.filter(|c| *c != 0) {
         model.warnings.insert(
             0,
@@ -293,10 +327,12 @@ fn model_of(out: &RunOutput) -> anyhow::Result<BuildModel> {
     if let Ok(lines) = prumo::fls::parse_file(&out.fls)
         && let Some(n) = prumo::fls::font_database_built(&lines)
     {
+        // The build happens at the first font selection (size10.clo's \normalsize). The
+        // main file's own row holds the whole body on a long document, so skip it.
         let culprit = model
             .unit_table()
             .into_iter()
-            .next()
+            .find(|r| !r.name.ends_with(".tex"))
             .map(|r| {
                 format!(
                     "; it sits in {}'s exclusive column ({:.0} ms)",
@@ -324,18 +360,30 @@ impl BuildArgs {
     }
 }
 
-fn run_options(b: &BuildArgs) -> RunOptions {
-    RunOptions {
+fn run_options(b: &BuildArgs) -> anyhow::Result<RunOptions> {
+    Ok(RunOptions {
         latexmk: b.latexmk,
         build: b.build.clone(),
         out: b.out.clone(),
+        environments: environments(b.env.as_deref())?,
         ..RunOptions::new(b.main.clone(), b.engine().0)
-    }
+    })
 }
 
-/// The cached run, or a fresh one.
+/// `main.prumo` instead of `main.tex`: records from a build prumo did not run.
+fn is_records(b: &BuildArgs) -> bool {
+    b.main.extension().is_some_and(|e| e == "prumo")
+}
+
+/// The cached run, or a fresh one; or, given a `.prumo` file, the records next to it.
 fn ensure_run(b: &BuildArgs, quiet: bool) -> anyhow::Result<RunOutput> {
-    let opts = run_options(b);
+    if is_records(b) {
+        if !quiet {
+            eprintln!("prumo: reading {} (no build; the files next to it are used when present)", b.main.display());
+        }
+        return Ok(run::from_records(&b.main)?);
+    }
+    let opts = run_options(b)?;
     if !b.rebuild
         && let Some(c) = run::cached(&b.main, b.out.as_deref())?
         && !run::is_stale(&c, &opts)
@@ -365,6 +413,9 @@ fn ensure_run(b: &BuildArgs, quiet: bool) -> anyhow::Result<RunOutput> {
         && !quiet
     {
         eprintln!("prumo: the build exited with {code}; see {}", prumo::doctor::host_path(&out.dir.join("build.out")));
+        if let Some(e) = prumo::texlog::parse_file(&out.log).ok().and_then(|l| l.errors.into_iter().next()) {
+            eprintln!("prumo: first error: ! {e}");
+        }
         if b.engine.is_none()
             && let Some(hint) = engine_hint(&out.log)
         {
@@ -516,8 +567,14 @@ fn main() -> anyhow::Result<()> {
             };
             println!("{}  ({state})", prumo::doctor::host_path(&dir));
         }
+        Cmd::Run { build } if is_records(&build) => {
+            anyhow::bail!("{}: run builds a document; give its .tex", build.main.display())
+        }
+        Cmd::Unused { build, .. } if is_records(&build) => {
+            anyhow::bail!("{}: unused rebuilds the document; give its .tex", build.main.display())
+        }
         Cmd::Run { build } => {
-            let out = run::run(&run_options(&build))?;
+            let out = run::run(&run_options(&build)?)?;
             println!("prumo: artifacts in {}", prumo::doctor::host_path(&out.dir));
             println!("  command: {}", out.info.command.join(" "));
             println!("  exit code: {}", out.info.exit_code.map(|c| c.to_string()).unwrap_or_else(|| "signal".into()));
@@ -547,11 +604,20 @@ fn main() -> anyhow::Result<()> {
                     report::time_text(
                         &model,
                         &out.job,
-                        files_read,
-                        by,
-                        top,
-                        depth,
-                        prumo::chart::detect(plain).map(|l| prumo::chart::Look { preamble, ..l })
+                        report::TextOptions {
+                            files_read,
+                            by,
+                            top,
+                            depth,
+                            look: prumo::chart::detect(plain).map(|l| prumo::chart::Look { preamble, ..l }),
+                            no_wall: if is_records(&build) {
+                                report::NoWall::Records
+                            } else if out.info.latexmk {
+                                report::NoWall::Latexmk
+                            } else {
+                                report::NoWall::OldCache
+                            },
+                        }
                     )
                 );
             }
@@ -654,10 +720,11 @@ fn main() -> anyhow::Result<()> {
                 }
             }
         }
-        Cmd::Compare { main, engines, latexmk, runs, out, json } => {
+        Cmd::Compare { main, engines, latexmk, runs, out, env: names, json } => {
             let engines = if engines.is_empty() { prumo::compare::ALL_ENGINES.to_vec() } else { engines };
+            let environments = environments(names.as_deref())?;
             let c = prumo::compare::compare(
-                &prumo::compare::CompareOptions { main, engines, latexmk, runs, out, env: vec![] },
+                &prumo::compare::CompareOptions { main, engines, latexmk, runs, out, env: vec![], environments },
                 |msg| {
                     if !json {
                         eprintln!("prumo: {msg}");
@@ -711,7 +778,18 @@ fn main() -> anyhow::Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use super::missing_font;
+    use super::{environments, missing_font};
+
+    #[test]
+    fn env_flag() {
+        let v = |xs: &[&str]| xs.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+        assert_eq!(environments(None).unwrap(), prumo::run::default_environments());
+        assert_eq!(environments(Some(&v(&["none"]))).unwrap(), Vec::<String>::new());
+        assert_eq!(environments(Some(&v(&[""]))).unwrap(), Vec::<String>::new());
+        assert_eq!(environments(Some(&v(&["tblr", " align* ", "tblr"]))).unwrap(), v(&["tblr", "align*"]));
+        assert!(environments(Some(&v(&["document"]))).is_err());
+        assert!(environments(Some(&v(&["a}b"]))).is_err());
+    }
 
     #[test]
     fn fontspec_font_name_is_read_from_the_log() {

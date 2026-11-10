@@ -1,10 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  9 NOV 2026 00:16
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  1 JAN 1970 00:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\RequirePackage{prumo}\input{notes}
+**\RequirePackage{prumo}\PrumoEnvironments{tikzpicture,axis,tcolorbox,tblr,long
+table,tabularx,minted,lstlisting,forest}\input{notes}
 (/w/tex/prumo.sty
-Package: prumo 2026/11/06 v0.1 build probe: timing, load graph, font records
+Package: prumo 2026/11/09 v0.2 build probe: timing, load graph, font records
 \g__prumo_depth_int=\count273
 \g__prumo_page_int=\count274
 )
@@ -387,12 +388,12 @@ L3 programming layer <2026-09-09>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 11581 strings out of 469155
- 248398 string characters out of 5451604
- 620758 words of memory out of 5000000
- 40609 multiletter control sequences out of 15000+600000
+ 11711 strings out of 469155
+ 252800 string characters out of 5451604
+ 622535 words of memory out of 5000000
+ 40739 multiletter control sequences out of 15000+600000
  628497 words of font info for 41 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 114i,5n,110p,438b,361s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 114i,5n,110p,533b,361s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on notes.pdf (1 page).
