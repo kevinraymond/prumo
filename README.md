@@ -11,9 +11,9 @@ It is not a compiler and not an editor. It sits next to whatever you already use
 ## Origin
 
 I made this while working on [florilegium](https://github.com/kevinraymond/florilegium) and as
-I learn more about LaTeX, LuaTeX and the hook system. The manual kept taking longer to build and
-I had no way to see why. Commenting packages out one at a time is not insight. prumo
-is one instrumented build that shows where the time goes, which package loaded which, and what you can
+I learn more about LaTeX, LuaTeX and the hook system. I'm interested in seeing inside things,
+in performance and in optimization, and prumo is how I look inside a LaTeX build. One
+instrumented build shows where the time goes, which package loaded which, and what you can
 drop.
 
 It has been run on my own corpus and on public documents from an ACM paper to the 7,710-page
