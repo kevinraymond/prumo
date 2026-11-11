@@ -1,5 +1,5 @@
 # Convenience targets; everything is also runnable by hand (see README.md).
-.PHONY: test tex-tests verify-prune images
+.PHONY: test tex-tests verify-prune images social
 
 test:
 	cargo fmt --check && cargo clippy --all-targets --all-features -- -D warnings && cargo test
@@ -18,3 +18,7 @@ verify-prune:
 images:
 	docker build -q --target clean -t prumo-tex -f docker/Dockerfile.tex .
 	docker build -q --target nocmsuper -t prumo-tex-nocmsuper -f docker/Dockerfile.tex .
+
+# The repository's social image, docs/img/social.png, in the full TeX Live image.
+social:
+	scripts/social.sh
