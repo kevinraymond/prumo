@@ -65,7 +65,17 @@ else, pick the simplest thing that passes the fixtures and note the choice in th
 
 ## Don't reinvent
 
-- Per-macro profiling → point at `texprof` (TeX Live, pdfTeX only). prumo stays at package/file/page.
+- Per-macro profiling → point at `texprof` (TeX Live's `hitex` package). It is its own engine
+  (TeX + e-TeX + Prote) and writes DVI, so it measures itself, not pdfTeX, XeTeX or LuaTeX.
+  prumo stays at package/file/page.
+- Static checks without a build (unused definitions, preamble cost) → `SaTeX`. prumo measures
+  a real build.
+- Package lookup by file, command or environment name → `texfindpkg`. `packages` starts from a
+  build, not from names.
+- A `DEPENDS.txt` for minimal installs → `DEPP` (Island of TeX) writes one from a `file/before`
+  hook. Read it before giving `packages` a dependency-file output.
+- Precompiled preambles, draft mode, TikZ externalization → `mylatexformat`, `-draftmode` (or
+  `-no-pdf`) and tikz's external library. `whatif` measures them and never reimplements them.
 - Log parsing for file nesting → read how `texlogsieve` does it before writing a log parser; prumo
   prefers hook records and uses the log only as a cross-check.
 - Build orchestration → `latexmk`. prumo wraps it (`-usepretex`, `-jobname`), never replaces it.

@@ -55,3 +55,22 @@ clearly marked placeholder.
     will reshape M4/M5.
 12. **CTAN upload of the probe.** Yes/no, and whether to name it `prumo.sty` or something
     generic like `buildprobe.sty` so the CTAN package outlives the tool's name.
+
+## After launch: candidates from the prior-art review (2026-11-12)
+
+Recorded only. None of these is planned, and none has a default.
+
+13. **Per-pass and per-tool timing under latexmk:** pass 1, biber, pass 2, makeindex. Under
+    latexmk the record file is the last pass's, and there is no finalization phase.
+14. **`prumo diff a.json b.json`**, and a budget or exit-code mode for CI.
+15. **Opt-in command timing** on the generic `cmd/<name>/before` and `cmd/<name>/after` hooks.
+    The kernel implements those hooks by patching the command (`\__hook_patch_command:Nnn`,
+    ltcmdhooks), which conflicts with CLAUDE.md rules 3 and 5. A conflict to decide, not a
+    plan.
+16. **`packages` on MiKTeX**, where texfindpkg maps names to packages and prumo reports files.
+    Also `packages` output as a `tlmgr install` line or a `DEPENDS.txt` (DEPP's file).
+17. **Trace export:** speedscope or Chrome trace-event JSON.
+18. **`unused --pairs`**, already mentioned in `06-unused-packages.md`: removing two packages
+    together when each one alone passes.
+
+On 12: texprof (in the `hitex` package) and texfindpkg both ship in TeX Live.
