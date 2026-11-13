@@ -2,8 +2,8 @@
 
 Survey done 2026-11-06. The tools in A, B, C and E were installed and run on TeX Live 2026 on
 2026-11-10 and the rows corrected. SaTeX, DEPP, texdepend, texdeps, two TeX.SE questions and a
-tex-live thread were added on 2026-11-12. SaTeX 0.2.2 and pdffonts were run that day; DEPP,
-texdepend and texdeps were read but not run. Each gap below is what a
+tex-live thread were added on 2026-11-12. SaTeX 0.2.2 and pdffonts were run that day, and
+DEPP 0.4 on 2026-11-13. texdepend and texdeps were read but not run. Each gap below is what a
 tool did on the date given, as a fact to design around, not a verdict on the tool.
 
 ## Where prumo does the same thing
@@ -98,7 +98,7 @@ hook context.
 | Tool | Approach | Gap |
 |---|---|---|
 | mkjobtexmf (Oberdiek, v0.8, 2011) | Run with `-recorder`/strace, symlink (or `--copy`) the used files into a job-local texmf tree | File level, one job, "experimental" by its own docs |
-| DEPP 0.4 (Marei Peischl, Island of TeX, 2026-01-07; GitLab, not on CTAN; read, not run) | A package loaded before the document. A `file/before` hook guesses each file's TeX Live package from its path (`tex/<format>/<package>/`); `tlmgr search --file` through shell-escape for the rest; fonts through luaotfload, hyphenation patterns from babel or polyglossia. Writes `DEPENDS.txt` | Its documentation: works with LuaLaTeX, other engines in progress. Its README: the list is written at `\begin{document}`, so fonts loaded later are not in it yet. Lists what to install |
+| DEPP 0.4 (Marei Peischl, Island of TeX, 2026-01-07; GitLab, not on CTAN; run 2026-11-13) | A package loaded before the document. A `file/before` hook collects the files. On LuaLaTeX each file's TeX Live package comes from its path (`tex/<format>/<package>/`) and the fonts from luaotfload. On pdfLaTeX and XeLaTeX each file goes to `tlmgr search --file` through shell-escape (`texosquery-jre8` under the default restricted shell). Hyphenation patterns from babel or polyglossia. Writes `DEPENDS.txt` at `enddocument/info` | Files read outside the hooks are not in the list (below). Lists what to install |
 | `depreader.lua` (Joseph Wright, TeX.SE answer 716373, 2024-04-24) | Reads the `.fls`, runs `tlmgr search --file /<name>` per file, prints the TeX Live packages and the files with no match | By its own list: only files a TeX run reads (not biber or makeindex), not format files, slow (one `tlmgr` call per file), no tlpdb `depend` edges |
 | snapshot + bundledoc (Pakin) | Archive a document's dependencies | For archiving, not for an install |
 | texliveonfly (2011) | Install missing packages via tlmgr while compiling | Add-only |
@@ -106,6 +106,32 @@ hook context.
 | tlmgr | `scheme-minimal`, `scheme-infraonly`, `remove`, `search --global --file`, `search --json` (since 2024-04, after the thread below; works on TeX Live 2026), pinning, `--usermode` | No "remove what these documents don't use" |
 | Tectonic bundles | Self-contained bundles; custom bundles from a hand-written spec | No usage-driven subsetting |
 | MiKTeX | Install on the fly | No pruning |
+
+**DEPP on prumo's fixtures (2026-11-13).** Built from the GitLab source (commit `bae14f2`)
+with `tex depp.ins` and run on TeX Live 2026, next to `prumo packages` on the same engine:
+basic, biblatex, beamer and custom-class on pdfLaTeX and LuaLaTeX, basic, biblatex and
+fontspec on XeLaTeX, fontspec on LuaLaTeX.
+
+- All three engines worked. Its documentation says LuaLaTeX works and the other engines are
+  in progress.
+- A build took 0.4 to 0.9 s on LuaLaTeX. On pdfLaTeX and XeLaTeX with `-shell-escape`, one
+  `tlmgr search --file` per file made it 18 to 124 s (124 s for beamer on pdfLaTeX). Without
+  shell-escape the list was empty, with a warning. Under the default restricted shell it used
+  `texosquery-jre8`, and the list for basic had `cmextra`, a directory in amsfonts, in place
+  of amsfonts.
+- For the packages a document loads, its lists and prumo's agreed, with two differences.
+  tlmgr can list two packages for a file and the first is the one recorded, so on pdfLaTeX
+  `array.sty` and `enumerate.sty` came out as `latex-tools-dev`, LaTeX's development release,
+  not `tools`. Every list from pdfLaTeX and XeLaTeX with `-shell-escape` had a line `\par` in
+  it; tlmgr prints nothing for the document's own files.
+- Files read outside the hooks were not in its lists on any engine: the Type 1 fonts embedded
+  at shipout (amsfonts's `.pfb` files for Computer Modern, and cm-super's through the font map
+  on basic), babel's `babel-en-US.ini`, and `atbegshi.sty` under beamer. prumo has them from
+  `-recorder`. scheme-minimal, which DEPP's setup example starts from, brings in amsfonts but
+  not cm-super.
+- Its README says the list is written at `\begin{document}`, so fonts loaded later are not in
+  it. 0.4 writes it from `enddocument/info`, and a font and a file first used on page 2 of a
+  test document were in the list.
 
 **Same idea:** `packages` is the `.fls`-to-package lookup from the tex-live thread, and
 mkjobtexmf collects the same file list. prumo reads `texlive.tlpdb` directly (it is what
@@ -168,7 +194,7 @@ B and E (above).
 - https://tug.org/TUGboat/tb45-2/tb140ruckert-profiler.html
 - https://github.com/EagleoutIce/satex-analyzer (SaTeX; github.com/gigalasr/satex-analyzer
   is a fork from 2026-09-26 at 0.1.0) · https://crates.io/crates/satex-analyzer
-- https://gitlab.com/islandoftex/texmf/depp
+- https://gitlab.com/islandoftex/texmf/depp (run at commit bae14f2655f2)
 - https://tex.stackexchange.com/questions/210139 · https://tex.stackexchange.com/a/211572
 - https://tex.stackexchange.com/questions/716306 · https://tex.stackexchange.com/a/716373
 - https://tug.org/pipermail/tex-live/2024-April/050431.html (thread start) ·

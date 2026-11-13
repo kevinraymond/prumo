@@ -14,15 +14,18 @@ saying what differs.
   texdepend, texdeps and the TeX.SE per-page timer, and the tex-live thread of April 2024
   under demand signals. Its gaps are dated facts now, without verdicts.
   `06-unused-packages.md` got the same pass.
-- SaTeX 0.2.2 and pdffonts 26.07.0 were run on TeX Live 2026. DEPP, texdepend and texdeps
-  were read, not run.
+- SaTeX 0.2.2 and pdffonts 26.07.0 were run on TeX Live 2026. texdepend and texdeps were
+  read, not run.
+- DEPP 0.4 was run on 2026-11-13, built from source, on five fixtures and all three engines,
+  next to `prumo packages`. The README entry and 02 now say what it did and where the lists
+  differ.
 - The byte-identical test compares the whole PDF, built twice in one directory with
   `SOURCE_DATE_EPOCH=0` and `FORCE_SOURCE_DATE=1`. The README says that now. The test passes
   on the TeX Live 2026 image (2026-11-12).
 - CLAUDE.md no longer calls texprof pdfTeX, and "Don't reinvent" names SaTeX, texfindpkg,
   DEPP and mylatexformat.
 
-**Blocked:** nothing. DEPP is still to be run.
+**Blocked:** nothing.
 **Open questions:** 13 to 18 in `08-open-questions.md`, recorded from the review. CLAUDE.md
 rule 3 allows more than the test checks ("modulo /CreationDate and ID"); should it say what
 the test does? Carried over: should the LuaTeX font count go in through `font.nextid()`, and
