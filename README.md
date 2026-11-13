@@ -330,8 +330,7 @@ seconds longer; `compare` runs every engine twice for that reason, and the
 ## Related tools
 
 These are the tools I know of that touch the same questions. Each was installed and run on
-TeX Live 2026 (November 2026) before I described it here, except DEPP, which I have read but
-not run.
+TeX Live 2026 (November 2026) before I described it here.
 
 - **texprof and texprofile** (Martin Ruckert, TUGboat 45:2, 2024; in TeX Live, in the `hitex`
   package). texprof is a TeX engine of its own, Knuth's TeX with e-TeX and Prote, and it
@@ -363,12 +362,17 @@ not run.
   found" errors name, until the build gets through.
 - **mkjobtexmf** (Heiko Oberdiek, 2011, in TeX Live). Collects the files one run read, from
   `-recorder` or strace, into a texmf tree for that job.
-- **DEPP** (Marei Peischl, Island of TeX, 0.4 of January 2026, on GitLab and not yet on CTAN;
-  not run). A package loaded ahead of the document. On each `file/before` hook it names the
-  file's TeX Live package from where the file sits in the tree, asks `tlmgr search --file`
-  through shell-escape for the rest, and writes the list to `DEPENDS.txt` for a minimal Docker
-  image or a Nix `texlive.withPackages`. Its documentation says it works with LuaLaTeX and
-  that the other engines are in progress.
+- **DEPP** (Marei Peischl, Island of TeX, 0.4 of January 2026, on GitLab and not yet on
+  CTAN). A package loaded ahead of the document. It notes each file on the `file/before` hook
+  and, at the end of the document, writes the TeX Live packages to `DEPENDS.txt` for a minimal
+  Docker image or a Nix `texlive.withPackages`. On LuaLaTeX it names a file's package from
+  where the file sits in the tree. On pdfLaTeX and XeLaTeX it runs `tlmgr search --file` for
+  each file, which needs `-shell-escape`. Its documentation says LuaLaTeX works and the other
+  engines are in progress. I built 0.4 from source and ran it on five of prumo's fixtures.
+  On all three engines its lists named the packages the documents load. The builds took
+  under a second on LuaLaTeX and 18 to 124 seconds on pdfLaTeX and XeLaTeX. Where its lists
+  and `prumo packages` differ is in the
+  [prior-art notes](docs/02-prior-art.md#e-slimming--pruning-tex-live).
 - **pdffonts** (Poppler). Lists the fonts in a PDF with their type and encoding, and whether
   each one is embedded and subset.
 
