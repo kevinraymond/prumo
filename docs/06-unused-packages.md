@@ -3,8 +3,16 @@
 The question "can I delete this `\usepackage`?" cannot be answered by reading the source,
 because packages act by side effect (microtype, hyperref, babel, fontenc, geometry), by
 redefining existing commands (amsmath's `\boldsymbol`, `\eqref`), or by being loaded for a
-single option. The honest answer is experimental: remove it, rebuild, see what changes. Prior
-tools do that badly (top-level only, hash of PDF bytes). prumo does it properly.
+single option. The answer has to come from an experiment: remove it, rebuild, see what
+changes.
+
+Same idea as existing tools: LaTeXpkges did this in 2015, and latexpkges3 and stygtfo do it
+too (`02-prior-art.md`, section A). SaTeX's `unused-package` lint asks the same question from
+an abstract interpretation, without a build. In prumo the candidates come from the probe's
+records, so a request in the user's own class or package counts as well, and the
+comparison is page count, text and a render. LaTeXpkges looks only at the main file's top
+level and compares an MD5 of the output; stygtfo compares rendered pages and was tested with
+Tectonic only, by its README (both checked 2026-11-10).
 
 ## Candidates
 
@@ -20,7 +28,7 @@ Skip list, reported as "loaded for side effects — not tested": `fontenc`, `inp
 `polyglossia`, `fontspec`, `microtype`, `geometry`, `hyperref`, `bookmark`, `lmodern` and other
 pure font-selection packages, `etoolbox`/`xparse`/`expl3` (kernel-adjacent), `nag`, `showframe`,
 `layout`, `lipsum`? (no — lipsum is testable). Keep the list short and editable
-(`--test-all` overrides it). Hard-coding judgement is a smell; the list exists only because
+(`--test-all` overrides it). Hard-coding judgment is a smell; the list exists only because
 these packages will always "pass" the no-change test while obviously doing something.
 
 ## Removing the request (the default since hardening 2)

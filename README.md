@@ -16,6 +16,10 @@ in performance and in optimization, and prumo is how I look inside a LaTeX build
 instrumented build shows where the time goes, which package loaded which, and what you can
 drop.
 
+Most of the individual pieces already exist in other tools, and [Related tools](#related-tools)
+names them. prumo puts them behind one instrumented build on the stock pdfTeX, XeTeX and
+LuaTeX engines.
+
 It has been run on my own corpus and on public documents from an ACM paper to the 7,710-page
 Stacks Project (see [the benchmarks](docs/benchmarks/README.md)). Please report what breaks!
 
@@ -263,8 +267,12 @@ TEXINPUTS=tex: pdflatex -recorder -jobname=main "\RequirePackage{prumo}\PrumoEnv
 It only listens to the LaTeX hook management system and writes one event per line to
 `main.prumo`: files, packages and classes opening and closing, the steps of
 `\begin{document}` and `\end{document}`, each shipout, and the environments it was asked to
-watch. It never changes typesetting: the PDF is byte-identical with and without it, on all
-three engines, and that is a test. prumo reads that record, the engine's `-recorder` file list
+watch. It never changes typesetting. A test builds each fixture twice, once plain and once
+with the probe, and compares the two PDFs byte for byte, with nothing skipped. Both builds run
+in the same directory, because LuaTeX's `/ID` depends on the output path, and with
+`SOURCE_DATE_EPOCH=0` and `FORCE_SOURCE_DATE=1`, so the dates in the PDF and from `\today` are
+fixed. That is eight fixtures, seven of them on all three engines and the fontspec one on
+XeTeX. prumo reads that record, the engine's `-recorder` file list
 (`main.fls`) and the PDF into one model and reports from there.
 
 The reference analyzer, `scripts/prumo_report.py`, is the oracle the Rust implementation must
@@ -316,19 +324,26 @@ seconds longer; `compare` runs every engine twice for that reason, and the
 - **Package and page, not macro.** For per-line and per-macro profiling there is `texprof`
   (below). prumo answers the questions before that one: which package, which file, which
   page, which environment, which font, which `\usepackage` line.
-- **Experiments, not guesses.** "Unused" means the document was rebuilt without the request and
+- **Experiments.** "Unused" means the document was rebuilt without the request and
   nothing observable changed: page count, text, a coarse render. The caveat is printed with it.
 
 ## Related tools
 
 These are the tools I know of that touch the same questions. Each was installed and run on
-TeX Live 2026 (November 2026) before I described it here.
+TeX Live 2026 (November 2026) before I described it here, except DEPP, which I have read but
+not run.
 
 - **texprof and texprofile** (Martin Ruckert, TUGboat 45:2, 2024; in TeX Live, in the `hitex`
   package). texprof is a TeX engine of its own, Knuth's TeX with e-TeX and Prote, and it
   writes DVI. It timestamps every command and charges the time to the file and line the
   command came from, a macro's to where it was defined. texprofile prints the tables and a
   call graph.
+- **SaTeX** (Florian Sihler, Rust, 0.2.2 of November 2026, on crates.io; its README says it is
+  still work in progress). An abstract interpreter for TeX and LaTeX: it expands macros and
+  runs primitives, and it does not typeset. `satex lint` has a `preamble-cost` note, an
+  `unused-package` hint (nothing the package defines is used), and `missing-dependency` and
+  `unused-dependency` checks against a `DEPENDS.txt`. `--timings` breaks SaTeX's own run down
+  by phase and file, not the engine's.
 - **latexpkges3** (Python, on PyPI since 2021, a fork of LaTeXpkges from 2015). Removes each
   `\usepackage` in the main file's preamble in turn, rebuilds, and compares an MD5 of the
   output. By design it looks only at the main file's top level.
@@ -348,12 +363,44 @@ TeX Live 2026 (November 2026) before I described it here.
   found" errors name, until the build gets through.
 - **mkjobtexmf** (Heiko Oberdiek, 2011, in TeX Live). Collects the files one run read, from
   `-recorder` or strace, into a texmf tree for that job.
+- **DEPP** (Marei Peischl, Island of TeX, 0.4 of January 2026, on GitLab and not yet on CTAN;
+  not run). A package loaded ahead of the document. On each `file/before` hook it names the
+  file's TeX Live package from where the file sits in the tree, asks `tlmgr search --file`
+  through shell-escape for the rest, and writes the list to `DEPENDS.txt` for a minimal Docker
+  image or a Nix `texlive.withPackages`. Its documentation says it works with LuaLaTeX and
+  that the other engines are in progress.
+- **pdffonts** (Poppler). Lists the fonts in a PDF with their type and encoding, and whether
+  each one is embedded and subset.
 
-prumo's answers come from hooks on the build you already run, on any of the three engines.
-The package graph is what the hooks saw load, not what the source text names. `unused`
-compares page count, text and a coarse render, not a checksum or an exit code. The package
-list is the files the engine read, mapped through your `texlive.tlpdb`. The installers above
-add what is missing; `prune` subtracts what a corpus does not use.
+### Same idea as existing tools
+
+Where prumo does what one of the tools above already does:
+
+- `unused`: remove the request, rebuild, compare the output. LaTeXpkges did it in 2015, and
+  latexpkges3 and stygtfo do it too. SaTeX's `unused-package` asks the same question from its
+  analysis, without a build.
+- `graph`: a package dependency graph with Graphviz output, as latex-dependency-grapher draws.
+- `packages`: the files a run read (`-recorder`), mapped to TeX Live packages. mkjobtexmf
+  collects the same file list. Joseph Wright described the same `.fls`-to-package lookup on
+  the [tex-live list](https://tug.org/pipermail/tex-live/2024-April/050431.html) in April 2024
+  and posted it as a [script on TeX.SE](https://tex.stackexchange.com/a/716373). DEPP builds
+  its list from a `file/before` hook, as prumo's probe does.
+- `prune`: a small install for a set of documents. TinyTeX and texliveonfly get there by
+  adding, mkjobtexmf by building a per-job tree, and DEPP by writing the list to install.
+- `fonts`: the embedded side is pdffonts output.
+- `time`: per-page timing with `\pdfelapsedtime` is a known technique, from a
+  [2014 TeX.SE answer](https://tex.stackexchange.com/a/211572). texprof goes finer, to the line
+  and the macro.
+- `whatif`: a preamble precompiled with mylatexformat, draft mode and TikZ externalization are
+  existing techniques. prumo only measures them.
+
+### What differs
+
+- The answers come from hooks on the build you already run, on any of the three engines.
+- The package graph is what the hooks saw load, not what the source text names.
+- `unused` compares page count, text and a coarse render, not a checksum or an exit code.
+- The package list is the files the engine read, mapped through your `texlive.tlpdb`.
+- The installers above add what is missing; `prune` subtracts what a corpus does not use.
 
 ### Why not texprof
 
@@ -366,12 +413,22 @@ package of hooks on the engine you already use, so the numbers are your build's,
 of packages, files, pages and environments. When prumo points at a package and you want to
 know which of its macros, that is texprof's question.
 
+## Built on
+
+- The LaTeX hook management system (`\AddToHook`), which the probe listens to.
+- expl3's `\sys_timer:`, the timer in every record.
+- The engines' `-recorder` file list.
+- `texlive.tlpdb`, TeX Live's package database, for `packages` and `prune`.
+- The Poppler tools: `pdffonts`, `pdftotext`, `pdftoppm` and `pdfinfo`.
+- latexmk, which drives the build with `--latexmk`.
+- mylatexformat, for the precompiled preamble in `whatif`.
+
 ## What it will not do
 
 - Profile macros. prumo stops at package, file, page and environment; `texprof` goes below
   that.
 - Change your build. The probe adds hooks and writes one record file; the PDF is
-  byte-identical with and without it, and that is a test.
+  byte-identical with and without it (see [How it works](#how-it-works) for the test).
 - Touch your files. Builds run on a copy; artifacts go to your cache directory (or whatever
   `--out` says), nothing next to your document. `prune --apply` is the one destructive command, it
   re-prints its plan first and needs `--yes`.
